@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var drinksStore: DrinksStore
+    
+    
     var body: some View {
         TabView {
             AddNewDrinkView()
@@ -25,11 +28,14 @@ struct ContentView: View {
                 Label("Settings", systemImage: "person.crop.circle.fill")
             }
         }
+        .environmentObject(drinksStore)
     }
 }
 
+// + TODO: would be nice to leverage previews. Is it possible not not comment this out?
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let drinksStore = DrinksStore() 
+        ContentView().environmentObject(drinksStore)
     }
 }
