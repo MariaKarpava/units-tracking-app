@@ -8,7 +8,6 @@
 import SwiftUI
 
 @main
-// + TODO: Follow Swift naming conventions. -> "UnitsTrackingApp"
 struct UnitsTrackingApp: App {
     @StateObject var drinkStore = DrinksStore()
     

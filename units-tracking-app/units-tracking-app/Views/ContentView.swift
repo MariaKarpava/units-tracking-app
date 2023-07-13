@@ -32,7 +32,6 @@ struct ContentView: View {
     }
 }
 
-// + TODO: would be nice to leverage previews. Is it possible not not comment this out?
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let drinksStore = DrinksStore() 

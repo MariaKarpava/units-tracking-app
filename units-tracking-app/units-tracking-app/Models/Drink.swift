@@ -17,6 +17,8 @@ struct Drink: Hashable {
     // ABV - alcohol by volume - is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent).
     let alcoholByVolume: Double // TODO: naming: consider ABV terminology. Consider Int. Consider using documentation comments (`/// ...`) to clarify what exactly is stored in this property.
     let date: Date // TODO: let's use Date. Format to string when needed to display on UI.
+    /// ABV - alcohol by volume - is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent).
+    /// Int = % * 10
     
     enum DrinkType {
         case beer
