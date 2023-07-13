@@ -8,23 +8,43 @@
 import Foundation
 import SwiftUI
 
-// + TODO: Keep file name and type name in sync. Here and in all other places.
+
 class DrinksStore: ObservableObject {
     
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-//        formatter.timeStyle = .none
         return formatter
     }
     
         
     @Published var drinks = [
-        Drink(drinkName: .beer, ml: 200, alcoholByVolume: 6.0, date: Date()),
-        Drink(drinkName: .beer, ml: 500, alcoholByVolume: 5.5, date: Date()),
-        Drink(drinkName: .wine, ml: 150, alcoholByVolume: 12.5, date: dateFormatter.date(from: "01.02.2023")!),
-        Drink(drinkName: .cocktail, ml: 300, alcoholByVolume: 5.5, date: dateFormatter.date(from: "06.05.2023")!),
+        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
+        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
+        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "01.02.2023")!),
+        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "06.05.2023")!),
     ]
+    
+    
+    var drinksWithUnits: [DrinkWithUnits] {
+        var result: [DrinkWithUnits] = []
+        
+        drinks.forEach { drink in
+            // units = strength (ABV) x volume (ml) ÷ 1,000
+            // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
+            let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
+            
+            print(drink.ml)
+            print(units)
+            print()
+            
+            let modifiedDrink = DrinkWithUnits(drinkType: drink.drinkType, date: drink.date, units: units)
+            result.append(modifiedDrink)
+        }
+        
+        return result
+    }
+    
     
     
     var drinksDict: [Date: [Drink]] {
@@ -44,9 +64,28 @@ class DrinksStore: ObservableObject {
             }
         }
         
-        print(groupedDrinks.keys)
-        print()
         return groupedDrinks
+    }
+    
+    
+    var drinksWithUnitsDict: [Date: [DrinkWithUnits]] {
+        let calendar = Calendar.current
+        var groupedDrinksWithUnits = [Date: [DrinkWithUnits]]()
+        
+        for drink in drinksWithUnits {
+            // Get the date components, excluding the time components
+            let dateWithoutTime = calendar.dateComponents([.year, .month, .day], from: drink.date)
+            // Create a new date using only the year, month, and day
+            let date = calendar.date(from: dateWithoutTime)!
+            
+            if groupedDrinksWithUnits[date] == nil {
+                groupedDrinksWithUnits[date] = [drink]
+            } else {
+                groupedDrinksWithUnits[date]?.append(drink)
+            }
+        }
+//        print("groupedDrinksWithUnits: \(groupedDrinksWithUnits)")
+        return groupedDrinksWithUnits
     }
 
 }
