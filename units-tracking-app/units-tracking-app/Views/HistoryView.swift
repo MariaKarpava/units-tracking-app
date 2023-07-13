@@ -17,10 +17,24 @@ struct HistoryView: View {
     }
 
     
+//    var body: some View {
+//        Form {
+//            ForEach(drinksStore.drinksDict.keys.sorted(), id: \.self) { date in
+//                let drinksForDate = drinksStore.drinksDict[date]!
+//
+//                Section(header: Text(dateFormatter.string(from: date))) {
+//                    // TODO: check whether id is unique here. consider making Drink to conform to Identifiable.
+//                    ForEach(drinksForDate, id: \.self) { drink in
+//                        DrinkHistoryRow(drink: drink)
+//                    }
+//                }
+//            }
+//        }
+//    }
     var body: some View {
         Form {
-            ForEach(drinksStore.drinksDict.keys.sorted(), id: \.self) { date in
-                let drinksForDate = drinksStore.drinksDict[date]!
+            ForEach(drinksStore.drinksWithUnitsDict.keys.sorted(), id: \.self) { date in
+                let drinksForDate = drinksStore.drinksWithUnitsDict[date]!
 
                 Section(header: Text(dateFormatter.string(from: date))) {
                     // TODO: check whether id is unique here. consider making Drink to conform to Identifiable.
@@ -35,17 +49,29 @@ struct HistoryView: View {
 
 
 
+//struct DrinkHistoryRow: View {
+//    let drink: Drink
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Text(drink.drinkType.description)
+//            Text("Volume: \(drink.ml) ml")
+//            Text("Alcohol Percentage: \(String(format: "%.1f", drink.alcoholByVolume))%")
+//        }
+//    }
+//}
+
 struct DrinkHistoryRow: View {
-    let drink: Drink
+    let drink: DrinkWithUnits
  
     var body: some View {
         VStack(alignment: .leading) {
             Text(drink.drinkType.description)
-            Text("Volume: \(drink.ml) ml")
-            Text("Alcohol Percentage: \(String(format: "%.1f", drink.alcoholByVolume))%")
+            Text("Units: \(String(format: "%.1f", drink.units))")
         }
     }
 }
+
 
 
 struct HistoryView_Previews: PreviewProvider {
