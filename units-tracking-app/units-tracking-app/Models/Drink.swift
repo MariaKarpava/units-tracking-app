@@ -75,8 +75,8 @@ struct Drink: Hashable, Identifiable {
 
 
 
-struct DrinkWithUnits: Hashable {
-//    let id: UUID
+struct DrinkWithUnits: Hashable, Identifiable {
+    let id: UUID
     let drinkType: Drink.DrinkType
     let date: Date
     let units: Double

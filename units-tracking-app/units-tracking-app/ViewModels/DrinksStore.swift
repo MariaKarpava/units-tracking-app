@@ -19,10 +19,10 @@ class DrinksStore: ObservableObject {
     
         
     @Published var drinks = [
-        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "01.02.2023")!),
+        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "01.05.2023")!),
         Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "06.05.2023")!),
+        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
+        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
     ]
     
     
@@ -38,7 +38,7 @@ class DrinksStore: ObservableObject {
             print(units)
             print()
             
-            let modifiedDrink = DrinkWithUnits(drinkType: drink.drinkType, date: drink.date, units: units)
+            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
             result.append(modifiedDrink)
         }
         
