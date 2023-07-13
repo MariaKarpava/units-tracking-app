@@ -1,5 +1,5 @@
 //
-//  NewDrinkModel.swift
+//  Drink.swift
 //  units-tracking-app
 //
 //  Created by Maryia Karpava on 03/07/2023.
@@ -7,18 +7,15 @@
 
 import Foundation
 
-// + TODO: move to "units-tracking-app/Model".
-
-// + TODO: why "New"? Does history consist of "New" drinks?L Let's find better name.
-struct Drink: Hashable {
-    // + TODO: do we need these to be mutable?
-    let drinkName: DrinkType
-    let ml: Int // + TODO: which units?
-    // ABV - alcohol by volume - is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent).
-    let alcoholByVolume: Double // TODO: naming: consider ABV terminology. Consider Int. Consider using documentation comments (`/// ...`) to clarify what exactly is stored in this property.
-    let date: Date // TODO: let's use Date. Format to string when needed to display on UI.
+struct Drink: Hashable, Identifiable {
+    let id = UUID()
+    
+    let drinkType: DrinkType
+    let ml: Int
     /// ABV - alcohol by volume - is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent).
     /// Int = % * 10
+    let alcoholByVolume: Int // TODO: Consider Int. Consider using documentation comments (`/// ...`) to clarify what exactly is stored in this property.
+    let date: Date
     
     enum DrinkType {
         case beer
@@ -67,8 +64,8 @@ struct Drink: Hashable {
         }
     }
     
-    init(drinkName: DrinkType, ml: Int, alcoholByVolume: Double, date: Date) {
-        self.drinkName = drinkName
+    init(drinkType: DrinkType, ml: Int, alcoholByVolume: Int, date: Date) {
+        self.drinkType = drinkType
         self.ml = ml
         self.alcoholByVolume = alcoholByVolume
         self.date = date
@@ -76,3 +73,11 @@ struct Drink: Hashable {
 }
 
 
+
+
+struct DrinkWithUnits: Hashable {
+//    let id: UUID
+    let drinkType: Drink.DrinkType
+    let date: Date
+    let units: Double
+}
