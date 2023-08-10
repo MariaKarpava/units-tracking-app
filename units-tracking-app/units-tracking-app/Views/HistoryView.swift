@@ -66,7 +66,7 @@ struct DrinkHistoryRow: View {
  
     var body: some View {
         VStack(alignment: .leading) {
-            Text(drink.drinkType.description)
+            Text(drink.drinkType.rawValue.capitalized)
             Text("Units: \(String(format: "%.1f", drink.units))")
         }
     }

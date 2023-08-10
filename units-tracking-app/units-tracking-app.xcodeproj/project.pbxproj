@@ -17,6 +17,7 @@
 		70ADD5222A52E860005D2EB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5212A52E85F005D2EB5 /* SettingsView.swift */; };
 		70ADD5252A52F0B6005D2EB5 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5242A52F0B6005D2EB5 /* Drink.swift */; };
 		70ADD5272A532115005D2EB5 /* DrinksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5262A532115005D2EB5 /* DrinksStore.swift */; };
+		70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		70ADD5212A52E85F005D2EB5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		70ADD5242A52F0B6005D2EB5 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		70ADD5262A532115005D2EB5 /* DrinksStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksStore.swift; sourceTree = "<group>"; };
+		70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewDrinkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				70ADD5262A532115005D2EB5 /* DrinksStore.swift */,
+				70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */,
 				70ADD5102A52E1DE005D2EB5 /* ContentView.swift in Sources */,
 				70ADD5272A532115005D2EB5 /* DrinksStore.swift in Sources */,
 				70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */,

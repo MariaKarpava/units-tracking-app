@@ -10,14 +10,14 @@ import Foundation
 struct Drink: Hashable, Identifiable {
     let id = UUID()
     
-    let drinkType: DrinkType
-    let ml: Int
+    var drinkType: DrinkType
+    var ml: Int
     /// ABV - alcohol by volume - is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent).
     /// Int = % * 10
-    let alcoholByVolume: Int // TODO: Consider Int. Consider using documentation comments (`/// ...`) to clarify what exactly is stored in this property.
-    let date: Date
+    var alcoholByVolume: Int // TODO: Consider Int. Consider using documentation comments (`/// ...`) to clarify what exactly is stored in this property.
+    var date: Date
     
-    enum DrinkType {
+    enum DrinkType: String, CaseIterable, Identifiable  {
         case beer
         case wine
         case cocktail
@@ -32,6 +32,9 @@ struct Drink: Hashable, Identifiable {
         case tequila
         case other
         
+        var id: Self { self }
+        
+        /*
         var description: String {
             switch self {
             case .beer:
@@ -62,6 +65,7 @@ struct Drink: Hashable, Identifiable {
                 return "Other"
             }
         }
+         */
     }
     
     init(drinkType: DrinkType, ml: Int, alcoholByVolume: Int, date: Date) {

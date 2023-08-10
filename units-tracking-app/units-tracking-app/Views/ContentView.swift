@@ -13,10 +13,12 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            AddNewDrinkView()
+            let addNewDrinkVM = AddNewDrinkViewModel(drinksStore: drinksStore)
+            AddNewDrinkView(viewModel: addNewDrinkVM)
                 .tabItem {
                 Label("Add New Drink", systemImage: "plus.circle")
             }
+
             StatisticsView()
                 .tabItem {
                 Label("Statistics", systemImage: "waveform")
