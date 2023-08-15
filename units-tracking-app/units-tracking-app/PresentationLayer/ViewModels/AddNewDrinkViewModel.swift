@@ -29,6 +29,5 @@ class AddNewDrinkViewModel: ObservableObject {
         let enteredAlcoholByVolume = Int(alcoholByVolumeInPicker*10)
         let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date())
         drinksStore.drinks.append(newDrink)
-
     }
 }
