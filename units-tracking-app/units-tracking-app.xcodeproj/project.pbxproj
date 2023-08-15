@@ -49,8 +49,12 @@
 		700F2FBA2A8BC8A300BAD52D /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				700F2FBD2A8BD4EB00BAD52D /* Views */,
-				70ADD5292A543B11005D2EB5 /* ViewModels */,
+				70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */,
+				70ADD50F2A52E1DE005D2EB5 /* ContentView.swift */,
+				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
+				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
+				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
+				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -58,7 +62,8 @@
 		700F2FBB2A8BC8CF00BAD52D /* BusinessLayer */ = {
 			isa = PBXGroup;
 			children = (
-				70ADD5282A543AEC005D2EB5 /* Models */,
+				70ADD5262A532115005D2EB5 /* DrinksStore.swift */,
+				70ADD5242A52F0B6005D2EB5 /* Drink.swift */,
 			);
 			path = BusinessLayer;
 			sourceTree = "<group>";
@@ -68,18 +73,6 @@
 			children = (
 			);
 			path = PersistenceLayer;
-			sourceTree = "<group>";
-		};
-		700F2FBD2A8BD4EB00BAD52D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				70ADD50F2A52E1DE005D2EB5 /* ContentView.swift */,
-				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
-				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
-				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
-				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		70ADD5012A52E1DE005D2EB5 = {
@@ -117,23 +110,6 @@
 				70ADD5142A52E1DF005D2EB5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		70ADD5282A543AEC005D2EB5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				70ADD5242A52F0B6005D2EB5 /* Drink.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		70ADD5292A543B11005D2EB5 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				70ADD5262A532115005D2EB5 /* DrinksStore.swift */,
-				70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
