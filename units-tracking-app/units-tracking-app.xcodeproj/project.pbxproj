@@ -46,6 +46,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		700F2FBA2A8BC8A300BAD52D /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				700F2FBD2A8BD4EB00BAD52D /* Views */,
+				70ADD5292A543B11005D2EB5 /* ViewModels */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		700F2FBB2A8BC8CF00BAD52D /* BusinessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				70ADD5282A543AEC005D2EB5 /* Models */,
+			);
+			path = BusinessLayer;
+			sourceTree = "<group>";
+		};
+		700F2FBC2A8BC8DD00BAD52D /* PersistenceLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PersistenceLayer;
+			sourceTree = "<group>";
+		};
+		700F2FBD2A8BD4EB00BAD52D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				70ADD50F2A52E1DE005D2EB5 /* ContentView.swift */,
+				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
+				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
+				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
+				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		70ADD5012A52E1DE005D2EB5 = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				70ADD50D2A52E1DE005D2EB5 /* UnitsTrackingApp.swift */,
-				70ADD5232A52E868005D2EB5 /* Views */,
-				70ADD5282A543AEC005D2EB5 /* Models */,
-				70ADD5292A543B11005D2EB5 /* ViewModels */,
+				700F2FBA2A8BC8A300BAD52D /* PresentationLayer */,
+				700F2FBB2A8BC8CF00BAD52D /* BusinessLayer */,
+				700F2FBC2A8BC8DD00BAD52D /* PersistenceLayer */,
 				70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */,
 				70ADD5132A52E1DF005D2EB5 /* Preview Content */,
 			);
@@ -81,18 +117,6 @@
 				70ADD5142A52E1DF005D2EB5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		70ADD5232A52E868005D2EB5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				70ADD50F2A52E1DE005D2EB5 /* ContentView.swift */,
-				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
-				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
-				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
-				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		70ADD5282A543AEC005D2EB5 /* Models */ = {
