@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @EnvironmentObject var drinksStore: DrinksStore
+    @EnvironmentObject var drinksService: DrinksService
    
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -18,8 +18,8 @@ struct HistoryView: View {
 
     var body: some View {
         Form {
-            ForEach(drinksStore.drinksWithUnitsDict.keys.sorted(), id: \.self) { date in
-                let drinksForDate = drinksStore.drinksWithUnitsDict[date]!
+            ForEach(drinksService.drinksWithUnitsDict.keys.sorted(), id: \.self) { date in
+                let drinksForDate = drinksService.drinksWithUnitsDict[date]!
 
                 Section(header: Text(dateFormatter.string(from: date))) {
                     ForEach(drinksForDate) { drink in
@@ -60,7 +60,7 @@ struct DrinkHistoryRow: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksStore = DrinksStore()
+        let drinksStore = DrinksService()
         HistoryView().environmentObject(drinksStore)
     }
 }

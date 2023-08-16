@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct RootView: View {
-    @EnvironmentObject var drinksStore: DrinksStore
     
+struct RootView: View {
+    @EnvironmentObject var drinksService: DrinksService
     
     var body: some View {
         TabView {
-            let addNewDrinkVM = AddNewDrinkViewModel(drinksStore: drinksStore)
+            let addNewDrinkVM = AddNewDrinkViewModel(drinksService: drinksService)
             AddNewDrinkView(viewModel: addNewDrinkVM)
                 .tabItem {
                 Label("Add New Drink", systemImage: "plus.circle")
@@ -30,13 +30,13 @@ struct RootView: View {
                 Label("Settings", systemImage: "person.crop.circle.fill")
             }
         }
-        .environmentObject(drinksStore)
+        .environmentObject(drinksService)
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksStore = DrinksStore() 
-        RootView().environmentObject(drinksStore)
+        let drinksService = DrinksService()
+        RootView().environmentObject(drinksService)
     }
 }
