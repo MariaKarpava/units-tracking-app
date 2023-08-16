@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     @EnvironmentObject var drinksStore: DrinksStore
     
     
@@ -34,9 +34,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         let drinksStore = DrinksStore() 
-        ContentView().environmentObject(drinksStore)
+        RootView().environmentObject(drinksStore)
     }
 }
