@@ -16,7 +16,7 @@
 		70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */; };
 		70ADD5222A52E860005D2EB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5212A52E85F005D2EB5 /* SettingsView.swift */; };
 		70ADD5252A52F0B6005D2EB5 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5242A52F0B6005D2EB5 /* Drink.swift */; };
-		70ADD5272A532115005D2EB5 /* DrinksStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5262A532115005D2EB5 /* DrinksStore.swift */; };
+		70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5262A532115005D2EB5 /* DrinksService.swift */; };
 		70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +31,7 @@
 		70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		70ADD5212A52E85F005D2EB5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		70ADD5242A52F0B6005D2EB5 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
-		70ADD5262A532115005D2EB5 /* DrinksStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksStore.swift; sourceTree = "<group>"; };
+		70ADD5262A532115005D2EB5 /* DrinksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksService.swift; sourceTree = "<group>"; };
 		70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewDrinkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +62,7 @@
 		700F2FBB2A8BC8CF00BAD52D /* BusinessLayer */ = {
 			isa = PBXGroup;
 			children = (
-				70ADD5262A532115005D2EB5 /* DrinksStore.swift */,
+				70ADD5262A532115005D2EB5 /* DrinksService.swift */,
 				70ADD5242A52F0B6005D2EB5 /* Drink.swift */,
 			);
 			path = BusinessLayer;
@@ -183,8 +183,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */,
-				70ADD5102A52E1DE005D2EB5 /* RootView.swift in Sources */,
-				70ADD5272A532115005D2EB5 /* DrinksStore.swift in Sources */,
+                70ADD5102A52E1DE005D2EB5 /* RootView.swift in Sources */,
+                70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */,
 				70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */,
 				70ADD51C2A52E825005D2EB5 /* HistoryView.swift in Sources */,
 				70ADD5252A52F0B6005D2EB5 /* Drink.swift in Sources */,

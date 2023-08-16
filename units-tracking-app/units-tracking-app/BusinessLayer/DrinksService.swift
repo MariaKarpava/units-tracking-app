@@ -8,7 +8,7 @@
 import Foundation
 
 
-class DrinksStore: ObservableObject {
+class DrinksService: ObservableObject {
     
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()

@@ -17,10 +17,10 @@ class AddNewDrinkViewModel: ObservableObject {
     static let alcoholByVolumeRange = Array(stride(from: 0.1, through: 100.0, by: 0.1))
     @Published var alcoholByVolumeInPicker = alcoholByVolumeRange.first!
     
-    private let drinksStore: DrinksStore
+    private let drinksService: DrinksService
     
-    init(drinksStore: DrinksStore) {
-        self.drinksStore = drinksStore
+    init(drinksService: DrinksService) {
+        self.drinksService = drinksService
     }
     
     func addNewDrinkTapped() {
@@ -28,6 +28,6 @@ class AddNewDrinkViewModel: ObservableObject {
         let enteredVolume = volumeInPicker
         let enteredAlcoholByVolume = Int(alcoholByVolumeInPicker*10)
         let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date())
-        drinksStore.drinks.append(newDrink)
+        drinksService.drinks.append(newDrink)
     }
 }

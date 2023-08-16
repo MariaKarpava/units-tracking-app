@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct UnitsTrackingApp: App {
-    @StateObject var drinkStore = DrinksStore()
+    @StateObject var drinkService = DrinksService()
     
     var body: some Scene {
         WindowGroup {
-            RootView().environmentObject(drinkStore)
+            RootView().environmentObject(drinkService)
         }
     }
 }
