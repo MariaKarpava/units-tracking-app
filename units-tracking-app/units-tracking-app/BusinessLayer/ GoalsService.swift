@@ -18,32 +18,4 @@ class  GoalsService: ObservableObject {
     func getUnitsPer7Days() -> Int {
         return 14
     }
-    
-    func saveUnitsPerDay() {
-        
-    }
-    
-    func saveUnitsPer7Days() {
-        
-    }
-    
-    func updateUnitsPerDay() {
-        
-    }
-    
-    func updateUnitsPer7Days() {
-        
-    }
-    
-    func deleteUnitsPerDay() {
-        
-    }
-    
-    func deleteUnitsPer7Days(){
-        
-    }
-    
-    func getInfo() {
-        
-    }
 }
