@@ -11,9 +11,9 @@ import SwiftUI
 
 extension Font {
     static var homeScreenUnits: Font {
-        Font.custom("Inter-Bold", size: 120)
+        Font.custom("Inter-Black", size: 120)
     }
     static var homeScreenText: Font {
-        Font.custom("Inter-Bold", size: 20)
+        Font.custom("Inter-Black", size: 20)
     }
 }
