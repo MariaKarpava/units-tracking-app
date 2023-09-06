@@ -14,14 +14,17 @@ struct RootView: View {
     var body: some View {
         TabView {
             let addNewDrinkVM = AddNewDrinkViewModel(drinksService: drinksService)
-            AddNewDrinkView(viewModel: addNewDrinkVM)
-                .tabItem {
-                Label("Add New Drink", systemImage: "plus.circle")
+            
+            HomeView().tabItem {
+                Label("Home", systemImage: "house")
             }
-
             StatisticsView()
                 .tabItem {
                 Label("Statistics", systemImage: "waveform")
+            }
+            AddNewDrinkView(viewModel: addNewDrinkVM)
+                .tabItem {
+                Label("Add New Drink", systemImage: "plus.circle")
             }
             HistoryView().tabItem {
                 Label("History", systemImage: "book")
