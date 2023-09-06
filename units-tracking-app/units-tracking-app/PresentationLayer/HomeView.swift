@@ -10,8 +10,11 @@ import SwiftUI
 struct HomeView: View {
     init() {
         for fontFamily in UIFont.familyNames {
-            print(fontFamily)
+            for font in UIFont.fontNames(forFamilyName: fontFamily) {
+                print("--\(font)")
+            }
         }
+        
     }
     
     
