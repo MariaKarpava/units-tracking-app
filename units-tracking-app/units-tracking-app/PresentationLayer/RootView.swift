@@ -17,21 +17,21 @@ struct RootView: View {
             let addNewDrinkVM = AddNewDrinkViewModel(drinksService: drinksService)
             
             HomeView(homeViewModel: HomeViewModel(drinksService: drinksService, goalsService: goalsService)).tabItem {
-                Label("Home", systemImage: "house")
+                Label("Home", systemImage: "house").foregroundColor(.accentColor)
             }
             StatisticsView()
                 .tabItem {
-                Label("Statistics", systemImage: "waveform")
+                Label("Statistics", systemImage: "waveform").foregroundColor(.accentColor)
             }
             AddNewDrinkView(viewModel: addNewDrinkVM)
                 .tabItem {
-                Label("Add New Drink", systemImage: "plus.circle")
+                Label("Add New Drink", systemImage: "plus.circle").foregroundColor(.accentColor)
             }
             HistoryView().tabItem {
-                Label("History", systemImage: "book")
+                Label("History", systemImage: "book").foregroundColor(.accentColor)
             }
             SettingsView().tabItem {
-                Label("Settings", systemImage: "person.crop.circle.fill")
+                Label("Settings", systemImage: "person.crop.circle.fill").foregroundColor(.accentColor)
             }
         }
     }
