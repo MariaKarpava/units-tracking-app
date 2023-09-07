@@ -16,4 +16,7 @@ extension Font {
     static var homeScreenText: Font {
         Font.custom("Inter-Black", size: 20)
     }
+    static var homeScreenInfoText: Font {
+        Font.custom("Inter-Medium", size: 18)
+    }
 }
