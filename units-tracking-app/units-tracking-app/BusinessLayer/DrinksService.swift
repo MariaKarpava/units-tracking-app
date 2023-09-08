@@ -47,8 +47,8 @@ class DrinksService: ObservableObject {
     
         
     @Published var drinks = [
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "01.05.2023")!),
-        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "06.05.2023")!),
+        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!),
+        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "06.08.2023")!),
         Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
         Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
     ]

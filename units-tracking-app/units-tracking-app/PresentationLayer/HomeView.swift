@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    init() {
-        for fontFamily in UIFont.familyNames {
-            for font in UIFont.fontNames(forFamilyName: fontFamily) {
-                print("--\(font)")
-            }
-        }
-        
-    }
+    private let drinksService: DrinksService
     
+    init(drinksService: DrinksService) {
+        self.drinksService = drinksService
+    }
     
     var body: some View {
         VStack {
+            
+            
             Spacer()
             Spacer()
+            Text("UnitsConsumedToday: \(drinksService.unitsConsumedToday)")
+            Text("UnitsConsumedToday: \(drinksService.unitsConsumedWithinLast7Days)")
+
+            
             Text("12.5")
                 .foregroundColor(Color("MainTextColor"))
                 .font(.homeScreenUnits)
@@ -41,8 +43,9 @@ struct HomeView: View {
     }
 }
 
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(drinksService: DrinksService())
     }
 }
