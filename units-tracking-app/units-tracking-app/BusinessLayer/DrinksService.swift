@@ -10,6 +10,35 @@ import Foundation
 
 class DrinksService: ObservableObject {
     
+    var unitsConsumedToday: Double {
+        let todaysDrinks = drinksWithUnits.filter { drink in
+            let calendar = Calendar.current
+            let drinkDateComponents = calendar.dateComponents([.day, .month, .year], from: drink.date)
+            let todaysDateComponents = calendar.dateComponents([.day, .month, .year], from: Date())
+            
+            return drinkDateComponents == todaysDateComponents
+        }
+        
+        let units = todaysDrinks.reduce(0.0) { $0 + $1.units }
+        print("unitsConsumedToday: \(units)")
+        return units
+    }
+    
+    var unitsConsumedWithinLast7Days: Double {
+        let calendar = Calendar.current
+        if let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date()) {
+            let last7DaysDrinks = drinksWithUnits.filter { drink in
+                drink.date >= sevenDaysAgo && drink.date <= Date()
+            }
+            let units = last7DaysDrinks.reduce(0.0) { $0 + $1.units }
+            print("unitsConsumedWithinLast7Days: \(units)")
+            return units
+        } else {
+            // Handle the case when sevenDaysAgo is nil
+            return 0.0
+        }
+    }
+    
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -32,10 +61,8 @@ class DrinksService: ObservableObject {
             // units = strength (ABV) x volume (ml) ÷ 1,000
             // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
             let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
-            
-            print(drink.ml)
-            print(units)
-            print()
+
+            print("Date: \(drink.date), units: \(units)")
             
             let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
             result.append(modifiedDrink)
