@@ -10,12 +10,13 @@ import SwiftUI
     
 struct RootView: View {
     @EnvironmentObject var drinksService: DrinksService
+    @EnvironmentObject var goalsService: GoalsService
     
     var body: some View {
         TabView {
             let addNewDrinkVM = AddNewDrinkViewModel(drinksService: drinksService)
             
-            HomeView(drinksService: drinksService).tabItem {
+            HomeView(drinksService: drinksService, goalsService: goalsService).tabItem {
                 Label("Home", systemImage: "house")
             }
             StatisticsView()
@@ -37,9 +38,13 @@ struct RootView: View {
     }
 }
 
+
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         let drinksService = DrinksService()
-        RootView().environmentObject(drinksService)
+        let goalsService = GoalsService()
+        RootView()
+            .environmentObject(drinksService)
+            .environmentObject(goalsService)
     }
 }
