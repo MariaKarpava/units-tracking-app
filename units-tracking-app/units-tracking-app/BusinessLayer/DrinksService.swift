@@ -27,9 +27,11 @@ class DrinksService: ObservableObject {
     var unitsConsumedWithinLast7Days: Double {
         let calendar = Calendar.current
         if let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date()) {
+            print("7 days ago: \(sevenDaysAgo)")
             let last7DaysDrinks = drinksWithUnits.filter { drink in
-                drink.date >= sevenDaysAgo && drink.date <= Date()
+                return drink.date >= sevenDaysAgo && drink.date <= Date()
             }
+            print("last7DaysDrinks: \(last7DaysDrinks)")
             let units = last7DaysDrinks.reduce(0.0) { $0 + $1.units }
             print("unitsConsumedWithinLast7Days: \(units)")
             return units
@@ -39,6 +41,13 @@ class DrinksService: ObservableObject {
         }
     }
     
+    func unitsRemainingForToday(unitsConsumedToday: Double, unitsConsumedWithinLast7Days: Double ) -> Double {
+        return min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+    }
+        
+    
+    
+    
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -47,8 +56,8 @@ class DrinksService: ObservableObject {
     
         
     @Published var drinks = [
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!),
-        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "06.08.2023")!),
+        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
+        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
         Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
         Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
     ]
