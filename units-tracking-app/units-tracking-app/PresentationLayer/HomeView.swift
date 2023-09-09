@@ -8,29 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
-    private let drinksService: DrinksService
-    private let goalsService: GoalsService
-    
-    init(drinksService: DrinksService, goalsService: GoalsService) {
-        self.drinksService = drinksService
-        self.goalsService = goalsService
-    }
-    
-    func colorForUnits(units: Double) -> Color {
-        if units >= goalsService.getUnitsPerDay() {
-            return Color("MainTextColor")
-        } else {
-            return Color("CustomOrange")
-        }
-    }
+    let homeViewModel: HomeViewModel
     
     
     var body: some View {
         VStack {
             Spacer()
             Spacer()
-            Text(String(format: "%.1f", drinksService.unitsRemainingForToday))
-                .foregroundColor(colorForUnits(units: drinksService.unitsRemainingForToday))
+            Text(String(format: "%.1f", homeViewModel.getUnitsRemainingForToday))
+                .foregroundColor(homeViewModel.colorForUnits)
                 .font(.homeScreenUnits)
                 .frame(height: 129)
             Text("Units remaining \n for today")
@@ -51,6 +37,10 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(drinksService: DrinksService(), goalsService: GoalsService())
+        let drinksService = DrinksService()
+        let goalsService = GoalsService()
+        let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
+        
+        return HomeView(homeViewModel: homeViewModel)
     }
 }

@@ -16,7 +16,7 @@ struct RootView: View {
         TabView {
             let addNewDrinkVM = AddNewDrinkViewModel(drinksService: drinksService)
             
-            HomeView(drinksService: drinksService, goalsService: goalsService).tabItem {
+            HomeView(homeViewModel: HomeViewModel(drinksService: drinksService, goalsService: goalsService)).tabItem {
                 Label("Home", systemImage: "house")
             }
             StatisticsView()
