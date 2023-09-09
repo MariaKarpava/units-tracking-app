@@ -10,10 +10,13 @@ import SwiftUI
 @main
 struct UnitsTrackingApp: App {
     @StateObject var drinkService = DrinksService()
+    @StateObject var goalsService = GoalsService()
     
     var body: some Scene {
         WindowGroup {
-            RootView().environmentObject(drinkService)
+            RootView()
+                .environmentObject(drinkService)
+                .environmentObject(goalsService)
         }
     }
 }

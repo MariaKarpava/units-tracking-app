@@ -41,8 +41,12 @@ class DrinksService: ObservableObject {
         }
     }
     
-    func unitsRemainingForToday(unitsConsumedToday: Double, unitsConsumedWithinLast7Days: Double ) -> Double {
-        return min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+//    func unitsRemainingForToday(unitsConsumedToday: Double, unitsConsumedWithinLast7Days: Double ) -> Double {
+//        return min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+//    }
+    
+    var unitsRemainingForToday: Double {
+        min(unitsConsumedToday, unitsConsumedWithinLast7Days)
     }
         
     
