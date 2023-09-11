@@ -40,13 +40,18 @@ class DrinksService: ObservableObject {
             return 0.0
         }
     }
-    
-//    func unitsRemainingForToday(unitsConsumedToday: Double, unitsConsumedWithinLast7Days: Double ) -> Double {
-//        return min(unitsConsumedToday, unitsConsumedWithinLast7Days)
-//    }
+
     
     var unitsRemainingForToday: Double {
-        min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+        var result = 0.0
+        if unitsConsumedWithinLast7Days > 12 || unitsConsumedToday > 6 {
+            result = 0.0
+        } else if unitsConsumedWithinLast7Days < 12 && unitsConsumedToday > 6 {
+            result = 0.0
+        } else if unitsConsumedWithinLast7Days < 12 && unitsConsumedToday < 6 {
+            result = min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+        }
+        return result
     }
         
     
