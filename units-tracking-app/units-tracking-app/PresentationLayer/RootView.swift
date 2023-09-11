@@ -35,14 +35,15 @@ struct RootView: View {
             }
         }
         .environmentObject(drinksService)
+        .environmentObject(goalsService)
     }
 }
 
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
         let goalsService = GoalsService()
+        let drinksService = DrinksService()
         RootView()
             .environmentObject(drinksService)
             .environmentObject(goalsService)
