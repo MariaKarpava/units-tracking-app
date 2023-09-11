@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class DrinksService: ObservableObject {
+    private let goalsService = GoalsService()
+    
     
     var unitsConsumedToday: Double {
         let todaysDrinks = drinksWithUnits.filter { drink in
@@ -44,16 +47,48 @@ class DrinksService: ObservableObject {
     
     var unitsRemainingForToday: Double {
         var result = 0.0
-        if unitsConsumedWithinLast7Days > 12 || unitsConsumedToday > 6 {
+        let allowedUnitsPerDay = goalsService.getUnitsPerDay
+        let allowedUnitsPer7Days = goalsService.getUnitsPer7Days
+        
+        if unitsConsumedWithinLast7Days > allowedUnitsPer7Days || unitsConsumedToday > allowedUnitsPerDay {
             result = 0.0
-        } else if unitsConsumedWithinLast7Days < 12 && unitsConsumedToday > 6 {
+        } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday > allowedUnitsPerDay {
             result = 0.0
-        } else if unitsConsumedWithinLast7Days < 12 && unitsConsumedToday < 6 {
+        } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday < allowedUnitsPerDay {
             result = min(unitsConsumedToday, unitsConsumedWithinLast7Days)
         }
         return result
     }
         
+    
+    var colorForUnits: Color {
+        enum DrinkState {
+            case normal
+            case closeToZero
+            case remainingIsZero
+        }
+        
+        let unitsRemainingForToday = unitsRemainingForToday
+        var currentDrinkState: DrinkState
+        
+        if unitsRemainingForToday > 3.0 {
+            currentDrinkState = .normal
+        } else if unitsRemainingForToday >= 1.0 {
+            currentDrinkState = .closeToZero
+        } else {
+            currentDrinkState = .remainingIsZero
+        }
+            
+        
+        switch currentDrinkState {
+        case .normal:
+            return Color.green
+        case .closeToZero:
+            return Color.orange
+        case .remainingIsZero:
+            return Color.red
+        }
+    }
     
     
     

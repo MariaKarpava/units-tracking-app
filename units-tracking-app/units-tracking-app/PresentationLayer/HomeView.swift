@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     let homeViewModel: HomeViewModel
     
-    
     var body: some View {
         VStack {
             Spacer()

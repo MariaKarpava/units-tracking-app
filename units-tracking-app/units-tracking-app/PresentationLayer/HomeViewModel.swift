@@ -19,7 +19,7 @@ class HomeViewModel: ObservableObject {
     }
     
     var colorForUnits: Color {
-        if drinksService.unitsRemainingForToday >= goalsService.getUnitsPerDay() {
+        if drinksService.unitsRemainingForToday >= goalsService.getUnitsPerDay {
             return Color("MainTextColor")
         } else {
             return Color("CustomOrange")
