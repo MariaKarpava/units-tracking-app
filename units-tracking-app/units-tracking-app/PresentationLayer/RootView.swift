@@ -21,17 +21,17 @@ struct RootView: View {
             }
             StatisticsView()
                 .tabItem {
-                Label("Statistics", systemImage: "waveform").foregroundColor(.accentColor)
+                    Label("Stats", systemImage: "chart.xyaxis.line").foregroundColor(.accentColor)
             }
             AddNewDrinkView(viewModel: addNewDrinkVM)
                 .tabItem {
-                Label("Add New Drink", systemImage: "plus.circle").foregroundColor(.accentColor)
+                Image("AddButton").foregroundColor(.accentColor)
             }
             HistoryView().tabItem {
-                Label("History", systemImage: "book").foregroundColor(.accentColor)
+                Label("History", systemImage: "list.bullet").foregroundColor(.accentColor)
             }
             SettingsView().tabItem {
-                Label("Settings", systemImage: "person.crop.circle.fill").foregroundColor(.accentColor)
+                Label("Settings", systemImage: "gearshape").foregroundColor(.accentColor)
             }
         }
     }
