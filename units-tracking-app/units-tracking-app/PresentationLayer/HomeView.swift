@@ -14,10 +14,17 @@ struct HomeView: View {
         VStack {
             Spacer()
             Spacer()
-            Text(String(format: "%.1f", homeViewModel.getUnitsRemainingForToday))
-                .foregroundColor(homeViewModel.colorForUnits)
-                .font(.homeScreenUnits)
-                .frame(height: 129)
+            if homeViewModel.colorForUnits == Color.red {
+                Image("WarningSymbol")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 140, height: 122)
+            } else {
+                Text(String(format: "%.1f", homeViewModel.getUnitsRemainingForToday))
+                    .foregroundColor(homeViewModel.colorForUnits)
+                    .font(.homeScreenUnits)
+                    .frame(height: 129)
+            }
             Text("Units remaining \n for today")
                 .foregroundColor(Color("SecondaryTextColor"))
                 .font(.homeScreenText)
