@@ -82,9 +82,9 @@ class DrinksService: ObservableObject {
         
         switch currentDrinkState {
         case .normal:
-            return Color.green
+            return Color("MainTextColor")
         case .closeToZero:
-            return Color.orange
+            return Color("CustomOrange")
         case .remainingIsZero:
             return Color.red
         }
