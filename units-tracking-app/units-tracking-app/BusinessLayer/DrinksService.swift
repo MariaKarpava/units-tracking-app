@@ -61,37 +61,6 @@ class DrinksService: ObservableObject {
     }
         
     
-    var colorForUnits: Color {
-        enum DrinkState {
-            case normal
-            case closeToZero
-            case remainingIsZero
-        }
-        
-        let unitsRemainingForToday = unitsRemainingForToday
-        var currentDrinkState: DrinkState
-        
-        if unitsRemainingForToday > 3.0 {
-            currentDrinkState = .normal
-        } else if unitsRemainingForToday >= 1.0 {
-            currentDrinkState = .closeToZero
-        } else {
-            currentDrinkState = .remainingIsZero
-        }
-            
-        
-        switch currentDrinkState {
-        case .normal:
-            return Color("MainTextColor")
-        case .closeToZero:
-            return Color("CustomOrange")
-        case .remainingIsZero:
-            return Color.red
-        }
-    }
-    
-    
-    
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
