@@ -42,6 +42,13 @@ struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
         let drinksService = DrinksService()
+        
         RootView(drinksService: drinksService, goalsService: goalsService)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        RootView(drinksService: drinksService, goalsService: goalsService)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
     }
 }

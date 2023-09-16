@@ -11,23 +11,33 @@ struct CustomTabBar: View {
     var body: some View {
         VStack {
             Spacer()
-            HStack {
+            HStack(alignment: .bottom, spacing: 35) {
                 Button {
                     // Switch to Home
                 } label: {
-                    VStack {
-                        Image(systemName: "house")
+                    VStack(alignment: .center, spacing: 5) {
+                        Image(systemName: "house.fill")
+                            .font(.system(size: 23))
+                            .border(.red)
                         Text("Home")
+                            .font(.system(size: 10))
+                            
                     }
+                    .frame(width: 48, height: 40, alignment: .center)
+                    .border(.green)
                 }
                 
                 Button {
                     // Switch to
                 } label: {
-                    VStack {
+                    VStack(alignment: .center, spacing: 5) {
                         Image(systemName: "chart.xyaxis.line")
+                            .font(.system(size: 23))
                         Text("Stats")
+                            .font(.system(size: 10))
                     }
+                    .frame(width: 48, height: 40, alignment: .center)
+                    .border(.green)
                 }
                 
                 Button {
@@ -42,39 +52,57 @@ struct CustomTabBar: View {
                                 
                         Image(systemName: "plus")
                             .foregroundColor(Color.white)
-                            .frame(width: 60, height: 60)
-                            
+                            .font(.system(size: 25))
                     }
+                    .border(.green)
                 }
                 
                 Button {
                     // Switch to
                 } label: {
-                    VStack {
+                    VStack(alignment: .center, spacing: 5) {
                         Image(systemName: "list.bullet")
+                            .font(.system(size: 23))
+                            .border(.red)
                         Text("History")
+                            .font(.system(size: 10))
                     }
+                    .frame(width: 48, height: 40, alignment: .center)
+                    .border(.green)
                 }
                 
                 Button {
                     // Switch to
                 } label: {
-                    VStack {
+                    VStack(alignment: .center, spacing: 5) {
                         Image(systemName: "gearshape")
+                            .font(.system(size: 23))
+                            .border(.red)
                         Text("Setings")
+                            .font(.system(size: 10))
                     }
+                    .frame(width: 48, height: 40, alignment: .center)
+                    .border(.green)
                 }
-                
-                
-
-            }.frame(height: 82)
-
+            }
         }
+        .frame(maxWidth: .infinity)
     }
 }
+
+
+
+
+
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
         CustomTabBar()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+
+        CustomTabBar()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
     }
 }
