@@ -34,21 +34,25 @@ struct CustomTabBar: View {
                 Text("Tab Bar Height: \(tabBarHeight)")
                 Text("Tab Bar Width: \(tabBarWidth)")
                 
-                Path { path in
-                    let screenHeight = UIScreen.main.bounds.height
-
-                    path.move(to: CGPoint(x: 0, y: screenHeight - tabBarHeight))
-                    path.addLine(to: CGPoint(x: geometry0.size.width, y: screenHeight - tabBarHeight))
-
-                    path.addLine(to: CGPoint(x: geometry0.size.width, y: screenHeight - tabBarHeight - 10))
-                    path.addLine(to: CGPoint(x: 0, y: screenHeight - tabBarHeight - 0.1))
-                        path.closeSubpath()
-                    }
-                    .fill(Color.pink)
+                Spacer()
                 
-                
-                
+               
                 GeometryReader { geometry in
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: 27))
+                        path.addLine(to: CGPoint(x: geometry.size.width, y: 27))
+                        path.addLine(to: CGPoint(x: geometry.size.width, y: 0))
+                        path.addLine(to: CGPoint(x: 0, y: 0))
+                        path.closeSubpath()
+
+                        let arcCenter = CGPoint(x: geometry.size.width / 2, y: 13.5) // Halfway on the rectangle's height
+                        let arcRadius: CGFloat = 50
+                        path.addArc(center: arcCenter, radius: arcRadius, startAngle: .degrees(0), endAngle: .degrees(180), clockwise: true)
+                        
+                        }
+                        .fill(Color.pink)
+                        
+                   
                     
                     HStack(alignment: .bottom, spacing: 0) {
                         Spacer(minLength: 0)
@@ -121,8 +125,9 @@ struct CustomTabBar: View {
                         Spacer(minLength: 0)
                     }
                     .padding()
-                    .background(Color.pink).opacity(0.2)
-                    .border(Color.pink)
+                    .background(Color.blue)
+                    .opacity(0.2)
+                    .border(Color.blue)
                     .onAppear {
                         tabBarHeight = geometry.size.height
                         tabBarWidth = geometry.size.width
