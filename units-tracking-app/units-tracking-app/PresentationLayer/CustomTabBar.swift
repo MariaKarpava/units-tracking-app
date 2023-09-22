@@ -21,8 +21,6 @@ struct TestScreen: View {
 
 
 
-
-
 struct CustomTabBar: View {
     @State private var tabBarHeight: CGFloat = 0
     @State private var tabBarWidth: CGFloat = 0
@@ -36,103 +34,91 @@ struct CustomTabBar: View {
                 
                 Spacer()
                 
-               
                 GeometryReader { geometry in
-                    Path { path in
-                        path.move(to: CGPoint(x: 0, y: 27))
-                        path.addLine(to: CGPoint(x: geometry.size.width, y: 27))
-                        path.addLine(to: CGPoint(x: geometry.size.width, y: 0))
-                        path.addLine(to: CGPoint(x: 0, y: 0))
-                        path.closeSubpath()
-
-                        let arcCenter = CGPoint(x: geometry.size.width / 2, y: 13.5) // Halfway on the rectangle's height
-                        let arcRadius: CGFloat = 50
-                        path.addArc(center: arcCenter, radius: arcRadius, startAngle: .degrees(0), endAngle: .degrees(180), clockwise: true)
-                        
-                        }
-                        .fill(Color.pink)
-                        
-                   
                     
-                    HStack(alignment: .bottom, spacing: 0) {
-                        Spacer(minLength: 0)
-                        Button(action: {
-                            // Switch to Home
-                        }) {
-                            VStack(alignment: .center, spacing: 5) {
-                                Image(systemName: "house.fill")
-                                    .font(.system(size: 23))
-                                    .border(Color.red)
-                                Text("Home")
-                                    .font(.system(size: 10))
+                    TopBorderVectorView().offset(y: 17)
+                    
+                        HStack(alignment: .bottom, spacing: 0) {
+                            Spacer(minLength: 0)
+                            Button(action: {
+                                // Switch to Home
+                            }) {
+                                VStack(alignment: .center, spacing: 5) {
+                                    Image(systemName: "house.fill")
+                                        .font(.system(size: 23))
+                                        .border(Color.red)
+                                    Text("Home")
+                                        .font(.system(size: 10))
+                                }
+                                .frame(maxWidth: .infinity)
                             }
-                            .frame(maxWidth: .infinity)
-                        }
-                        
-                        Button(action: {
-                            // Switch to Stats
-                        }) {
-                            VStack(alignment: .center, spacing: 5) {
-                                Image(systemName: "chart.xyaxis.line")
-                                    .font(.system(size: 23))
-                                Text("Stats")
-                                    .font(.system(size: 10))
+                            
+                            Button(action: {
+                                // Switch to Stats
+                            }) {
+                                VStack(alignment: .center, spacing: 5) {
+                                    Image(systemName: "chart.xyaxis.line")
+                                        .font(.system(size: 23))
+                                    Text("Stats")
+                                        .font(.system(size: 10))
+                                }
+                                .frame(maxWidth: .infinity)
                             }
-                            .frame(maxWidth: .infinity)
-                        }
-                        
-                        Button(action: {
-                            // Add Button Action
-                        }) {
-                            ZStack {
-                                Circle()
-                                    .fill(
-                                        LinearGradient(colors: [Color("AddButtonUpperColor"), Color("AddButtonBottomColor")], startPoint: .top, endPoint: .bottom)
-                                    )
-                                    .frame(width: 64, height: 64)
-                                                
-                                Image(systemName: "plus")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 25))
+                            
+                            Button(action: {
+                                // Add Button Action
+                            }) {
+                                ZStack {
+                                    Circle()
+                                        .fill(
+                                            LinearGradient(colors: [Color("AddButtonUpperColor"), Color("AddButtonBottomColor")], startPoint: .top, endPoint: .bottom)
+                                        )
+                                        .frame(width: 64, height: 64)
+                                                    
+                                    Image(systemName: "plus")
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 25))
+                                        
+                                }
+                            }.offset(y: -10)
+                            
+                            Button(action: {
+                                // Switch to History
+                            }) {
+                                VStack(alignment: .center, spacing: 5) {
+                                    Image(systemName: "list.bullet")
+                                        .font(.system(size: 23))
+                                        .border(Color.red)
+                                    Text("History")
+                                        .font(.system(size: 10))
+                                }
+                                .frame(maxWidth: .infinity)
                             }
-                        }
-                        
-                        Button(action: {
-                            // Switch to History
-                        }) {
-                            VStack(alignment: .center, spacing: 5) {
-                                Image(systemName: "list.bullet")
-                                    .font(.system(size: 23))
-                                    .border(Color.red)
-                                Text("History")
-                                    .font(.system(size: 10))
+                            
+                            Button(action: {
+                                // Switch to Settings
+                            }) {
+                                VStack(alignment: .center, spacing: 5) {
+                                    Image(systemName: "gearshape")
+                                        .font(.system(size: 23))
+                                        .border(Color.red)
+                                    Text("Settings")
+                                        .font(.system(size: 10))
+                                }
+                                .frame(maxWidth: .infinity)
                             }
-                            .frame(maxWidth: .infinity)
+                            Spacer(minLength: 0)
                         }
-                        
-                        Button(action: {
-                            // Switch to Settings
-                        }) {
-                            VStack(alignment: .center, spacing: 5) {
-                                Image(systemName: "gearshape")
-                                    .font(.system(size: 23))
-                                    .border(Color.red)
-                                Text("Settings")
-                                    .font(.system(size: 10))
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        Spacer(minLength: 0)
+                        .padding()
+    //                    .background(Color.blue)
+    //                    .opacity(0.2)
+    //                    .border(Color.blue)
+                        .onAppear {
+                            tabBarHeight = geometry.size.height
+                            tabBarWidth = geometry.size.width
                     }
-                    .padding()
-                    .background(Color.blue)
-                    .opacity(0.2)
-                    .border(Color.blue)
-                    .onAppear {
-                        tabBarHeight = geometry.size.height
-                        tabBarWidth = geometry.size.width
-                    }
-                }.frame(height: 77)
+                }
+                .frame(height: 77)
             }
         }
     }
