@@ -36,7 +36,7 @@ struct CustomTabBar: View {
                 
                 GeometryReader { geometry in
                     
-                    TopBorderVectorView().offset(y: 17)
+                    TopBorderVectorView().offset(y: 13)
                     
                         HStack(alignment: .bottom, spacing: 0) {
                             Spacer(minLength: 0)
@@ -46,7 +46,7 @@ struct CustomTabBar: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "house.fill")
                                         .font(.system(size: 23))
-                                        .border(Color.red)
+//                                        .border(Color.red)
                                     Text("Home")
                                         .font(.system(size: 10))
                                 }
@@ -88,7 +88,7 @@ struct CustomTabBar: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "list.bullet")
                                         .font(.system(size: 23))
-                                        .border(Color.red)
+//                                        .border(Color.red)
                                     Text("History")
                                         .font(.system(size: 10))
                                 }
@@ -101,7 +101,7 @@ struct CustomTabBar: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "gearshape")
                                         .font(.system(size: 23))
-                                        .border(Color.red)
+//                                        .border(Color.red)
                                     Text("Settings")
                                         .font(.system(size: 10))
                                 }
