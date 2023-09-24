@@ -13,17 +13,11 @@ struct TopBorderVectorView: View {
     var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
-            let height = geometry.size.height
             let radius: CGFloat = 39
-            let circleCenterY: CGFloat = 21
+            let circleCenterY: CGFloat = 500
             let center = CGPoint(x: width / 2, y: circleCenterY)
             let startAngle = Angle(degrees: 0 - 25)
             let endAngle = Angle(degrees: 180 + 25)
-            let startPoint = CGPoint(
-                x: center.x + radius * CGFloat(cos(startAngle.radians)),
-                y: center.y + radius * CGFloat(sin(startAngle.radians))
-            )
-            
             
             FirstLine(center: center)
             FirstCurve(center: center, radius: radius, endAngle: endAngle)
