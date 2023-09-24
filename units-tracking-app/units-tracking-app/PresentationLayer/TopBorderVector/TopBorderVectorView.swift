@@ -12,97 +12,148 @@ import CoreGraphics
 struct TopBorderVectorView: View {
     var body: some View {
         GeometryReader { geometry in
-            FirstLine()
-            FirstCurve()
-            Arc()
-            SecondCurve()
-            SecondLine()
-        }.frame(width: 390, height: 27)
+            let width = geometry.size.width
+            let height = geometry.size.height
+            let radius: CGFloat = 39
+            let circleCenterY: CGFloat = 21
+            let center = CGPoint(x: width / 2, y: circleCenterY)
+            let startAngle = Angle(degrees: 0 - 25)
+            let endAngle = Angle(degrees: 180 + 25)
+            let startPoint = CGPoint(
+                x: center.x + radius * CGFloat(cos(startAngle.radians)),
+                y: center.y + radius * CGFloat(sin(startAngle.radians))
+            )
+            let endPoint = CGPoint(
+                x: center.x + radius * CGFloat(cos(endAngle.radians)),
+                y: center.y + radius * CGFloat(sin(endAngle.radians))
+            )
+            
+            FirstLine(width: width, center: center)
+            FirstCurve(width: width, radius: radius, center: center, startAngle: startAngle, endAngle: endAngle, endPoint: endPoint)
+            Arc(width: width, radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
+            SecondCurve(width: width, radius: radius, center: center, startAngle: startAngle, moveToPoint: startPoint)
+            SecondLine(width: width, center: center)
+        }
     }
 }
 
 
+
+
 struct FirstLine: View {
+    let width: CGFloat
+    let center: CGPoint
+    
     var body: some View {
-        let offsetY: CGFloat = 11
-        
-        let startFirstLine = CGPoint(x: 0, y: 27-offsetY)
-        let endFirstLine = CGPoint(x: 144.5, y: 27-offsetY-0.05)
-        
-        Path { path in
-            path.move(to: startFirstLine)
-            path.addLine(to: endFirstLine)
-        }
-        .stroke(lineWidth: 0.2)
+        GeometryReader { geometry in
+            let startFirstLine = CGPoint(x: 0, y:  center.y - 5)
+            let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 5)
+           
+            Path { path in
+                path.move(to: startFirstLine)
+                path.addLine(to: endFirstLine)
+            }
+            .stroke(lineWidth: 0.2)
         .foregroundColor(.black)
+        }
     }
 }
 
 struct FirstCurve: View {
+    let width: CGFloat
+    let radius: CGFloat
+    let center: CGPoint
+    let startAngle: Angle
+    let endAngle: Angle
+    let endPoint: CGPoint
+    
     var body: some View {
-        let offsetY: CGFloat = 11
-        let offsetX: CGFloat = 3.5
-        
-        Path { path in
-            path.move(to: CGPoint(x: 141+offsetX, y: 27-offsetY)) // можно регyлировать по x
-            path.addQuadCurve(
-                to: CGPoint(x: 156.5+offsetX-0.3, y: 15-offsetY+0.3), // точно правильно
-                control: CGPoint(x: 152+offsetX, y: 26-offsetY)
-            )
-        }
-        .stroke(lineWidth: 0.2)
+        GeometryReader { geometry in
+            let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 5)
+            let moveToPoint = endPoint
+            let controlPoint = CGPoint(x: center.x - 39.5, y: center.y - 6)
+            
+            Path { path in
+                path.move(to: startPoint)
+                path.addQuadCurve(
+                    to: moveToPoint,
+                    control: controlPoint
+                )
+            }
+            .stroke(lineWidth: 0.2)
         .foregroundColor(.black)
+        }
     }
 }
 
 
 struct Arc: View {
+    let width: CGFloat
+    let radius: CGFloat
+    let center: CGPoint
+    let startAngle: Angle
+    let endAngle: Angle
+    
     var body: some View {
-        Path { path in
-            path.addArc(
-                center: CGPoint(x: 195, y: 15+6),
-                radius: 39,
-                startAngle: .degrees(0 - 25),
-                endAngle: .degrees(180 + 25),
-                clockwise: true)
+        GeometryReader { geometry in
+            Path { path in
+                path.addArc(
+                    center: center,
+                    radius: radius,
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    clockwise: true)
+            }
+            .stroke(lineWidth: 0.2)
+            .foregroundColor(.black)
         }
-        .stroke(lineWidth: 0.2)
-        .foregroundColor(.black)
     }
 }
 
+
 struct SecondCurve: View {
+    let width: CGFloat
+    let radius: CGFloat
+    let center: CGPoint
+    let startAngle: Angle
+    let moveToPoint: CGPoint
+    
     var body: some View {
-        let offsetY: CGFloat = 11
-        let offsetX: CGFloat = 3.5
-        
-        Path { path in
-                path.move(to: CGPoint(x: 141 + offsetX, y: 27 - offsetY))
-                path.addQuadCurve(
-                    to: CGPoint(x: 156.5 + offsetX, y: 15 - offsetY),
-                    control: CGPoint(x: 155 + offsetX, y: 26 - offsetY)
-                )
-            }
-            .stroke(lineWidth: 0.1)
-            .foregroundColor(.black)
-            .scaleEffect(x: -1, y: 1, anchor: .center)
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let center = CGPoint(x: width / 2, y: 21)
+            let startPoint = CGPoint(x: center.x + 50.5, y: center.y - 5)
+                        
+            Path { path in
+                    path.move(to: startPoint)
+                    path.addQuadCurve(
+                        to: moveToPoint,
+                        control: CGPoint(x: center.x + 39.5, y: center.y - 6)
+                    )
+                }
+                .stroke(lineWidth: 0.2)
+                .foregroundColor(.black)
+        }
     }
 }
 
 
 struct SecondLine: View {
+    let width: CGFloat
+    let center: CGPoint
+    
     var body: some View {
-        let offsetY: CGFloat = 11
-        
-        let startSecondLine = CGPoint(x: 248, y: 27-offsetY)
-        let endSecondLine = CGPoint(x: 390, y: 27-offsetY)
-        
-        Path { path in
-            path.move(to: startSecondLine)
-            path.addLine(to: endSecondLine)
-        }
-        .stroke(lineWidth: 0.1)
+        GeometryReader { geometry in
+            let startSecondLine = CGPoint(x: center.x + 50.5, y: center.y - 5)
+            let endSecondLine = CGPoint(x: width, y: center.y - 5)
+            
+            Path { path in
+                path.move(to: startSecondLine)
+                path.addLine(to: endSecondLine)
+            }
+            .stroke(lineWidth: 0.2)
         .foregroundColor(.black)
+        }
     }
 }
 
