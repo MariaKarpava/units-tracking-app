@@ -8,13 +8,13 @@
 import SwiftUI
 import CoreGraphics
 
-
+// Color: F0F0F0
 struct TopBorderVectorView: View {
     var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
             let radius: CGFloat = 39
-            let circleCenterY: CGFloat = 500
+            let circleCenterY: CGFloat = 0
             let center = CGPoint(x: width / 2, y: circleCenterY)
             let startAngle = Angle(degrees: 0 - 25)
             let endAngle = Angle(degrees: 180 + 25)

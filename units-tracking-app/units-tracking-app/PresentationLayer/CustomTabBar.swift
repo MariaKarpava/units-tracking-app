@@ -36,7 +36,7 @@ struct CustomTabBar: View {
                 
                 GeometryReader { geometry in
                     
-                    TopBorderVectorView().offset(y: 13)
+                    TopBorderVectorView().offset(y: 35)
                     
                         HStack(alignment: .bottom, spacing: 0) {
                             Spacer(minLength: 0)
