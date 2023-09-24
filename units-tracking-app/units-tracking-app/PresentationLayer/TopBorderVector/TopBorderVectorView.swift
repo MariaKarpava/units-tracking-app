@@ -31,7 +31,7 @@ struct TopBorderVectorView: View {
 
 
 
-struct FirstLine: View {
+private struct FirstLine: View {
     let center: CGPoint
     
     var body: some View {
@@ -49,7 +49,7 @@ struct FirstLine: View {
     }
 }
 
-struct FirstCurve: View {
+private struct FirstCurve: View {
     let center: CGPoint
     let radius: CGFloat
     let endAngle: Angle
@@ -77,7 +77,7 @@ struct FirstCurve: View {
 }
 
 
-struct Arc: View {
+private struct Arc: View {
     let radius: CGFloat
     let center: CGPoint
     let startAngle: Angle
@@ -100,7 +100,7 @@ struct Arc: View {
 }
 
 
-struct SecondCurve: View {
+private struct SecondCurve: View {
     let center: CGPoint
     let radius: CGFloat
     let startAngle: Angle
@@ -128,7 +128,7 @@ struct SecondCurve: View {
 }
 
 
-struct SecondLine: View {
+private struct SecondLine: View {
     let width: CGFloat
     let center: CGPoint
     
