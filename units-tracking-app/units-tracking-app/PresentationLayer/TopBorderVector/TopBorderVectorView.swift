@@ -23,15 +23,12 @@ struct TopBorderVectorView: View {
                 x: center.x + radius * CGFloat(cos(startAngle.radians)),
                 y: center.y + radius * CGFloat(sin(startAngle.radians))
             )
-            let endPoint = CGPoint(
-                x: center.x + radius * CGFloat(cos(endAngle.radians)),
-                y: center.y + radius * CGFloat(sin(endAngle.radians))
-            )
             
-            FirstLine(width: width, center: center)
-            FirstCurve(width: width, radius: radius, center: center, startAngle: startAngle, endAngle: endAngle, endPoint: endPoint)
-            Arc(width: width, radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
-            SecondCurve(width: width, radius: radius, center: center, startAngle: startAngle, moveToPoint: startPoint)
+            
+            FirstLine(center: center)
+            FirstCurve(center: center, radius: radius, endAngle: endAngle)
+            Arc(radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
+            SecondCurve(center: center, radius: radius, startAngle: startAngle)
             SecondLine(width: width, center: center)
         }
     }
@@ -41,7 +38,6 @@ struct TopBorderVectorView: View {
 
 
 struct FirstLine: View {
-    let width: CGFloat
     let center: CGPoint
     
     var body: some View {
@@ -60,18 +56,18 @@ struct FirstLine: View {
 }
 
 struct FirstCurve: View {
-    let width: CGFloat
-    let radius: CGFloat
     let center: CGPoint
-    let startAngle: Angle
+    let radius: CGFloat
     let endAngle: Angle
-    let endPoint: CGPoint
     
     var body: some View {
         GeometryReader { geometry in
             let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 5)
-            let moveToPoint = endPoint
             let controlPoint = CGPoint(x: center.x - 39.5, y: center.y - 6)
+            let moveToPoint = CGPoint(
+                x: center.x + radius * CGFloat(cos(endAngle.radians)),
+                y: center.y + radius * CGFloat(sin(endAngle.radians))
+            )
             
             Path { path in
                 path.move(to: startPoint)
@@ -88,7 +84,6 @@ struct FirstCurve: View {
 
 
 struct Arc: View {
-    let width: CGFloat
     let radius: CGFloat
     let center: CGPoint
     let startAngle: Angle
@@ -112,23 +107,24 @@ struct Arc: View {
 
 
 struct SecondCurve: View {
-    let width: CGFloat
-    let radius: CGFloat
     let center: CGPoint
+    let radius: CGFloat
     let startAngle: Angle
-    let moveToPoint: CGPoint
     
     var body: some View {
         GeometryReader { geometry in
-            let width = geometry.size.width
-            let center = CGPoint(x: width / 2, y: 21)
             let startPoint = CGPoint(x: center.x + 50.5, y: center.y - 5)
+            let controlPoint = CGPoint(x: center.x + 39.5, y: center.y - 6)
+            let moveToPoint = CGPoint(
+                x: center.x + radius * CGFloat(cos(startAngle.radians)),
+                y: center.y + radius * CGFloat(sin(startAngle.radians))
+            )
                         
             Path { path in
                     path.move(to: startPoint)
                     path.addQuadCurve(
                         to: moveToPoint,
-                        control: CGPoint(x: center.x + 39.5, y: center.y - 6)
+                        control: controlPoint
                     )
                 }
                 .stroke(lineWidth: 0.2)
