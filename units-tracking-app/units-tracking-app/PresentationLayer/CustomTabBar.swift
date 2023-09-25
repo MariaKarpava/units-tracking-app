@@ -25,6 +25,11 @@ struct CustomTabBar: View {
     @State private var tabBarHeight: CGFloat = 0
     @State private var tabBarWidth: CGFloat = 0
     
+    @State private var isButton1Tapped = false
+    @State private var isButton2Tapped = false
+    @State private var isButton3Tapped = false
+    @State private var isButton4Tapped = false
+    
     var body: some View {
         
         GeometryReader { geometry0 in
@@ -36,25 +41,35 @@ struct CustomTabBar: View {
                 
                 GeometryReader { geometry in
                     
-                    TopBorderVectorView().offset(y: 45)
+                    TopBorderVectorView().offset(y: 35)
                     
-                        HStack(alignment: .bottom, spacing: 0) {
+                        HStack(alignment: .center, spacing: 0) {
                             Spacer(minLength: 0)
                             Button(action: {
                                 // Switch to Home
+                                isButton1Tapped.toggle()
+                                isButton2Tapped = false
+                                isButton3Tapped = false
+                                isButton4Tapped = false
+                                
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
-                                    Image(systemName: "house.fill")
+                                    Image(systemName: "house")
                                         .font(.system(size: 23))
 //                                        .border(Color.red)
                                     Text("Home")
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
+                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
                             }
                             
                             Button(action: {
                                 // Switch to Stats
+                                isButton2Tapped.toggle()
+                                isButton1Tapped = false
+                                isButton3Tapped = false
+                                isButton4Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "chart.xyaxis.line")
@@ -63,12 +78,13 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
+                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
                             }
                             
                             Button(action: {
                                 // Add Button Action
                             }) {
-                                ZStack {
+                                ZStack(alignment: .center) {
                                     Circle()
                                         .fill(
                                             LinearGradient(colors: [Color("AddButtonUpperColor"), Color("AddButtonBottomColor")], startPoint: .top, endPoint: .bottom)
@@ -77,13 +93,19 @@ struct CustomTabBar: View {
                                                     
                                     Image(systemName: "plus")
                                         .foregroundColor(Color.white)
-                                        .font(.system(size: 25))
+//                                        .font(.system(size: 27))
+                                        .font(Font.system(size: 30, weight: .medium))
+//
                                         
                                 }
-                            }.offset(y: -3)
+                            } .offset(y: -13)
                             
                             Button(action: {
                                 // Switch to History
+                                isButton3Tapped.toggle()
+                                isButton1Tapped = false
+                                isButton2Tapped = false
+                                isButton4Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "list.bullet")
@@ -93,10 +115,15 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
+                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
                             }
                             
                             Button(action: {
                                 // Switch to Settings
+                                isButton4Tapped.toggle()
+                                isButton1Tapped = false
+                                isButton2Tapped = false
+                                isButton3Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "gearshape")
@@ -106,6 +133,7 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
+                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
                             }
                             Spacer(minLength: 0)
                         }
