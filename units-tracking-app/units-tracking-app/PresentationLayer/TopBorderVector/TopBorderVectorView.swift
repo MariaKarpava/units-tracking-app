@@ -8,6 +8,16 @@
 import SwiftUI
 import CoreGraphics
 
+
+struct ToShow: View {
+    var body: some View {
+        VStack{
+            Spacer().frame(height: 300)
+            TopBorderVectorView()
+        }
+    }
+}
+
 // Color: F0F0F0
 struct TopBorderVectorView: View {
     var body: some View {
@@ -17,7 +27,7 @@ struct TopBorderVectorView: View {
             let circleCenterY: CGFloat = 0
             let center = CGPoint(x: width / 2, y: circleCenterY)
             let startAngle = Angle(degrees: 0 - 25)
-            let endAngle = Angle(degrees: 180 + 25)
+            let endAngle = Angle(degrees: 180 + 29)
             
             FirstLine(center: center)
             FirstCurve(center: center, radius: radius, endAngle: endAngle)
@@ -36,8 +46,8 @@ private struct FirstLine: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startFirstLine = CGPoint(x: 0, y:  center.y - 5)
-            let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 5)
+            let startFirstLine = CGPoint(x: 0, y:  center.y - 11) // was: center.y - 5
+            let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 11)
            
             Path { path in
                 path.move(to: startFirstLine)
@@ -56,8 +66,8 @@ private struct FirstCurve: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 5)
-            let controlPoint = CGPoint(x: center.x - 39.5, y: center.y - 6)
+            let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 11) //was center.y - 5
+            let controlPoint = CGPoint(x: center.x - 40, y: center.y - 11)
             let moveToPoint = CGPoint(
                 x: center.x + radius * CGFloat(cos(endAngle.radians)),
                 y: center.y + radius * CGFloat(sin(endAngle.radians))
@@ -161,21 +171,31 @@ private struct SecondLine: View {
 
 
 
+    struct ToShow_Previews: PreviewProvider {
+        static var previews: some View {
+            ToShow()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+                .previewDisplayName("iPhone 14")
 
-
-
-
-
-
-
-struct TopBorderVectorView_Previews: PreviewProvider {
-    static var previews: some View {
-        TopBorderVectorView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-            .previewDisplayName("iPhone 14")
-
-        TopBorderVectorView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
-            .previewDisplayName("iPhone 14 Pro Max")
+            ToShow()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+                .previewDisplayName("iPhone 14 Pro Max")
+        }
     }
-}
+
+
+
+
+
+
+//struct TopBorderVectorView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TopBorderVectorView()
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+//            .previewDisplayName("iPhone 14")
+//
+//        TopBorderVectorView()
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+//            .previewDisplayName("iPhone 14 Pro Max")
+//    }
+//}
