@@ -26,8 +26,8 @@ struct TopBorderVectorView: View {
             let radius: CGFloat = 39
             let circleCenterY: CGFloat = 0
             let center = CGPoint(x: width / 2, y: circleCenterY)
-            let startAngle = Angle(degrees: 0 - 29)
-            let endAngle = Angle(degrees: 180 + 29)
+            let startAngle = Angle(degrees: 0 - 33)
+            let endAngle = Angle(degrees: 180 + 33)
             
             FirstLine(center: center)
             FirstCurve(center: center, radius: radius, endAngle: endAngle)
@@ -46,8 +46,8 @@ private struct FirstLine: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startFirstLine = CGPoint(x: 0, y:  center.y - 11)
-            let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 11)
+            let startFirstLine = CGPoint(x: 0, y:  center.y - 15)
+            let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 15)
            
             Path { path in
                 path.move(to: startFirstLine)
@@ -66,8 +66,8 @@ private struct FirstCurve: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 11)
-            let controlPoint = CGPoint(x: center.x - 40, y: center.y - 11)
+            let startPoint = CGPoint(x: center.x - 50.5, y: center.y - 15)
+            let controlPoint = CGPoint(x: center.x - 38, y: center.y - 15)
             let moveToPoint = CGPoint(
                 x: center.x + radius * CGFloat(cos(endAngle.radians)),
                 y: center.y + radius * CGFloat(sin(endAngle.radians))
@@ -118,8 +118,8 @@ private struct SecondCurve: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startPoint = CGPoint(x: center.x + 50.5, y: center.y - 11)
-            let controlPoint = CGPoint(x: center.x + 40, y: center.y - 11)
+            let startPoint = CGPoint(x: center.x + 50.5, y: center.y - 15)
+            let controlPoint = CGPoint(x: center.x + 38, y: center.y - 15)
             let moveToPoint = CGPoint(
                 x: center.x + radius * CGFloat(cos(startAngle.radians)),
                 y: center.y + radius * CGFloat(sin(startAngle.radians))
@@ -146,8 +146,8 @@ private struct SecondLine: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startSecondLine = CGPoint(x: center.x + 50.5, y: center.y - 11)
-            let endSecondLine = CGPoint(x: width, y: center.y - 11)
+            let startSecondLine = CGPoint(x: center.x + 50.5, y: center.y - 15)
+            let endSecondLine = CGPoint(x: width, y: center.y - 15)
             
             Path { path in
                 path.move(to: startSecondLine)
