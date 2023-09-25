@@ -36,7 +36,7 @@ struct CustomTabBar: View {
                 
                 GeometryReader { geometry in
                     
-                    TopBorderVectorView().offset(y: 48)
+                    TopBorderVectorView().offset(y: 45)
                     
                         HStack(alignment: .bottom, spacing: 0) {
                             Spacer(minLength: 0)
@@ -80,7 +80,7 @@ struct CustomTabBar: View {
                                         .font(.system(size: 25))
                                         
                                 }
-                            } //.offset(y: 20)
+                            }.offset(y: -3)
                             
                             Button(action: {
                                 // Switch to History
