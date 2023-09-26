@@ -16,6 +16,6 @@ class  GoalsService: ObservableObject {
     
     /// Returns the number of units per 7 days which is the max value but still within a limit.
     var getUnitsPer7Days: Double {
-        return 14.0
+        return 12.0
     }
 }
