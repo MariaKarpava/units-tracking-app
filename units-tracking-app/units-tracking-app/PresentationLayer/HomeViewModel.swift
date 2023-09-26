@@ -49,6 +49,7 @@ class HomeViewModel: ObservableObject {
     
     
     var getUnitsRemainingForToday: Double {
-        drinksService.unitsRemainingForToday
+        print("HVM: drinksService.unitsRemainingForToday: \(drinksService.unitsRemainingForToday)")
+        return drinksService.unitsRemainingForToday
     }
 }
