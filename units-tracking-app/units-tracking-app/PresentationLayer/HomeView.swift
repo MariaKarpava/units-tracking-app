@@ -37,15 +37,17 @@ struct HomeView: View {
                     .frame(height: 136)
             }
             
-            Spacer()
-            Text("Why?")
-                .underline()
-                .foregroundColor(.accentColor)
-                .font(.homeScreenInfoText)
-                .frame(height: 96)
+            Button {
+                homeViewModel.getInfoText()
+            } label: {
+                Text("Why?")
+                    .frame(height: 96)
+                    .underline()
+                    .foregroundColor(.accentColor)
+                    .font(.homeScreenInfoButton)
+            }
             Spacer()
                 .frame(height: 290)
-            
         }
     }
 }

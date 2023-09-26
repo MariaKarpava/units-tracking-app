@@ -52,4 +52,9 @@ class HomeViewModel: ObservableObject {
         print("HVM: drinksService.unitsRemainingForToday: \(drinksService.unitsRemainingForToday)")
         return drinksService.unitsRemainingForToday
     }
+    
+    func getInfoText() -> String {
+        print(drinksService.infoText)
+        return drinksService.infoText
+    }
 }

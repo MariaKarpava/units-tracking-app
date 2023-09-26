@@ -12,6 +12,8 @@ import SwiftUI
 class DrinksService: ObservableObject {
     private let goalsService = GoalsService()
     
+    var infoText: String = "Info about units"
+    
     
     var unitsConsumedToday: Double {
         let todaysDrinks = drinksWithUnits.filter { drink in
