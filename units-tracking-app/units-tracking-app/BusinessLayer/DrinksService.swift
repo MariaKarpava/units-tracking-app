@@ -53,10 +53,16 @@ class DrinksService: ObservableObject {
         
         if unitsConsumedWithinLast7Days > allowedUnitsPer7Days || unitsConsumedToday > allowedUnitsPerDay {
             result = 0.0
+            print("unitsRemainingForToday1: \(result)")
         } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday > allowedUnitsPerDay {
             result = 0.0
+            print("unitsRemainingForToday2: \(result)")
         } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday < allowedUnitsPerDay {
-            result = min(unitsConsumedToday, unitsConsumedWithinLast7Days)
+            let unitsRemainingFor7Days = allowedUnitsPer7Days - unitsConsumedWithinLast7Days
+            let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday
+            
+            result = min(unitsRemainingFor7Days, unitsRemainingForTodayIgnoringLast7Days)
+            print("unitsRemainingForToday3: \(result)")
         }
         return result
     }
@@ -72,8 +78,8 @@ class DrinksService: ObservableObject {
     @Published var drinks = [
         Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
         Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
-//        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-//        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
+        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
+        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
     ]
     
     

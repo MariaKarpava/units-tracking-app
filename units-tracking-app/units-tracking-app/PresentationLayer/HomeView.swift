@@ -34,6 +34,7 @@ struct HomeView: View {
                     .foregroundColor(Color("SecondaryTextColor"))
                     .font(.homeScreenText)
                     .multilineTextAlignment(.center)
+                    .frame(height: 136)
             }
             
             Spacer()
