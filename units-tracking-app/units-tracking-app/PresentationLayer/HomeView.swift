@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    let homeViewModel: HomeViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct HomeView: View {
                     .frame(height: 136)
                 
             } else {
-                Text(String(format: "%.1f", homeViewModel.getUnitsRemainingForToday))
+                Text(String(format: "%.1f", homeViewModel.unitsRemainingForToday))
                     .foregroundColor(homeViewModel.colorForUnits)
                     .font(.homeScreenUnits)
                     .frame(height: 129)
