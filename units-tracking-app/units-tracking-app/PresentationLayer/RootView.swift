@@ -9,8 +9,8 @@ import SwiftUI
 
     
 struct RootView: View {
-    @EnvironmentObject var drinksService: DrinksService
-    @EnvironmentObject var goalsService: GoalsService
+    var drinksService: DrinksService
+    var goalsService: GoalsService
     
     var body: some View {
         TabView {
@@ -34,8 +34,6 @@ struct RootView: View {
                 Label("Settings", systemImage: "person.crop.circle.fill")
             }
         }
-        .environmentObject(drinksService)
-        .environmentObject(goalsService)
     }
 }
 
@@ -44,7 +42,7 @@ struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
         let drinksService = DrinksService()
-        RootView()
+        RootView(drinksService: drinksService, goalsService: goalsService)
             .environmentObject(drinksService)
             .environmentObject(goalsService)
     }

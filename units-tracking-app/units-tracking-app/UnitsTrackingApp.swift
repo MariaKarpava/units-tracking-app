@@ -15,9 +15,7 @@ struct UnitsTrackingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(drinkService)
-                .environmentObject(goalsService)
+            RootView(drinksService: drinkService, goalsService: goalsService)
         }
     }
 }

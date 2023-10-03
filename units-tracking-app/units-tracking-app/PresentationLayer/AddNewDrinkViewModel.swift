@@ -29,5 +29,7 @@ class AddNewDrinkViewModel: ObservableObject {
         let enteredAlcoholByVolume = Int(alcoholByVolumeInPicker*10)
         let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date())
         drinksService.drinks.append(newDrink)
+        
+        NotificationCenter.default.post(name: .drinksHasChanged, object: drinksService)
     }
 }
