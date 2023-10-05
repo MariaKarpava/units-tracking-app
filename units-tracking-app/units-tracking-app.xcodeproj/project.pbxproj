@@ -26,6 +26,7 @@
 		70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5262A532115005D2EB5 /* DrinksService.swift */; };
 		70EC76252ADDD67500009842 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EC76242ADDD67500009842 /* Color+Custom.swift */; };
 		70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */; };
+		70F7AD5C2ACEC6D300CC22A2 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F7AD5B2ACEC6D300CC22A2 /* HistoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		70ADD5262A532115005D2EB5 /* DrinksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksService.swift; sourceTree = "<group>"; };
 		70EC76242ADDD67500009842 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewDrinkViewModel.swift; sourceTree = "<group>"; };
+		70F7AD5B2ACEC6D300CC22A2 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
 				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
 				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
+				70F7AD5B2ACEC6D300CC22A2 /* HistoryViewModel.swift */,
 				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
 				707FE2582AA8806200D61391 /* HomeViewModel.swift */,
 				707FE25A2AA8825800D61391 /* HomeView.swift */,
@@ -241,6 +244,7 @@
 				707FE25B2AA8825800D61391 /* HomeView.swift in Sources */,
 				70ADD50E2A52E1DE005D2EB5 /* UnitsTrackingApp.swift in Sources */,
 				700F2FC32A8D23B700BAD52D /* GoalsService.swift in Sources */,
+				70F7AD5C2ACEC6D300CC22A2 /* HistoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
