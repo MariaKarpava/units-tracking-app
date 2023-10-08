@@ -129,7 +129,10 @@ class DrinksService {
             // units = strength (ABV) x volume (ml) ÷ 1,000
             // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
             let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
-            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
+
+            print("Date: \(drink.date), units: \(units)")
+            
+            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml)
             result.append(modifiedDrink)
         }
         return result

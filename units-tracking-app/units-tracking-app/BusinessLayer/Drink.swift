@@ -53,4 +53,6 @@ struct DrinkWithUnits: Hashable, Identifiable {
     let drinkType: Drink.DrinkType
     let date: Date
     let units: Double
+    
+    let ml: Int
 }
