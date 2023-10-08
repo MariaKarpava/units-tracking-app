@@ -66,7 +66,7 @@ struct RootView: View {
                 case .stats:
                     StatisticsView()
                 case .history:
-                    HistoryView2()
+                    HistoryView(HistoryViewModel: HistoryViewModel(drinksService: drinksService))
                 case .settings:
                     SettingsView()
                 }
