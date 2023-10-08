@@ -9,21 +9,20 @@ import SwiftUI
 
 
 struct HistoryView: View {
-
-    @EnvironmentObject var drinksService: DrinksService
+    @ObservedObject var HistoryViewModel: HistoryViewModel
     
 
     var body: some View {
         ScrollView(.vertical) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("Edit")
                     .frame(width: 380, height: 90, alignment: .bottomTrailing)
                     .underline()
                 Text("History")
                     .frame(width: 380, height: 40, alignment: .leading)
                     .font(.largeTitle)
-                ForEach(drinksService.drinksWithUnitsDict.keys.sorted(), id: \.self) { date in
-                    let drinksForDate = drinksService.drinksWithUnitsDict[date]!
+                ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
+                    let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
                     
                     VStack(spacing: 10) { // Adjust spacing as needed
                         ForEach(drinksForDate) { drink in
@@ -44,6 +43,7 @@ struct HistoryView: View {
 
 struct DrinkHistoryRow: View {
     let drink: DrinkWithUnits
+    
     private var dateFormatterForYear: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
@@ -81,4 +81,10 @@ struct DrinkHistoryRow: View {
 }
 
 
-                                                                                     
+struct HistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        let drinksService = DrinksService()
+        let historyViewModel = HistoryViewModel(drinksService: drinksService)
+        HistoryView(HistoryViewModel: historyViewModel)
+    }
+}
