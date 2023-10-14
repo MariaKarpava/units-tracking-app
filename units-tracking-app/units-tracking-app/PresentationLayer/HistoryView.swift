@@ -65,7 +65,10 @@ struct DrinkHistoryRow: View {
             }
             Divider().frame(height: 60)
             VStack(alignment: .leading) {
-                Text(drink.drinkType.rawValue.capitalized)
+                HStack {
+                    Text(String(format: "%.1f", drink.alcoholByVolume / 10))
+                    Text(drink.drinkType.rawValue.capitalized)
+                }
                 HStack {
                     Text(String(drink.ml))
                     Text("ml")
