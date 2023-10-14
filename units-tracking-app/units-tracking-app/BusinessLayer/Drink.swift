@@ -55,4 +55,5 @@ struct DrinkWithUnits: Hashable, Identifiable {
     let units: Double
     
     let ml: Int
+    var alcoholByVolume: Int
 }

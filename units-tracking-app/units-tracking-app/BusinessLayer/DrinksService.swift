@@ -132,7 +132,7 @@ class DrinksService {
 
             print("Date: \(drink.date), units: \(units)")
             
-            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml)
+            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
             result.append(modifiedDrink)
         }
         return result
