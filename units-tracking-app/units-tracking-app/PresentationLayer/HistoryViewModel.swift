@@ -11,9 +11,11 @@ import SwiftUI
 
 class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
+    @Published var drinks: [Drink]
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
+        drinks = drinksService.drinks
         
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -21,11 +23,15 @@ class HistoryViewModel: ObservableObject {
             queue: .main
         ) { notification in
             // Handle the notification here
+            self.drinks = self.getDrinks()
             print("Received a notification in History View!")
         }
     }
     
-    
+    func getDrinks() -> [Drink] {
+        return drinksService.drinks
+    }
+
     func getDatesFromDrinksWithUnits() -> [Date] {
         return drinksService.drinksWithUnitsDict.keys.sorted()
     }
