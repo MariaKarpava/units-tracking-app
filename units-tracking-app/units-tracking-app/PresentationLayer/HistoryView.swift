@@ -13,29 +13,32 @@ struct HistoryView: View {
     
 
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .center) {
-                Text("Edit")
-                    .frame(width: 380, height: 90, alignment: .bottomTrailing)
-                    .underline()
-                Text("History")
-                    .frame(width: 380, height: 40, alignment: .leading)
-                    .font(.largeTitle)
-                ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
-                    let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
-                    
-                    VStack(spacing: 10) { // Adjust spacing as needed
-                        ForEach(drinksForDate) { drink in
-                            DrinkHistoryRow(drink: drink)
-                                .frame(width: 350, height: 80)
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 5)
+        GeometryReader { bodyGeometry in
+            ScrollView(.vertical) {
+                VStack(alignment: .center) {
+                    Text("Edit")
+                        .frame(width: bodyGeometry.size.width * 0.9, height: 90, alignment: .bottomTrailing)
+                        .underline()
+                    Text("History")
+                        .frame(width: bodyGeometry.size.width * 0.9, height: 40, alignment: .leading)
+                        .font(.largeTitle)
+                    ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
+                        let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
+                        
+                        VStack(alignment: .center, spacing: 10) {
+                            ForEach(drinksForDate) { drink in
+                                DrinkHistoryRow(drink: drink)
+                                    .frame(width: bodyGeometry.size.width * 0.9, height: 80)
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                                    .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 5)
+                            }
                         }
                     }
-                }
-                Spacer()
-            }
+                } // VStack
+            
+            }.frame(width: bodyGeometry.size.width) // Scroll View
+
         }
     }
 }
@@ -60,29 +63,33 @@ struct DrinkHistoryRow: View {
  
  
     var body: some View {
-        HStack {
-            VStack {
-                Text(dateFormatterForDayAndMonth.string(from: drink.date))
-                Text(dateFormatterForYear.string(from: drink.date))
-            }
-            Divider().frame(height: 60)
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(String(Double(drink.alcoholByVolume) / 10.0))
-                    Text("% •")
-                    Text(drink.drinkType.rawValue.capitalized)
+        GeometryReader { geometry in
+            
+            HStack(alignment: .center) {
+                VStack {
+                    Text(dateFormatterForDayAndMonth.string(from: drink.date))
+                    Text(dateFormatterForYear.string(from: drink.date))
                 }
-                HStack {
-                    Text(String(drink.ml))
-                    Text("ml")
+                Divider().frame(height: 60)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(String(Double(drink.alcoholByVolume) / 10.0))
+                        Text("% •")
+                        Text(drink.drinkType.rawValue.capitalized)
+                    }
+                    HStack {
+                        Text(String(drink.ml))
+                        Text("ml")
+                    }
+                }
+                Spacer()
+                VStack{
+                    Text(String(format: "%.1f", drink.units))
+                    Text("Unit(s)")
                 }
             }
-            Spacer()
-            VStack{
-                Text(String(format: "%.1f", drink.units))
-                Text("Unit(s)")
-            }
-        }.frame(width: 330, height: 70)
+//            .frame(width: geometry.size.width * 0.9, height: 70)
+        }
     }
 }
 
