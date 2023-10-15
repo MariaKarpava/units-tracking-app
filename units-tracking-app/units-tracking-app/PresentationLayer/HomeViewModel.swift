@@ -58,7 +58,7 @@ class HomeViewModel: ObservableObject {
         
         if unitsRemainingForToday > 3.0 {
             currentDrinkState = .normal
-        } else if unitsRemainingForToday >= 1.0 {
+        } else if unitsRemainingForToday > 0 {
             currentDrinkState = .closeToZero
         } else {
             currentDrinkState = .remainingIsZero
