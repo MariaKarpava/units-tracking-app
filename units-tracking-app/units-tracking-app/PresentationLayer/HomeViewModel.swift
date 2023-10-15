@@ -21,7 +21,7 @@ class HomeViewModel: ObservableObject {
     init(drinksService: DrinksService, goalsService: GoalsService) {
         self.drinksService = drinksService
         self.goalsService = goalsService
-        unitsRemainingForToday = drinksService.unitsRemainingForToday
+        unitsRemainingForToday = drinksService.unitsRemainingForToday()
         colorForUnits = calculateColorForUnits()
         
         NotificationCenter.default.addObserver(
@@ -32,7 +32,7 @@ class HomeViewModel: ObservableObject {
             // Handle the notification here
             print("Received a notification! \(Date())")
             
-            self.unitsRemainingForToday = self.drinksService.unitsRemainingForToday
+            self.unitsRemainingForToday = self.drinksService.unitsRemainingForToday()
             self.colorForUnits = self.calculateColorForUnits()
         }
     }
@@ -56,9 +56,9 @@ class HomeViewModel: ObservableObject {
         let unitsRemainingForToday = drinksService.unitsRemainingForToday
         var currentDrinkState: DrinkState
         
-        if unitsRemainingForToday > 3.0 {
+        if unitsRemainingForToday() > 3.0 {
             currentDrinkState = .normal
-        } else if unitsRemainingForToday > 0 {
+        } else if unitsRemainingForToday() > 0 {
             currentDrinkState = .closeToZero
         } else {
             currentDrinkState = .remainingIsZero
