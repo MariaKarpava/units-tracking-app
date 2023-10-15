@@ -11,9 +11,6 @@ import Foundation
 class DrinksService {
     private let goalsService = GoalsService()
     
-    var infoText: String = "Info about units"
-    
-    
     func unitsConsumedToday() -> Double {
         let todaysDrinks = drinksWithUnits.filter { drink in
             let calendar = Calendar.current

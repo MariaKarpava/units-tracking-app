@@ -76,8 +76,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var unitsRemainingForToday: Double
     
-    func getInfoText() -> String {
-        print(drinksService.infoText)
-        return drinksService.infoText
+    func whyButtonTapped() {
+        print("why button tapped")
     }
 }
