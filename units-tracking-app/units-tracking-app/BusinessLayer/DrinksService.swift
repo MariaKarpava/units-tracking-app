@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import SwiftUI
 
 
-class DrinksService: ObservableObject {
+class DrinksService {
     private let goalsService = GoalsService()
     
     var infoText: String = "Info about units"
@@ -77,7 +76,7 @@ class DrinksService: ObservableObject {
     }
     
         
-    @Published var drinks = [
+    var drinks = [
         Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
         Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
 //        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),

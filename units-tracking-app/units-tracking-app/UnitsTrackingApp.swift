@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct UnitsTrackingApp: App {
     @StateObject var goalsService = GoalsService()
-    @StateObject var drinkService = DrinksService()
+    var drinkService = DrinksService()
     
 
     var body: some Scene {
