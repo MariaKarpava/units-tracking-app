@@ -15,7 +15,7 @@ class DrinksService: ObservableObject {
     var infoText: String = "Info about units"
     
     
-    var unitsConsumedToday: Double {
+    func unitsConsumedToday() -> Double {
         let todaysDrinks = drinksWithUnits.filter { drink in
             let calendar = Calendar.current
             let drinkDateComponents = calendar.dateComponents([.day, .month, .year], from: drink.date)
@@ -29,7 +29,7 @@ class DrinksService: ObservableObject {
         return units
     }
     
-    var unitsConsumedWithinLast7Days: Double {
+    func unitsConsumedWithinLast7Days() -> Double {
         let calendar = Calendar.current
         if let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date()) {
             print()
@@ -48,20 +48,20 @@ class DrinksService: ObservableObject {
     }
 
     
-    var unitsRemainingForToday: Double {
+    func unitsRemainingForToday() -> Double {
         var result = 0.0
-        let allowedUnitsPerDay = goalsService.getUnitsPerDay
-        let allowedUnitsPer7Days = goalsService.getUnitsPer7Days
+        let allowedUnitsPerDay = goalsService.unitsPerDay
+        let allowedUnitsPer7Days = goalsService.unitsPer7Days
         
-        if unitsConsumedWithinLast7Days > allowedUnitsPer7Days || unitsConsumedToday > allowedUnitsPerDay {
+        if unitsConsumedWithinLast7Days() > allowedUnitsPer7Days || unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
             print("unitsRemainingForToday1: \(result)")
-        } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday > allowedUnitsPerDay {
+        } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
             print("unitsRemainingForToday2: \(result)")
-        } else if unitsConsumedWithinLast7Days < allowedUnitsPer7Days && unitsConsumedToday < allowedUnitsPerDay {
-            let unitsRemainingFor7Days = allowedUnitsPer7Days - unitsConsumedWithinLast7Days
-            let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday
+        } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() < allowedUnitsPerDay {
+            let unitsRemainingFor7Days = allowedUnitsPer7Days - unitsConsumedWithinLast7Days()
+            let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday()
             
             result = min(unitsRemainingFor7Days, unitsRemainingForTodayIgnoringLast7Days)
             print("unitsRemainingForToday3: \(result)")
