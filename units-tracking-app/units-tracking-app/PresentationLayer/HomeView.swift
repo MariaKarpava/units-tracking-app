@@ -38,7 +38,7 @@ struct HomeView: View {
             }
             
             Button {
-                homeViewModel.getInfoText()
+                homeViewModel.whyButtonTapped()
             } label: {
                 Text("Why?")
                     .frame(height: 96)
