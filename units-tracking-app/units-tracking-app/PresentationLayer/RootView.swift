@@ -43,7 +43,5 @@ struct RootView_Previews: PreviewProvider {
         let goalsService = GoalsService()
         let drinksService = DrinksService()
         RootView(drinksService: drinksService, goalsService: goalsService)
-            .environmentObject(drinksService)
-            .environmentObject(goalsService)
     }
 }

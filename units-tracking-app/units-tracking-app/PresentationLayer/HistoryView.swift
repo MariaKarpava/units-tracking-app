@@ -7,16 +7,22 @@
 
 import SwiftUI
 
+
+
 struct HistoryView: View {
-    @EnvironmentObject var drinksService: DrinksService
-   
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        return formatter
-    }
+
+//    @EnvironmentObject var drinksService: DrinksService
+//
+//    private var dateFormatter: DateFormatter {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "dd.MM.yyyy"
+//        return formatter
+//    }
 
     var body: some View {
+        EmptyView()
+        
+/*
         Form {
             ForEach(drinksService.drinksWithUnitsDict.keys.sorted(), id: \.self) { date in
                 let drinksForDate = drinksService.drinksWithUnitsDict[date]!
@@ -28,7 +34,9 @@ struct HistoryView: View {
                 }
             }
         }
+ */
     }
+
 }
 
 
@@ -58,12 +66,12 @@ struct DrinkHistoryRow: View {
 
 
 
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        let drinksStore = DrinksService()
-        HistoryView().environmentObject(drinksStore)
-    }
-}
+//struct HistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let drinksStore = DrinksService()
+//        HistoryView().environmentObject(drinksStore)
+//    }
+//}
 
-  
+
                                                                                         
