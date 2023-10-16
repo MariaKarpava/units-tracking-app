@@ -17,10 +17,10 @@ struct HistoryView: View {
             ScrollView(.vertical) {
                 VStack(alignment: .center) {
                     Text("Edit")
-                        .frame(width: bodyGeometry.size.width * 0.9, height: 90, alignment: .bottomTrailing)
+                        .frame(width: bodyGeometry.size.width - 40, height: 90, alignment: .bottomTrailing)
                         .underline()
                     Text("History")
-                        .frame(width: bodyGeometry.size.width * 0.9, height: 40, alignment: .leading)
+                        .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
                         .font(.largeTitle)
                     ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
                         let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
@@ -28,7 +28,7 @@ struct HistoryView: View {
                         VStack(alignment: .center, spacing: 10) {
                             ForEach(drinksForDate) { drink in
                                 DrinkHistoryRow(drink: drink)
-                                    .frame(width: bodyGeometry.size.width * 0.9, height: 80)
+                                    .frame(width: bodyGeometry.size.width - 40, height: 80)
                                     .background(Color.white)
                                     .cornerRadius(10)
                                     .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 5)
