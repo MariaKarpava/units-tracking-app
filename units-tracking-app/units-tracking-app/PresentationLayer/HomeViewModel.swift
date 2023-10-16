@@ -66,11 +66,11 @@ class HomeViewModel: ObservableObject {
             
         switch currentDrinkState {
         case .normal:
-            return Color("MainTextColor")
+            return .mainText
         case .closeToZero:
-            return  Color("CustomOrange")
+            return .customOrange
         case .remainingIsZero:
-            return Color.red
+            return .red
         }
     }
     
