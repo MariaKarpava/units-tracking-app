@@ -12,7 +12,7 @@
 		707FE25B2AA8825800D61391 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FE25A2AA8825800D61391 /* HomeView.swift */; };
 		707FE25E2AA8DB9F00D61391 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 707FE25D2AA8DB9F00D61391 /* Inter-Black.ttf */; };
 		707FE2602AA8DBB300D61391 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 707FE25F2AA8DBB300D61391 /* Inter-Medium.ttf */; };
-		707FE2632AA8EFD200D61391 /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FE2622AA8EFD200D61391 /* FontStyles.swift */; };
+		707FE2632AA8EFD200D61391 /* Font+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FE2622AA8EFD200D61391 /* Font+Custom.swift */; };
 		70ADD50E2A52E1DE005D2EB5 /* UnitsTrackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD50D2A52E1DE005D2EB5 /* UnitsTrackingApp.swift */; };
 		70ADD5102A52E1DE005D2EB5 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD50F2A52E1DE005D2EB5 /* RootView.swift */; };
 		70ADD5122A52E1DF005D2EB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */; };
@@ -33,7 +33,7 @@
 		707FE25D2AA8DB9F00D61391 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
 		707FE25F2AA8DBB300D61391 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		707FE2612AA8DC5300D61391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		707FE2622AA8EFD200D61391 /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
+		707FE2622AA8EFD200D61391 /* Font+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Custom.swift"; sourceTree = "<group>"; };
 		70ADD50A2A52E1DE005D2EB5 /* units-tracking-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "units-tracking-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70ADD50D2A52E1DE005D2EB5 /* UnitsTrackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsTrackingApp.swift; sourceTree = "<group>"; };
 		70ADD50F2A52E1DE005D2EB5 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -62,6 +62,9 @@
 		700F2FBA2A8BC8A300BAD52D /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */,
+				707FE25C2AA8DB4500D61391 /* Fonts */,
+				707FE2622AA8EFD200D61391 /* Font+Custom.swift */,
 				70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */,
 				70ADD50F2A52E1DE005D2EB5 /* RootView.swift */,
 				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
@@ -103,7 +106,6 @@
 		70ADD5012A52E1DE005D2EB5 = {
 			isa = PBXGroup;
 			children = (
-				707FE2622AA8EFD200D61391 /* FontStyles.swift */,
 				70ADD50C2A52E1DE005D2EB5 /* units-tracking-app */,
 				70ADD50B2A52E1DE005D2EB5 /* Products */,
 			);
@@ -125,8 +127,6 @@
 				700F2FBA2A8BC8A300BAD52D /* PresentationLayer */,
 				700F2FBB2A8BC8CF00BAD52D /* BusinessLayer */,
 				700F2FBC2A8BC8DD00BAD52D /* PersistenceLayer */,
-				70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */,
-				707FE25C2AA8DB4500D61391 /* Fonts */,
 				70ADD5132A52E1DF005D2EB5 /* Preview Content */,
 			);
 			path = "units-tracking-app";
@@ -218,7 +218,7 @@
 				70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */,
 				70ADD51C2A52E825005D2EB5 /* HistoryView.swift in Sources */,
 				707FE2592AA8806200D61391 /* HomeViewModel.swift in Sources */,
-				707FE2632AA8EFD200D61391 /* FontStyles.swift in Sources */,
+				707FE2632AA8EFD200D61391 /* Font+Custom.swift in Sources */,
 				70ADD5252A52F0B6005D2EB5 /* Drink.swift in Sources */,
 				70ADD5222A52E860005D2EB5 /* SettingsView.swift in Sources */,
 				70ADD51E2A52E83A005D2EB5 /* AddNewDrinkView.swift in Sources */,
