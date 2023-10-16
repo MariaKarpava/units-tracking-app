@@ -98,6 +98,13 @@ struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         let drinksService = DrinksService()
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
+        
         HistoryView(HistoryViewModel: historyViewModel)
+            .previewDisplayName("iPhone 14 Pro Max")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+        
+        HistoryView(HistoryViewModel: historyViewModel)
+            .previewDisplayName("iPhone 14")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
     }
 }
