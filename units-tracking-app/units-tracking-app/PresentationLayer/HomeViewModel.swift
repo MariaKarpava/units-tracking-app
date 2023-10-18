@@ -17,36 +17,34 @@ extension Notification.Name {
 class HomeViewModel: ObservableObject {
     private let drinksService: DrinksService
     private let goalsService: GoalsService
+    @Published var viewState: ViewState
+    
+    struct ViewState {
+        var colorForUnits: Color = .blue
+        var unitsRemainingForToday: Double = -1
+    }
+    
     
     init(drinksService: DrinksService, goalsService: GoalsService) {
         self.drinksService = drinksService
         self.goalsService = goalsService
-        unitsRemainingForToday = drinksService.unitsRemainingForToday()
-        colorForUnits = calculateColorForUnits()
+        self.viewState = ViewState()
         
+        viewState.unitsRemainingForToday = drinksService.unitsRemainingForToday()
+        viewState.colorForUnits = calculateColorForUnits()
+ 
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
+            
             object: drinksService,
             queue: .main
-        ) { notification in
             // Handle the notification here
             print("Received a notification! \(Date())")
-            
-            self.unitsRemainingForToday = self.drinksService.unitsRemainingForToday()
-            self.colorForUnits = self.calculateColorForUnits()
         }
     }
     
-
     
-    @Published var colorForUnits: Color = .blue
     func calculateColorForUnits() -> Color {
-        print("---")
-        print("---")
-        print("calculateColorForUnits()")
-        print("---")
-        print("---")
-        
         enum DrinkState {
             case normal
             case closeToZero
@@ -73,8 +71,6 @@ class HomeViewModel: ObservableObject {
             return .red
         }
     }
-    
-    @Published var unitsRemainingForToday: Double
     
     func whyButtonTapped() {
         print("why button tapped")
