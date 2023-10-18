@@ -38,8 +38,12 @@ class HomeViewModel: ObservableObject {
             
             object: drinksService,
             queue: .main
+        ) { [weak self] notification in
             // Handle the notification here
+            guard let strongSelf = self else { return }
             print("Received a notification! \(Date())")
+            strongSelf.viewState.unitsRemainingForToday = strongSelf.drinksService.unitsRemainingForToday()
+            strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits()
         }
     }
     
