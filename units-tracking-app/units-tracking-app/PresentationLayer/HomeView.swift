@@ -14,7 +14,7 @@ struct HomeView: View {
         VStack {
             Spacer()
                 .frame(height: 225)
-            if homeViewModel.colorForUnits == Color.red {
+            if homeViewModel.viewState.colorForUnits == Color.red {
                 Image("WarningSymbol")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -26,8 +26,8 @@ struct HomeView: View {
                     .frame(height: 136)
                 
             } else {
-                Text(String(format: "%.1f", homeViewModel.unitsRemainingForToday))
-                    .foregroundColor(homeViewModel.colorForUnits)
+                Text(String(format: "%.1f", homeViewModel.viewState.unitsRemainingForToday))
+                    .foregroundColor(homeViewModel.viewState.colorForUnits)
                     .font(.homeScreenUnits)
                     .frame(height: 129)
                 Text("Units remaining \n for today")
