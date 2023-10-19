@@ -41,6 +41,9 @@ class HomeViewModel: ObservableObject {
         let drinkState = calculateCurrentDrinkState()
         viewState.colorForUnits = calculateColorForUnits(currentDrinkState: drinkState)
         viewState.text = "Units remaining \n for today"
+        viewState.warningSymbolIsVisible = false
+        viewState.unitsAreVisible = true
+        
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -57,8 +60,12 @@ class HomeViewModel: ObservableObject {
             strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits(currentDrinkState: drinkState)
             if drinkState == .normal || drinkState == .closeToZero {
                 strongSelf.viewState.text = "units remaining \n for today."
+                strongSelf.viewState.warningSymbolIsVisible = false
+                strongSelf.viewState.unitsAreVisible = true
             } else {
                 strongSelf.viewState.text = "You have reached your \n drinking limit today."
+                strongSelf.viewState.warningSymbolIsVisible = true
+                strongSelf.viewState.unitsAreVisible = false
             }
         }
     }
