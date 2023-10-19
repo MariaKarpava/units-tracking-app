@@ -14,13 +14,13 @@ struct HomeView: View {
         VStack {
             Spacer()
                 .frame(height: 225)
-            if homeViewModel.viewState.warningSymbolIsVisible {
+            if homeViewModel.viewState.remainingUnitsIndication == .warning {
                 Image("WarningSymbol")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 140, height: 122)
             }
-            if homeViewModel.viewState.unitsAreVisible {
+            if homeViewModel.viewState.remainingUnitsIndication == .exactNumber {
                 Text(String(format: "%.1f", homeViewModel.viewState.unitsRemainingForToday))
                     .foregroundColor(homeViewModel.viewState.colorForUnits)
                     .font(.homeScreenUnits)
