@@ -19,24 +19,17 @@ struct HomeView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 140, height: 122)
-                Text("You have reached your \n drinking limit today.")
-                    .foregroundColor(.secondaryText)
-                    .font(.homeScreenText)
-                    .multilineTextAlignment(.center)
-                    .frame(height: 136)
-                
             } else {
                 Text(String(format: "%.1f", homeViewModel.viewState.unitsRemainingForToday))
                     .foregroundColor(homeViewModel.viewState.colorForUnits)
                     .font(.homeScreenUnits)
                     .frame(height: 129)
-                Text("Units remaining \n for today")
-                    .foregroundColor(.secondaryText)
-                    .font(.homeScreenText)
-                    .multilineTextAlignment(.center)
-                    .frame(height: 136)
             }
-            
+            Text(homeViewModel.viewState.text)
+                .foregroundColor(.secondaryText)
+                .font(.homeScreenText)
+                .multilineTextAlignment(.center)
+                .frame(height: 136)
             Button {
                 homeViewModel.whyButtonTapped()
             } label: {

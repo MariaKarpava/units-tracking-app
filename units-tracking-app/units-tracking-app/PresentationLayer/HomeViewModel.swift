@@ -28,6 +28,7 @@ class HomeViewModel: ObservableObject {
     struct ViewState {
         var colorForUnits: Color = .blue
         var unitsRemainingForToday: Double = -1
+        var text: String = ""
     }
     
     
@@ -39,6 +40,7 @@ class HomeViewModel: ObservableObject {
         viewState.unitsRemainingForToday = drinksService.unitsRemainingForToday()
         let drinkState = calculateCurrentDrinkState()
         viewState.colorForUnits = calculateColorForUnits(currentDrinkState: drinkState)
+        viewState.text = "Units remaining \n for today"
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -53,6 +55,11 @@ class HomeViewModel: ObservableObject {
             
             let drinkState = strongSelf.calculateCurrentDrinkState()
             strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits(currentDrinkState: drinkState)
+            if drinkState == .normal || drinkState == .closeToZero {
+                strongSelf.viewState.text = "units remaining \n for today."
+            } else {
+                strongSelf.viewState.text = "You have reached your \n drinking limit today."
+            }
         }
     }
     
