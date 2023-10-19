@@ -19,6 +19,12 @@ class HomeViewModel: ObservableObject {
     private let goalsService: GoalsService
     @Published var viewState: ViewState
     
+    enum DrinkState {
+        case normal
+        case closeToZero
+        case remainingIsZero
+    }
+    
     struct ViewState {
         var colorForUnits: Color = .blue
         var unitsRemainingForToday: Double = -1
@@ -31,7 +37,8 @@ class HomeViewModel: ObservableObject {
         self.viewState = ViewState()
         
         viewState.unitsRemainingForToday = drinksService.unitsRemainingForToday()
-        viewState.colorForUnits = calculateColorForUnits()
+        let drinkState = calculateCurrentDrinkState()
+        viewState.colorForUnits = calculateColorForUnits(currentDrinkState: drinkState)
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -41,31 +48,19 @@ class HomeViewModel: ObservableObject {
         ) { [weak self] notification in
             // Handle the notification here
             guard let strongSelf = self else { return }
-            print("Received a notification! \(Date())")
+//            print("Received a notification! \(Date())")
             strongSelf.viewState.unitsRemainingForToday = strongSelf.drinksService.unitsRemainingForToday()
-            strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits()
+            
+            let drinkState = strongSelf.calculateCurrentDrinkState()
+            strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits(currentDrinkState: drinkState)
         }
     }
     
     
-    func calculateColorForUnits() -> Color {
-        enum DrinkState {
-            case normal
-            case closeToZero
-            case remainingIsZero
-        }
-        
-        let unitsRemainingForToday = drinksService.unitsRemainingForToday
-        var currentDrinkState: DrinkState
-        
-        if unitsRemainingForToday() > 3.0 {
-            currentDrinkState = .normal
-        } else if unitsRemainingForToday() > 0 {
-            currentDrinkState = .closeToZero
-        } else {
-            currentDrinkState = .remainingIsZero
-        }
-            
+    
+    
+    
+    func calculateColorForUnits(currentDrinkState: DrinkState) -> Color {
         switch currentDrinkState {
         case .normal:
             return .mainText
@@ -75,6 +70,20 @@ class HomeViewModel: ObservableObject {
             return .red
         }
     }
+    
+    
+    func calculateCurrentDrinkState() -> DrinkState {
+        let unitsRemainingForToday = drinksService.unitsRemainingForToday
+        
+        if unitsRemainingForToday() > 3.0 {
+            return .normal
+        } else if unitsRemainingForToday() > 0 {
+            return .closeToZero
+        } else {
+            return .remainingIsZero
+        }
+    }
+    
     
     func whyButtonTapped() {
         print("why button tapped")
