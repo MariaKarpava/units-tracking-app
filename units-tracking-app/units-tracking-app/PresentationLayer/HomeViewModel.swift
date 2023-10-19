@@ -25,10 +25,18 @@ class HomeViewModel: ObservableObject {
         case remainingIsZero
     }
     
+    
     struct ViewState {
+        enum RemainingUnitsIndication {
+            case warning
+            case exactNumber
+        }
+        
         var colorForUnits: Color = .blue
         var unitsRemainingForToday: Double = -1
         var text: String = ""
+        
+        var remainingUnitsIndication: RemainingUnitsIndication = .exactNumber
     }
     
     
@@ -41,9 +49,7 @@ class HomeViewModel: ObservableObject {
         let drinkState = calculateCurrentDrinkState()
         viewState.colorForUnits = calculateColorForUnits(currentDrinkState: drinkState)
         viewState.text = "Units remaining \n for today"
-        viewState.warningSymbolIsVisible = false
-        viewState.unitsAreVisible = true
-        
+        viewState.remainingUnitsIndication = .exactNumber
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -60,13 +66,10 @@ class HomeViewModel: ObservableObject {
             strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits(currentDrinkState: drinkState)
             if drinkState == .normal || drinkState == .closeToZero {
                 strongSelf.viewState.text = "units remaining \n for today."
-                strongSelf.viewState.warningSymbolIsVisible = false
-                strongSelf.viewState.unitsAreVisible = true
+                strongSelf.viewState.remainingUnitsIndication = .exactNumber
             } else {
                 strongSelf.viewState.text = "You have reached your \n drinking limit today."
-                strongSelf.viewState.warningSymbolIsVisible = true
-                strongSelf.viewState.unitsAreVisible = false
-            }
+                strongSelf.viewState.remainingUnitsIndication = .warning            }
         }
     }
     
