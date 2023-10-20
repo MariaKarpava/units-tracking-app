@@ -26,17 +26,13 @@ class HomeViewModel: ObservableObject {
     }
     
     
-    struct ViewState {
-        enum RemainingUnitsIndication {
+    struct ViewState: Equatable {
+        enum RemainingUnitsIndication: Equatable {
             case warning
-            case exactNumber
+            case exactNumber(units: Double, color: Color)
         }
-        
-        var colorForUnits: Color = .blue
-        var unitsRemainingForToday: Double = -1
         var text: String = ""
-        
-        var remainingUnitsIndication: RemainingUnitsIndication = .exactNumber
+        var remainingUnitsIndication: RemainingUnitsIndication = .exactNumber(units: -1, color: .blue)
     }
     
     
@@ -45,11 +41,9 @@ class HomeViewModel: ObservableObject {
         self.goalsService = goalsService
         self.viewState = ViewState()
         
-        viewState.unitsRemainingForToday = drinksService.unitsRemainingForToday()
         let drinkState = calculateCurrentDrinkState()
-        viewState.colorForUnits = calculateColorForUnits(currentDrinkState: drinkState)
         viewState.text = "Units remaining \n for today"
-        viewState.remainingUnitsIndication = .exactNumber
+        viewState.remainingUnitsIndication = .exactNumber(units: drinksService.unitsRemainingForToday(), color: calculateColorForUnits(currentDrinkState: drinkState))
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -59,14 +53,10 @@ class HomeViewModel: ObservableObject {
         ) { [weak self] notification in
             // Handle the notification here
             guard let strongSelf = self else { return }
-//            print("Received a notification! \(Date())")
-            strongSelf.viewState.unitsRemainingForToday = strongSelf.drinksService.unitsRemainingForToday()
-            
             let drinkState = strongSelf.calculateCurrentDrinkState()
-            strongSelf.viewState.colorForUnits = strongSelf.calculateColorForUnits(currentDrinkState: drinkState)
             if drinkState == .normal || drinkState == .closeToZero {
                 strongSelf.viewState.text = "units remaining \n for today."
-                strongSelf.viewState.remainingUnitsIndication = .exactNumber
+                strongSelf.viewState.remainingUnitsIndication = .exactNumber(units: strongSelf.drinksService.unitsRemainingForToday(), color: strongSelf.calculateColorForUnits(currentDrinkState: drinkState))
             } else {
                 strongSelf.viewState.text = "You have reached your \n drinking limit today."
                 strongSelf.viewState.remainingUnitsIndication = .warning            }
