@@ -16,10 +16,10 @@ struct HomeView: View {
                 .frame(height: 225)
             switch homeViewModel.viewState.remainingUnitsIndication {
             case .warning:
-                Image("WarningSymbol")
-                    .resizable()
+                Image(systemName: "exclamationmark.triangle")
+                    .foregroundColor(.customOrange)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 140, height: 122)
+                    .font(Font.system(size: 140))
             case .exactNumber(let units, let color):
                 Text(String(format: "%.1f", units))
                     .foregroundColor(color)
