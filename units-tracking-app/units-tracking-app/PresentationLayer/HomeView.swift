@@ -14,16 +14,17 @@ struct HomeView: View {
         VStack {
             Spacer()
                 .frame(height: 225)
-            if case .exactNumber(let units, let color) = homeViewModel.viewState.remainingUnitsIndication {
-                Text(String(format: "%.1f", units))
-                    .foregroundColor(color)
-                    .font(.homeScreenUnits)
-                    .frame(height: 129)
-            } else if homeViewModel.viewState.remainingUnitsIndication == .warning {
+            switch homeViewModel.viewState.remainingUnitsIndication {
+            case .warning:
                 Image("WarningSymbol")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 140, height: 122)
+            case .exactNumber(let units, let color):
+                Text(String(format: "%.1f", units))
+                    .foregroundColor(color)
+                    .font(.homeScreenUnits)
+                    .frame(height: 129)
             }
 
             Text(homeViewModel.viewState.text)
