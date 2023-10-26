@@ -20,15 +20,10 @@ struct TestScreen: View {
 }
 
 
-
 struct CustomTabBar: View {
     @State private var tabBarHeight: CGFloat = 0
     @State private var tabBarWidth: CGFloat = 0
     
-    @State private var isButton1Tapped = false
-    @State private var isButton2Tapped = false
-    @State private var isButton3Tapped = false
-    @State private var isButton4Tapped = false
     
     var body: some View {
         
@@ -47,10 +42,6 @@ struct CustomTabBar: View {
                             Spacer(minLength: 0)
                             Button(action: {
                                 // Switch to Home
-                                isButton1Tapped.toggle()
-                                isButton2Tapped = false
-                                isButton3Tapped = false
-                                isButton4Tapped = false
                                 
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
@@ -61,15 +52,11 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
+                                .foregroundColor(Color.black)
                             }
                             
                             Button(action: {
                                 // Switch to Stats
-                                isButton2Tapped.toggle()
-                                isButton1Tapped = false
-                                isButton3Tapped = false
-                                isButton4Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "chart.xyaxis.line")
@@ -78,7 +65,7 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
+                                .foregroundColor(Color.black)
                             }
                             
                             Button(action: {
@@ -102,10 +89,6 @@ struct CustomTabBar: View {
                             
                             Button(action: {
                                 // Switch to History
-                                isButton3Tapped.toggle()
-                                isButton1Tapped = false
-                                isButton2Tapped = false
-                                isButton4Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "list.bullet")
@@ -115,15 +98,11 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
+                                .foregroundColor(Color.black)
                             }
                             
                             Button(action: {
                                 // Switch to Settings
-                                isButton4Tapped.toggle()
-                                isButton1Tapped = false
-                                isButton2Tapped = false
-                                isButton3Tapped = false
                             }) {
                                 VStack(alignment: .center, spacing: 5) {
                                     Image(systemName: "gearshape")
@@ -133,7 +112,7 @@ struct CustomTabBar: View {
                                         .font(.system(size: 10))
                                 }
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(isButton1Tapped ? Color.blue : Color.black)
+                                .foregroundColor(Color.black)
                             }
                             Spacer(minLength: 0)
                         }
