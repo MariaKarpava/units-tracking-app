@@ -87,7 +87,7 @@ struct CustomTabBar: View {
                                 ZStack(alignment: .center) {
                                     Circle()
                                         .fill(
-                                            LinearGradient(colors: [Color("AddButtonUpperColor"), Color("AddButtonBottomColor")], startPoint: .top, endPoint: .bottom)
+                                            LinearGradient(colors: [Color.addButtonTopColor, Color.addButtonBottomColor], startPoint: .top, endPoint: .bottom)
                                         )
                                         .frame(width: 64, height: 64)
                                                     
