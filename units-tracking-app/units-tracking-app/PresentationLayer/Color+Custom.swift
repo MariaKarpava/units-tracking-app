@@ -25,5 +25,13 @@ extension Color {
     static var secondaryText: Color {
         Color("SecondaryText")
     }
+    
+    static var addButtonTopColor: Color {
+        Color("AddButtonTopColor")
+    }
+    
+    static var addButtonBottomColor: Color {
+        Color("AddButtonBottomColor")
+    }
 }
 
