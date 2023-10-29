@@ -9,15 +9,114 @@ import SwiftUI
 import CoreGraphics
 
 
+struct HistoryView2: View {
+    var body: some View {
+        Text("History View 2")
+    }
+}
+
+struct AddView2: View {
+    var body: some View {
+        Text("Add View 2")
+    }
+}
+
+
+enum TabbedItems: Int, CaseIterable {
+    case home
+    case stats
+    case history
+    case settings
+    
+    var title: String{
+        switch self {
+        case .home:
+            return "Home"
+        case .stats:
+            return "Stats"
+        case .history:
+            return "History"
+        case .settings:
+            return "Settings"
+        }
+    }
+    
+    var iconName: String{
+            switch self {
+            case .home:
+                return "house"
+            case .stats:
+                return "chart.xyaxis.line"
+            case .history:
+                return "list.bullet"
+            case .settings:
+                return "gearshape"
+            }
+        }
+}
+
+
 struct TestScreen: View {
+    @State var selectedTab = 0
+    @ObservedObject var homeViewModel: HomeViewModel
+    
     var body: some View {
         VStack {
-            Text("Hello World")
-            Spacer()
-            CustomTabBar()
+            ZStack(alignment: .bottom){
+                TabView(selection: $selectedTab) {
+                    HomeView(homeViewModel: homeViewModel).tag(0)
+                    StatisticsView().tag(1)
+                    HistoryView2().tag(2)
+                    SettingsView().tag(3)
+                }
+            }
+            ZStack{
+                    HStack{
+                        ForEach((TabbedItems.allCases), id: \.self){ item in
+                            Button{
+                                selectedTab = item.rawValue
+                            } label: {
+                                CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                            }
+                        }
+                    }
+                    .padding(6)
+                }
+                .frame(height: 70)
+                .background(.purple.opacity(0.2))
+                .cornerRadius(35)
+                .padding(.horizontal, 26)
         }
     }
 }
+
+extension TestScreen{
+    func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
+        VStack(alignment: .center, spacing: 5){
+            Image(systemName: imageName)
+                .font(.system(size: 23))
+                .foregroundColor(isActive ? .accent : .gray)
+            Text(title)
+                .font(.system(size: 10))
+                .frame(maxWidth: .infinity)
+                .foregroundColor(isActive ? .accent : .gray)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 struct CustomTabBar: View {
@@ -26,14 +125,9 @@ struct CustomTabBar: View {
     
     
     var body: some View {
-        
         GeometryReader { geometry0 in
             VStack {
-                Text("Tab Bar Height: \(tabBarHeight)")
-                Text("Tab Bar Width: \(tabBarWidth)")
-                
                 Spacer()
-                
                 GeometryReader { geometry in
                     
                     TopBorderVectorView().offset(y: 35)
@@ -82,7 +176,6 @@ struct CustomTabBar: View {
                                         .foregroundColor(Color.white)
 //                                        .font(.system(size: 27))
                                         .font(Font.system(size: 30, weight: .medium))
-//
                                         
                                 }
                             } .offset(y: -13)
@@ -146,11 +239,15 @@ struct TopBorderVector: View {
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TestScreen()
+        let drinksService = DrinksService()
+        let goalsService = GoalsService()
+        let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
+        
+        TestScreen(homeViewModel: homeViewModel)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
 
-        TestScreen()
+        TestScreen(homeViewModel: homeViewModel)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
             .previewDisplayName("iPhone 14 Pro Max")
     }
