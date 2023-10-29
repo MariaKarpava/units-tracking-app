@@ -80,12 +80,8 @@ struct TestScreen: View {
                             }
                         }
                     }
-                    .padding(6)
                 }
-                .frame(height: 70)
-                .background(.purple.opacity(0.2))
-                .cornerRadius(35)
-                .padding(.horizontal, 26)
+                .frame(height: 77)
         }
     }
 }
