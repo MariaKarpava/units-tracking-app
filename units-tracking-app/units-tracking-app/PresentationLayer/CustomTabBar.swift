@@ -86,7 +86,7 @@ struct TestScreen: View {
     }
 }
 
-extension TestScreen{
+extension TestScreen {
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
         VStack(alignment: .center, spacing: 5){
             Image(systemName: imageName)
@@ -98,6 +98,19 @@ extension TestScreen{
                 .foregroundColor(isActive ? .accent : .gray)
         }
         .frame(maxWidth: .infinity)
+    }
+    
+    func customMiddleButton(imageName: String, title: String, isActive: Bool) -> some View {
+        ZStack(alignment: .center) {
+            Circle()
+                .fill(
+                    LinearGradient(colors: [Color.addButtonTopColor, Color.addButtonBottomColor], startPoint: .top, endPoint: .bottom)
+                )
+                .frame(width: 64, height: 64)
+            Image(systemName: "plus")
+                .foregroundColor(Color.white)
+                .font(Font.system(size: 30, weight: .medium))
+        }
     }
 }
 
