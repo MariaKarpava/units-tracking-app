@@ -15,12 +15,6 @@ struct HistoryView2: View {
     }
 }
 
-struct AddView2: View {
-    var body: some View {
-        Text("Add View 2")
-    }
-}
-
 
 enum TabbedItems: Int, CaseIterable {
     case home
@@ -57,31 +51,57 @@ enum TabbedItems: Int, CaseIterable {
 
 
 struct TestScreen: View {
-    @State var selectedTab = 0
+    @State var selectedTab: TabbedItems = .home
     @ObservedObject var homeViewModel: HomeViewModel
+    @State private var showSheet = false
+    var drinksService: DrinksService
+    var goalsService: GoalsService
     
     var body: some View {
         VStack {
-            ZStack(alignment: .bottom){
-                TabView(selection: $selectedTab) {
-                    HomeView(homeViewModel: homeViewModel).tag(0)
-                    StatisticsView().tag(1)
-                    HistoryView2().tag(2)
-                    SettingsView().tag(3)
+            Group {
+                switch selectedTab {
+                case .home:
+                    HomeView(homeViewModel: homeViewModel)
+                case .stats:
+                    StatisticsView()
+                case .history:
+                    HistoryView2()
+                case .settings:
+                    SettingsView()
                 }
             }
-            ZStack{
-                    HStack{
-                        ForEach((TabbedItems.allCases), id: \.self){ item in
-                            Button{
-                                selectedTab = item.rawValue
-                            } label: {
-                                CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
-                            }
-                        }
+            .border(.green)
+            HStack{
+                ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
+                    Button {
+                        selectedTab = item
+                    } label: {
+                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                     }
                 }
-                .frame(height: 77)
+                
+                Button {
+                    showSheet.toggle()
+                } label: {
+                    customMiddleButton()
+                }
+                .sheet(isPresented: $showSheet) {
+                    AddNewDrinkView(viewModel: AddNewDrinkViewModel(drinksService: drinksService))
+                }
+                .offset(y: -13)
+
+                ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
+                    Button {
+                        selectedTab = item
+                    } label: {
+                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                    }
+                }
+                
+                
+            }.frame(height: 77)
+                
         }
     }
 }
@@ -100,7 +120,7 @@ extension TestScreen {
         .frame(maxWidth: .infinity)
     }
     
-    func customMiddleButton(imageName: String, title: String, isActive: Bool) -> some View {
+    func customMiddleButton() -> some View {
         ZStack(alignment: .center) {
             Circle()
                 .fill(
@@ -252,11 +272,11 @@ struct CustomTabBar_Previews: PreviewProvider {
         let goalsService = GoalsService()
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         
-        TestScreen(homeViewModel: homeViewModel)
+        TestScreen(homeViewModel: homeViewModel, drinksService: drinksService, goalsService: goalsService)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
 
-        TestScreen(homeViewModel: homeViewModel)
+        TestScreen(homeViewModel: homeViewModel, drinksService: drinksService, goalsService: goalsService)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
             .previewDisplayName("iPhone 14 Pro Max")
     }
