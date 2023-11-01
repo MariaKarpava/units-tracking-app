@@ -72,8 +72,15 @@ struct RootView: View {
                     SettingsView()
                 }
             }
-            .border(.green)
-            HStack{
+            .background(.yellow)
+            
+            TopBorderVectorView()
+                .opacity(0.3)
+                .offset(y: 28)
+                .background(.red)
+                
+            
+            HStack {
                 ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
                     Button {
                         selectedTab = item
@@ -101,9 +108,9 @@ struct RootView: View {
                 }
                 
                 
-            }.frame(height: 77)
+            }.frame(height: 77).background(.green)
                 
-        }
+        }.background(.gray)
     }
 }
 
@@ -160,7 +167,9 @@ struct CustomTabBar: View {
                 Spacer()
                 GeometryReader { geometry in
                     
-                    TopBorderVectorView().offset(y: 35)
+                    TopBorderVectorView()
+                        .offset(y: 35)
+                        .border(.red)
                     
                         HStack(alignment: .center, spacing: 0) {
                             Spacer(minLength: 0)

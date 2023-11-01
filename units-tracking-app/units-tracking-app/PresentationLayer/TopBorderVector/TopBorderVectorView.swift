@@ -13,7 +13,7 @@ struct ToShow: View {
     var body: some View {
         VStack{
             Spacer().frame(height: 300)
-            TopBorderVectorView()
+            TopBorderVectorView() // .background(.red)
         }
     }
 }
@@ -24,21 +24,77 @@ struct TopBorderVectorView: View {
         GeometryReader { geometry in
             let width = geometry.size.width
             let radius: CGFloat = 39
-            let circleCenterY: CGFloat = 0
+            let circleCenterY: CGFloat = 39 // should be = radius (39)
             let center = CGPoint(x: width / 2, y: circleCenterY)
             let startAngle = Angle(degrees: 0 - 33)
             let endAngle = Angle(degrees: 180 + 33)
+            let lowerBorderOffset: Double = 5
             
+            LeftVerticalLine(center: center, lowerBorderOffset: lowerBorderOffset)
             FirstLine(center: center)
             FirstCurve(center: center, radius: radius, endAngle: endAngle)
             Arc(radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
             SecondCurve(center: center, radius: radius, startAngle: startAngle)
             SecondLine(width: width, center: center)
+            RightVerticalLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
+            BottomLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
         }
     }
 }
 
+private struct LeftVerticalLine: View {
+    let center: CGPoint
+    let lowerBorderOffset: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            let upperPoint = CGPoint(x: 0, y: center.y - 15)
+            let lowerPoint = CGPoint(x: 0, y: center.y + lowerBorderOffset)
+            
+            Path { path in
+                path.move(to: upperPoint)
+                path.addLine(to: lowerPoint)
+            }.stroke(lineWidth: 0.2)
+            .foregroundColor(.black)
+        }
+    }
+}
 
+private struct RightVerticalLine: View {
+    let center: CGPoint
+    let width: CGFloat
+    let lowerBorderOffset: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            let upperPoint = CGPoint(x: width, y: center.y - 15)
+            let lowerPoint = CGPoint(x: width, y: center.y + lowerBorderOffset)
+            
+            Path { path in
+                path.move(to: upperPoint)
+                path.addLine(to: lowerPoint)
+            }.stroke(lineWidth: 0.2)
+            .foregroundColor(.black)
+        }
+    }
+}
+
+private struct BottomLine: View {
+    let center: CGPoint
+    let width: CGFloat
+    let lowerBorderOffset: Double
+    
+    var body: some View {
+        let leftPoint = CGPoint(x: 0, y: center.y + lowerBorderOffset)
+        let rightPoint = CGPoint(x: width, y: center.y + lowerBorderOffset)
+        
+        Path { path in
+            path.move(to: leftPoint)
+            path.addLine(to: rightPoint)
+        }.stroke(lineWidth: 0.2)
+        .foregroundColor(.white)
+    }
+}
 
 
 private struct FirstLine: View {
@@ -46,7 +102,7 @@ private struct FirstLine: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let startFirstLine = CGPoint(x: 0, y:  center.y - 15)
+            let startFirstLine = CGPoint(x: 0, y: center.y - 15)
             let endFirstLine = CGPoint(x: center.x - 50.5, y: center.y - 15)
            
             Path { path in
