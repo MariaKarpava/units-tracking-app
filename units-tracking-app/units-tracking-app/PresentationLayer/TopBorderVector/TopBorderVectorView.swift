@@ -13,16 +13,57 @@ struct ToShow: View {
     var body: some View {
         VStack{
             Spacer().frame(height: 300)
-            TopBorderVectorView() // .background(.red)
+            TopBorderVectorView()  
         }
     }
 }
 
-// Color: F0F0F0
+
 struct TopBorderVectorView: View {
+    func myPath(width: CGFloat, radius: CGFloat, circleCenterY: CGFloat, center: CGPoint, startAngle: Angle, endAngle: Angle, lowerBorderOffset: Double) -> Path {
+        let path = Path { p in
+            // First line
+            p.move(to: CGPoint(x: 0, y: center.y - 15))
+            p.addLine(to: CGPoint(x: center.x - 50.5, y: center.y - 15))
+            
+            // First curve
+            p.addQuadCurve(
+                to: CGPoint(x: center.x + radius * CGFloat(cos(endAngle.radians)),
+                            y: center.y + radius * CGFloat(sin(endAngle.radians))),
+                control: CGPoint(x: center.x - 38, y: center.y - 15)
+            )
+            
+            // Arc
+            // Changed start and end angles
+            p.addArc(center: center, radius: radius, startAngle: endAngle, endAngle: startAngle, clockwise: false)
+            
+            p.addQuadCurve(
+                to: CGPoint(x: center.x + 50.5, y: center.y - 15),
+                control: CGPoint(x: center.x + 38, y: center.y - 15)
+            )
+            
+            // Second line
+            p.addLine(to: CGPoint(x: width, y: center.y - 15))
+            
+            // Right vertical line
+            p.addLine(to: CGPoint(x: width, y: center.y + lowerBorderOffset))
+            
+            // Bottom line
+            p.addLine(to: CGPoint(x: 0, y: center.y + lowerBorderOffset))
+            
+            // Left vertical line
+            p.addLine(to: CGPoint(x: 0, y: center.y + lowerBorderOffset))
+        }
+        
+       return  path
+//            .fill(.red)
+//                .stroke(.black, lineWidth: 0.2)
+            
+    }
+
     var body: some View {
         GeometryReader { geometry in
-            let width = geometry.size.width
+            let width: CGFloat = geometry.size.width
             let radius: CGFloat = 39
             let circleCenterY: CGFloat = 39 // should be = radius (39)
             let center = CGPoint(x: width / 2, y: circleCenterY)
@@ -30,17 +71,26 @@ struct TopBorderVectorView: View {
             let endAngle = Angle(degrees: 180 + 33)
             let lowerBorderOffset: Double = 5
             
-            LeftVerticalLine(center: center, lowerBorderOffset: lowerBorderOffset)
-            FirstLine(center: center)
-            FirstCurve(center: center, radius: radius, endAngle: endAngle)
-            Arc(radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
-            SecondCurve(center: center, radius: radius, startAngle: startAngle)
-            SecondLine(width: width, center: center)
-            RightVerticalLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
-            BottomLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
+            myPath(width: width, radius: radius, circleCenterY: circleCenterY, center: center, startAngle: startAngle, endAngle: endAngle, lowerBorderOffset: lowerBorderOffset)
+                .fill(.red)
+                .overlay {
+                    myPath(width: width, radius: radius, circleCenterY: circleCenterY, center: center, startAngle: startAngle, endAngle: endAngle, lowerBorderOffset: lowerBorderOffset)
+                        .stroke(.black, lineWidth: 0.2)
+                }
+            
+//            LeftVerticalLine(center: center, lowerBorderOffset: lowerBorderOffset)
+//            FirstLine(center: center)
+//            FirstCurve(center: center, radius: radius, endAngle: endAngle)
+//            Arc(radius: radius, center: center, startAngle: startAngle, endAngle: endAngle)
+//            SecondCurve(center: center, radius: radius, startAngle: startAngle)
+//            SecondLine(width: width, center: center)
+//            RightVerticalLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
+//            BottomLine(center: center, width: width, lowerBorderOffset: lowerBorderOffset)
         }
     }
 }
+
+
 
 private struct LeftVerticalLine: View {
     let center: CGPoint
@@ -92,7 +142,7 @@ private struct BottomLine: View {
             path.move(to: leftPoint)
             path.addLine(to: rightPoint)
         }.stroke(lineWidth: 0.2)
-        .foregroundColor(.white)
+        .foregroundColor(.black)
     }
 }
 
