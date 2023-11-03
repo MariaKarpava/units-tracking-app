@@ -49,7 +49,6 @@ enum TabbedItems: Int, CaseIterable {
         }
 }
 
-
 struct RootView: View {
     @State var selectedTab: TabbedItems = .home
     @ObservedObject var homeViewModel: HomeViewModel
@@ -59,7 +58,7 @@ struct RootView: View {
     var goalsService: GoalsService
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0.0) {
             Group {
                 switch selectedTab {
                 case .home:
@@ -72,45 +71,50 @@ struct RootView: View {
                     SettingsView()
                 }
             }
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity)
             .background(.yellow)
+ 
             
-            TopBorderVectorView()
-                .opacity(0.3)
-                .offset(y: 28)
-                .background(.red)
+            ZStack {
+                TopBorderVectorView()
+                    .background(.clear)
+                    .offset(y: 10)
                 
-            
-            HStack {
-                ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
-                    Button {
-                        selectedTab = item
-                    } label: {
-                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                HStack {
+                    ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
+                        Button {
+                            selectedTab = item
+                        } label: {
+                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                        }
                     }
-                }
-                
-                Button {
-                    showSheet.toggle()
-                } label: {
-                    customMiddleButton()
-                }
-                .sheet(isPresented: $showSheet) {
-                    AddNewDrinkView(viewModel: AddNewDrinkViewModel(drinksService: drinksService))
-                }
-                .offset(y: -13)
+                    
+                    Button {
+                        showSheet.toggle()
+                    } label: {
+                        customMiddleButton()
+                    }
+                    .sheet(isPresented: $showSheet) {
+                        AddNewDrinkView(viewModel: AddNewDrinkViewModel(drinksService: drinksService))
+                    }
+                    .offset(y: -13)
 
-                ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
-                    Button {
-                        selectedTab = item
-                    } label: {
-                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                    ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
+                        Button {
+                            selectedTab = item
+                        } label: {
+                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                        }
                     }
-                }
+                    
+                    
+                }.frame(height: 77)
+            }
+//            .background(.green)
                 
-                
-            }.frame(height: 77).background(.green)
-                
-        }.background(.gray)
+        }
+//        .background(.gray)
     }
 }
 
