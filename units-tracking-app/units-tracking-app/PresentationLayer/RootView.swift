@@ -78,8 +78,7 @@ struct RootView: View {
             
             ZStack {
                 TopBorderVectorView()
-                    .background(.clear)
-                    .offset(y: 10)
+                    .offset(y: -26.5)
                 
                 HStack {
                     ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
@@ -98,7 +97,7 @@ struct RootView: View {
                     .sheet(isPresented: $showSheet) {
                         AddNewDrinkView(viewModel: AddNewDrinkViewModel(drinksService: drinksService))
                     }
-                    .offset(y: -13)
+                    .offset(y: -6.5)
 
                     ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
                         Button {
@@ -109,9 +108,9 @@ struct RootView: View {
                     }
                     
                     
-                }.frame(height: 77)
+                }.frame(height: 49)
             }
-//            .background(.green)
+            .background(.clear)
                 
         }
 //        .background(.gray)
