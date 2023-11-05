@@ -86,7 +86,7 @@ struct RootView: View {
                             selectedTab = item
                         } label: {
                             CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
-                        }
+                        } .offset(y: 5)
                     }
                     
                     Button {
@@ -104,7 +104,7 @@ struct RootView: View {
                             selectedTab = item
                         } label: {
                             CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
-                        }
+                        } .offset(y: 5)
                     }
                     
                     
@@ -119,16 +119,22 @@ struct RootView: View {
 
 extension RootView {
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
-        VStack(alignment: .center, spacing: 5){
-            Image(systemName: imageName)
-                .font(.system(size: 23))
+        VStack() {
+            VStack(alignment: .center) {
+                Image(systemName: imageName)
+                    .font(.system(size: 23))
                 .foregroundColor(isActive ? .accent : .gray)
-            Text(title)
-                .font(.system(size: 10))
-                .frame(maxWidth: .infinity)
+            }.frame(maxWidth: .infinity,
+                    maxHeight: .infinity)
+            VStack(alignment: .trailing) {
+                Text(title)
+                    .font(.system(size: 14))
+                    .frame(maxWidth: .infinity)
                 .foregroundColor(isActive ? .accent : .gray)
+                
+            }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: 49)
     }
     
     func customMiddleButton() -> some View {
