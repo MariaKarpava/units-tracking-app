@@ -86,7 +86,7 @@ struct RootView: View {
                             selectedTab = item
                         } label: {
                             CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
-                        } .offset(y: 5)
+                        } .offset(y: 4)
                     }
                     
                     Button {
@@ -104,7 +104,7 @@ struct RootView: View {
                             selectedTab = item
                         } label: {
                             CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
-                        } .offset(y: 5)
+                        } .offset(y: 4)
                     }
                     
                     
@@ -128,11 +128,11 @@ extension RootView {
                     maxHeight: .infinity)
             VStack(alignment: .trailing) {
                 Text(title)
-                    .font(.system(size: 14))
+                    .font(.system(size: 10))
                     .frame(maxWidth: .infinity)
                 .foregroundColor(isActive ? .accent : .gray)
                 
-            }
+            } .offset(y: -5)
         }
         .frame(maxWidth: .infinity, maxHeight: 49)
     }
