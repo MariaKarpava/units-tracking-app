@@ -132,7 +132,8 @@ extension RootView {
                     .frame(maxWidth: .infinity)
                 .foregroundColor(isActive ? .accent : .gray)
                 
-            } .offset(y: -5)
+            }.offset(y: -3)
+            Spacer().frame(height: 2)
         }
         .frame(maxWidth: .infinity, maxHeight: 49)
     }
