@@ -49,7 +49,7 @@ struct TabBarTopBorderVectorView: View {
           return path
     }
     
-    func myPath(width: CGFloat, radius: CGFloat, circleCenterY: CGFloat, center: CGPoint, startAngle: Angle, endAngle: Angle, lowerBorderOffset: Double) -> Path {
+    func addWholePath(width: CGFloat, radius: CGFloat, circleCenterY: CGFloat, center: CGPoint, startAngle: Angle, endAngle: Angle, lowerBorderOffset: Double) -> Path {
         let path = Path { p in
             // First line
             p.move(to: CGPoint(x: 0, y: center.y - 15))
@@ -96,7 +96,7 @@ struct TabBarTopBorderVectorView: View {
             let endAngle = Angle(degrees: 180 + 33)
             let lowerBorderOffset: Double = 5
             
-            myPath(width: width, radius: radius, circleCenterY: circleCenterY, center: center, startAngle: startAngle, endAngle: endAngle, lowerBorderOffset: lowerBorderOffset)
+            addWholePath(width: width, radius: radius, circleCenterY: circleCenterY, center: center, startAngle: startAngle, endAngle: endAngle, lowerBorderOffset: lowerBorderOffset)
                 .fill(.white)
                 .overlay {
                     addUpperPartOfThePath(width: width, radius: radius, circleCenterY: circleCenterY, center: center, startAngle: startAngle, endAngle: endAngle)
