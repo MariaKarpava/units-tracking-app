@@ -85,14 +85,14 @@ struct RootView: View {
                         Button {
                             selectedTab = item
                         } label: {
-                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                         } .offset(y: 4)
                     }
                     
                     Button {
                         showSheet.toggle()
                     } label: {
-                        customMiddleButton()
+                        addCustomMiddleButton()
                     }
                     .sheet(isPresented: $showSheet) {
                         AddNewDrinkView(viewModel: AddNewDrinkViewModel(drinksService: drinksService))
@@ -103,7 +103,7 @@ struct RootView: View {
                         Button {
                             selectedTab = item
                         } label: {
-                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                         } .offset(y: 4)
                     }
                     
@@ -118,7 +118,7 @@ struct RootView: View {
 
     
 extension RootView {
-    func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
+    func addCustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
         VStack() {
             VStack(alignment: .center) {
                 Image(systemName: imageName)
@@ -138,7 +138,7 @@ extension RootView {
         .frame(maxWidth: .infinity, maxHeight: 49)
     }
     
-    func customMiddleButton() -> some View {
+    func addCustomMiddleButton() -> some View {
         ZStack(alignment: .center) {
             Circle()
                 .fill(
