@@ -77,7 +77,7 @@ struct RootView: View {
  
             
             ZStack {
-                TopBorderVectorView()
+                TabBarTopBorderVectorView()
                     .offset(y: -26.5)
                 
                 HStack {

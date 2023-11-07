@@ -13,13 +13,13 @@ struct ToShow: View {
     var body: some View {
         VStack{
             Spacer()
-            TopBorderVectorView()  
+            TabBarTopBorderVectorView()  
         }
     }
 }
 
 
-struct TopBorderVectorView: View {
+struct TabBarTopBorderVectorView: View {
     
     func addUpperPartOfThePath(width: CGFloat, radius: CGFloat, circleCenterY: CGFloat, center: CGPoint, startAngle: Angle, endAngle: Angle) -> Path {
         let path = Path { p in
