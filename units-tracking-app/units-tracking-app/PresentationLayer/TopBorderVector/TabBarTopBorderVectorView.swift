@@ -9,15 +9,6 @@ import SwiftUI
 import CoreGraphics
 
 
-struct ToShow: View {
-    var body: some View {
-        VStack{
-            Spacer()
-            TabBarTopBorderVectorView()  
-        }
-    }
-}
-
 
 struct TabBarTopBorderVectorView: View {
     
@@ -108,22 +99,6 @@ struct TabBarTopBorderVectorView: View {
 
 
 
-
-
-
-
-
-    struct ToShow_Previews: PreviewProvider {
-        static var previews: some View {
-            ToShow()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-                .previewDisplayName("iPhone 14")
-
-            ToShow()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
-                .previewDisplayName("iPhone 14 Pro Max")
-        }
-    }
 
 
 
