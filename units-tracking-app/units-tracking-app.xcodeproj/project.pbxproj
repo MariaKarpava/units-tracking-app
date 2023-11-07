@@ -15,7 +15,6 @@
 		707FE2602AA8DBB300D61391 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 707FE25F2AA8DBB300D61391 /* Inter-Medium.ttf */; };
 		707FE2632AA8EFD200D61391 /* Font+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FE2622AA8EFD200D61391 /* Font+Custom.swift */; };
 		709A43EF2AE9DAC300C92BFA /* TopBorderVectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A43ED2AE9DAC300C92BFA /* TopBorderVectorView.swift */; };
-		709A43F02AE9DAC300C92BFA /* CurveExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A43EE2AE9DAC300C92BFA /* CurveExperiments.swift */; };
 		70ADD50E2A52E1DE005D2EB5 /* UnitsTrackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD50D2A52E1DE005D2EB5 /* UnitsTrackingApp.swift */; };
 		70ADD5122A52E1DF005D2EB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */; };
 		70ADD5152A52E1DF005D2EB5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70ADD5142A52E1DF005D2EB5 /* Preview Assets.xcassets */; };
@@ -39,7 +38,6 @@
 		707FE2612AA8DC5300D61391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		707FE2622AA8EFD200D61391 /* Font+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Custom.swift"; sourceTree = "<group>"; };
 		709A43ED2AE9DAC300C92BFA /* TopBorderVectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBorderVectorView.swift; sourceTree = "<group>"; };
-		709A43EE2AE9DAC300C92BFA /* CurveExperiments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveExperiments.swift; sourceTree = "<group>"; };
 		70ADD50A2A52E1DE005D2EB5 /* units-tracking-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "units-tracking-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70ADD50D2A52E1DE005D2EB5 /* UnitsTrackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsTrackingApp.swift; sourceTree = "<group>"; };
 		70ADD5112A52E1DF005D2EB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		709A43EC2AE9D99200C92BFA /* TopBorderVector */ = {
 			isa = PBXGroup;
 			children = (
-				709A43EE2AE9DAC300C92BFA /* CurveExperiments.swift */,
 				709A43ED2AE9DAC300C92BFA /* TopBorderVectorView.swift */,
 			);
 			path = TopBorderVector;
@@ -233,7 +230,6 @@
 				706F16EA2AB34C500051B68A /* RootView.swift in Sources */,
 				709A43EF2AE9DAC300C92BFA /* TopBorderVectorView.swift in Sources */,
 				70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */,
-				709A43F02AE9DAC300C92BFA /* CurveExperiments.swift in Sources */,
 				70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */,
 				70ADD51C2A52E825005D2EB5 /* HistoryView.swift in Sources */,
 				707FE2592AA8806200D61391 /* HomeViewModel.swift in Sources */,
