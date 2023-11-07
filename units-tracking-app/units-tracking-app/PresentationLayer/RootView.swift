@@ -111,12 +111,12 @@ struct RootView: View {
                 }.frame(height: 49)
             }
             .background(.clear)
-                
         }
-//        .background(.gray)
     }
 }
 
+
+    
 extension RootView {
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
         VStack() {
@@ -157,7 +157,7 @@ extension RootView {
 
 
 
-struct CustomTabBar_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         let drinksService = DrinksService()
         let goalsService = GoalsService()
