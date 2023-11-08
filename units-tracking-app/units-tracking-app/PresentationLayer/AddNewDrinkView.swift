@@ -76,16 +76,3 @@ struct AddNewDrinkView: View {
 }
 
 
-
-
-
-
-
-
-//struct AddNewDrinkView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let drinksStore = DrinksStore()
-//        return AddNewDrinkView(drinksStore: drinksStore)
-//    }
-//}
-
