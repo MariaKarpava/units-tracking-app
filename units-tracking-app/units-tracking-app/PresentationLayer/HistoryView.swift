@@ -30,15 +30,14 @@ struct HistoryView: View {
                                 DrinkHistoryRow(drink: drink)
                                     .frame(width: bodyGeometry.size.width - 40, height: 80)
                                     .background(Color.white)
-                                    .cornerRadius(10)
-                                    .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 5)
+                                    .cornerRadius(4)
+                                    .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
                             }
                         }
-                    }
-                } // VStack
+                    } // ForEach
+                }.frame(width: bodyGeometry.size.width - 20) // VStack
             
             }.frame(width: bodyGeometry.size.width) // Scroll View
-
         }
     }
 }

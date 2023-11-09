@@ -73,7 +73,6 @@ struct RootView: View {
             }
             .frame(maxWidth: .infinity,
                    maxHeight: .infinity)
-            .background(.yellow)
  
             
             ZStack {
