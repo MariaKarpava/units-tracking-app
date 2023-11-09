@@ -19,4 +19,7 @@ extension Font {
     static var homeScreenInfoButton: Font {
         Font.custom("Inter-Medium", size: 16)
     }
+    static var historyScreenEditButton: Font {
+        Font.custom("Inter-Regular", size: 18)
+    }
 }
