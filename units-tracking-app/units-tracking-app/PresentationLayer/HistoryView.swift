@@ -77,7 +77,8 @@ struct DrinkHistoryRow: View {
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
                 }.frame(width: 98)
-                Divider().frame(height: 60).offset(x: 0, y: 10)
+                Divider().frame(height: 60).padding(-8)
+
                 VStack(alignment: .leading) {
                     HStack {
                         Text(String(Double(drink.alcoholByVolume) / 10.0))
