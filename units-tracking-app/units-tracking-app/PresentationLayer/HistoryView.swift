@@ -25,6 +25,7 @@ struct HistoryView: View {
                         .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
                         .font(.historyScreenHistoryHeader)
                         .foregroundColor(.mainText)
+                    
                     ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
                         let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
                         
@@ -35,6 +36,7 @@ struct HistoryView: View {
                                     .background(Color.white)
                                     .cornerRadius(4)
                                     .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                                    
                             }
                         }
                     }.frame(width: bodyGeometry.size.width - 20)  // ForEach
@@ -67,11 +69,15 @@ struct DrinkHistoryRow: View {
         GeometryReader { geometry in
             
             HStack(alignment: .center) {
-                VStack {
+                VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
+                        .font(.historyScreenDateAndMonth)
+                        .foregroundColor(.mainText)
                     Text(dateFormatterForYear.string(from: drink.date))
-                }
-                Divider().frame(height: 60)
+                        .font(.historyScreenYear)
+                        .foregroundColor(.secondaryText)
+                }.frame(width: 98)
+                Divider().frame(height: 60).offset(x: 0, y: 10)
                 VStack(alignment: .leading) {
                     HStack {
                         Text(String(Double(drink.alcoholByVolume) / 10.0))
@@ -89,7 +95,7 @@ struct DrinkHistoryRow: View {
                     Text("Unit(s)")
                 }
             }
-//            .frame(width: geometry.size.width * 0.9, height: 70)
+            .frame(width: geometry.size.width, height: 80)
         }
     }
 }
