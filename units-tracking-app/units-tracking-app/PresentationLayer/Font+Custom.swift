@@ -25,10 +25,11 @@ extension Font {
     static var historyScreenHistoryHeader: Font {
         Font.custom("Inter-SemiBild", size: 32)
     }
-    static var historyScreenDateAndMonth: Font {
+    static var historyScreenMainInfo: Font {
         Font.custom("Inter-Medium", size: 16)
     }
     static var historyScreenYear: Font {
         Font.custom("Inter-Medium", size: 12)
     }
+    
 }
