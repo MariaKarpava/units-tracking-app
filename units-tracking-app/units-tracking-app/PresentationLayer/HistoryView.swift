@@ -71,7 +71,7 @@ struct DrinkHistoryRow: View {
             HStack(alignment: .center) {
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
-                        .font(.historyScreenDateAndMonth)
+                        .font(.historyScreenMainInfo)
                         .foregroundColor(.mainText)
                     Text(dateFormatterForYear.string(from: drink.date))
                         .font(.historyScreenYear)
@@ -81,14 +81,23 @@ struct DrinkHistoryRow: View {
 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(String(Double(drink.alcoholByVolume) / 10.0))
-                        Text("% •")
+                        Text(String(Double(drink.alcoholByVolume) / 10.0)).padding(.horizontal, 2)
+                        Text("% • ").padding(.horizontal, -8)
                         Text(drink.drinkType.rawValue.capitalized)
                     }
+                    .frame(height: 32)
+                    .font(.historyScreenMainInfo)
+                    .foregroundColor(.mainText)
+                       
                     HStack {
-                        Text(String(drink.ml))
-                        Text("ml")
+                        Text(String(drink.ml)).padding(.horizontal, 2)
+                        Text("ml").padding(.horizontal, -8)
                     }
+                    .font(.historyScreenMainInfo)
+                    .foregroundColor(.mainText)
+                    .offset(y: -7)
+                        
+                        
                 }
                 Spacer()
                 VStack{
