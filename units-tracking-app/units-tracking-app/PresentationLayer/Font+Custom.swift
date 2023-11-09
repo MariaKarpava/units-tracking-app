@@ -22,4 +22,7 @@ extension Font {
     static var historyScreenEditButton: Font {
         Font.custom("Inter-Regular", size: 18)
     }
+    static var historyScreenHistoryHeader: Font {
+        Font.custom("Inter-SemiBild", size: 32)
+    }
 }

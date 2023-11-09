@@ -23,7 +23,8 @@ struct HistoryView: View {
                         .font(.historyScreenEditButton)
                     Text("History")
                         .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
-                        .font(.largeTitle)
+                        .font(.historyScreenHistoryHeader)
+                        .foregroundColor(.mainText)
                     ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
                         let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
                         
