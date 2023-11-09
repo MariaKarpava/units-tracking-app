@@ -19,6 +19,8 @@ struct HistoryView: View {
                     Text("Edit")
                         .frame(width: bodyGeometry.size.width - 40, height: 90, alignment: .bottomTrailing)
                         .underline()
+                        .foregroundColor(.secondaryText)
+                        .font(.historyScreenEditButton)
                     Text("History")
                         .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
                         .font(.largeTitle)
@@ -34,9 +36,8 @@ struct HistoryView: View {
                                     .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
                             }
                         }
-                    } // ForEach
-                }.frame(width: bodyGeometry.size.width - 20) // VStack
-            
+                    }.frame(width: bodyGeometry.size.width - 20)  // ForEach
+                }  // VStack
             }.frame(width: bodyGeometry.size.width) // Scroll View
         }
     }
