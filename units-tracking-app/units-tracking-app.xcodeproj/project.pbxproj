@@ -28,6 +28,7 @@
 		70EC76252ADDD67500009842 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EC76242ADDD67500009842 /* Color+Custom.swift */; };
 		70F025022AFD8B8600AA2AA4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */; };
 		70F025042AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */; };
+		70F025062AFDA9B300AA2AA4 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */; };
 		70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		70EC76242ADDD67500009842 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Regular.ttf"; path = "../../../../../../../Downloads/Inter (1)/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewDrinkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 				707FE25D2AA8DB9F00D61391 /* Inter-Black.ttf */,
 				70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */,
 				70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */,
+				70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				70F025042AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf in Resources */,
 				707FE2602AA8DBB300D61391 /* Inter-Medium.ttf in Resources */,
 				70F025022AFD8B8600AA2AA4 /* Inter-Regular.ttf in Resources */,
+				70F025062AFDA9B300AA2AA4 /* Inter-Bold.ttf in Resources */,
 				70ADD5152A52E1DF005D2EB5 /* Preview Assets.xcassets in Resources */,
 				707FE25E2AA8DB9F00D61391 /* Inter-Black.ttf in Resources */,
 				70ADD5122A52E1DF005D2EB5 /* Assets.xcassets in Resources */,

@@ -31,5 +31,11 @@ extension Font {
     static var historyScreenYear: Font {
         Font.custom("Inter-Medium", size: 12)
     }
+    static var historyScreenUnits: Font {
+        Font.custom("Inter-Bold", size: 24)
+    }
+    static var historyScreenUnitsText: Font {
+        Font.custom("Inter-Regular", size: 12)
+    }
     
 }

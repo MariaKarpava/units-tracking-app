@@ -100,10 +100,15 @@ struct DrinkHistoryRow: View {
                         
                 }
                 Spacer()
-                VStack{
+                VStack(alignment: .center) {
                     Text(String(format: "%.1f", drink.units))
+                        .font(.historyScreenUnits)
+                        .foregroundColor(.mainText)
                     Text("Unit(s)")
-                }
+                        .font(.historyScreenUnitsText)
+                        .foregroundColor(.secondaryText)
+                }.frame(width: 78)
+                
             }
             .frame(width: geometry.size.width, height: 80)
         }
