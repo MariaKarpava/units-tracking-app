@@ -32,7 +32,7 @@ extension Font {
         Font.custom("Inter-Medium", size: 12)
     }
     static var historyScreenUnits: Font {
-        Font.custom("Inter-Bold", size: 24)
+        Font.custom("Inter-Black", size: 24)
     }
     static var historyScreenUnitsText: Font {
         Font.custom("Inter-Regular", size: 12)

@@ -29,6 +29,7 @@
 		70F025022AFD8B8600AA2AA4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */; };
 		70F025042AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */; };
 		70F025062AFDA9B300AA2AA4 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */; };
+		70F025082B000CC100AA2AA4 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025072B000CC100AA2AA4 /* Inter-ExtraBold.ttf */; };
 		70F61A562A6041F100180237 /* AddNewDrinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Regular.ttf"; path = "../../../../../../../Downloads/Inter (1)/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		70F025072B000CC100AA2AA4 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
 		70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewDrinkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 				70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */,
 				70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */,
 				70F025052AFDA9B300AA2AA4 /* Inter-Bold.ttf */,
+				70F025072B000CC100AA2AA4 /* Inter-ExtraBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				70F025042AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf in Resources */,
 				707FE2602AA8DBB300D61391 /* Inter-Medium.ttf in Resources */,
 				70F025022AFD8B8600AA2AA4 /* Inter-Regular.ttf in Resources */,
+				70F025082B000CC100AA2AA4 /* Inter-ExtraBold.ttf in Resources */,
 				70F025062AFDA9B300AA2AA4 /* Inter-Bold.ttf in Resources */,
 				70ADD5152A52E1DF005D2EB5 /* Preview Assets.xcassets in Resources */,
 				707FE25E2AA8DB9F00D61391 /* Inter-Black.ttf in Resources */,
