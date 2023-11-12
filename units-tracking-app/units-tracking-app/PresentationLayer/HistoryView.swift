@@ -13,35 +13,44 @@ struct HistoryView: View {
     
 
     var body: some View {
-        GeometryReader { bodyGeometry in
-            ScrollView(.vertical) {
-                VStack(alignment: .center) {
-                    Text("Edit")
-                        .frame(width: bodyGeometry.size.width - 40, height: 90, alignment: .bottomTrailing)
-                        .underline()
-                        .foregroundColor(.secondaryText)
-                        .font(.historyScreenEditButton)
-                    Text("History")
-                        .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
-                        .font(.historyScreenHistoryHeader)
-                        .foregroundColor(.mainText)
-                    
-                    ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
-                        let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
-                        
-                        VStack(alignment: .center, spacing: 10) {
-                            ForEach(drinksForDate) { drink in
-                                DrinkHistoryRow(drink: drink)
-                                    .frame(width: bodyGeometry.size.width - 40, height: 80)
-                                    .background(Color.white)
-                                    .cornerRadius(4)
-                                    .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
-                                    
+        NavigationView {
+            GeometryReader { bodyGeometry in
+                ScrollView(.vertical) {
+                    VStack(alignment: .center, spacing: 15) {
+//                        Text("History")
+//                            .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
+//                            .font(.historyScreenHistoryHeader)
+//                            .foregroundColor(.mainText)
+//                        Text("Edit")
+//                            .frame(width: bodyGeometry.size.width - 40, height: 90, alignment: .bottomTrailing)
+//                            .underline()
+//                            .foregroundColor(.secondaryText)
+//                            .font(.historyScreenEditButton)
+                        ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
+                            let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
+                            VStack(alignment: .center, spacing: 10) {
+                                ForEach(drinksForDate) { drink in
+                                    DrinkHistoryRow(drink: drink)
+                                        .frame(width: bodyGeometry.size.width - 40, height: 80)
+//                                        .frame(height: 80)
+                                        .background(Color.white)
+                                        .cornerRadius(4)
+                                        .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                                }
                             }
                         }
-                    }.frame(width: bodyGeometry.size.width - 20)  // ForEach
-                }  // VStack
-            }.frame(width: bodyGeometry.size.width) // Scroll View
+//                        .frame(width: bodyGeometry.size.width - 20) // ForEach
+                    } // VStack
+                }
+                .frame(width: bodyGeometry.size.width) // Scroll View
+                .padding(.vertical, 20)
+            }.toolbar { // Geo
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("History")
+                        .font(.historyScreenHistoryHeader)
+                        .foregroundColor(.mainText)
+                }
+            }
         }
     }
 }
@@ -76,8 +85,12 @@ struct DrinkHistoryRow: View {
                     Text(dateFormatterForYear.string(from: drink.date))
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
-                }.frame(width: 98)
-                Divider().frame(height: 60).padding(-8)
+                }
+                .frame(width: 98)
+                Divider()
+                    .frame(height: 60)
+//                    .offset(x: -8)
+                    .padding(.horizontal, 8)
 
                 VStack(alignment: .leading) {
                     HStack {
@@ -93,8 +106,6 @@ struct DrinkHistoryRow: View {
                     .font(.historyScreenMainInfo)
                     .foregroundColor(.addMainHistoryScreenColor)
                     .offset(y: -7)
-                        
-                        
                 }
                 Spacer()
                 VStack(alignment: .center) {
