@@ -12,10 +12,14 @@ import SwiftUI
 class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
     @Published var drinks: [Drink]
+    @Published var viewState: ViewState
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
         drinks = drinksService.drinks
+        self.viewState = ViewState()
+        self.updateViewState()
+        
         
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -38,5 +42,24 @@ class HistoryViewModel: ObservableObject {
     
     func getDrinksWithUnitsDict() -> [Date: [DrinkWithUnits]] {
         return drinksService.drinksWithUnitsDict
+    }
+    
+    
+    struct ViewState: Equatable {
+        enum State: Equatable {
+            case empty
+            case notEmpty
+        }
+        var currentState: State = .empty
+    }
+    
+    
+    
+    func updateViewState() {
+        if getDrinks().count == 0 {
+            viewState.currentState = .empty
+        } else {
+            viewState.currentState = .notEmpty
+        }
     }
 }

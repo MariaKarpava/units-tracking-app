@@ -26,20 +26,26 @@ struct HistoryView: View {
 //                            .underline()
 //                            .foregroundColor(.secondaryText)
 //                            .font(.historyScreenEditButton)
-                        ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
-                            let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
-                            VStack(alignment: .center, spacing: 10) {
-                                ForEach(drinksForDate) { drink in
-                                    DrinkHistoryRow(drink: drink)
-                                        .frame(width: bodyGeometry.size.width - 40, height: 80)
-//                                        .frame(height: 80)
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                        
+                        switch HistoryViewModel.viewState.currentState {
+                        case .empty:
+                            EmptyDrinkHistory()
+                        case .notEmpty:
+                            ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
+                                let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
+                                VStack(alignment: .center, spacing: 10) {
+                                    ForEach(drinksForDate) { drink in
+                                        DrinkHistoryRow(drink: drink)
+                                            .frame(width: bodyGeometry.size.width - 40, height: 80)
+    //                                        .frame(height: 80)
+                                            .background(Color.white)
+                                            .cornerRadius(4)
+                                            .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                                    }
                                 }
                             }
+    //                        .frame(width: bodyGeometry.size.width - 20) // ForEach
                         }
-//                        .frame(width: bodyGeometry.size.width - 20) // ForEach
                     } // VStack
                 }
                 .frame(width: bodyGeometry.size.width) // Scroll View
@@ -54,6 +60,20 @@ struct HistoryView: View {
         }
     }
 }
+
+
+
+struct EmptyDrinkHistory: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("No data yet")
+            .font(.historyScreenEmpty)
+            .foregroundColor(.secondaryText)
+        }
+    }
+}
+
+
 
 
 struct DrinkHistoryRow: View {
