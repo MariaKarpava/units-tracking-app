@@ -17,16 +17,6 @@ struct HistoryView: View {
             GeometryReader { bodyGeometry in
                 ScrollView(.vertical) {
                     VStack(alignment: .center, spacing: 15) {
-//                        Text("History")
-//                            .frame(width: bodyGeometry.size.width - 40, height: 40, alignment: .leading)
-//                            .font(.historyScreenHistoryHeader)
-//                            .foregroundColor(.mainText)
-//                        Text("Edit")
-//                            .frame(width: bodyGeometry.size.width - 40, height: 90, alignment: .bottomTrailing)
-//                            .underline()
-//                            .foregroundColor(.secondaryText)
-//                            .font(.historyScreenEditButton)
-                        
                         switch HistoryViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
@@ -37,14 +27,12 @@ struct HistoryView: View {
                                     ForEach(drinksForDate) { drink in
                                         DrinkHistoryRow(drink: drink)
                                             .frame(width: bodyGeometry.size.width - 40, height: 80)
-    //                                        .frame(height: 80)
                                             .background(Color.white)
                                             .cornerRadius(4)
                                             .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
                                     }
                                 }
                             }
-    //                        .frame(width: bodyGeometry.size.width - 20) // ForEach
                         }
                     } // VStack
                 }
