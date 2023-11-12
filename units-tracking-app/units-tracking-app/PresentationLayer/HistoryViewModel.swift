@@ -33,7 +33,7 @@ class HistoryViewModel: ObservableObject {
     }
 
     func getDatesFromDrinksWithUnits() -> [Date] {
-        return drinksService.drinksWithUnitsDict.keys.sorted()
+        return drinksService.drinksWithUnitsDict.keys.sorted(by: >)
     }
     
     func getDrinksWithUnitsDict() -> [Date: [DrinkWithUnits]] {
