@@ -37,5 +37,8 @@ extension Font {
     static var historyScreenUnitsText: Font {
         Font.custom("Inter-Regular", size: 12)
     }
+    static var historyScreenEmpty: Font {
+        Font.custom("Inter-Medium", size: 20)
+    }
     
 }
