@@ -76,6 +76,7 @@ class DrinksService {
     
     var drinks: [Drink] = [
         Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
+//        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
 //        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
 //        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
 //        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
@@ -100,6 +101,7 @@ class DrinksService {
         }
     }
     
+
     
     init() {
         // Decode
@@ -120,6 +122,7 @@ class DrinksService {
     
     var drinksWithUnits: [DrinkWithUnits] {
         var result: [DrinkWithUnits] = []
+<<<<<<< HEAD
         
         guard !drinks.isEmpty else {
             return result
@@ -129,12 +132,25 @@ class DrinksService {
             // units = strength (ABV) x volume (ml) ÷ 1,000
             // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
             let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
+=======
+>>>>>>> 34a75d7 (Handle empty drinks array case.)
 
-            print("Date: \(drink.date), units: \(units)")
-            
-            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
-            result.append(modifiedDrink)
+        if !drinks.isEmpty {
+            drinks.forEach { drink in
+                // units = strength (ABV) x volume (ml) ÷ 1,000
+                // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
+                let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
+
+                print("Date: \(drink.date), units: \(units)")
+
+                let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
+                result.append(modifiedDrink)
+            }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34a75d7 (Handle empty drinks array case.)
         return result
     }
     
