@@ -176,16 +176,16 @@ class DrinksService {
         return groupedDrinks
     }
     
-    
+        
     var drinksWithUnitsDict: [Date: [DrinkWithUnits]] {
         let calendar = Calendar.current
         var groupedDrinksWithUnits = [Date: [DrinkWithUnits]]()
         
         for drink in drinksWithUnits {
-            // Get the date components, excluding the time components
-            let dateWithoutTime = calendar.dateComponents([.year, .month, .day], from: drink.date)
-            // Create a new date using only the year, month, and day
-            let date = calendar.date(from: dateWithoutTime)!
+            // Get the date component WITH the time component
+            let dateWithTime = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: drink.date)
+            
+            let date = calendar.date(from: dateWithTime)!
             
             if groupedDrinksWithUnits[date] == nil {
                 groupedDrinksWithUnits[date] = [drink]
