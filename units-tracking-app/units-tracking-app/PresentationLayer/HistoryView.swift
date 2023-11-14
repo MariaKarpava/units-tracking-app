@@ -16,7 +16,7 @@ struct HistoryView: View {
         NavigationView {
             GeometryReader { bodyGeometry in
                 ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 15) {
+                    VStack(alignment: .leading, spacing: 15) {
                         switch HistoryViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
@@ -36,7 +36,7 @@ struct HistoryView: View {
                         }
                     } // VStack
                 }
-                .frame(width: bodyGeometry.size.width) // Scroll View
+                .frame(width: HistoryViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
                 .padding(.vertical, 20)
             }.toolbar { // Geo
                 ToolbarItem(placement: .topBarLeading) {
@@ -57,6 +57,7 @@ struct EmptyDrinkHistory: View {
             Text("No data yet")
             .font(.historyScreenEmpty)
             .foregroundColor(.secondaryText)
+            .padding(.leading, 20)
         }
     }
 }
