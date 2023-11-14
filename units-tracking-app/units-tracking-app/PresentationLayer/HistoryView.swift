@@ -8,6 +8,17 @@
 import SwiftUI
 
 
+struct ResultView: View {
+    var drink: DrinkWithUnits
+    var body: some View {
+        //  Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
+        VStack {
+            Text(String(drink.drinkType.rawValue.capitalized))
+        }
+    }
+}
+
+
 struct HistoryView: View {
     @ObservedObject var HistoryViewModel: HistoryViewModel
     
@@ -25,11 +36,13 @@ struct HistoryView: View {
                                 let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
                                 VStack(alignment: .center, spacing: 10) {
                                     ForEach(drinksForDate) { drink in
-                                        DrinkHistoryRow(drink: drink)
-                                            .frame(width: bodyGeometry.size.width - 40, height: 80)
-                                            .background(Color.white)
-                                            .cornerRadius(4)
-                                            .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                                        NavigationLink(destination: ResultView(drink: drink)) {
+                                            DrinkHistoryRow(drink: drink)
+                                                .frame(width: bodyGeometry.size.width - 40, height: 80)
+                                                .background(Color.white)
+                                                .cornerRadius(4)
+                                                .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
+                                            }
                                     }
                                 }
                             }
@@ -38,7 +51,9 @@ struct HistoryView: View {
                 }
                 .frame(width: HistoryViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
                 .padding(.vertical, 20)
-            }.toolbar { // Geo
+                .padding(.top, 40)
+            }
+            .toolbar { // Geo
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
                         .font(.historyScreenHistoryHeader)
