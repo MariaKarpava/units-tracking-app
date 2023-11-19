@@ -73,9 +73,9 @@ class DrinksService {
     }
     
         
-    var drinks = [
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
-        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
+    var drinks: [Drink] = [
+//        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
+//        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
 //        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
 //        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
     ] {
@@ -119,17 +119,18 @@ class DrinksService {
     var drinksWithUnits: [DrinkWithUnits] {
         var result: [DrinkWithUnits] = []
         
-        drinks.forEach { drink in
-            // units = strength (ABV) x volume (ml) ÷ 1,000
-            // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
-            let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
+        if !drinks.isEmpty {
+            drinks.forEach { drink in
+                // units = strength (ABV) x volume (ml) ÷ 1,000
+                // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
+                let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
 
-//            print("Date: \(drink.date), units: \(units)")
-            
-            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
-            result.append(modifiedDrink)
+    //            print("Date: \(drink.date), units: \(units)")
+                
+                let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
+                result.append(modifiedDrink)
+            }
         }
-        
         return result
     }
     
