@@ -21,21 +21,21 @@ class DrinksService {
         }
         
         let units = todaysDrinks.reduce(0.0) { $0 + $1.units }
-        print("unitsConsumedToday: \(units)")
+//        print("unitsConsumedToday: \(units)")
         return units
     }
     
     func unitsConsumedWithinLast7Days() -> Double {
         let calendar = Calendar.current
         if let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date()) {
-            print()
-            print("7 days ago: \(sevenDaysAgo)")
+//            print()
+//            print("7 days ago: \(sevenDaysAgo)")
             let last7DaysDrinks = drinksWithUnits.filter { drink in
                 return drink.date >= sevenDaysAgo && drink.date <= Date()
             }
-            print("last7DaysDrinks: \(last7DaysDrinks)")
+//            print("last7DaysDrinks: \(last7DaysDrinks)")
             let units = last7DaysDrinks.reduce(0.0) { $0 + $1.units }
-            print("unitsConsumedWithinLast7Days: \(units)")
+//            print("unitsConsumedWithinLast7Days: \(units)")
             return units
         } else {
             // Handle the case when sevenDaysAgo is nil
@@ -60,7 +60,7 @@ class DrinksService {
             let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday()
             
             result = min(unitsRemainingFor7Days, unitsRemainingForTodayIgnoringLast7Days)
-            print("unitsRemainingForToday3: \(result)")
+//            print("unitsRemainingForToday3: \(result)")
         }
         return result
     }
@@ -93,7 +93,7 @@ class DrinksService {
             // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
             let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
 
-            print("Date: \(drink.date), units: \(units)")
+//            print("Date: \(drink.date), units: \(units)")
             
             let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units)
             result.append(modifiedDrink)
