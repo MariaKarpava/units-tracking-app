@@ -37,17 +37,6 @@ class HomeViewModel: ObservableObject {
     
     
     init(drinksService: DrinksService, goalsService: GoalsService) {
-        // Decode
-        if let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") {
-            let decoder = JSONDecoder()
-            do {
-                let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
-                drinksService.drinks = loadedDrinks
-            } catch {
-                print("Error decoding array: \(error)")
-            }
-        }
-        
         self.drinksService = drinksService
         self.goalsService = goalsService
         self.viewState = ViewState()
