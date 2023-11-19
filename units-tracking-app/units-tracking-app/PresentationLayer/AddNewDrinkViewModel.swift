@@ -29,5 +29,26 @@ class AddNewDrinkViewModel: ObservableObject {
         let enteredAlcoholByVolume = Int(alcoholByVolumeInPicker*10)
         let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date())
         drinksService.drinks.append(newDrink)
+        
+        
+        // Encode
+        let encoder = JSONEncoder()
+        do {
+            let encodedDrinks = try encoder.encode(drinksService.drinks)
+            UserDefaults.standard.set(encodedDrinks, forKey: "SavedDrinks")
+        } catch {
+            print("Error encoding array: \(error)")
+        }
+        
+        // Decode
+        if let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") {
+            let decoder = JSONDecoder()
+            do {
+                let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
+                drinksService.drinks = loadedDrinks
+            } catch {
+                print("Error decoding array: \(error)")
+            }
+        }
     }
 }

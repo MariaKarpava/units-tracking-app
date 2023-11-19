@@ -85,6 +85,13 @@ class DrinksService {
     }
     
     
+    func printAllDrinks() {
+        drinks.forEach { drink in
+            print(drink)
+        }
+    }
+    
+    
     var drinksWithUnits: [DrinkWithUnits] {
         var result: [DrinkWithUnits] = []
         

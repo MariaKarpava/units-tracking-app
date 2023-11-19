@@ -37,6 +37,17 @@ class HomeViewModel: ObservableObject {
     
     
     init(drinksService: DrinksService, goalsService: GoalsService) {
+        // Decode
+        if let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") {
+            let decoder = JSONDecoder()
+            do {
+                let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
+                drinksService.drinks = loadedDrinks
+            } catch {
+                print("Error decoding array: \(error)")
+            }
+        }
+        
         self.drinksService = drinksService
         self.goalsService = goalsService
         self.viewState = ViewState()
@@ -60,9 +71,13 @@ class HomeViewModel: ObservableObject {
         if drinkState == .normal || drinkState == .closeToZero {
             viewState.text = "units remaining \n for today."
             viewState.remainingUnitsIndication = .exactNumber(units: drinksService.unitsRemainingForToday(), color: calculateColorForUnits(currentDrinkState: drinkState))
+            print(drinksService.printAllDrinks())
+            print()
         } else {
             viewState.text = "You have reached your \n drinking limit today."
             viewState.remainingUnitsIndication = .warning
+            print(drinksService.printAllDrinks())
+            print()
         }
     }
     
