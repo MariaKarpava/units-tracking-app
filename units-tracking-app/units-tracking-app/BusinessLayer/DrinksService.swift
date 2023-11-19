@@ -81,8 +81,32 @@ class DrinksService {
     ] {
         didSet{
             NotificationCenter.default.post(name: .drinksHasChanged, object: self)
+            
+            //Encode
+            let encoder = JSONEncoder()
+            do {
+                let encodedDrinks = try encoder.encode(drinks)
+                UserDefaults.standard.set(encodedDrinks, forKey: "SavedDrinks")
+            } catch {
+                print("Error encoding array: \(error)")
+            }
         }
     }
+    
+    
+    init() {
+        // Decode
+        if let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") {
+            let decoder = JSONDecoder()
+            do {
+                let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
+                drinks = loadedDrinks
+            } catch {
+                print("Error decoding array: \(error)")
+            }
+        }
+    }
+    
     
     
     func printAllDrinks() {
