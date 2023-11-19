@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Drink: Hashable, Identifiable {
-    let id = UUID()
+struct Drink: Hashable, Identifiable, Codable {
+    let id: UUID
     
     var drinkType: DrinkType
     var ml: Int
@@ -17,7 +17,7 @@ struct Drink: Hashable, Identifiable {
     var alcoholByVolume: Int
     var date: Date
     
-    enum DrinkType: String, CaseIterable, Identifiable  {
+    enum DrinkType: String, CaseIterable, Identifiable, Codable  {
         case beer
         case wine
         case cocktail
@@ -34,41 +34,10 @@ struct Drink: Hashable, Identifiable {
         
         var id: Self { self }
         
-        /*
-        var description: String {
-            switch self {
-            case .beer:
-                return "Beer"
-            case .wine:
-                return "Wine"
-            case .cocktail:
-                return "Cocktail"
-            case .vodka:
-                return "Vodka"
-            case .cognac:
-                return "Cognac"
-            case .whiskey:
-                return "Whiskey"
-            case .brandy:
-                return "Brandy"
-            case .champagne:
-                return "Champagne"
-            case .cider:
-                return "Cider"
-            case .liqueur:
-                return "Liqueur"
-            case .shot:
-                return "Shot"
-            case .tequila:
-                return "Tequila"
-            case .other:
-                return "Other"
-            }
-        }
-         */
     }
     
     init(drinkType: DrinkType, ml: Int, alcoholByVolume: Int, date: Date) {
+        self.id = UUID()
         self.drinkType = drinkType
         self.ml = ml
         self.alcoholByVolume = alcoholByVolume
