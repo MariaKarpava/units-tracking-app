@@ -52,6 +52,7 @@ enum TabbedItems: Int, CaseIterable {
 struct RootView: View {
     @State var selectedTab: TabbedItems = .home
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
     
     @State private var showSheet = false
     var drinksService: DrinksService
@@ -66,7 +67,7 @@ struct RootView: View {
                 case .stats:
                     StatisticsView()
                 case .history:
-                    HistoryView(HistoryViewModel: HistoryViewModel(drinksService: drinksService))
+                    HistoryView(HistoryViewModel: historyViewModel)
                 case .settings:
                     SettingsView()
                 }
@@ -161,12 +162,13 @@ struct RootView_Previews: PreviewProvider {
         let drinksService = DrinksService()
         let goalsService = GoalsService()
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
+        let historyViewModel = HistoryViewModel(drinksService: drinksService)
         
-        RootView(homeViewModel: homeViewModel, drinksService: drinksService, goalsService: goalsService)
+        RootView(homeViewModel: homeViewModel, historyViewModel: historyViewModel, drinksService: drinksService, goalsService: goalsService)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
 
-        RootView(homeViewModel: homeViewModel, drinksService: drinksService, goalsService: goalsService)
+        RootView(homeViewModel: homeViewModel, historyViewModel: historyViewModel, drinksService: drinksService, goalsService: goalsService)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
             .previewDisplayName("iPhone 14 Pro Max")
     }
