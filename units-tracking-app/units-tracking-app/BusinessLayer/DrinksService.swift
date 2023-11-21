@@ -84,9 +84,10 @@ class DrinksService {
             
             //Encode
             let encoder = JSONEncoder()
+            let savedDrinks = "savedDrinks"
             do {
                 let encodedDrinks = try encoder.encode(drinks)
-                UserDefaults.standard.set(encodedDrinks, forKey: "SavedDrinks")
+                UserDefaults.standard.set(encodedDrinks, forKey: savedDrinks)
             } catch {
                 print("Error encoding array: \(error)")
             }
