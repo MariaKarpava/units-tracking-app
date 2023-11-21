@@ -82,15 +82,14 @@ struct EmptyDrinkHistory: View {
 
 struct DrinkHistoryRow: View {
     let drink: DrinkWithUnits
+    let formatter = DateFormatter()
     
     private var dateFormatterForYear: DateFormatter {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         return formatter
     }
     
     private var dateFormatterForDayAndMonth: DateFormatter {
-        let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM"
         return formatter
     }
