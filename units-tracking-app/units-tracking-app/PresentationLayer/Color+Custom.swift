@@ -34,8 +34,8 @@ extension Color {
         Color("AddButtonBottomColor")
     }
     
-    static var addMainHistoryScreenColor: Color {
-        Color("AddMainHistoryScreenColor")
+    static var addMainColorForHistoryScreenRaw: Color {
+        Color("AddMainColorForHistoryScreenRaw")
     }
 }
 
