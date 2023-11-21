@@ -46,11 +46,11 @@ class HistoryViewModel: ObservableObject {
     
     
     struct ViewState: Equatable {
-        enum State: Equatable {
+        enum Content: Equatable {
             case empty
             case notEmpty
         }
-        var currentState: State = .empty
+        var currentState: Content = .empty
     }
     
     
