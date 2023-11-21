@@ -20,7 +20,7 @@ struct ResultView: View {
 
 
 struct HistoryView: View {
-    @ObservedObject var HistoryViewModel: HistoryViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
     
 
     var body: some View {
@@ -28,12 +28,12 @@ struct HistoryView: View {
             GeometryReader { bodyGeometry in
                 ScrollView(.vertical) {
                     VStack(alignment: .leading, spacing: 15) {
-                        switch HistoryViewModel.viewState.currentState {
+                        switch historyViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
                         case .notEmpty:
-                            ForEach(HistoryViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
-                                let drinksForDate = HistoryViewModel.getDrinksWithUnitsDict()[date]!
+                            ForEach(historyViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
+                                let drinksForDate = historyViewModel.getDrinksWithUnitsDict()[date]!
                                 VStack(alignment: .center, spacing: 10) {
                                     ForEach(drinksForDate) { drink in
                                         NavigationLink(destination: ResultView(drink: drink)) {
@@ -49,7 +49,7 @@ struct HistoryView: View {
                         }
                     } // VStack
                 }
-                .frame(width: HistoryViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
+                .frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
                 .padding(.vertical, 20)
                 .padding(.top, 40)
             }
@@ -153,11 +153,11 @@ struct HistoryView_Previews: PreviewProvider {
         let drinksService = DrinksService()
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
         
-        HistoryView(HistoryViewModel: historyViewModel)
+        HistoryView(historyViewModel: historyViewModel)
             .previewDisplayName("iPhone 14 Pro Max")
             .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
         
-        HistoryView(HistoryViewModel: historyViewModel)
+        HistoryView(historyViewModel: historyViewModel)
             .previewDisplayName("iPhone 14")
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
     }
