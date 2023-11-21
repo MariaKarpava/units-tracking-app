@@ -72,7 +72,8 @@ class DrinksService {
         return formatter
     }
     
-        
+    let savedDrinks = "savedDrinks"
+    
     var drinks: [Drink] = [
 //        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
 //        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
@@ -84,7 +85,6 @@ class DrinksService {
             
             //Encode
             let encoder = JSONEncoder()
-            let savedDrinks = "savedDrinks"
             do {
                 let encodedDrinks = try encoder.encode(drinks)
                 UserDefaults.standard.set(encodedDrinks, forKey: savedDrinks)
@@ -97,25 +97,19 @@ class DrinksService {
     
     init() {
         // Decode
-        guard let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") else {
+        guard let savedDrinksData = UserDefaults.standard.data(forKey: savedDrinks) else {
             return
         }
         let decoder = JSONDecoder()
         do {
             let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
             drinks = loadedDrinks
+            print(drinks)
         } catch {
             print("Error decoding array: \(error)")
         }
     }
     
-    
-    
-    func printAllDrinks() {
-        drinks.forEach { drink in
-            print(drink)
-        }
-    }
     
     
     var drinksWithUnits: [DrinkWithUnits] {

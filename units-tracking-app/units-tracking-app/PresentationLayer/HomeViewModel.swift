@@ -60,13 +60,9 @@ class HomeViewModel: ObservableObject {
         if drinkState == .normal || drinkState == .closeToZero {
             viewState.text = "units remaining \n for today."
             viewState.remainingUnitsIndication = .exactNumber(units: drinksService.unitsRemainingForToday(), color: calculateColorForUnits(currentDrinkState: drinkState))
-            print(drinksService.printAllDrinks())
-            print()
         } else {
             viewState.text = "You have reached your \n drinking limit today."
             viewState.remainingUnitsIndication = .warning
-            print(drinksService.printAllDrinks())
-            print()
         }
     }
     
