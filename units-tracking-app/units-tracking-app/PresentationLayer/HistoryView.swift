@@ -105,7 +105,7 @@ struct DrinkHistoryRow: View {
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
                         .font(.historyScreenMainInfo)
-                        .foregroundColor(.addMainHistoryScreenColor)
+                        .foregroundColor(.addMainColorForHistoryScreenRaw)
                     Text(dateFormatterForYear.string(from: drink.date))
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
@@ -124,11 +124,11 @@ struct DrinkHistoryRow: View {
                     }
                     .frame(height: 32)
                     .font(.historyScreenMainInfo)
-                    .foregroundColor(.addMainHistoryScreenColor)
+                    .foregroundColor(.addMainColorForHistoryScreenRaw)
                        
                     Text(String(drink.ml)+"ml")
                     .font(.historyScreenMainInfo)
-                    .foregroundColor(.addMainHistoryScreenColor)
+                    .foregroundColor(.addMainColorForHistoryScreenRaw)
                     .offset(y: -7)
                 }
                 Spacer()
