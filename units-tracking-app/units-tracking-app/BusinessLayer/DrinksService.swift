@@ -96,14 +96,15 @@ class DrinksService {
     
     init() {
         // Decode
-        if let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") {
-            let decoder = JSONDecoder()
-            do {
-                let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
-                drinks = loadedDrinks
-            } catch {
-                print("Error decoding array: \(error)")
-            }
+        guard let savedDrinksData = UserDefaults.standard.data(forKey: "SavedDrinks") else {
+            return
+        }
+        let decoder = JSONDecoder()
+        do {
+            let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
+            drinks = loadedDrinks
+        } catch {
+            print("Error decoding array: \(error)")
         }
     }
     
