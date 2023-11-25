@@ -32,17 +32,15 @@ struct HistoryView: View {
                         case .empty:
                             EmptyDrinkHistory()
                         case .notEmpty:
-                            ForEach(historyViewModel.getDatesFromDrinksWithUnits(), id: \.self) { date in
-                                let drinksForDate = historyViewModel.getDrinksWithUnitsDict()[date]!
+                            // should use foreach for drinks whenever @Published drinks in VM changes
+                            ForEach(historyViewModel.drinksWithUnits, id: \.self) { drink in
                                 VStack(alignment: .center, spacing: 10) {
-                                    ForEach(drinksForDate) { drink in
-                                        NavigationLink(destination: ResultView(drink: drink)) {
-                                            DrinkHistoryRow(drink: drink)
-                                                .frame(width: bodyGeometry.size.width - 40, height: 80)
-                                                .background(Color.white)
-                                                .cornerRadius(4)
-                                                .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
-                                            }
+                                    NavigationLink(destination: ResultView(drink: drink)) {
+                                        DrinkHistoryRow(drink: drink)
+                                            .frame(width: bodyGeometry.size.width - 40, height: 80)
+                                            .background(Color.white)
+                                            .cornerRadius(4)
+                                            .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
                                     }
                                 }
                             }
