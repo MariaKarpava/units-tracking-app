@@ -11,17 +11,14 @@ import SwiftUI
 
 class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
-    @Published var drinks: [Drink]
     @Published var viewState: ViewState
     @Published var drinksWithUnits: [DrinkWithUnits]
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
-        drinks = drinksService.drinks
         drinksWithUnits = drinksService.drinksWithUnits.reversed()
         self.viewState = ViewState()
         self.updateViewState()
-        
         
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
@@ -29,28 +26,14 @@ class HistoryViewModel: ObservableObject {
             queue: .main
         ) { notification in
             // Handle the notification here
-            self.drinks = self.getDrinks()
             self.drinksWithUnits = self.getDrinksWithUnits()
             print("Received a notification in History View!")
         }
     }
     
-    func getDrinks() -> [Drink] {
-        return drinksService.drinks
-    }
-    
     func getDrinksWithUnits() -> [DrinkWithUnits] {
         return drinksService.drinksWithUnits.reversed()
     }
-    
-    func getDatesFromDrinksWithUnits() -> [Date] {
-        return drinksService.drinksWithUnitsDict.keys.sorted(by: >)
-    }
-    
-    func getDrinksWithUnitsDict() -> [Date: [DrinkWithUnits]] {
-        return drinksService.drinksWithUnitsDict
-    }
-    
     
     struct ViewState: Equatable {
         enum Content: Equatable {
@@ -60,10 +43,8 @@ class HistoryViewModel: ObservableObject {
         var currentState: Content = .empty
     }
     
-    
-    
     func updateViewState() {
-        if getDrinks().count == 0 {
+        if getDrinksWithUnits().count == 0 {
             viewState.currentState = .empty
         } else {
             viewState.currentState = .notEmpty

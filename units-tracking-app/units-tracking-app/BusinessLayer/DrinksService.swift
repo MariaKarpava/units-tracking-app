@@ -19,23 +19,18 @@ class DrinksService {
             
             return drinkDateComponents == todaysDateComponents
         }
-        
+
         let units = todaysDrinks.reduce(0.0) { $0 + $1.units }
-//        print("unitsConsumedToday: \(units)")
         return units
     }
     
     func unitsConsumedWithinLast7Days() -> Double {
         let calendar = Calendar.current
         if let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: Date()) {
-//            print()
-//            print("7 days ago: \(sevenDaysAgo)")
             let last7DaysDrinks = drinksWithUnits.filter { drink in
                 return drink.date >= sevenDaysAgo && drink.date <= Date()
             }
-//            print("last7DaysDrinks: \(last7DaysDrinks)")
             let units = last7DaysDrinks.reduce(0.0) { $0 + $1.units }
-//            print("unitsConsumedWithinLast7Days: \(units)")
             return units
         } else {
             // Handle the case when sevenDaysAgo is nil
@@ -51,16 +46,13 @@ class DrinksService {
         
         if unitsConsumedWithinLast7Days() > allowedUnitsPer7Days || unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
-//            print("unitsRemainingForToday1: \(result)")
         } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
-//            print("unitsRemainingForToday2: \(result)")
         } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() < allowedUnitsPerDay {
             let unitsRemainingFor7Days = allowedUnitsPer7Days - unitsConsumedWithinLast7Days()
             let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday()
             
             result = min(unitsRemainingFor7Days, unitsRemainingForTodayIgnoringLast7Days)
-//            print("unitsRemainingForToday3: \(result)")
         }
         return result
     }
@@ -77,14 +69,6 @@ class DrinksService {
     var drinks: [Drink] = [
         Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!),
         Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.09.2023")!),
-//        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-//        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
-//        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-//        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
-//        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-//        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
-//        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
-//        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date())
     ] {
         didSet{
             NotificationCenter.default.post(name: .drinksHasChanged, object: self)
@@ -121,7 +105,6 @@ class DrinksService {
     
     var drinksWithUnits: [DrinkWithUnits] {
         var result: [DrinkWithUnits] = []
-<<<<<<< HEAD
         
         guard !drinks.isEmpty else {
             return result
@@ -131,71 +114,12 @@ class DrinksService {
             // units = strength (ABV) x volume (ml) ÷ 1,000
             // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
             let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
-=======
->>>>>>> 34a75d7 (Handle empty drinks array case.)
-
-        if !drinks.isEmpty {
-            drinks.forEach { drink in
-                // units = strength (ABV) x volume (ml) ÷ 1,000
-                // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
-                let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
-
-//                print("Date: \(drink.date), units: \(units)")
-
-                let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
-                result.append(modifiedDrink)
-            }
+            
+            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
+            result.append(modifiedDrink)
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 34a75d7 (Handle empty drinks array case.)
         return result
     }
-    
-    
-    
-    var drinksDict: [Date: [Drink]] {
-        let calendar = Calendar.current
-        var groupedDrinks = [Date: [Drink]]()
-        
-        for drink in drinks {
-            // Get the date components, excluding the time components
-            let dateWithoutTime = calendar.dateComponents([.year, .month, .day], from: drink.date)
-            // Create a new date using only the year, month, and day
-            let date = calendar.date(from: dateWithoutTime)!
-            
-            if groupedDrinks[date] == nil {
-                groupedDrinks[date] = [drink]
-            } else {
-                groupedDrinks[date]?.append(drink)
-            }
-        }
-        
-        return groupedDrinks
-    }
-    
-        
-    var drinksWithUnitsDict: [Date: [DrinkWithUnits]] {
-        let calendar = Calendar.current
-        var groupedDrinksWithUnits = [Date: [DrinkWithUnits]]()
-        
-        for drink in drinksWithUnits {
-            // Get the date component WITH the time component
-            let dateWithTime = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: drink.date)
-            
-            let date = calendar.date(from: dateWithTime)!
-            
-            if groupedDrinksWithUnits[date] == nil {
-                groupedDrinksWithUnits[date] = [drink]
-            } else {
-                groupedDrinksWithUnits[date]?.append(drink)
-            }
-        }
-//        print("groupedDrinksWithUnits: \(groupedDrinksWithUnits)")
-        return groupedDrinksWithUnits
-    }
-
 }
 
 
