@@ -72,7 +72,7 @@ class DrinksService {
         return formatter
     }
     
-    let savedDrinks = "savedDrinks"
+    private let savedDrinksKey = "savedDrinks"
     
     var drinks: [Drink] = [
 //        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
@@ -87,7 +87,7 @@ class DrinksService {
             let encoder = JSONEncoder()
             do {
                 let encodedDrinks = try encoder.encode(drinks)
-                UserDefaults.standard.set(encodedDrinks, forKey: savedDrinks)
+                UserDefaults.standard.set(encodedDrinks, forKey: savedDrinksKey)
             } catch {
                 print("Error encoding array: \(error)")
             }
@@ -97,7 +97,7 @@ class DrinksService {
     
     init() {
         // Decode
-        guard let savedDrinksData = UserDefaults.standard.data(forKey: savedDrinks) else {
+        guard let savedDrinksData = UserDefaults.standard.data(forKey: savedDrinksKey) else {
             return
         }
         let decoder = JSONDecoder()
