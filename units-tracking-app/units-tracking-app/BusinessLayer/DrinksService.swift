@@ -51,10 +51,10 @@ class DrinksService {
         
         if unitsConsumedWithinLast7Days() > allowedUnitsPer7Days || unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
-            print("unitsRemainingForToday1: \(result)")
+//            print("unitsRemainingForToday1: \(result)")
         } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
-            print("unitsRemainingForToday2: \(result)")
+//            print("unitsRemainingForToday2: \(result)")
         } else if unitsConsumedWithinLast7Days() < allowedUnitsPer7Days && unitsConsumedToday() < allowedUnitsPerDay {
             let unitsRemainingFor7Days = allowedUnitsPer7Days - unitsConsumedWithinLast7Days()
             let unitsRemainingForTodayIgnoringLast7Days = allowedUnitsPerDay - unitsConsumedToday()
@@ -75,8 +75,8 @@ class DrinksService {
     private let savedDrinksKey = "savedDrinks"
     
     var drinks: [Drink] = [
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
-        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.07.2023")!),
+        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!),
+        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.09.2023")!),
 //        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
 //        Drink(drinkType: .beer, ml: 500, alcoholByVolume: 55, date: Date()),
 //        Drink(drinkType: .beer, ml: 200, alcoholByVolume: 60, date: Date()),
@@ -140,7 +140,7 @@ class DrinksService {
                 // here we ÷ 10,000 because we store ABV in Int (we multiplied Double by 10 to convert it into Int)
                 let units: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
 
-                print("Date: \(drink.date), units: \(units)")
+//                print("Date: \(drink.date), units: \(units)")
 
                 let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: units, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
                 result.append(modifiedDrink)

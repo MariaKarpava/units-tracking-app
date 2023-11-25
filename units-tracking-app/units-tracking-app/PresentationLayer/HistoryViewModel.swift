@@ -13,10 +13,12 @@ class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
     @Published var drinks: [Drink]
     @Published var viewState: ViewState
+    @Published var drinksWithUnits: [DrinkWithUnits]
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
         drinks = drinksService.drinks
+        drinksWithUnits = drinksService.drinksWithUnits.reversed()
         self.viewState = ViewState()
         self.updateViewState()
         
@@ -28,6 +30,7 @@ class HistoryViewModel: ObservableObject {
         ) { notification in
             // Handle the notification here
             self.drinks = self.getDrinks()
+            self.drinksWithUnits = self.getDrinksWithUnits()
             print("Received a notification in History View!")
         }
     }
@@ -35,7 +38,11 @@ class HistoryViewModel: ObservableObject {
     func getDrinks() -> [Drink] {
         return drinksService.drinks
     }
-
+    
+    func getDrinksWithUnits() -> [DrinkWithUnits] {
+        return drinksService.drinksWithUnits.reversed()
+    }
+    
     func getDatesFromDrinksWithUnits() -> [Date] {
         return drinksService.drinksWithUnitsDict.keys.sorted(by: >)
     }
