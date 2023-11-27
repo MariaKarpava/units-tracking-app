@@ -24,32 +24,40 @@ struct HistoryView: View {
     
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { bodyGeometry in
                 ScrollView(.vertical) {
-                    VStack(alignment: .leading, spacing: 15) {
+                    LazyVStack(alignment: .center, spacing: 15) {
                         switch historyViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
                         case .notEmpty:
                             // should use foreach for drinks whenever @Published drinks in VM changes
-                            ForEach(historyViewModel.drinksWithUnits, id: \.self) { drink in
-                                VStack(alignment: .center, spacing: 10) {
-                                    NavigationLink(destination: ResultView(drink: drink)) {
-                                        DrinkHistoryRow(drink: drink)
-                                            .frame(width: bodyGeometry.size.width - 40, height: 80)
-                                            .background(Color.white)
-                                            .cornerRadius(4)
-                                            .shadow(color: Color.gray.opacity(0.2), radius: 6, x: 0, y: 0)
-                                    }
+                            ForEach(historyViewModel.viewState.drinksWithUnits, id: \.self) { drink in
+                                NavigationLink(destination: ResultView(drink: drink)) {
+                                    DrinkHistoryRow(drink: drink)
+                                        .frame(
+                                            width: bodyGeometry.size.width - 40,
+                                            height: 80
+                                        )
+                                        .background(Color.white)
+                                        .cornerRadius(4)
+                                        .shadow(
+                                            color: Color.gray.opacity(0.2),
+                                            radius: 10,
+                                            x: 0,
+                                            y: 0
+                                        )
                                 }
                             }
                         }
                     } // VStack
+                    .frame(width: bodyGeometry.size.width)
                 }
                 .frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
+                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                 .padding(.vertical, 20)
-                .padding(.top, 40)
+//                .border(.red)
             }
             .toolbar { // Geo
                 ToolbarItem(placement: .topBarLeading) {

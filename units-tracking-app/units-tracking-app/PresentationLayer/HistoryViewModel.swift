@@ -12,11 +12,10 @@ import SwiftUI
 class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
     @Published var viewState: ViewState
-    @Published var drinksWithUnits: [DrinkWithUnits]
+    
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
-        drinksWithUnits = drinksService.drinksWithUnits.reversed()
         self.viewState = ViewState()
         self.updateViewState()
         
@@ -26,7 +25,7 @@ class HistoryViewModel: ObservableObject {
             queue: .main
         ) { notification in
             // Handle the notification here
-            self.drinksWithUnits = self.getDrinksWithUnits()
+            self.viewState.drinksWithUnits = self.getDrinksWithUnits()
             print("Received a notification in History View!")
         }
     }
@@ -41,6 +40,7 @@ class HistoryViewModel: ObservableObject {
             case notEmpty
         }
         var currentState: Content = .empty
+        var drinksWithUnits: [DrinkWithUnits] = []
     }
     
     func updateViewState() {
@@ -48,6 +48,7 @@ class HistoryViewModel: ObservableObject {
             viewState.currentState = .empty
         } else {
             viewState.currentState = .notEmpty
+            viewState.drinksWithUnits = getDrinksWithUnits()
         }
     }
 }
