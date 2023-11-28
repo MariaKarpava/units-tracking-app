@@ -105,8 +105,7 @@ struct DrinkHistoryRow: View {
  
     var body: some View {
         GeometryReader { geometry in
-            
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 0) {
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
                         .font(.historyScreenMainInfo)
@@ -118,13 +117,13 @@ struct DrinkHistoryRow: View {
                 .frame(width: 98)
                 Divider()
                     .frame(height: 60)
-//                    .offset(x: -8)
-                    .padding(.horizontal, 8)
+                Spacer()
+                    .frame(width: 20)
 
                 VStack(alignment: .leading) {
                     HStack {
                         Text(String(format: "%.1f%%", Double(drink.alcoholByVolume) / 10))
-                        Text(" • ")
+                        Text("•")
                         Text(drink.drinkType.rawValue.capitalized)
                     }
                     .frame(height: 32)
@@ -137,14 +136,16 @@ struct DrinkHistoryRow: View {
                     .offset(y: -7)
                 }
                 Spacer()
-                VStack(alignment: .center) {
+                VStack(alignment: .trailing) {
                     Text(String(format: "%.1f", drink.units))
                         .font(.historyScreenUnits)
                         .foregroundColor(.mainText)
-                    Text("Unit(s)")
+                    Text("unit(s)")
                         .font(.historyScreenUnitsText)
                         .foregroundColor(.secondaryText)
-                }.frame(width: 78)
+                }
+                .frame(width: 78)
+                Spacer().frame(width: 10)
                 
             }
             .frame(width: geometry.size.width, height: 80)
