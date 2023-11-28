@@ -130,7 +130,11 @@ struct DrinkHistoryRow: View {
                     .font(.historyScreenMainInfo)
                     .foregroundColor(.addMainColorForHistoryScreenRaw)
                        
-                    Text(String(drink.ml)+"ml")
+                    HStack {
+                        Text(String(drink.ml)+"ml")
+                        Text("•")
+                        Text(String(drink.numberOfDrinks))
+                    }
                     .font(.historyScreenMainInfo)
                     .foregroundColor(.addMainColorForHistoryScreenRaw)
                     .offset(y: -7)
