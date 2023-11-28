@@ -22,6 +22,7 @@ struct AddNewDrinkView: View {
                 drinkTypeSection
                 drinkVolumeSection
                 abvSection
+                drinkNumberSection
             }
             .navigationTitle("Add New Drink")
             addNewDrinkButton
@@ -47,6 +48,16 @@ struct AddNewDrinkView: View {
             Picker("Please add volume in ml", selection: $viewModel.volumeInPicker) {
                 ForEach(AddNewDrinkViewModel.volumeRange, id: \.self) { volume in
                    Text("\(volume)")
+                }
+            }
+        }
+    }
+    
+    var drinkNumberSection: some View {
+        Section(header: Text("Drink Number")) {
+            Picker("Please add number of drinks", selection: $viewModel.numberOfDrinksInPicker) {
+                ForEach(AddNewDrinkViewModel.numberOfDrinksRange, id: \.self) { number in
+                   Text("\(number)")
                 }
             }
         }
