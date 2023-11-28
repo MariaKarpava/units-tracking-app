@@ -82,9 +82,13 @@ class HomeViewModel: ObservableObject {
     func calculateCurrentDrinkState() -> DrinkState {
         let unitsRemainingForToday = drinksService.unitsRemainingForToday
         
-        if unitsRemainingForToday() > 3.0 {
+        let unitsAllowedPer7Days = goalsService.unitsPer7Days
+        let closeToLimitUnits: Double = unitsAllowedPer7Days * 20 / 100
+        
+        // was > 3.0
+        if unitsRemainingForToday() > closeToLimitUnits {
             return .normal
-        } else if unitsRemainingForToday() > 0 {
+        } else if unitsRemainingForToday() > 0 { // was > 0
             return .closeToZero
         } else {
             return .remainingIsZero
