@@ -25,7 +25,7 @@ class HistoryViewModel: ObservableObject {
             queue: .main
         ) { notification in
             // Handle the notification here
-            self.viewState.drinksWithUnits = self.getDrinksWithUnits()
+            self.viewState.drinkHistoryRowModels = self.convertToDrinkHistoryRowModels()
             print("Received a notification in History View!")
         }
     }
@@ -40,7 +40,23 @@ class HistoryViewModel: ObservableObject {
             case notEmpty
         }
         var currentState: Content = .empty
-        var drinksWithUnits: [DrinkWithUnits] = []
+        var drinkHistoryRowModels: [DrinkHistoryRowModel] = []
+    }
+    
+    struct DrinkHistoryRowModel: Equatable, Hashable {
+        var drinkWithUnits: DrinkWithUnits
+        var shouldDisplayQuantity: Bool {
+            drinkWithUnits.numberOfDrinks == 1 ? false : true
+        }
+    }
+    
+    func convertToDrinkHistoryRowModels() -> [DrinkHistoryRowModel] {
+        var result: [DrinkHistoryRowModel] = []
+        getDrinksWithUnits().forEach { drinkWithUnits in
+            let drinkHistoryRowModel = DrinkHistoryRowModel(drinkWithUnits: drinkWithUnits)
+            result.append(drinkHistoryRowModel)
+        }
+        return result
     }
     
     func updateViewState() {
@@ -48,7 +64,7 @@ class HistoryViewModel: ObservableObject {
             viewState.currentState = .empty
         } else {
             viewState.currentState = .notEmpty
-            viewState.drinksWithUnits = getDrinksWithUnits()
+            viewState.drinkHistoryRowModels = convertToDrinkHistoryRowModels()
         }
     }
 }

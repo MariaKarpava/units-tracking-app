@@ -33,9 +33,9 @@ struct HistoryView: View {
                             EmptyDrinkHistory()
                         case .notEmpty:
                             // should use foreach for drinks whenever @Published drinks in VM changes
-                            ForEach(historyViewModel.viewState.drinksWithUnits, id: \.self) { drink in
-                                NavigationLink(destination: ResultView(drink: drink)) {
-                                    DrinkHistoryRow(drink: drink)
+                            ForEach(historyViewModel.viewState.drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
+                                NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+                                    DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showNumberOfDrinks: drinkHistoryRowModel.shouldDisplayQuantity)
                                         .frame(
                                             width: bodyGeometry.size.width - 40,
                                             height: 80
@@ -89,6 +89,7 @@ struct EmptyDrinkHistory: View {
 struct DrinkHistoryRow: View {
     let drink: DrinkWithUnits
     let formatter = DateFormatter()
+    let showNumberOfDrinks: Bool
     
     private var dateFormatterForYear: DateFormatter {
         formatter.dateFormat = "yyyy"
@@ -132,8 +133,10 @@ struct DrinkHistoryRow: View {
                        
                     HStack {
                         Text(String(drink.ml)+"ml")
-                        Text("•")
-                        Text(String(drink.numberOfDrinks))
+                        if showNumberOfDrinks {
+                            Text("x")
+                            Text(String(drink.numberOfDrinks))
+                        }
                     }
                     .font(.historyScreenMainInfo)
                     .foregroundColor(.addMainColorForHistoryScreenRaw)
