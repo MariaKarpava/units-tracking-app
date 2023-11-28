@@ -23,7 +23,7 @@ extension Font {
         Font.custom("Inter-Regular", size: 18)
     }
     static var historyScreenHistoryHeader: Font {
-        Font.custom("Inter-SemiBild", size: 32)
+        Font.custom("Inter-SemiBold", size: 32)
     }
     static var historyScreenMainInfo: Font {
         Font.custom("Inter-Medium", size: 16)
@@ -32,7 +32,7 @@ extension Font {
         Font.custom("Inter-Medium", size: 12)
     }
     static var historyScreenUnits: Font {
-        Font.custom("Inter-Black", size: 24)
+        Font.custom("inter-Black", size: 24)
     }
     static var historyScreenUnitsText: Font {
         Font.custom("Inter-Regular", size: 12)
