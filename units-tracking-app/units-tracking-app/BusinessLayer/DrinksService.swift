@@ -78,6 +78,7 @@ class DrinksService {
             do {
                 let encodedDrinks = try encoder.encode(drinks)
                 UserDefaults.standard.set(encodedDrinks, forKey: savedDrinksKey)
+                // UserDefaults.standard.removeObject(forKey: savedDrinksKey)
             } catch {
                 print("Error encoding array: \(error)")
             }
