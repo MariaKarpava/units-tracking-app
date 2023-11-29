@@ -49,6 +49,7 @@ enum TabbedItems: Int, CaseIterable {
         }
 }
 
+
 struct RootView: View {
     @State var selectedTab: TabbedItems = .home
     @ObservedObject var homeViewModel: HomeViewModel
@@ -75,11 +76,9 @@ struct RootView: View {
             .frame(maxWidth: .infinity,
                    maxHeight: .infinity)
  
-            
             ZStack {
                 TabBarTopBorderVectorView()
                     .offset(y: -26.5)
-                
                 HStack {
                     ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
                         Button {
@@ -116,33 +115,37 @@ struct RootView: View {
 }
 
 
-    
 extension RootView {
     func addCustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
         VStack() {
             VStack(alignment: .center) {
                 Image(systemName: imageName)
                     .font(.system(size: 23))
-                .foregroundColor(isActive ? .accent : .gray)
-            }.frame(maxWidth: .infinity,
-                    maxHeight: .infinity)
+                    .foregroundColor(isActive ? .accent : .gray)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             VStack(alignment: .trailing) {
                 Text(title)
                     .font(.system(size: 10))
                     .frame(maxWidth: .infinity)
-                .foregroundColor(isActive ? .accent : .gray)
+                    .foregroundColor(isActive ? .accent : .gray)
                 
-            }.offset(y: -3)
+            }
+            .offset(y: -3)
             Spacer().frame(height: 2)
         }
         .frame(maxWidth: .infinity, maxHeight: 49)
     }
     
-    func addCustomMiddleButton() -> some View {
+    private func addCustomMiddleButton() -> some View {
         ZStack(alignment: .center) {
             Circle()
                 .fill(
-                    LinearGradient(colors: [Color.addButtonTopColor, Color.addButtonBottomColor], startPoint: .top, endPoint: .bottom)
+                    LinearGradient(
+                        colors: [Color.addButtonTopColor, Color.addButtonBottomColor],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                 )
                 .frame(width: 64, height: 64)
             Image(systemName: "plus")
@@ -151,10 +154,6 @@ extension RootView {
         }
     }
 }
-
-
-
-
 
 
 struct RootView_Previews: PreviewProvider {

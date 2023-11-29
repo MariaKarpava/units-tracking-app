@@ -11,7 +11,6 @@ import SwiftUI
 struct ResultView: View {
     var drink: DrinkWithUnits
     var body: some View {
-        //  Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.09.2023")!),
         VStack {
             Text(String(drink.drinkType.rawValue.capitalized))
         }
@@ -21,7 +20,6 @@ struct ResultView: View {
 
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
-    
 
     var body: some View {
         NavigationStack {
@@ -71,7 +69,6 @@ struct HistoryView: View {
 }
 
 
-
 struct EmptyDrinkHistory: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -84,12 +81,10 @@ struct EmptyDrinkHistory: View {
 }
 
 
-
-
 struct DrinkHistoryRow: View {
     let drink: DrinkWithUnits
-    let formatter = DateFormatter()
     let showNumberOfDrinks: Bool
+    private let formatter = DateFormatter()
     
     private var dateFormatterForYear: DateFormatter {
         formatter.dateFormat = "yyyy"
@@ -100,9 +95,6 @@ struct DrinkHistoryRow: View {
         formatter.dateFormat = "dd MMM"
         return formatter
     }
-    
-    
- 
  
     var body: some View {
         GeometryReader { geometry in

@@ -13,7 +13,6 @@ class HistoryViewModel: ObservableObject {
     private let drinksService: DrinksService
     @Published var viewState: ViewState
     
-    
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
         self.viewState = ViewState()
@@ -28,10 +27,6 @@ class HistoryViewModel: ObservableObject {
             self.viewState.drinkHistoryRowModels = self.convertToDrinkHistoryRowModels()
             print("Received a notification in History View!")
         }
-    }
-    
-    func getDrinksWithUnits() -> [DrinkWithUnits] {
-        return drinksService.drinksWithUnits.reversed()
     }
     
     struct ViewState: Equatable {
@@ -50,7 +45,11 @@ class HistoryViewModel: ObservableObject {
         }
     }
     
-    func convertToDrinkHistoryRowModels() -> [DrinkHistoryRowModel] {
+    private func getDrinksWithUnits() -> [DrinkWithUnits] {
+        return drinksService.drinksWithUnits.reversed()
+    }
+    
+    private func convertToDrinkHistoryRowModels() -> [DrinkHistoryRowModel] {
         var result: [DrinkHistoryRowModel] = []
         getDrinksWithUnits().forEach { drinkWithUnits in
             let drinkHistoryRowModel = DrinkHistoryRowModel(drinkWithUnits: drinkWithUnits)
@@ -59,7 +58,7 @@ class HistoryViewModel: ObservableObject {
         return result
     }
     
-    func updateViewState() {
+    private func updateViewState() {
         if getDrinksWithUnits().count == 0 {
             viewState.currentState = .empty
         } else {

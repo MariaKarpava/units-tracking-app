@@ -12,10 +12,12 @@ struct UnitsTrackingApp: App {
     @StateObject var goalsService = GoalsService()
     var drinkService = DrinksService()
     
-
     var body: some Scene {
         WindowGroup {
-            RootView(homeViewModel: HomeViewModel(drinksService: drinkService, goalsService: goalsService), historyViewModel: HistoryViewModel(drinksService: drinkService), drinksService: drinkService, goalsService: goalsService)
+            RootView(homeViewModel: HomeViewModel(drinksService: drinkService, goalsService: goalsService),
+                     historyViewModel: HistoryViewModel(drinksService: drinkService),
+                     drinksService: drinkService,
+                     goalsService: goalsService)
         }
     }
 }

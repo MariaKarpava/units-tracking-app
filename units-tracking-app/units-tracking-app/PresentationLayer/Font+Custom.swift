@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 
+// Home Screen
 extension Font {
     static var homeScreenUnits: Font {
         Font.custom("Inter-Black", size: 120)
@@ -19,6 +20,11 @@ extension Font {
     static var homeScreenInfoButton: Font {
         Font.custom("Inter-Medium", size: 16)
     }
+}
+    
+
+// History Screen
+extension Font {
     static var historyScreenEditButton: Font {
         Font.custom("Inter-Regular", size: 18)
     }
@@ -40,5 +46,4 @@ extension Font {
     static var historyScreenEmpty: Font {
         Font.custom("Inter-Medium", size: 20)
     }
-    
 }

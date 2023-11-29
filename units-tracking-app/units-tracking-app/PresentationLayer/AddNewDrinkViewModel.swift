@@ -20,7 +20,7 @@ class AddNewDrinkViewModel: ObservableObject {
     static let alcoholByVolumeRange = Array(stride(from: 0.1, through: 100.0, by: 0.1))
     @Published var alcoholByVolumeInPicker = alcoholByVolumeRange.first!
     
-    private let drinksService: DrinksService
+    let drinksService: DrinksService
     
     init(drinksService: DrinksService) {
         self.drinksService = drinksService
