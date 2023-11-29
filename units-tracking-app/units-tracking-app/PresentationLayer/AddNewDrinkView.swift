@@ -11,6 +11,14 @@ import SwiftUI
 struct AddNewDrinkView: View {
     @StateObject private var viewModel: AddNewDrinkViewModel
     
+    private var addNewDrinkButton: some View {
+        Button {
+            viewModel.addNewDrinkTapped()
+        } label : {
+            Text("Add New Drink")
+        }.buttonStyle(.bordered)
+    }
+    
     init(viewModel: AddNewDrinkViewModel) {
         // use _ to set raw value to wrapped properties
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -29,7 +37,7 @@ struct AddNewDrinkView: View {
         }
     }
                     
-    var drinkTypeSection: some View {
+    private var drinkTypeSection: some View {
         Section(header: Text("Drink Type")) {
             Picker("Drink Type", selection: $viewModel.drinkType) {
                 ForEach(Drink.DrinkType.allCases) { drinkType in
@@ -40,10 +48,7 @@ struct AddNewDrinkView: View {
         }
     }
     
-    
-
-    
-    var drinkVolumeSection: some View {
+    private var drinkVolumeSection: some View {
         Section(header: Text("Drink Volume")) {
             Picker("Please add volume in ml", selection: $viewModel.volumeInPicker) {
                 ForEach(AddNewDrinkViewModel.volumeRange, id: \.self) { volume in
@@ -53,7 +58,7 @@ struct AddNewDrinkView: View {
         }
     }
     
-    var drinkNumberSection: some View {
+    private var drinkNumberSection: some View {
         Section(header: Text("Drink Number")) {
             Picker("Please add number of drinks", selection: $viewModel.numberOfDrinksInPicker) {
                 ForEach(AddNewDrinkViewModel.numberOfDrinksRange, id: \.self) { number in
@@ -63,7 +68,7 @@ struct AddNewDrinkView: View {
         }
     }
     
-    var abvSection: some View {
+    private var abvSection: some View {
         Section(header: Text("Alcohol By Volume")) {
             Picker("Please add ABV in %", selection: $viewModel.alcoholByVolumeInPicker) {
                 ForEach(AddNewDrinkViewModel.alcoholByVolumeRange, id: \.self) { abvVolume in
@@ -72,18 +77,6 @@ struct AddNewDrinkView: View {
             }
         }
     }
-    
-
-        
-    
-    private var addNewDrinkButton: some View {
-        Button {
-            viewModel.addNewDrinkTapped()
-        } label : {
-            Text("Add New Drink")
-        }.buttonStyle(.bordered)
-    }
-    
 }
 
 

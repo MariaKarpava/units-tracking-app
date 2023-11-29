@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct Drink: Hashable, Identifiable, Codable {
     let id: UUID
     
@@ -48,15 +49,12 @@ struct Drink: Hashable, Identifiable, Codable {
 }
 
 
-
-
 struct DrinkWithUnits: Hashable, Identifiable {
     let id: UUID
     let drinkType: Drink.DrinkType
     let date: Date
     let units: Double
     let numberOfDrinks: Int
-    
     let ml: Int
     var alcoholByVolume: Int
 }
