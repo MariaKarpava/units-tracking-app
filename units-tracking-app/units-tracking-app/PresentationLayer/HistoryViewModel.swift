@@ -50,12 +50,7 @@ class HistoryViewModel: ObservableObject {
     }
     
     private func convertToDrinkHistoryRowModels() -> [DrinkHistoryRowModel] {
-        var result: [DrinkHistoryRowModel] = []
-        getDrinksWithUnits().forEach { drinkWithUnits in
-            let drinkHistoryRowModel = DrinkHistoryRowModel(drinkWithUnits: drinkWithUnits)
-            result.append(drinkHistoryRowModel)
-        }
-        return result
+        getDrinksWithUnits().map { DrinkHistoryRowModel(drinkWithUnits: $0) }
     }
     
     private func updateViewState() {
