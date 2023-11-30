@@ -20,12 +20,11 @@ class DrinksService {
     private let savedDrinksKey = "savedDrinks"
     
     var drinks: [Drink] = [
-        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!, numberOfDrinks: 1),
-        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.09.2023")!, numberOfDrinks: 3)
+//        Drink(drinkType: .wine, ml: 150, alcoholByVolume: 125, date: dateFormatter.date(from: "05.08.2023")!, numberOfDrinks: 1),
+//        Drink(drinkType: .cocktail, ml: 300, alcoholByVolume: 55, date: dateFormatter.date(from: "08.09.2023")!, numberOfDrinks: 3)
     ] {
         didSet{
             NotificationCenter.default.post(name: .drinksHasChanged, object: self)
-            
             //Encode
             let encoder = JSONEncoder()
             do {

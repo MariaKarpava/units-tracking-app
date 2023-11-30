@@ -22,9 +22,10 @@ class HistoryViewModel: ObservableObject {
             forName: .drinksHasChanged,
             object: drinksService,
             queue: .main
-        ) { notification in
+        ) { [ weak self ] notification in
             // Handle the notification here
-            self.viewState.drinkHistoryRowModels = self.convertToDrinkHistoryRowModels()
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
             print("Received a notification in History View!")
         }
     }
