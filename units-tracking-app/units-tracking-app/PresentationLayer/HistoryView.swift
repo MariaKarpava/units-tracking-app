@@ -81,6 +81,7 @@ struct EmptyDrinkHistory: View {
                 .font(.historyScreenEmpty)
                 .foregroundColor(.secondaryText)
                 .padding(.leading, 20)
+                .padding(.top, 30)
         }
     }
 }
