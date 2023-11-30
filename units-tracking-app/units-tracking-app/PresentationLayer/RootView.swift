@@ -142,7 +142,7 @@ extension RootView {
             Circle()
                 .fill(
                     LinearGradient(
-                        colors: [Color.addButtonTopColor, Color.addButtonBottomColor],
+                        colors: [Color.buttonTopColor, Color.buttonBottomColor],
                         startPoint: .top,
                         endPoint: .bottom
                     )

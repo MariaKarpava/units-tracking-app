@@ -62,7 +62,7 @@ struct HistoryView: View {
 //                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
 //                .padding(.vertical, 20)
             }
-            .toolbar { // Geo
+            .toolbar { // GeometryReader
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
                         .font(.historyScreenHistoryHeader)
@@ -108,7 +108,7 @@ struct DrinkHistoryRow: View {
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
                         .font(.historyScreenMainInfo)
-                        .foregroundColor(.addMainColorForHistoryScreenRaw)
+                        .foregroundColor(.mainColorForHistoryScreenRaw)
                     Text(dateFormatterForYear.string(from: drink.date))
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
@@ -127,7 +127,7 @@ struct DrinkHistoryRow: View {
                     }
                     .frame(height: 32)
                     .font(.historyScreenMainInfo)
-                    .foregroundColor(.addMainColorForHistoryScreenRaw)
+                    .foregroundColor(.mainColorForHistoryScreenRaw)
                        
                     HStack {
                         Text(String(drink.ml)+"ml")
@@ -137,7 +137,7 @@ struct DrinkHistoryRow: View {
                         }
                     }
                     .font(.historyScreenMainInfo)
-                    .foregroundColor(.addMainColorForHistoryScreenRaw)
+                    .foregroundColor(.mainColorForHistoryScreenRaw)
                     .offset(y: -7)
                 }
                 Spacer()
