@@ -45,7 +45,6 @@ class HomeViewModel: ObservableObject {
  
         NotificationCenter.default.addObserver(
             forName: .drinksHasChanged,
-            
             object: drinksService,
             queue: .main
         ) { [weak self] notification in
