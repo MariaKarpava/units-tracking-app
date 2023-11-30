@@ -24,38 +24,43 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { bodyGeometry in
-                ScrollView(.vertical) {
-                    LazyVStack(alignment: .center, spacing: 15) {
+//                ScrollView(.vertical) {
+//                    LazyVStack(alignment: .center, spacing: 15) {
                         switch historyViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
                         case .notEmpty:
                             // should use foreach for drinks whenever @Published drinks in VM changes
-                            ForEach(historyViewModel.viewState.drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
-                                NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                    DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showNumberOfDrinks: drinkHistoryRowModel.shouldDisplayQuantity)
-                                        .frame(
-                                            width: bodyGeometry.size.width - 40,
-                                            height: 80
-                                        )
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .shadow(
-                                            color: Color.gray.opacity(0.2),
-                                            radius: 10,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                }
-                            }
+                            ScrollView(.vertical) {
+                                LazyVStack(alignment: .center, spacing: 15) {
+                                    ForEach(historyViewModel.viewState.drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
+                                        NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+                                            DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showNumberOfDrinks: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                .frame(
+                                                    width: bodyGeometry.size.width - 40,
+                                                    height: 80
+                                                )
+                                                .background(Color.white)
+                                                .cornerRadius(4)
+                                                .shadow(
+                                                    color: Color.gray.opacity(0.2),
+                                                    radius: 10,
+                                                    x: 0,
+                                                    y: 0
+                                                )
+                                        }
+                                    }
+                                }.frame(width: bodyGeometry.size.width)
+                            }.frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
+                                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
+                                .padding(.vertical, 20)
                         }
-                    } // VStack
-                    .frame(width: bodyGeometry.size.width)
-                }
-                .frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
-                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
-                .padding(.vertical, 20)
-//                .border(.red)
+//                    } // VStack
+//                    .frame(width: bodyGeometry.size.width)
+//                }
+//                .frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
+//                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
+//                .padding(.vertical, 20)
             }
             .toolbar { // Geo
                 ToolbarItem(placement: .topBarLeading) {
@@ -71,11 +76,11 @@ struct HistoryView: View {
 
 struct EmptyDrinkHistory: View {
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             Text("No data yet")
-            .font(.historyScreenEmpty)
-            .foregroundColor(.secondaryText)
-            .padding(.leading, 20)
+                .font(.historyScreenEmpty)
+                .foregroundColor(.secondaryText)
+                .padding(.leading, 20)
         }
     }
 }
