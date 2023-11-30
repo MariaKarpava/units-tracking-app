@@ -50,7 +50,15 @@ class DrinksService {
             let unitsPerDrink: Double = Double(drink.ml) * (Double(drink.alcoholByVolume) / 10) / 1000
             let totalUnits = unitsPerDrink * Double(drink.quantity)
             
-            let modifiedDrink = DrinkWithUnits(id: drink.id, drinkType: drink.drinkType, date: drink.date, units: totalUnits, quantity: drink.quantity, ml: drink.ml, alcoholByVolume: drink.alcoholByVolume)
+            let modifiedDrink = DrinkWithUnits(
+                id: drink.id,
+                drinkType: drink.drinkType,
+                date: drink.date,
+                units: totalUnits,
+                quantity: drink.quantity,
+                ml: drink.ml,
+                alcoholByVolume: drink.alcoholByVolume
+            )
             result.append(modifiedDrink)
         }
         return result
