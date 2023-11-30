@@ -17,7 +17,7 @@ struct Drink: Hashable, Identifiable, Codable {
     /// Int = % * 10
     var alcoholByVolume: Int
     var date: Date
-    var numberOfDrinks: Int
+    var quantity: Int
     
     enum DrinkType: String, CaseIterable, Identifiable, Codable  {
         case beer
@@ -38,13 +38,13 @@ struct Drink: Hashable, Identifiable, Codable {
         
     }
     
-    init(drinkType: DrinkType, ml: Int, alcoholByVolume: Int, date: Date, numberOfDrinks: Int) {
+    init(drinkType: DrinkType, ml: Int, alcoholByVolume: Int, date: Date, quantity: Int) {
         self.id = UUID()
         self.drinkType = drinkType
         self.ml = ml
         self.alcoholByVolume = alcoholByVolume
         self.date = date
-        self.numberOfDrinks = numberOfDrinks
+        self.quantity = quantity
     }
 }
 
@@ -54,7 +54,7 @@ struct DrinkWithUnits: Hashable, Identifiable {
     let drinkType: Drink.DrinkType
     let date: Date
     let units: Double
-    let numberOfDrinks: Int
+    let quantity: Int
     let ml: Int
     var alcoholByVolume: Int
 }

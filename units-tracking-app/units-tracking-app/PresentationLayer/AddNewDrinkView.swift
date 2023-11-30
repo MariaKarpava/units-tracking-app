@@ -60,8 +60,8 @@ struct AddNewDrinkView: View {
     
     private var drinkNumberSection: some View {
         Section(header: Text("Drink Number")) {
-            Picker("Please add number of drinks", selection: $viewModel.numberOfDrinksInPicker) {
-                ForEach(AddNewDrinkViewModel.numberOfDrinksRange, id: \.self) { number in
+            Picker("Please add number of drinks", selection: $viewModel.quantityInPicker) {
+                ForEach(AddNewDrinkViewModel.quantityRange, id: \.self) { number in
                    Text("\(number)")
                 }
             }

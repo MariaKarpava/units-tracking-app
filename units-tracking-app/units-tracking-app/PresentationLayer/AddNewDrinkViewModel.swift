@@ -14,8 +14,8 @@ class AddNewDrinkViewModel: ObservableObject {
     static let volumeRange = Array(stride(from: 5, through: 1000, by: 5))
     @Published var volumeInPicker: Int = volumeRange.first!
     
-    static let numberOfDrinksRange = Array(stride(from: 1, through: 50, by: 1))
-    @Published var numberOfDrinksInPicker: Int = numberOfDrinksRange.first!
+    static let quantityRange = Array(stride(from: 1, through: 50, by: 1))
+    @Published var quantityInPicker: Int = quantityRange.first!
 
     static let alcoholByVolumeRange = Array(stride(from: 0.1, through: 100.0, by: 0.1))
     @Published var alcoholByVolumeInPicker = alcoholByVolumeRange.first!
@@ -30,8 +30,8 @@ class AddNewDrinkViewModel: ObservableObject {
         let selectedDrinkType = drinkType
         let enteredVolume = volumeInPicker
         let enteredAlcoholByVolume = Int(alcoholByVolumeInPicker*10)
-        let enteredNumberOfDrinks = numberOfDrinksInPicker
-        let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date(), numberOfDrinks: enteredNumberOfDrinks)
+        let enteredQuantity = quantityInPicker
+        let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date(), quantity: enteredQuantity)
         drinksService.drinks.append(newDrink)
     }
 }
