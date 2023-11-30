@@ -42,7 +42,7 @@ class HistoryViewModel: ObservableObject {
     struct DrinkHistoryRowModel: Equatable, Hashable {
         var drinkWithUnits: DrinkWithUnits
         var shouldDisplayQuantity: Bool {
-            drinkWithUnits.numberOfDrinks == 1 ? false : true
+            drinkWithUnits.quantity == 1 ? false : true
         }
     }
     

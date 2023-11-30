@@ -35,7 +35,7 @@ struct HistoryView: View {
                                 LazyVStack(alignment: .center, spacing: 15) {
                                     ForEach(historyViewModel.viewState.drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
                                         NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                            DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showNumberOfDrinks: drinkHistoryRowModel.shouldDisplayQuantity)
+                                            DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                 .frame(
                                                     width: bodyGeometry.size.width - 40,
                                                     height: 80
@@ -89,7 +89,7 @@ struct EmptyDrinkHistory: View {
 
 struct DrinkHistoryRow: View {
     let drink: DrinkWithUnits
-    let showNumberOfDrinks: Bool
+    let showQuantity: Bool
     private let formatter = DateFormatter()
     
     private var dateFormatterForYear: DateFormatter {
@@ -131,9 +131,9 @@ struct DrinkHistoryRow: View {
                        
                     HStack {
                         Text(String(drink.ml)+"ml")
-                        if showNumberOfDrinks {
+                        if showQuantity {
                             Text("x")
-                            Text(String(drink.numberOfDrinks))
+                            Text(String(drink.quantity))
                         }
                     }
                     .font(.historyScreenMainInfo)
