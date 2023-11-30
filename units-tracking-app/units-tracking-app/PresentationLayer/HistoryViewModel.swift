@@ -33,10 +33,9 @@ class HistoryViewModel: ObservableObject {
     struct ViewState: Equatable {
         enum Content: Equatable {
             case empty
-            case notEmpty
+            case notEmpty(drinkHistoryRowModels: [DrinkHistoryRowModel])
         }
         var currentState: Content = .empty
-        var drinkHistoryRowModels: [DrinkHistoryRowModel] = []
     }
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
@@ -63,8 +62,7 @@ class HistoryViewModel: ObservableObject {
         if getDrinksWithUnits().count == 0 {
             viewState.currentState = .empty
         } else {
-            viewState.currentState = .notEmpty
-            viewState.drinkHistoryRowModels = convertToDrinkHistoryRowModels()
+            viewState.currentState = .notEmpty(drinkHistoryRowModels: convertToDrinkHistoryRowModels())
         }
     }
 }

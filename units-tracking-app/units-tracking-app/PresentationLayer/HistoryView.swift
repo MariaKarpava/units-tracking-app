@@ -29,11 +29,11 @@ struct HistoryView: View {
                         switch historyViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
-                        case .notEmpty:
+                        case .notEmpty(let drinkHistoryRowModels):
                             // should use foreach for drinks whenever @Published drinks in VM changes
                             ScrollView(.vertical) {
                                 LazyVStack(alignment: .center, spacing: 15) {
-                                    ForEach(historyViewModel.viewState.drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
+                                    ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
                                         NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                             DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                 .frame(
@@ -51,7 +51,7 @@ struct HistoryView: View {
                                         }
                                     }
                                 }.frame(width: bodyGeometry.size.width)
-                            }.frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
+                            }.frame(width: historyViewModel.viewState.currentState == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
                                 .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                                 .padding(.vertical, 20)
                         }
