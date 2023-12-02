@@ -52,8 +52,10 @@ enum TabbedItems: Int, CaseIterable {
 
 struct RootView: View {
     @State var selectedTab: TabbedItems = .home
+    
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var historyViewModel: HistoryViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
     
     @State private var showSheet = false
     var drinksService: DrinksService
@@ -63,16 +65,18 @@ struct RootView: View {
     static let addButtonProtrusion: CGFloat = 40
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
-                HomeView(homeViewModel: homeViewModel)
-                    .tag(TabbedItems.home)
-                StatisticsView()
-                    .tag(TabbedItems.stats)
-                HistoryView(historyViewModel: historyViewModel)
-                    .tag(TabbedItems.history)
-                SettingsView()
-                    .tag(TabbedItems.settings)
+        VStack(spacing: 0.0) {
+            ZStack(alignment: .bottom) {
+                TabView(selection: $selectedTab) {
+                    HomeView(homeViewModel: homeViewModel)
+                        .tag(TabbedItems.home)
+                    StatisticsView()
+                        .tag(TabbedItems.stats)
+                    HistoryView(historyViewModel: historyViewModel)
+                        .tag(TabbedItems.history)
+                    SettingsView()
+                        .tag(TabbedItems.settings)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
  
@@ -158,13 +162,26 @@ struct RootView_Previews: PreviewProvider {
         let goalsService = GoalsService()
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
+        let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
         
-        RootView(homeViewModel: homeViewModel, historyViewModel: historyViewModel, drinksService: drinksService, goalsService: goalsService)
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-            .previewDisplayName("iPhone 14")
+        RootView(
+            homeViewModel: homeViewModel,
+            historyViewModel: historyViewModel,
+            settingsViewModel: settingsViewModel,
+            drinksService: drinksService,
+            goalsService: goalsService
+        )
+        .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+        .previewDisplayName("iPhone 14")
 
-        RootView(homeViewModel: homeViewModel, historyViewModel: historyViewModel, drinksService: drinksService, goalsService: goalsService)
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
-            .previewDisplayName("iPhone 14 Pro Max")
+        RootView(
+            homeViewModel: homeViewModel,
+            historyViewModel: historyViewModel,
+            settingsViewModel: settingsViewModel,
+            drinksService: drinksService,
+            goalsService: goalsService
+        )
+        .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+        .previewDisplayName("iPhone 14 Pro Max")
     }
 }

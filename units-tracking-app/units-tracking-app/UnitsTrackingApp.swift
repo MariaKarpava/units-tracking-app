@@ -14,10 +14,11 @@ struct UnitsTrackingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView(homeViewModel: HomeViewModel(drinksService: drinkService, goalsService: goalsService),
-                     historyViewModel: HistoryViewModel(drinksService: drinkService),
-                     drinksService: drinkService,
-                     goalsService: goalsService)
+            RootView(
+                homeViewModel: HomeViewModel(drinksService: drinkService, goalsService: goalsService),
+                settingsViewModel: SettingsViewModel(drinksService: drinkService, goalsService: goalsService),
+                drinksService: drinkService,
+                goalsService: goalsService)
         }
     }
 }

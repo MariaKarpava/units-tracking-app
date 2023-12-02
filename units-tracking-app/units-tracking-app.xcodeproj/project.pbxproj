@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700931472B1B5C8600551518 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931462B1B5C8600551518 /* SettingsViewModel.swift */; };
 		700F2FC32A8D23B700BAD52D /* GoalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F2FC22A8D23B700BAD52D /* GoalsService.swift */; };
 		705404582ACEC7920049E834 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705404572ACEC7920049E834 /* HistoryViewModel.swift */; };
 		706F16EA2AB34C500051B68A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706F16E92AB34C500051B68A /* RootView.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		700931462B1B5C8600551518 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		700F2FC22A8D23B700BAD52D /* GoalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsService.swift; sourceTree = "<group>"; };
 		705404572ACEC7920049E834 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		706F16E92AB34C500051B68A /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 				707FE2622AA8EFD200D61391 /* Font+Custom.swift */,
 				70F61A552A6041F100180237 /* AddNewDrinkViewModel.swift */,
 				70ADD51D2A52E83A005D2EB5 /* AddNewDrinkView.swift */,
+				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
+				700931462B1B5C8600551518 /* SettingsViewModel.swift */,
 				70ADD51F2A52E852005D2EB5 /* StatisticsView.swift */,
 				70ADD51B2A52E825005D2EB5 /* HistoryView.swift */,
 				705404572ACEC7920049E834 /* HistoryViewModel.swift */,
@@ -261,6 +265,7 @@
 				70ADD50E2A52E1DE005D2EB5 /* UnitsTrackingApp.swift in Sources */,
 				700F2FC32A8D23B700BAD52D /* GoalsService.swift in Sources */,
 				705404582ACEC7920049E834 /* HistoryViewModel.swift in Sources */,
+				700931472B1B5C8600551518 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
