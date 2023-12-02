@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    
     var body: some View {
         Text("Settings")
     }
 }
 
+
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        let drinksService = DrinksService()
+        let goalsService = GoalsService()
+        return SettingsView(settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService))
     }
 }
