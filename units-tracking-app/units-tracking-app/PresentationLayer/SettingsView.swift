@@ -11,7 +11,23 @@ struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     
     var body: some View {
-        Text("Settings")
+        NavigationStack {
+            Form {
+                DayLimitView
+            }
+            .scrollContentBackground(.hidden)
+        }
+    }
+    
+    
+    var DayLimitView: some View {
+        Section() {
+            Picker("Day limit", selection: $settingsViewModel.dayLimitInPicker) {
+                ForEach(SettingsViewModel.dayLimitRange, id: \.self) { dayLimit in
+                    Text("\(dayLimit) unit(s)")
+                }
+            }
+        }
     }
 }
 
