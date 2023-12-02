@@ -16,6 +16,10 @@ class SettingsViewModel: ObservableObject {
         self.drinksService = drinksService
         self.goalsService = goalsService
     }
+    
+    static let dayLimitRange = Array(stride(from: 1, to: 50, by: 1))
+    @Published var dayLimitInPicker = dayLimitRange.first!
+    
 }
 
 
