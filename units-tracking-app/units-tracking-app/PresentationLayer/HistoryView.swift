@@ -24,8 +24,6 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { bodyGeometry in
-//                ScrollView(.vertical) {
-//                    LazyVStack(alignment: .center, spacing: 15) {
                         switch historyViewModel.viewState.currentState {
                         case .empty:
                             EmptyDrinkHistory()
@@ -55,12 +53,6 @@ struct HistoryView: View {
                                 .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                                 .padding(.vertical, 20)
                         }
-//                    } // VStack
-//                    .frame(width: bodyGeometry.size.width)
-//                }
-//                .frame(width: historyViewModel.viewState.currentState == .notEmpty ? bodyGeometry.size.width : nil) // Scroll View
-//                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
-//                .padding(.vertical, 20)
             }
             .toolbar { // GeometryReader
                 ToolbarItem(placement: .topBarLeading) {
