@@ -26,16 +26,16 @@ extension Color {
         Color("SecondaryText")
     }
     
-    static var buttonTopColor: Color {
+    static var addButtonTopColor: Color {
         Color("AddButtonTopColor")
     }
     
-    static var buttonBottomColor: Color {
+    static var addButtonBottomColor: Color {
         Color("AddButtonBottomColor")
     }
     
-    static var mainColorForHistoryScreenRaw: Color {
-        Color("AddMainColorForHistoryScreenRaw")
+    static var mainColorForTextInHistoryScreenRaw: Color {
+        Color("MainColorForTextInHistoryScreenRaw")
     }
 }
 
