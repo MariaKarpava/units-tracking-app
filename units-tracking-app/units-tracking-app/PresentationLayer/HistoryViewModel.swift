@@ -34,7 +34,7 @@ class HistoryViewModel: ObservableObject {
             case empty
             case notEmpty(drinkHistoryRowModels: [DrinkHistoryRowModel])
         }
-        var currentState: Content = .empty
+        var content: Content = .empty
     }
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
@@ -54,9 +54,9 @@ class HistoryViewModel: ObservableObject {
     
     private func updateViewState() {
         if getDrinksWithUnits().isEmpty {
-            viewState.currentState = .empty
+            viewState.content = .empty
         } else {
-            viewState.currentState = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
+            viewState.content = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
         }
     }
 }

@@ -24,7 +24,7 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { bodyGeometry in
-                        switch historyViewModel.viewState.currentState {
+                        switch historyViewModel.viewState.content {
                         case .empty:
                             EmptyDrinkHistory()
                         case .notEmpty(let drinkHistoryRowModels):
@@ -49,7 +49,7 @@ struct HistoryView: View {
                                         }
                                     }
                                 }.frame(width: bodyGeometry.size.width)
-                            }.frame(width: historyViewModel.viewState.currentState == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
+                            }.frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
                                 .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                                 .padding(.vertical, 20)
                         }
