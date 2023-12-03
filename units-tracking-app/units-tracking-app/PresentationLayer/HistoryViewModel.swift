@@ -45,18 +45,21 @@ class HistoryViewModel: ObservableObject {
     }
     
     private func getDrinksWithUnits() -> [DrinkWithUnits] {
-        return drinksService.drinksWithUnits.reversed()
+        let originalDrinksWithUnits = drinksService.drinksWithUnits
+        let sortedByDateDrinksWithUnits = originalDrinksWithUnits.sorted(by: { $0.date.compare($1.date) == .orderedDescending })
+        return sortedByDateDrinksWithUnits
     }
     
-    private func convertToDrinkHistoryRowModels() -> [DrinkHistoryRowModel] {
-        getDrinksWithUnits().map { DrinkHistoryRowModel(drinkWithUnits: $0) }
+    //drinksWithUnitsAsRowModels
+    private func rawModels(from drinksWithUnits: [DrinkWithUnits]) -> [DrinkHistoryRowModel] {
+        drinksWithUnits.map { DrinkHistoryRowModel(drinkWithUnits: $0) }
     }
     
     private func updateViewState() {
-        if getDrinksWithUnits().count == 0 {
+        if getDrinksWithUnits().isEmpty {
             viewState.currentState = .empty
         } else {
-            viewState.currentState = .notEmpty(drinkHistoryRowModels: convertToDrinkHistoryRowModels())
+            viewState.currentState = .notEmpty(drinkHistoryRowModels: rawModels(from: getDrinksWithUnits()))
         }
     }
 }
