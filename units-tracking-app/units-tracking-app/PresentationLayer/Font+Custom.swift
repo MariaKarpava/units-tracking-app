@@ -20,6 +20,12 @@ extension Font {
     static var homeScreenInfoButton: Font {
         Font.custom("Inter-Medium", size: 16)
     }
+    static var settingsScreenPickerTitle: Font {
+        Font.custom("Inter-Medium", size: 16)
+    }
+    static var settingsScreenInfoText: Font {
+        Font.custom("Inter-Medium", size: 12)
+    }
 }
     
 

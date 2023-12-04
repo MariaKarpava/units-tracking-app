@@ -7,62 +7,43 @@
 
 import SwiftUI
 
+
 struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     
     var body: some View {
         NavigationStack {
-            Form {
+            VStack {
                 DayLimitView
                 WeeklyLimitView
                 InfoWarningsView
                 NextDayStartView
                 InfoStartOfTheDay
             }
-            .scrollContentBackground(.hidden)
-            .navigationTitle("Settings")
         }
     }
     
-    
     var DayLimitView: some View {
-        Section() {
-            Picker("Day limit", selection: $settingsViewModel.dayLimitInPicker) {
-                ForEach(SettingsViewModel.dayLimitRange, id: \.self) { dayLimit in
-                    Text("\(dayLimit) unit(s)")
-                }
-            }
-        }
+        EmptyView()
     }
     
     var WeeklyLimitView: some View {
-        Section() {
-            Picker("Weekly limit", selection: $settingsViewModel.weeklyLimitInPicker) {
-                ForEach(SettingsViewModel.weeklyLimitRange, id: \.self) { weeklyLimit in
-                    Text("\(weeklyLimit) unit(s)")
-                }
-            }
-        }
+        EmptyView()
     }
     
     var InfoWarningsView: some View {
-        Section() {
-            Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
-        }
+        Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
+            .font(.settingsScreenInfoText)
     }
     
     var NextDayStartView: some View {
-        Section() {
-            DatePicker("Next day starts at", selection: $settingsViewModel.chosenTime, displayedComponents: .hourAndMinute)
-        }
+        EmptyView()
     }
     
     var InfoStartOfTheDay: some View {
-        Section() {
-            Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
-        }
+        Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
+            .font(.settingsScreenInfoText)
     }
-    
 }
 
 
