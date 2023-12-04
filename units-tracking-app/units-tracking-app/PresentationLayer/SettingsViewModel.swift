@@ -20,6 +20,11 @@ class SettingsViewModel: ObservableObject {
     static let dayLimitRange = Array(stride(from: 1, to: 50, by: 1))
     @Published var dayLimitInPicker = dayLimitRange.first!
     
+    static let weeklyLimitRange = Array(stride(from: 1, to: 50, by: 1))
+    @Published var weeklyLimitInPicker = weeklyLimitRange.first!
+    
+    
+    
 }
 
 
