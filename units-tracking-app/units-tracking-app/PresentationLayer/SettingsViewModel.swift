@@ -17,8 +17,8 @@ class SettingsViewModel: ObservableObject {
         self.goalsService = goalsService
     }
     
-    static let dayLimitRange = Array(stride(from: 1, to: 50, by: 1))
-    @Published var dayLimitInPicker = dayLimitRange.first!
+    static let dailyLimitRange = Array(stride(from: 1, to: 50, by: 1))
+    @Published var dailyLimitInPicker = dailyLimitRange.first!
     
     static let weeklyLimitRange = Array(stride(from: 1, to: 50, by: 1))
     @Published var weeklyLimitInPicker = weeklyLimitRange.first!
