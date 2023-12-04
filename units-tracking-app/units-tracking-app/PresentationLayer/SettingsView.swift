@@ -14,21 +14,39 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                HeaderView
                 DayLimitView
                 WeeklyLimitView
                 InfoWarningsView
+                Spacer().frame(height: 50)
                 NextDayStartView
                 InfoStartOfTheDay
             }
         }
     }
     
+    var HeaderView: some View {
+        Text("Settings")
+    }
+    
     var DayLimitView: some View {
-        EmptyView()
+        HStack {
+            Text("Daily limit")
+            Spacer()
+            Text("1")
+            Text("unit(s)")
+        }
+        .frame(height: 50)
     }
     
     var WeeklyLimitView: some View {
-        EmptyView()
+        HStack {
+            Text("Weekly limit")
+            Spacer()
+            Text("1")
+            Text("unit(s)")
+        }
+        .frame(height: 50)
     }
     
     var InfoWarningsView: some View {
@@ -37,7 +55,12 @@ struct SettingsView: View {
     }
     
     var NextDayStartView: some View {
-        EmptyView()
+        HStack {
+            Text("Next day starts at")
+            Spacer()
+            Text("04:00")
+        }
+        .frame(height: 50)
     }
     
     var InfoStartOfTheDay: some View {
