@@ -13,20 +13,21 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                HeaderView
-                DayLimitView
-                WeeklyLimitView
-                InfoWarningsView
-                Spacer().frame(height: 50)
-                NextDayStartView
-                InfoStartOfTheDay
+            GeometryReader { geometry in
+                VStack {
+                    DayLimitView
+                    WeeklyLimitView
+                    InfoWarningsView
+                    Spacer().frame(height: 50)
+                    NextDayStartView
+                    InfoStartOfTheDay
+                }
+            }.toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Settings")
+                }
             }
         }
-    }
-    
-    var HeaderView: some View {
-        Text("Settings")
     }
     
     var DayLimitView: some View {
