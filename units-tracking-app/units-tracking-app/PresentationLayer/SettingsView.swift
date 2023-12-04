@@ -14,6 +14,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 DayLimitView
+                WeeklyLimitView
             }
             .scrollContentBackground(.hidden)
         }
@@ -29,6 +30,19 @@ struct SettingsView: View {
             }
         }
     }
+    
+    var WeeklyLimitView: some View {
+        Section() {
+            Picker("Weekly limit", selection: $settingsViewModel.weeklyLimitInPicker) {
+                ForEach(SettingsViewModel.weeklyLimitRange, id: \.self) { weeklyLimit in
+                    Text("\(weeklyLimit) unit(s)")
+                }
+            }
+        }
+    }
+    
+    
+    
 }
 
 
