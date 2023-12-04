@@ -15,6 +15,9 @@ struct SettingsView: View {
             Form {
                 DayLimitView
                 WeeklyLimitView
+                InfoWarningsView
+                NextDayStartView
+                InfoStartOfTheDay
             }
             .scrollContentBackground(.hidden)
         }
@@ -41,7 +44,23 @@ struct SettingsView: View {
         }
     }
     
+    var InfoWarningsView: some View {
+        Section() {
+            Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
+        }
+    }
     
+    var NextDayStartView: some View {
+        Section() {
+            DatePicker("Next day starts at", selection: $settingsViewModel.chosenTime, displayedComponents: .hourAndMinute)
+        }
+    }
+    
+    var InfoStartOfTheDay: some View {
+        Section() {
+            Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
+        }
+    }
     
 }
 
