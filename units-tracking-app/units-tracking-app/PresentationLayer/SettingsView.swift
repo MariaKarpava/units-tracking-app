@@ -20,6 +20,7 @@ struct SettingsView: View {
                 InfoStartOfTheDay
             }
             .scrollContentBackground(.hidden)
+            .navigationTitle("Settings")
         }
     }
     
