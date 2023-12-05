@@ -8,6 +8,15 @@
 import SwiftUI
 
 
+struct LimitView: View {
+    var body: some View {
+        VStack {
+            Text(String("Change limits"))
+        }
+    }
+}
+
+
 struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     
@@ -40,7 +49,7 @@ struct SettingsView: View {
         HStack {
             Text("Daily limit").foregroundColor(.mainText)
             Spacer()
-            Group {
+            NavigationLink(destination: LimitView()) {
                 Text(String(format: "%0.1f", settingsViewModel.getDailyLimit()))
                 Text("unit(s)")
                 Text(">")
@@ -56,7 +65,7 @@ struct SettingsView: View {
         HStack {
             Text("Weekly limit").foregroundColor(.mainText)
             Spacer()
-            Group {
+            NavigationLink(destination: LimitView()) {
                 Text(String(format: "%0.1f", settingsViewModel.getWeeklyLimit()))
                 Text("unit(s)")
                 Text(">")
@@ -78,7 +87,7 @@ struct SettingsView: View {
         HStack {
             Text("Next day starts at")
             Spacer()
-            Group {
+            NavigationLink(destination: LimitView()) {
                 Text("04:00")
                 Text(">")
             }
