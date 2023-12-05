@@ -13,16 +13,17 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                VStack {
-                    DayLimitView
-                    WeeklyLimitView
-                    InfoWarningsView
-                    Spacer().frame(height: 50)
-                    NextDayStartView
-                    InfoStartOfTheDay
-                }
-            }.toolbar {
+            VStack() {
+                Spacer().frame(height: 50)
+                DailyLimitView
+                WeeklyLimitView
+                InfoWarningsView
+                Spacer().frame(height: 60)
+                NextDayStartView
+                InfoStartOfTheDay
+                Spacer()
+            }
+            .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Settings")
                 }
@@ -30,14 +31,16 @@ struct SettingsView: View {
         }
     }
     
-    var DayLimitView: some View {
+    var DailyLimitView: some View {
         HStack {
             Text("Daily limit")
             Spacer()
             Text("1")
             Text("unit(s)")
+            Text(">")
         }
         .frame(height: 50)
+        .padding(.horizontal, 20)
     }
     
     var WeeklyLimitView: some View {
@@ -46,13 +49,16 @@ struct SettingsView: View {
             Spacer()
             Text("1")
             Text("unit(s)")
+            Text(">")
         }
         .frame(height: 50)
+        .padding(.horizontal, 20)
     }
     
     var InfoWarningsView: some View {
         Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
             .font(.settingsScreenInfoText)
+            .padding(.horizontal, 20)
     }
     
     var NextDayStartView: some View {
@@ -60,13 +66,16 @@ struct SettingsView: View {
             Text("Next day starts at")
             Spacer()
             Text("04:00")
+            Text(">")
         }
         .frame(height: 50)
+        .padding(.horizontal, 20)
     }
     
     var InfoStartOfTheDay: some View {
         Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
             .font(.settingsScreenInfoText)
+            .padding(.horizontal, 20)
     }
 }
 
