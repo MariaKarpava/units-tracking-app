@@ -41,7 +41,7 @@ struct SettingsView: View {
             Text("Daily limit").foregroundColor(.mainText)
             Spacer()
             Group {
-                Text("1")
+                Text(String(format: "%0.1f", settingsViewModel.getDailyLimit()))
                 Text("unit(s)")
                 Text(">")
             }.foregroundColor(.secondaryText)
@@ -57,7 +57,7 @@ struct SettingsView: View {
             Text("Weekly limit").foregroundColor(.mainText)
             Spacer()
             Group {
-                Text("1")
+                Text(String(format: "%0.1f", settingsViewModel.getWeeklyLimit()))
                 Text("unit(s)")
                 Text(">")
             }.foregroundColor(.secondaryText)

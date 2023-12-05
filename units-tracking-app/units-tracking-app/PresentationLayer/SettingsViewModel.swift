@@ -23,7 +23,13 @@ class SettingsViewModel: ObservableObject {
     static let weeklyLimitRange = Array(stride(from: 1, to: 50, by: 1))
     @Published var weeklyLimitInPicker = weeklyLimitRange.first!
     
-    @Published var chosenTime = Date()
+    func getDailyLimit() -> Double {
+        goalsService.unitsPerDay
+    }
+    
+    func getWeeklyLimit() -> Double {
+        goalsService.unitsPer7Days
+    }
 }
 
 
