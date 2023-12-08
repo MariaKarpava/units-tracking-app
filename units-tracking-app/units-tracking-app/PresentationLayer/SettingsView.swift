@@ -55,9 +55,9 @@ struct SettingsView: View {
                         Text(String(format: "%0.1f", settingsViewModel.getDailyLimit()))
                     }
                     Text("\(settingValue)")
-                    Text(">")
                 }
                 .foregroundColor(.secondaryText)
+                Image(systemName: "chevron.right").foregroundColor(.mainText)
             }
         }
         .frame(height: 50)
