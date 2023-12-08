@@ -17,7 +17,7 @@ struct HistoryView2: View {
 
 
 enum TabbedItems: Int, CaseIterable {
-    case home
+    case home = 0
     case stats
     case history
     case settings
@@ -51,7 +51,7 @@ enum TabbedItems: Int, CaseIterable {
 
 
 struct RootView: View {
-    @State var selectedTab: TabbedItems = .home
+    @State var selectedTab = 0
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var historyViewModel: HistoryViewModel
     
@@ -61,20 +61,18 @@ struct RootView: View {
     
     var body: some View {
         VStack(spacing: 0.0) {
-            Group {
-                switch selectedTab {
-                case .home:
+            ZStack(alignment: .bottom){
+                TabView(selection: $selectedTab) {
                     HomeView(homeViewModel: homeViewModel)
-                case .stats:
+                        .tag(0)
                     StatisticsView()
-                case .history:
+                        .tag(1)
                     HistoryView(historyViewModel: historyViewModel)
-                case .settings:
+                        .tag(2)
                     SettingsView()
+                        .tag(3)
                 }
-            }
-            .frame(maxWidth: .infinity,
-                   maxHeight: .infinity)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
  
             ZStack {
                 TabBarTopBorderVectorView()
@@ -82,9 +80,8 @@ struct RootView: View {
                 HStack {
                     ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
                         Button {
-                            selectedTab = item
-                        } label: {
-                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                            selectedTab = item.rawValue
+                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
                         } .offset(y: 4)
                     }
                     
@@ -100,9 +97,8 @@ struct RootView: View {
 
                     ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
                         Button {
-                            selectedTab = item
-                        } label: {
-                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
+                            selectedTab = item.rawValue
+                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
                         } .offset(y: 4)
                     }
                     
