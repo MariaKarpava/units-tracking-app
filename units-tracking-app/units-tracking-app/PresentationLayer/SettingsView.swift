@@ -69,14 +69,15 @@ struct SettingsView: View {
         Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
             .font(.settingsScreenWarningInfo)
             .foregroundColor(.mainText)
-            .padding(.horizontal, 20)
+            .frame(height: 50)
+            .padding(.horizontal, 19)
     }
     
     var infoStartOfTheDay: some View {
         Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
             .font(.settingsScreenWarningInfo)
             .foregroundColor(.mainText)
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 15)
     }
 }
 
