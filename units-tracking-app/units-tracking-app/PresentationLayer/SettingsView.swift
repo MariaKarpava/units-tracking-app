@@ -24,7 +24,7 @@ struct SettingsView: View {
         VStack {
             Spacer().frame(height: 30)
             NavigationStack {
-                VStack() {
+                VStack(alignment: .leading) {
                     Spacer().frame(height: 50)
                     settingCell(settingTitle: "Daily limit", settingValue: "unit(s)", showUnits: true)
                     settingCell(settingTitle: "Weekly limit", settingValue: "unit(s)", showUnits: true)
@@ -70,14 +70,14 @@ struct SettingsView: View {
             .font(.settingsScreenWarningInfo)
             .foregroundColor(.mainText)
             .frame(height: 50)
-            .padding(.horizontal, 19)
+            .padding(.horizontal, 20)
     }
     
     var infoStartOfTheDay: some View {
         Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
             .font(.settingsScreenWarningInfo)
             .foregroundColor(.mainText)
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 20)
     }
 }
 
