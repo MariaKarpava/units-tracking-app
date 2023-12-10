@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 
+extension Notification.Name {
+    static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
+    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
+}
+
+
 class SettingsViewModel: ObservableObject {
     private let drinksService: DrinksService
     private let goalsService: GoalsService
@@ -19,7 +25,26 @@ class SettingsViewModel: ObservableObject {
         self.goalsService = goalsService
         self.viewState = ViewState()
         self.updateViewState()
+        
+        NotificationCenter.default.addObserver(
+            forName: .dailyLimitHasChanged,
+            object: goalsService,
+            queue: .main
+        ) { [weak self] notification in
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: .weeklyLimitHasChanged,
+            object: goalsService,
+            queue: .main
+        ) { [weak self] notification in
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+        }
     }
+    
     
     struct ViewState: Equatable {
         var dailyLimit: Double = 1.0
