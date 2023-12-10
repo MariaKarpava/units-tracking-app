@@ -17,7 +17,7 @@ struct HistoryView2: View {
 
 
 enum TabbedItems: Int, CaseIterable {
-    case home = 0
+    case home
     case stats
     case history
     case settings
@@ -51,7 +51,7 @@ enum TabbedItems: Int, CaseIterable {
 
 
 struct RootView: View {
-    @State var selectedTab = 0
+    @State var selectedTab: TabbedItems = .home
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var historyViewModel: HistoryViewModel
     
@@ -64,13 +64,13 @@ struct RootView: View {
             ZStack(alignment: .bottom){
                 TabView(selection: $selectedTab) {
                     HomeView(homeViewModel: homeViewModel)
-                        .tag(0)
+                        .tag(TabbedItems.home)
                     StatisticsView()
-                        .tag(1)
+                        .tag(TabbedItems.stats)
                     HistoryView(historyViewModel: historyViewModel)
-                        .tag(2)
+                        .tag(TabbedItems.history)
                     SettingsView()
-                        .tag(3)
+                        .tag(TabbedItems.settings)
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
  
@@ -80,8 +80,8 @@ struct RootView: View {
                 HStack {
                     ForEach((TabbedItems.allCases.prefix(2)), id: \.self){ item in
                         Button {
-                            selectedTab = item.rawValue
-                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                            selectedTab = item
+                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                         } .offset(y: 4)
                     }
                     
@@ -97,8 +97,8 @@ struct RootView: View {
 
                     ForEach((TabbedItems.allCases.suffix(2)), id: \.self){ item in
                         Button {
-                            selectedTab = item.rawValue
-                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                            selectedTab = item
+                        } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                         } .offset(y: 4)
                     }
                     
