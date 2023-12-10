@@ -8,21 +8,27 @@
 import Foundation
 import SwiftUI
 
+
 class SettingsViewModel: ObservableObject {
     private let drinksService: DrinksService
     private let goalsService: GoalsService
-    
+    @Published var viewState: ViewState
+
     init(drinksService: DrinksService, goalsService: GoalsService) {
         self.drinksService = drinksService
         self.goalsService = goalsService
+        self.viewState = ViewState()
+        self.updateViewState()
     }
     
-    func getDailyLimit() -> Double {
-        goalsService.unitsPerDay
+    struct ViewState: Equatable {
+        var dailyLimit: Double = 1.0
+        var weeklyLimit: Double = 2.0
     }
     
-    func getWeeklyLimit() -> Double {
-        goalsService.unitsPer7Days
+    private func updateViewState() {
+        viewState.dailyLimit = goalsService.unitsPerDay
+        viewState.weeklyLimit = goalsService.unitsPer7Days
     }
 }
 
