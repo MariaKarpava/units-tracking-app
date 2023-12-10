@@ -28,7 +28,7 @@ struct SettingsView: View {
                     Spacer().frame(height: 50)
                     settingCell(title: "Daily limit", value: "unit(s)", showUnits: true, units: settingsViewModel.getDailyLimit())
                     settingCell(title: "Weekly limit", value: "unit(s)", showUnits: true, units: settingsViewModel.getWeeklyLimit())
-                    infoWarningsView
+                    infoAboutLimits
                     Spacer().frame(height: 60)
                     settingCell(title: "Next day starts at", value: "04:00", showUnits: false, units: nil)
                     infoStartOfTheDay
@@ -65,7 +65,7 @@ struct SettingsView: View {
         .font(.settingsScreenMainInfo)
     }
     
-    var infoWarningsView: some View {
+    var infoAboutLimits: some View {
         Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
             .font(.settingsScreenWarningInfo)
             .foregroundColor(.mainText)
