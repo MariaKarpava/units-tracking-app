@@ -26,11 +26,11 @@ struct SettingsView: View {
             NavigationStack {
                 VStack(alignment: .leading) {
                     Spacer().frame(height: 50)
-                    settingCell(title: "Daily limit", value: "unit(s)", showUnits: true)
-                    settingCell(title: "Weekly limit", value: "unit(s)", showUnits: true)
+                    settingCell(title: "Daily limit", value: "unit(s)", showUnits: true, units: settingsViewModel.getDailyLimit())
+                    settingCell(title: "Weekly limit", value: "unit(s)", showUnits: true, units: settingsViewModel.getWeeklyLimit())
                     infoWarningsView
                     Spacer().frame(height: 60)
-                    settingCell(title: "Next day starts at", value: "04:00", showUnits: false)
+                    settingCell(title: "Next day starts at", value: "04:00", showUnits: false, units: nil)
                     infoStartOfTheDay
                     Spacer()
                 }
@@ -45,14 +45,14 @@ struct SettingsView: View {
         }
     }
     
-    func settingCell(title: String, value: String, showUnits: Bool) -> some View {
+    func settingCell(title: String, value: String, showUnits: Bool, units: Double?) -> some View {
         NavigationLink(destination: LimitView()) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
                 HStack {
                     if showUnits {
-                        Text(String(format: "%0.1f", settingsViewModel.getDailyLimit()))
+                        Text(String(format: "%0.1f", units ?? ""))
                     }
                     Text("\(value)")
                 }
