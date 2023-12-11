@@ -60,21 +60,21 @@ struct RootView: View {
     var goalsService: GoalsService
     
     var body: some View {
-        VStack(spacing: 0.0) {
-            ZStack(alignment: .bottom){
-                TabView(selection: $selectedTab) {
-                    HomeView(homeViewModel: homeViewModel)
-                        .tag(TabbedItems.home)
-                    StatisticsView()
-                        .tag(TabbedItems.stats)
-                    HistoryView(historyViewModel: historyViewModel)
-                        .tag(TabbedItems.history)
-                    SettingsView()
-                        .tag(TabbedItems.settings)
-                }
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        ZStack(alignment: .bottom) {
+            TabView(selection: $selectedTab) {
+                HomeView(homeViewModel: homeViewModel)
+                    .tag(TabbedItems.home)
+                StatisticsView()
+                    .tag(TabbedItems.stats)
+                HistoryView(historyViewModel: historyViewModel)
+                    .tag(TabbedItems.history)
+                SettingsView()
+                    .tag(TabbedItems.settings)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
  
-            ZStack {
+            ZStack() {
                 TabBarTopBorderVectorView()
                     .offset(y: -26.5)
                 HStack {
@@ -105,7 +105,7 @@ struct RootView: View {
                     
                 }.frame(height: 49)
             }
-            .background(.clear)
+            .background(.white)
         }
     }
 }
