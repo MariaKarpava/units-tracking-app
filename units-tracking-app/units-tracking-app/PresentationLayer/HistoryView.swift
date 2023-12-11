@@ -51,7 +51,7 @@ struct HistoryView: View {
                                 }.frame(width: bodyGeometry.size.width)
                             }.frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
                                 .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
-                                .padding(.vertical, 20)
+                                .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: 20) })
                         }
             }
             .toolbar { // GeometryReader
