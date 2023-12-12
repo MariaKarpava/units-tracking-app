@@ -59,6 +59,9 @@ struct RootView: View {
     var drinksService: DrinksService
     var goalsService: GoalsService
     
+    // protrusion of add button + some extra space
+    static let addButtonProtrusion: CGFloat = 40
+    
     var body: some View {
         VStack(spacing: 0.0) {
             Group {
