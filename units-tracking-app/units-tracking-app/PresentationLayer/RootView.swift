@@ -72,7 +72,6 @@ struct RootView: View {
                     .tag(TabbedItems.settings)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
  
             ZStack() {
                 TabBarTopBorderVectorView()
@@ -101,8 +100,6 @@ struct RootView: View {
                         } label: {                            addCustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item))
                         } .offset(y: 4)
                     }
-                    
-                    
                 }.frame(height: 49)
             }
             .background(.white)
