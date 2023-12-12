@@ -25,24 +25,6 @@ class SettingsViewModel: ObservableObject {
         self.goalsService = goalsService
         self.viewState = ViewState()
         self.updateViewState()
-        
-        NotificationCenter.default.addObserver(
-            forName: .dailyLimitHasChanged,
-            object: goalsService,
-            queue: .main
-        ) { [weak self] notification in
-            guard let strongSelf = self else { return }
-            strongSelf.updateViewState()
-        }
-        
-        NotificationCenter.default.addObserver(
-            forName: .weeklyLimitHasChanged,
-            object: goalsService,
-            queue: .main
-        ) { [weak self] notification in
-            guard let strongSelf = self else { return }
-            strongSelf.updateViewState()
-        }
     }
     
     
