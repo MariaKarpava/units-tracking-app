@@ -37,6 +37,14 @@ class SettingsViewModel: ObservableObject {
         viewState.dailyLimit = goalsService.unitsPerDay
         viewState.weeklyLimit = goalsService.unitsPer7Days
     }
+    
+    func decrementDailyLimitTapped() {
+        viewState.dailyLimit -= 1.0
+    }
+    
+    func incrementDailyLimitTapped() {
+        viewState.dailyLimit += 1.0
+    }
 }
 
 
