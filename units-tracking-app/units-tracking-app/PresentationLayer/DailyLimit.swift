@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct DailyLimit: View {
+    @ObservedObject var settingsViewModel: SettingsViewModel
     
     var body: some View {
         VStack {
@@ -24,13 +25,13 @@ struct DailyLimit: View {
                         Spacer().frame(height: 140)
                         HStack {
                             Button {
-                                
+                                settingsViewModel.decrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }
                             unitsIncrement
                             Button {
-                                
+                                settingsViewModel.incrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "+")
                             }
@@ -65,7 +66,7 @@ struct DailyLimit: View {
     
     var unitsIncrement: some View {
         VStack {
-            Text("6")
+            Text(String(format: "%.1f", settingsViewModel.viewState.dailyLimit))
             Text("unit(s)")
         }.frame(width: 120, height: 64)
     }
@@ -81,8 +82,10 @@ struct DailyLimit: View {
 }
 
 
-
-
-#Preview {
-    DailyLimit()
+struct DailyLimit_Previews: PreviewProvider {
+    static var previews: some View {
+        let drinksService = DrinksService()
+        let goalsService = GoalsService()
+        return DailyLimit(settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService))
+    }
 }
