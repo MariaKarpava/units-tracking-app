@@ -33,10 +33,12 @@ class SettingsViewModel: ObservableObject {
     }
     
     func decrementDailyLimitTapped() {
+        guard viewState.dailyLimit > 0 else { return }
         viewState.dailyLimit -= 1.0
     }
     
     func incrementDailyLimitTapped() {
+        guard viewState.dailyLimit < 100 else { return }
         viewState.dailyLimit += 1.0
     }
 }
