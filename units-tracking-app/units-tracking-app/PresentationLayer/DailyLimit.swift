@@ -9,20 +9,45 @@ import SwiftUI
 
 
 struct DailyLimit: View {
+    
     var body: some View {
-       NavigationStack {
-            VStack(alignment: .leading) {
-                VStack {
-                    infoText
-                    Spacer().frame(height: 140)
-                    unitsIncrement
+        VStack {
+            Spacer().frame(height: 30)
+            NavigationStack {
+                VStack(alignment: .leading) {
+                    Text("Daily Limit")
+                        .font(.settingsScreenHeader)
+                        .foregroundColor(.mainText)
+                    VStack {
+                        Spacer().frame(height: 60)
+                        infoText
+                        Spacer().frame(height: 140)
+                        HStack {
+                            Button {
+                                
+                            } label: {
+                                addCustomStepperButton(sign: "-")
+                            }
+                            unitsIncrement
+                            Button {
+                                
+                            } label: {
+                                addCustomStepperButton(sign: "+")
+                            }
+                        }
+                        
+                        Spacer()
+                    }
+                    
                 }
-            }.navigationTitle("Daily Limit")
-               .toolbar {
-                   Button("Save") {
-                       
+                .toolbar {
+                   ToolbarItem(placement: .navigationBarTrailing) {
+                       Button("Save") {
+                          print("save")
+                       }
                    }
                }
+            }
         }
     }
     
@@ -39,21 +64,20 @@ struct DailyLimit: View {
     }
     
     var unitsIncrement: some View {
-        HStack {
-            roundSquare
-            VStack {
-                Text("6")
-                Text("unit(s)")
-            }.frame(width: 120, height: 64)
-            roundSquare
-        }
+        VStack {
+            Text("6")
+            Text("unit(s)")
+        }.frame(width: 120, height: 64)
     }
     
-    var roundSquare: some View {
+    func addCustomStepperButton(sign: String) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(Color.black, lineWidth: 2)
             .frame(width: 64, height: 64)
+            .overlay(Text(sign))
     }
+    
+    
 }
 
 
