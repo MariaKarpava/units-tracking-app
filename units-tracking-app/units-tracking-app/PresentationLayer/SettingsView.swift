@@ -8,15 +8,6 @@
 import SwiftUI
 
 
-struct LimitView: View {
-    var body: some View {
-        VStack {
-            Text(String("Change limits"))
-        }
-    }
-}
-
-
 struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     
@@ -46,7 +37,7 @@ struct SettingsView: View {
     }
     
     func settingCell(title: String, value: String) -> some View {
-        NavigationLink(destination: LimitView()) {
+        NavigationLink(destination: DailyLimit()) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
