@@ -74,7 +74,7 @@ struct RootView: View {
                         .tag(TabbedItems.stats)
                     HistoryView(historyViewModel: historyViewModel)
                         .tag(TabbedItems.history)
-                    SettingsView()
+                    SettingsView(settingsViewModel: settingsViewModel)
                         .tag(TabbedItems.settings)
                 }
             }
