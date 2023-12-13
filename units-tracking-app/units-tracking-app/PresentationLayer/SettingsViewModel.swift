@@ -9,12 +9,6 @@ import Foundation
 import SwiftUI
 
 
-extension Notification.Name {
-    static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
-    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
-}
-
-
 class SettingsViewModel: ObservableObject {
     private let drinksService: DrinksService
     private let goalsService: GoalsService
