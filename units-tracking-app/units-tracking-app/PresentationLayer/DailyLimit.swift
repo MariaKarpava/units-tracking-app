@@ -78,7 +78,7 @@ struct DailyLimit: View {
             not exceed a daily limit of 8 units,
             while for females the value is 6 units. 
             
-            Note: there is no safe amount of
+            Note: there is **no safe** amount of
             alcohol. The more alcohol you
             consume, the higher are the risks.
             """)
