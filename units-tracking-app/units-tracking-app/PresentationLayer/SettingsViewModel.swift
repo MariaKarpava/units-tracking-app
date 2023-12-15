@@ -21,7 +21,6 @@ class SettingsViewModel: ObservableObject {
         self.updateViewState()
     }
     
-    
     struct ViewState: Equatable {
         var dailyLimit: Double = 1.0
         var weeklyLimit: Double = 2.0
