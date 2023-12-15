@@ -13,7 +13,8 @@ struct DailyLimit: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-        var customBackButton : some View { Button(action: {
+        var customBackButton : some View { 
+            Button(action: {
             self.presentationMode.wrappedValue.dismiss()
             }) {
                 HStack {
@@ -55,12 +56,17 @@ struct DailyLimit: View {
                     
                 }
                 .toolbar {
-                   ToolbarItem(placement: .navigationBarTrailing) {
-                       Button("Save") {
-                          print("save")
-                       }
-                   }
-               }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            print("save")
+                        } label: {
+                            Text("Save")
+                                .underline() 
+                                .foregroundColor(.mainText)
+                        }
+                    }
+                }
+
             } .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: customBackButton)
         }
