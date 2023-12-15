@@ -11,6 +11,19 @@ import SwiftUI
 struct DailyLimit: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+        var customBackButton : some View { Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                Image(systemName: "chevron.left")
+                Text("")
+                }
+            }
+        }
+        
+    
     var body: some View {
         VStack {
             Spacer().frame(height: 30)
@@ -48,7 +61,8 @@ struct DailyLimit: View {
                        }
                    }
                }
-            }
+            } .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: customBackButton)
         }
     }
     
