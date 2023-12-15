@@ -28,13 +28,13 @@ struct DailyLimit: View {
                                 settingsViewModel.decrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "-")
-                            }
+                            }.disabled(settingsViewModel.viewState.dailyLimit <= 0)
                             unitsIncrement
                             Button {
                                 settingsViewModel.incrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "+")
-                            }
+                            }.disabled(settingsViewModel.viewState.dailyLimit > 99)
                         }
                         
                         Spacer()
