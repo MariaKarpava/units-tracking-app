@@ -9,8 +9,14 @@ import SwiftUI
 
 @main
 struct UnitsTrackingApp: App {
-    @StateObject var goalsService = GoalsService()
-    var drinkService = DrinksService()
+    var goalsService: GoalsService
+    var drinkService: DrinksService
+    
+    init() {
+        let goalsService = GoalsService()
+        self.drinkService = DrinksService(goalsService: goalsService)
+        self.goalsService = goalsService
+    }
     
     var body: some Scene {
         WindowGroup {

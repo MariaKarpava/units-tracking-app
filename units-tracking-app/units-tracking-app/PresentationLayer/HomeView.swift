@@ -51,8 +51,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
         let goalsService = GoalsService()
+        let drinksService = DrinksService(goalsService: goalsService)
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         
         return HomeView(homeViewModel: homeViewModel)

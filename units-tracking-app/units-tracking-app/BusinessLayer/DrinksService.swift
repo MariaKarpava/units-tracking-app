@@ -9,7 +9,7 @@ import Foundation
 
 
 class DrinksService {
-    private let goalsService = GoalsService()
+    let goalsService: GoalsService
             
     static private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -63,7 +63,8 @@ class DrinksService {
         return result
     }
     
-    init() {
+    init(goalsService: GoalsService) {
+        self.goalsService = goalsService
         // Decode
         guard let savedDrinksData = UserDefaults.standard.data(forKey: savedDrinksKey) else {
             return

@@ -78,8 +78,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
         let goalsService = GoalsService()
+        let drinksService = DrinksService(goalsService: goalsService)
         return SettingsView(settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService))
     }
 }

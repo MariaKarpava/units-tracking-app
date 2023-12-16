@@ -59,7 +59,7 @@ struct RootView: View {
     
     @State private var showSheet = false
     var drinksService: DrinksService
-    var goalsService: GoalsService
+    let goalsService: GoalsService
     
     // protrusion of add button + some extra space
     static let addButtonProtrusion: CGFloat = 40
@@ -158,8 +158,8 @@ extension RootView {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
         let goalsService = GoalsService()
+        let drinksService = DrinksService(goalsService: goalsService)
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
         let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)

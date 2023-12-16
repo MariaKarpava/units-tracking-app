@@ -153,7 +153,8 @@ struct DrinkHistoryRow: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
+        let goalsService = GoalsService()
+        let drinksService = DrinksService(goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
         
         HistoryView(historyViewModel: historyViewModel)
