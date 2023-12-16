@@ -17,8 +17,8 @@ struct SettingsView: View {
             NavigationStack {
                 VStack(alignment: .leading) {
                     Spacer().frame(height: 50)
-                    settingCell(title: "Daily limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)")
-                    settingCell(title: "Weekly limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)")
+                    settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)")
+                    settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)")
                     infoAboutLimits
                     Spacer().frame(height: 60)
                     settingCell(title: "Next day starts at", value: "04:00")
