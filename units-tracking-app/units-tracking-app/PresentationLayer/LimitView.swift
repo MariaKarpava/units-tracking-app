@@ -32,7 +32,8 @@ struct LimitView: View {
             self.presentationMode.wrappedValue.dismiss()
             }) {
                 HStack {
-                Image(systemName: "chevron.left")
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.mainText)
                 Text("")
                 }
             }
@@ -40,50 +41,53 @@ struct LimitView: View {
         
     
     var body: some View {
-        VStack {
-            Spacer().frame(height: 30)
             NavigationStack {
-                VStack(alignment: .leading) {
-                    Text(header)
-                        .font(.settingsScreenHeader)
-                        .foregroundColor(.mainText)
-                    VStack {
-                        Spacer().frame(height: 60)
+                GeometryReader { geometry in
+                    VStack(alignment: .leading) {
+                        Text(header)
+                            .font(.limitScreenHeader)
+                            .foregroundColor(.mainText)
+                            .padding(20)
+                        Spacer()
+                            .frame(height: 60)
                         infoText
+                        .padding(.horizontal, 55)
                         Spacer().frame(height: 140)
                         HStack {
+                            Spacer()
                             Button {
                                 settingsViewModel.decrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }.disabled(settingsViewModel.viewState.dailyLimit <= 0)
-                            unitsIncrementer
+                            unitsIncrementer.frame(width: 100)
                             Button {
                                 settingsViewModel.incrementDailyLimitTapped()
                             } label: {
                                 addCustomStepperButton(sign: "+")
                             }.disabled(settingsViewModel.viewState.dailyLimit > 99)
+                            Spacer()
                         }
                         
                         Spacer()
                     }
-                    
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            print("save")
-                        } label: {
-                            Text("Save")
-                                .underline() 
-                                .foregroundColor(.mainText)
+                        
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                print("save")
+                            } label: {
+                                Text("Save")
+                                    .underline()
+                                    .font(.limitScreenSaveButton)
+                                    .foregroundColor(.mainText)
+                            }
                         }
-                    }
+                }
                 }
 
             } .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: customBackButton)
-        }
     }
     
     var infoText: some View {
@@ -99,17 +103,23 @@ struct LimitView: View {
     }
     
     var unitsIncrementer: some View {
-        VStack {
+        VStack(alignment: .center) {
             Text(String(format: "%.1f", units))
+                .foregroundColor(.mainText)
             Text("unit(s)")
-        }.frame(width: 120, height: 64)
+                .foregroundColor(.secondaryText)
+        }.font(.limitScreenUnits)
     }
     
     func addCustomStepperButton(sign: String) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(Color.black, lineWidth: 2)
             .frame(width: 64, height: 64)
-            .overlay(Text(sign))
+            .overlay(
+                Text(sign)
+                    .foregroundColor(.mainText)
+                    .font(.limitScreenStepperSign)
+            )
     }
     
     
