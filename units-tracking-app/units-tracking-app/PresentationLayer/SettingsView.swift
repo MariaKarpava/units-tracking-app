@@ -37,7 +37,15 @@ struct SettingsView: View {
     }
     
     func settingCell(title: String, value: String) -> some View {
-        NavigationLink(destination: DailyLimit(settingsViewModel: settingsViewModel)) {
+//        var units: Double = 0
+//        
+//        if title == "Daily Limit" {
+//            units = settingsViewModel.viewState.dailyLimit
+//        } else {
+//            units = settingsViewModel.viewState.weeklyLimit
+//        }
+//        
+        NavigationLink(destination: LimitView(settingsViewModel: settingsViewModel, header: title)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
