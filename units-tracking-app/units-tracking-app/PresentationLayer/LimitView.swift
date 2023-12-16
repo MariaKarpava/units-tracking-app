@@ -118,8 +118,8 @@ struct LimitView: View {
 
 struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
-        let drinksService = DrinksService()
         let goalsService = GoalsService()
+        let drinksService = DrinksService(goalsService: goalsService)
         let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
         return LimitView(settingsViewModel: settingsViewModel, header: "Daily Limit")
     }

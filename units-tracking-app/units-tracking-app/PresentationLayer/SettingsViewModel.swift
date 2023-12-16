@@ -11,7 +11,7 @@ import SwiftUI
 
 class SettingsViewModel: ObservableObject {
     private let drinksService: DrinksService
-    private var goalsService: GoalsService
+    private let goalsService: GoalsService
     @Published var viewState: ViewState
 
     init(drinksService: DrinksService, goalsService: GoalsService) {
@@ -33,8 +33,7 @@ class SettingsViewModel: ObservableObject {
     
     func decrementDailyLimitTapped() {
         guard viewState.dailyLimit > 0 else { return }
-//        drinksService.
-        viewState.dailyLimit -= 1.0
+//        goalsService.unitsPerDay -= 1.0
     }
     
     func incrementDailyLimitTapped() {
