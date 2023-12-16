@@ -8,8 +8,22 @@
 import SwiftUI
 
 
-struct DailyLimit: View {
+struct LimitView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
+    
+    let header: String
+    
+    var units: Double {
+        var units: Double = 0
+        if header == "Daily Limit" {
+            units = settingsViewModel.viewState.dailyLimit
+            return units
+        } else {
+            units = settingsViewModel.viewState.weeklyLimit
+            return units
+        }
+    }
+
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -30,7 +44,7 @@ struct DailyLimit: View {
             Spacer().frame(height: 30)
             NavigationStack {
                 VStack(alignment: .leading) {
-                    Text("Daily Limit")
+                    Text(header)
                         .font(.settingsScreenHeader)
                         .foregroundColor(.mainText)
                     VStack {
@@ -43,7 +57,7 @@ struct DailyLimit: View {
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }.disabled(settingsViewModel.viewState.dailyLimit <= 0)
-                            unitsIncrement
+                            unitsIncrementer
                             Button {
                                 settingsViewModel.incrementDailyLimitTapped()
                             } label: {
@@ -84,9 +98,9 @@ struct DailyLimit: View {
             """)
     }
     
-    var unitsIncrement: some View {
+    var unitsIncrementer: some View {
         VStack {
-            Text(String(format: "%.1f", settingsViewModel.viewState.dailyLimit))
+            Text(String(format: "%.1f", units))
             Text("unit(s)")
         }.frame(width: 120, height: 64)
     }
@@ -106,6 +120,7 @@ struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let drinksService = DrinksService()
         let goalsService = GoalsService()
-        return DailyLimit(settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService))
+        let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
+        return LimitView(settingsViewModel: settingsViewModel, header: "Daily Limit")
     }
 }
