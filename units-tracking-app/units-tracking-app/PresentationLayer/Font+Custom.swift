@@ -61,17 +61,20 @@ extension Font {
     
     
     // LimitView Screen
-    static var LimitScreenHeader: Font {
+    static var limitScreenHeader: Font {
         Font.custom("Inter-SemiBold", size: 32)
     }
-    static var LimitScreenSaveButton: Font {
+    static var limitScreenSaveButton: Font {
         Font.custom("Inter-Regular", size: 18)
     }
-    static var LimitScreenInfoText: Font {
+    static var limitScreenInfoText: Font {
         Font.custom("Inter-Regular", size: 16)
     }
-    static var LimitScreenUnits: Font {
+    static var limitScreenUnits: Font {
         Font.custom("Inter-Medium", size: 20)
+    }
+    static var limitScreenStepperSign: Font {
+        Font.custom("Inter-Medium", size: 32)
     }
     
     
