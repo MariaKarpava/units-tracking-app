@@ -163,8 +163,8 @@ struct RootView_Previews: PreviewProvider {
         let drinksService = DrinksService(goalsService: goalsService)
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
-        let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
-        let limitViewModel = LimitViewModel(drinksService: drinksService, goalsService: goalsService)
+        let settingsViewModel = SettingsViewModel(goalsService: goalsService)
+        let limitViewModel = LimitViewModel(goalsService: goalsService)
         
         RootView(
             homeViewModel: homeViewModel,

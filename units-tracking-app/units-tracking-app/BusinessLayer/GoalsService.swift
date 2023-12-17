@@ -10,23 +10,15 @@ import Foundation
 
 class  GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
-    var unitsPerDay: Double {
-        get {
-            return 5.0
-        }
-        set(newUnits) {
-            
-        }
+    var unitsPerDay: Double = 5.0
+    /// Returns the number of units per 7 days which is the max value but still within a limit.
+    var unitsPer7Days: Double = 14.0
+    
+    func changeUnitsPerDay(newValue: Double) {
+    unitsPerDay = newValue
     }
     
-    
-    /// Returns the number of units per 7 days which is the max value but still within a limit.
-    var unitsPer7Days: Double {
-        get {
-            return 14.0
-        }
-        set(newUnits) {
-            
-        }
+    func changeUnitsPer7Days(newValue: Double) {
+        unitsPer7Days = newValue
     }
 }

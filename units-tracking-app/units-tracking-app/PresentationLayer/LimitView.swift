@@ -23,6 +23,8 @@ struct LimitView: View {
             return units
         }
     }
+    
+    
 
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -56,13 +58,21 @@ struct LimitView: View {
                         HStack {
                             Spacer()
                             Button {
+                                if header == "Daily Limit" {
                                 limitViewModel.decrementDailyLimitTapped()
+                                } else {
+                                    limitViewModel.decrementWeeklyLimitTapped()
+                                }
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }.disabled(limitViewModel.viewState.dailyLimit <= 0)
                             unitsIncrementer.frame(width: 100)
                             Button {
+                                if header == "Daily Limit" {
                                 limitViewModel.incrementDailyLimitTapped()
+                                } else {
+                                    limitViewModel.incrementWeeklyLimitTapped()
+                                }
                             } label: {
                                 addCustomStepperButton(sign: "+")
                             }.disabled(limitViewModel.viewState.dailyLimit > 99)
@@ -130,8 +140,8 @@ struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
         let drinksService = DrinksService(goalsService: goalsService)
-        let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
-        let limitViewModel = LimitViewModel(drinksService: drinksService, goalsService: goalsService)
+        let settingsViewModel = SettingsViewModel(goalsService: goalsService)
+        let limitViewModel = LimitViewModel(goalsService: goalsService)
         return LimitView(limitViewModel: limitViewModel, header: "Daily Limit")
     }
 }

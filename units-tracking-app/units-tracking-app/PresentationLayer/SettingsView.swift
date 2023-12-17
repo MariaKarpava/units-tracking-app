@@ -75,8 +75,8 @@ struct SettingsView_Previews: PreviewProvider {
         let goalsService = GoalsService()
         let drinksService = DrinksService(goalsService: goalsService)
         return SettingsView(
-            settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService),
-            limitViewModel: LimitViewModel(drinksService: drinksService, goalsService: goalsService)
+            settingsViewModel: SettingsViewModel(goalsService: goalsService),
+            limitViewModel: LimitViewModel(goalsService: goalsService)
         )
     }
 }
