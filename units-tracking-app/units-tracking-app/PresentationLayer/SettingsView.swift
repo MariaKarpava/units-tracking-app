@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var limitViewModel: LimitViewModel
+    
     
     var body: some View {
         VStack {
@@ -37,7 +39,7 @@ struct SettingsView: View {
     }
     
     func settingCell(title: String, value: String) -> some View {        
-        NavigationLink(destination: LimitView(settingsViewModel: settingsViewModel, header: title)) {
+        NavigationLink(destination: LimitView(limitViewModel: limitViewModel, header: title)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
@@ -72,6 +74,9 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
         let drinksService = DrinksService(goalsService: goalsService)
-        return SettingsView(settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService))
+        return SettingsView(
+            settingsViewModel: SettingsViewModel(drinksService: drinksService, goalsService: goalsService),
+            limitViewModel: LimitViewModel(drinksService: drinksService, goalsService: goalsService)
+        )
     }
 }

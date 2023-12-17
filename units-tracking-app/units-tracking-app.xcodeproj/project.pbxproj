@@ -27,6 +27,7 @@
 		70ADD5222A52E860005D2EB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5212A52E85F005D2EB5 /* SettingsView.swift */; };
 		70ADD5252A52F0B6005D2EB5 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5242A52F0B6005D2EB5 /* Drink.swift */; };
 		70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD5262A532115005D2EB5 /* DrinksService.swift */; };
+		70DC27412B2F8EA500C8A700 /* LimitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC27402B2F8EA500C8A700 /* LimitViewModel.swift */; };
 		70EC76252ADDD67500009842 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EC76242ADDD67500009842 /* Color+Custom.swift */; };
 		70F025022AFD8B8600AA2AA4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */; };
 		70F025042AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */; };
@@ -58,6 +59,7 @@
 		70ADD5212A52E85F005D2EB5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		70ADD5242A52F0B6005D2EB5 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		70ADD5262A532115005D2EB5 /* DrinksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksService.swift; sourceTree = "<group>"; };
+		70DC27402B2F8EA500C8A700 /* LimitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitViewModel.swift; sourceTree = "<group>"; };
 		70EC76242ADDD67500009842 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		70F025012AFD8B8600AA2AA4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Regular.ttf"; path = "../../../../../../../Downloads/Inter (1)/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		70F025032AFD8FFD00AA2AA4 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				705404572ACEC7920049E834 /* HistoryViewModel.swift */,
 				70ADD5212A52E85F005D2EB5 /* SettingsView.swift */,
 				706E0D192B2A076300AB2055 /* LimitView.swift */,
+				70DC27402B2F8EA500C8A700 /* LimitViewModel.swift */,
 				700931462B1B5C8600551518 /* SettingsViewModel.swift */,
 				707FE2582AA8806200D61391 /* HomeViewModel.swift */,
 				707FE25A2AA8825800D61391 /* HomeView.swift */,
@@ -256,6 +259,7 @@
 				709A43EF2AE9DAC300C92BFA /* TabBarTopBorderVectorView.swift in Sources */,
 				70ADD5272A532115005D2EB5 /* DrinksService.swift in Sources */,
 				70ADD5202A52E852005D2EB5 /* StatisticsView.swift in Sources */,
+				70DC27412B2F8EA500C8A700 /* LimitViewModel.swift in Sources */,
 				70ADD51C2A52E825005D2EB5 /* HistoryView.swift in Sources */,
 				707FE2592AA8806200D61391 /* HomeViewModel.swift in Sources */,
 				707FE2632AA8EFD200D61391 /* Font+Custom.swift in Sources */,
