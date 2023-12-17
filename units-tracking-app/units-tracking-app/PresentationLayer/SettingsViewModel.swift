@@ -10,12 +10,10 @@ import SwiftUI
 
 
 class SettingsViewModel: ObservableObject {
-    private let drinksService: DrinksService
     private let goalsService: GoalsService
     @Published var viewState: ViewState
 
-    init(drinksService: DrinksService, goalsService: GoalsService) {
-        self.drinksService = drinksService
+    init(goalsService: GoalsService) {
         self.goalsService = goalsService
         self.viewState = ViewState()
         self.updateViewState()
@@ -30,25 +28,6 @@ class SettingsViewModel: ObservableObject {
         viewState.dailyLimit = goalsService.unitsPerDay
         viewState.weeklyLimit = goalsService.unitsPer7Days
     }
-    
-    func decrementDailyLimitTapped() {
-        guard viewState.dailyLimit > 0 else { return }
-        viewState.dailyLimit -= 1.0
-        updateGoalsService()
-    }
-    
-    func incrementDailyLimitTapped() {
-        guard viewState.dailyLimit < 100 else { return }
-        viewState.dailyLimit += 1.0
-        updateGoalsService()
-    }
-    
-    private func updateGoalsService() {
-        goalsService.unitsPerDay = viewState.dailyLimit
-        goalsService.unitsPer7Days = viewState.weeklyLimit
-    }
-    
-    
 }
 
 
