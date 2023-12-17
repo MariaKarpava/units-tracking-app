@@ -9,12 +9,10 @@ import Foundation
 
 
 class LimitViewModel: ObservableObject {
-    private let drinksService: DrinksService
     private let goalsService: GoalsService
     @Published var viewState: ViewState
 
-    init(drinksService: DrinksService, goalsService: GoalsService) {
-        self.drinksService = drinksService
+    init(goalsService: GoalsService) {
         self.goalsService = goalsService
         self.viewState = ViewState()
         self.updateViewState()
