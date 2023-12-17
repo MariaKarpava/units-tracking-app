@@ -56,6 +56,7 @@ struct RootView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var historyViewModel: HistoryViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var limitViewModel: LimitViewModel
     
     @State private var showSheet = false
     var drinksService: DrinksService
@@ -74,7 +75,7 @@ struct RootView: View {
                         .tag(TabbedItems.stats)
                     HistoryView(historyViewModel: historyViewModel)
                         .tag(TabbedItems.history)
-                    SettingsView(settingsViewModel: settingsViewModel)
+                    SettingsView(settingsViewModel: settingsViewModel, limitViewModel: limitViewModel)
                         .tag(TabbedItems.settings)
                 }
             }
@@ -163,11 +164,13 @@ struct RootView_Previews: PreviewProvider {
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
         let settingsViewModel = SettingsViewModel(drinksService: drinksService, goalsService: goalsService)
+        let limitViewModel = LimitViewModel(drinksService: drinksService, goalsService: goalsService)
         
         RootView(
             homeViewModel: homeViewModel,
             historyViewModel: historyViewModel,
             settingsViewModel: settingsViewModel,
+            limitViewModel: limitViewModel, 
             drinksService: drinksService,
             goalsService: goalsService
         )
@@ -178,7 +181,7 @@ struct RootView_Previews: PreviewProvider {
             homeViewModel: homeViewModel,
             historyViewModel: historyViewModel,
             settingsViewModel: settingsViewModel,
-            drinksService: drinksService,
+            limitViewModel: limitViewModel, drinksService: drinksService,
             goalsService: goalsService
         )
         .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
