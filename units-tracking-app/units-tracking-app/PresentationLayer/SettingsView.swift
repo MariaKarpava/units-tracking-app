@@ -14,31 +14,33 @@ struct SettingsView: View {
     
     
     var body: some View {
-        VStack {
-            Spacer().frame(height: 30)
-            NavigationStack {
-                VStack(alignment: .leading) {
-                    Spacer().frame(height: 50)
-                    settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)")
-                    settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)")
-                    infoAboutLimits
-                    Spacer().frame(height: 60)
-                    settingCell(title: "Next day starts at", value: "04:00")
-                    infoStartOfTheDay
-                    Spacer()
-                }
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Text("Settings")
-                            .font(.settingsScreenHeader)
-                            .foregroundColor(.mainText)
-                    }
-                }
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Spacer().frame(height: 40)
+                Text("Settings")
+                    .font(.settingsScreenHeader)
+                    .foregroundColor(.mainText)
+                    .padding(.horizontal, 20)
+                Spacer().frame(height: 50)
+                settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)")
+                settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)")
+                infoAboutLimits
+                Spacer().frame(height: 60)
+                settingCell(title: "Next day starts at", value: "04:00")
+                infoStartOfTheDay
+                Spacer()
             }
+//            .toolbar {
+//                ToolbarItem(placement: .topBarLeading) {
+//                    Text("Settings")
+//                        .font(.settingsScreenHeader)
+//                        .foregroundColor(.mainText)
+//                }
+//            }
         }
     }
     
-    func settingCell(title: String, value: String) -> some View {        
+    func settingCell(title: String, value: String) -> some View {
         NavigationLink(destination: LimitView(limitViewModel: limitViewModel, header: title)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
@@ -51,6 +53,9 @@ struct SettingsView: View {
         .frame(height: 50)
         .padding(.horizontal, 20)
         .font(.settingsScreenMainInfo)
+        .onAppear {
+            settingsViewModel.updateViewState()
+        }
     }
     
     var infoAboutLimits: some View {
@@ -67,13 +72,13 @@ struct SettingsView: View {
             .foregroundColor(.mainText)
             .padding(.horizontal, 20)
     }
+
 }
 
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
-        let drinksService = DrinksService(goalsService: goalsService)
         return SettingsView(
             settingsViewModel: SettingsViewModel(goalsService: goalsService),
             limitViewModel: LimitViewModel(goalsService: goalsService)
