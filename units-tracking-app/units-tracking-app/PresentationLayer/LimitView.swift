@@ -65,7 +65,8 @@ struct LimitView: View {
                                 }
                             } label: {
                                 addCustomStepperButton(sign: "-")
-                            }.disabled(limitViewModel.viewState.dailyLimit <= 0)
+                            }
+                            .disabled(limitViewModel.viewState.dailyLimit <= 0)
                             unitsIncrementer.frame(width: 100)
                             Button {
                                 if header == "Daily Limit" {
@@ -75,10 +76,10 @@ struct LimitView: View {
                                 }
                             } label: {
                                 addCustomStepperButton(sign: "+")
-                            }.disabled(limitViewModel.viewState.dailyLimit > 99)
+                            }
+                            .disabled(limitViewModel.viewState.dailyLimit > 99)
                             Spacer()
                         }
-                        
                         Spacer()
                     }
                         
@@ -96,7 +97,8 @@ struct LimitView: View {
                 }
                 }
 
-            } .navigationBarBackButtonHidden(true)
+            } 
+            .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: customBackButton)
     }
     

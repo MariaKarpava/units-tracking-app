@@ -54,7 +54,6 @@ class LimitViewModel: ObservableObject {
     private func updateGoalsService() {
         goalsService.changeUnitsPerDay(newValue: viewState.dailyLimit)
         goalsService.changeUnitsPer7Days(newValue: viewState.weeklyLimit)
-        
         print("goalsService.unitsPerDay \(goalsService.unitsPerDay)")
         print("goalsService.changeUnitsPer7Days \(goalsService.unitsPer7Days)")
     }
