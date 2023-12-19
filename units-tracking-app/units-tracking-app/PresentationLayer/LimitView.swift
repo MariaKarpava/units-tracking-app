@@ -164,7 +164,7 @@ struct LimitView: View {
 struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
-        let limitViewModel = LimitViewModel(goalsService: goalsService)
+        let limitViewModel = LimitViewModel(goalsService: goalsService, limitType: .daily)
         return LimitView(limitViewModel: limitViewModel, header: "Daily Limit")
     }
 }

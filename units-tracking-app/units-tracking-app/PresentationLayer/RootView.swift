@@ -56,7 +56,6 @@ struct RootView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var historyViewModel: HistoryViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
-    @ObservedObject var limitViewModel: LimitViewModel
     
     @State private var showSheet = false
     var drinksService: DrinksService
@@ -75,7 +74,7 @@ struct RootView: View {
                         .tag(TabbedItems.stats)
                     HistoryView(historyViewModel: historyViewModel)
                         .tag(TabbedItems.history)
-                    SettingsView(settingsViewModel: settingsViewModel, limitViewModel: limitViewModel)
+                    SettingsView(settingsViewModel: settingsViewModel, goalsService: goalsService)
                         .tag(TabbedItems.settings)
                 }
             }
@@ -164,13 +163,11 @@ struct RootView_Previews: PreviewProvider {
         let homeViewModel = HomeViewModel(drinksService: drinksService, goalsService: goalsService)
         let historyViewModel = HistoryViewModel(drinksService: drinksService)
         let settingsViewModel = SettingsViewModel(goalsService: goalsService)
-        let limitViewModel = LimitViewModel(goalsService: goalsService)
         
         RootView(
             homeViewModel: homeViewModel,
             historyViewModel: historyViewModel,
             settingsViewModel: settingsViewModel,
-            limitViewModel: limitViewModel, 
             drinksService: drinksService,
             goalsService: goalsService
         )
@@ -181,7 +178,7 @@ struct RootView_Previews: PreviewProvider {
             homeViewModel: homeViewModel,
             historyViewModel: historyViewModel,
             settingsViewModel: settingsViewModel,
-            limitViewModel: limitViewModel, drinksService: drinksService,
+            drinksService: drinksService,
             goalsService: goalsService
         )
         .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))

@@ -24,7 +24,6 @@ struct UnitsTrackingApp: App {
                 homeViewModel: HomeViewModel(drinksService: drinkService, goalsService: goalsService),
                 historyViewModel: HistoryViewModel(drinksService: drinkService), 
                 settingsViewModel: SettingsViewModel(goalsService: goalsService),
-                limitViewModel: LimitViewModel(goalsService: goalsService),
                 drinksService: drinkService,
                 goalsService: goalsService)
         }
