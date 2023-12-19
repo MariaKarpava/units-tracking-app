@@ -66,7 +66,7 @@ struct LimitView: View {
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }
-                            .disabled(limitViewModel.viewState.dailyLimit <= 0)
+                            .disabled(!viewSateIsValid(header: header))
                             unitsIncrementer.frame(width: 100)
                             Button {
                                 if header == "Daily Limit" {
@@ -77,7 +77,6 @@ struct LimitView: View {
                             } label: {
                                 addCustomStepperButton(sign: "+")
                             }
-                            .disabled(limitViewModel.viewState.dailyLimit > 99)
                             Spacer()
                         }
                         Spacer()
@@ -102,6 +101,27 @@ struct LimitView: View {
             .navigationBarItems(leading: customBackButton)
     }
     
+    var dailyViewStateIsValid: Bool {
+        return limitViewModel.viewState.dailyLimit > 0
+    }
+    
+    var weeklyViewStateIsValid: Bool {
+        return limitViewModel.viewState.weeklyLimit > 0
+    }
+    
+    func viewSateIsValid(header: String) -> Bool {
+        if header == "Daily Limit" {
+            dailyViewStateIsValid
+        } else {
+            weeklyViewStateIsValid
+        }
+    }
+    
+    var buttonColor: Color {
+        return viewSateIsValid(header: header) ? .mainText : .secondaryText
+    }
+
+    
     var infoText: some View {
         Text("""
             According to the NHS, males should 
@@ -124,25 +144,26 @@ struct LimitView: View {
     }
     
     func addCustomStepperButton(sign: String) -> some View {
-        RoundedRectangle(cornerRadius: 10)
-            .stroke(Color.black, lineWidth: 2)
+        var color: Color = .mainText
+        if sign == "-" {
+            color = buttonColor
+        }
+        
+        return RoundedRectangle(cornerRadius: 10)
+            .stroke(buttonColor, lineWidth: 2)
             .frame(width: 64, height: 64)
             .overlay(
                 Text(sign)
-                    .foregroundColor(.mainText)
+                    .foregroundColor(color)
                     .font(.limitScreenStepperSign)
             )
     }
-    
-    
 }
 
 
 struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
-        let drinksService = DrinksService(goalsService: goalsService)
-        let settingsViewModel = SettingsViewModel(goalsService: goalsService)
         let limitViewModel = LimitViewModel(goalsService: goalsService)
         return LimitView(limitViewModel: limitViewModel, header: "Daily Limit")
     }

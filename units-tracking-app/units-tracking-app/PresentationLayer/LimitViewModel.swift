@@ -35,7 +35,6 @@ class LimitViewModel: ObservableObject {
     }
     
     func incrementDailyLimitTapped() {
-        guard viewState.dailyLimit < 100 else { return }
         viewState.dailyLimit += 1.0
         updateGoalsService()
     }
@@ -46,7 +45,6 @@ class LimitViewModel: ObservableObject {
     }
     
     func incrementWeeklyLimitTapped() {
-        guard viewState.weeklyLimit < 100 else { return }
         viewState.weeklyLimit += 1.0
         updateGoalsService()
     }
@@ -54,7 +52,5 @@ class LimitViewModel: ObservableObject {
     private func updateGoalsService() {
         goalsService.changeUnitsPerDay(newValue: viewState.dailyLimit)
         goalsService.changeUnitsPer7Days(newValue: viewState.weeklyLimit)
-        print("goalsService.unitsPerDay \(goalsService.unitsPerDay)")
-        print("goalsService.changeUnitsPer7Days \(goalsService.unitsPer7Days)")
     }
 }
