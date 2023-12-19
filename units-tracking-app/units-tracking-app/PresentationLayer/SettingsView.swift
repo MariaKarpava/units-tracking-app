@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
-    @ObservedObject var limitViewModel: LimitViewModel
+    let goalsService: GoalsService
     
     
     var body: some View {
@@ -22,11 +22,11 @@ struct SettingsView: View {
                     .foregroundColor(.mainText)
                     .padding(.horizontal, 20)
                 Spacer().frame(height: 50)
-                settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)")
-                settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)")
+                settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)", limitType: .daily)
+                settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)", limitType: .weekly)
                 infoAboutLimits
                 Spacer().frame(height: 60)
-                settingCell(title: "Next day starts at", value: "04:00")
+                settingCell(title: "Next day starts at", value: "04:00", limitType: .daily)
                 infoStartOfTheDay
                 Spacer()
             }
@@ -40,8 +40,9 @@ struct SettingsView: View {
         }
     }
     
-    func settingCell(title: String, value: String) -> some View {
-        NavigationLink(destination: LimitView(limitViewModel: limitViewModel, header: title)) {
+    func settingCell(title: String, value: String, limitType: LimitViewModel.LimitType) -> some View {
+        let vm = LimitViewModel(goalsService: goalsService, limitType: limitType)
+        return NavigationLink(destination: LimitView(limitViewModel: vm, header: title)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
@@ -81,7 +82,7 @@ struct SettingsView_Previews: PreviewProvider {
         let goalsService = GoalsService()
         return SettingsView(
             settingsViewModel: SettingsViewModel(goalsService: goalsService),
-            limitViewModel: LimitViewModel(goalsService: goalsService)
+            goalsService: goalsService
         )
     }
 }
