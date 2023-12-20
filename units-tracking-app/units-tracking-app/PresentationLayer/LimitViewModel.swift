@@ -26,8 +26,7 @@ class LimitViewModel: ObservableObject {
     }
     
     struct ViewState: Equatable {
-        var dailyLimit: Double = 1.0
-        var weeklyLimit: Double = 2.0
+        var units: Double = 1.0
         var limitType: LimitType = .daily
         var header: String = "Daily Limit"
     }
@@ -37,34 +36,30 @@ class LimitViewModel: ObservableObject {
     }
     
     private func updateViewState() {
-        viewState.dailyLimit = goalsService.unitsPerDay
-        viewState.weeklyLimit = goalsService.unitsPer7Days
+        if limitType == .daily {
+            viewState.units = goalsService.unitsPerDay
+        } else {
+            viewState.units = goalsService.unitsPer7Days
+        }
         viewState.header = updateHeader()
     }
     
-    func decrementDailyLimitTapped() {
-        guard viewState.dailyLimit > 0 else { return }
-        viewState.dailyLimit -= 1.0
+    func decrementUnits() {
+        guard viewState.units > 0 else { return }
+        viewState.units -= 1.0
         updateGoalsService()
     }
     
-    func incrementDailyLimitTapped() {
-        viewState.dailyLimit += 1.0
-        updateGoalsService()
-    }
-    func decrementWeeklyLimitTapped() {
-        guard viewState.weeklyLimit > 0 else { return }
-        viewState.weeklyLimit -= 1.0
-        updateGoalsService()
-    }
-    
-    func incrementWeeklyLimitTapped() {
-        viewState.weeklyLimit += 1.0
+    func incrementUnits() {
+        viewState.units += 1.0
         updateGoalsService()
     }
     
     private func updateGoalsService() {
-        goalsService.changeUnitsPerDay(newValue: viewState.dailyLimit)
-        goalsService.changeUnitsPer7Days(newValue: viewState.weeklyLimit)
+        if limitType == .daily {
+            goalsService.changeUnitsPerDay(newValue: viewState.units)
+        } else {
+            goalsService.changeUnitsPer7Days(newValue: viewState.units)
+        }
     }
 }
