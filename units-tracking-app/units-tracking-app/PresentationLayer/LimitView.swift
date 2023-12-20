@@ -11,16 +11,16 @@ import SwiftUI
 struct LimitView: View {
     @ObservedObject var limitViewModel: LimitViewModel
     
-    var units: Double {
-        var units: Double = 0
-        if limitViewModel.viewState.header == "Daily Limit" {
-            units = limitViewModel.viewState.dailyLimit
-            return units
-        } else {
-            units = limitViewModel.viewState.weeklyLimit
-            return units
-        }
-    }
+//    var units: Double {
+//        var units: Double = 0
+//        if limitViewModel.viewState.header == "Daily Limit" {
+//            units = limitViewModel.viewState.dailyLimit
+//            return units
+//        } else {
+//            units = limitViewModel.viewState.weeklyLimit
+//            return units
+//        }
+//    }
    
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -54,22 +54,14 @@ struct LimitView: View {
                         HStack {
                             Spacer()
                             Button {
-                                if limitViewModel.viewState.header == "Daily Limit" {
-                                limitViewModel.decrementDailyLimitTapped()
-                                } else {
-                                    limitViewModel.decrementWeeklyLimitTapped()
-                                }
+                                limitViewModel.decrementUnits()
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }
-                            .disabled(!viewSateIsValid(header: limitViewModel.viewState.header))
+//                            .disabled(!viewSateIsValid(header: limitViewModel.viewState.header))
                             unitsIncrementer.frame(width: 100)
                             Button {
-                                if limitViewModel.viewState.header == "Daily Limit" {
-                                limitViewModel.incrementDailyLimitTapped()
-                                } else {
-                                    limitViewModel.incrementWeeklyLimitTapped()
-                                }
+                                limitViewModel.incrementUnits()
                             } label: {
                                 addCustomStepperButton(sign: "+")
                             }
@@ -97,25 +89,25 @@ struct LimitView: View {
             .navigationBarItems(leading: customBackButton)
     }
     
-    var dailyViewStateIsValid: Bool {
-        return limitViewModel.viewState.dailyLimit > 0
-    }
-    
-    var weeklyViewStateIsValid: Bool {
-        return limitViewModel.viewState.weeklyLimit > 0
-    }
-    
-    func viewSateIsValid(header: String) -> Bool {
-        if header == "Daily Limit" {
-            dailyViewStateIsValid
-        } else {
-            weeklyViewStateIsValid
-        }
-    }
-    
-    var buttonColor: Color {
-        return viewSateIsValid(header: limitViewModel.viewState.header) ? .mainText : .secondaryText
-    }
+//    var dailyViewStateIsValid: Bool {
+//        return limitViewModel.viewState.dailyLimit > 0
+//    }
+//    
+//    var weeklyViewStateIsValid: Bool {
+//        return limitViewModel.viewState.weeklyLimit > 0
+//    }
+//    
+//    func viewSateIsValid(header: String) -> Bool {
+//        if header == "Daily Limit" {
+//            dailyViewStateIsValid
+//        } else {
+//            weeklyViewStateIsValid
+//        }
+//    }
+//    
+//    var buttonColor: Color {
+//        return viewSateIsValid(header: limitViewModel.viewState.header) ? .mainText : .secondaryText
+//    }
 
     
     var infoText: some View {
@@ -132,7 +124,7 @@ struct LimitView: View {
     
     var unitsIncrementer: some View {
         VStack(alignment: .center) {
-            Text(String(format: "%.1f", units))
+            Text(String(format: "%.1f", limitViewModel.viewState.units))
                 .foregroundColor(.mainText)
             Text("unit(s)")
                 .foregroundColor(.secondaryText)
@@ -140,17 +132,18 @@ struct LimitView: View {
     }
     
     func addCustomStepperButton(sign: String) -> some View {
-        var color: Color = .mainText
-        if sign == "-" {
-            color = buttonColor
-        }
+//        var color: Color = .mainText
+//        if sign == "-" {
+//            color = buttonColor
+//        }
         
         return RoundedRectangle(cornerRadius: 10)
-            .stroke(buttonColor, lineWidth: 2)
+//            .stroke(buttonColor, lineWidth: 2)
+            .stroke(Color.blue, lineWidth: 2)
             .frame(width: 64, height: 64)
             .overlay(
                 Text(sign)
-                    .foregroundColor(color)
+                    .foregroundColor(.blue)
                     .font(.limitScreenStepperSign)
             )
     }
