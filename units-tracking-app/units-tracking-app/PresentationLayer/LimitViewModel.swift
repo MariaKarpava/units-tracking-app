@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class LimitViewModel: ObservableObject {
@@ -27,12 +28,26 @@ class LimitViewModel: ObservableObject {
     
     struct ViewState: Equatable {
         var units: Double = 1.0
+        var unitsAreValid: Bool = true
         var limitType: LimitType = .daily
         var header: String = "Daily Limit"
+        var buttonColor: Color = .mainText
     }
     
     func updateHeader() -> String {
         limitType == .daily ? "Daily Limit" : "Weekly Limit"
+    }
+    
+    func checkIfUnitsAreValid() -> Bool {
+        return viewState.units > 0
+    }
+    
+    func updateButtonColor() -> Color {
+        if viewState.unitsAreValid {
+            return Color.mainText
+        } else {
+            return Color.secondaryText
+        }
     }
     
     private func updateViewState() {
@@ -42,17 +57,21 @@ class LimitViewModel: ObservableObject {
             viewState.units = goalsService.unitsPer7Days
         }
         viewState.header = updateHeader()
+        viewState.unitsAreValid = checkIfUnitsAreValid()
+        viewState.buttonColor = updateButtonColor()
     }
     
     func decrementUnits() {
         guard viewState.units > 0 else { return }
         viewState.units -= 1.0
         updateGoalsService()
+        updateViewState()
     }
     
     func incrementUnits() {
         viewState.units += 1.0
         updateGoalsService()
+        updateViewState()
     }
     
     private func updateGoalsService() {
