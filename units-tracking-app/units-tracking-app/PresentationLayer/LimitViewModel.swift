@@ -35,8 +35,14 @@ class LimitViewModel: ObservableObject {
     }
     
     func updateHeader() -> String {
-        limitType == .daily ? "Daily Limit" : "Weekly Limit"
+        switch viewState.limitType {
+        case .daily:
+            return "Daily Limit"
+        case .weekly:
+            return "Weekly Limit"
+        }
     }
+    
     
     func checkIfUnitsAreValid() -> Bool {
         return viewState.units > 0
