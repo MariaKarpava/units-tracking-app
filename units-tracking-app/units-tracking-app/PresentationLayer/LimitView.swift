@@ -11,18 +11,6 @@ import SwiftUI
 struct LimitView: View {
     @ObservedObject var limitViewModel: LimitViewModel
     
-//    var units: Double {
-//        var units: Double = 0
-//        if limitViewModel.viewState.header == "Daily Limit" {
-//            units = limitViewModel.viewState.dailyLimit
-//            return units
-//        } else {
-//            units = limitViewModel.viewState.weeklyLimit
-//            return units
-//        }
-//    }
-   
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
         var customBackButton : some View { 
@@ -56,14 +44,14 @@ struct LimitView: View {
                             Button {
                                 limitViewModel.decrementUnits()
                             } label: {
-                                addCustomStepperButton(sign: "-")
+                                addCustomStepperButton(sign: "-", color: limitViewModel.viewState.buttonColor)
                             }
-//                            .disabled(!viewSateIsValid(header: limitViewModel.viewState.header))
+                            .disabled(!limitViewModel.viewState.unitsAreValid)
                             unitsIncrementer.frame(width: 100)
                             Button {
                                 limitViewModel.incrementUnits()
                             } label: {
-                                addCustomStepperButton(sign: "+")
+                                addCustomStepperButton(sign: "+", color: limitViewModel.viewState.buttonColor)
                             }
                             Spacer()
                         }
@@ -88,26 +76,6 @@ struct LimitView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: customBackButton)
     }
-    
-//    var dailyViewStateIsValid: Bool {
-//        return limitViewModel.viewState.dailyLimit > 0
-//    }
-//    
-//    var weeklyViewStateIsValid: Bool {
-//        return limitViewModel.viewState.weeklyLimit > 0
-//    }
-//    
-//    func viewSateIsValid(header: String) -> Bool {
-//        if header == "Daily Limit" {
-//            dailyViewStateIsValid
-//        } else {
-//            weeklyViewStateIsValid
-//        }
-//    }
-//    
-//    var buttonColor: Color {
-//        return viewSateIsValid(header: limitViewModel.viewState.header) ? .mainText : .secondaryText
-//    }
 
     
     var infoText: some View {
@@ -131,19 +99,13 @@ struct LimitView: View {
         }.font(.limitScreenUnits)
     }
     
-    func addCustomStepperButton(sign: String) -> some View {
-//        var color: Color = .mainText
-//        if sign == "-" {
-//            color = buttonColor
-//        }
-        
-        return RoundedRectangle(cornerRadius: 10)
-//            .stroke(buttonColor, lineWidth: 2)
-            .stroke(Color.blue, lineWidth: 2)
+    func addCustomStepperButton(sign: String, color: Color) -> some View {
+        RoundedRectangle(cornerRadius: 10)
+            .stroke(color, lineWidth: 2)
             .frame(width: 64, height: 64)
             .overlay(
                 Text(sign)
-                    .foregroundColor(.blue)
+                    .foregroundColor(color)
                     .font(.limitScreenStepperSign)
             )
     }
