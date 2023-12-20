@@ -30,10 +30,7 @@ struct LimitView: View {
             NavigationStack {
                 GeometryReader { geometry in
                     VStack(alignment: .leading) {
-                        Text(limitViewModel.viewState.header)
-                            .font(.limitScreenHeader)
-                            .foregroundColor(.mainText)
-                            .padding(20)
+                        header
                         Spacer()
                             .frame(height: 60)
                         infoText
@@ -51,7 +48,7 @@ struct LimitView: View {
                             Button {
                                 limitViewModel.incrementUnits()
                             } label: {
-                                addCustomStepperButton(sign: "+", color: limitViewModel.viewState.buttonColor)
+                                addCustomStepperButton(sign: "+", color: .mainText)
                             }
                             Spacer()
                         }
@@ -75,6 +72,13 @@ struct LimitView: View {
             } 
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: customBackButton)
+    }
+    
+    var header: some View {
+        Text(limitViewModel.viewState.header)
+            .font(.limitScreenHeader)
+            .foregroundColor(.mainText)
+            .padding(20)
     }
 
     
