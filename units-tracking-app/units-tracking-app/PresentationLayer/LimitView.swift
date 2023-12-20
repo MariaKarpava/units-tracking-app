@@ -11,11 +11,9 @@ import SwiftUI
 struct LimitView: View {
     @ObservedObject var limitViewModel: LimitViewModel
     
-    let header: String
-    
     var units: Double {
         var units: Double = 0
-        if header == "Daily Limit" {
+        if limitViewModel.viewState.header == "Daily Limit" {
             units = limitViewModel.viewState.dailyLimit
             return units
         } else {
@@ -23,9 +21,7 @@ struct LimitView: View {
             return units
         }
     }
-    
-    
-
+   
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -46,7 +42,7 @@ struct LimitView: View {
             NavigationStack {
                 GeometryReader { geometry in
                     VStack(alignment: .leading) {
-                        Text(header)
+                        Text(limitViewModel.viewState.header)
                             .font(.limitScreenHeader)
                             .foregroundColor(.mainText)
                             .padding(20)
@@ -58,7 +54,7 @@ struct LimitView: View {
                         HStack {
                             Spacer()
                             Button {
-                                if header == "Daily Limit" {
+                                if limitViewModel.viewState.header == "Daily Limit" {
                                 limitViewModel.decrementDailyLimitTapped()
                                 } else {
                                     limitViewModel.decrementWeeklyLimitTapped()
@@ -66,10 +62,10 @@ struct LimitView: View {
                             } label: {
                                 addCustomStepperButton(sign: "-")
                             }
-                            .disabled(!viewSateIsValid(header: header))
+                            .disabled(!viewSateIsValid(header: limitViewModel.viewState.header))
                             unitsIncrementer.frame(width: 100)
                             Button {
-                                if header == "Daily Limit" {
+                                if limitViewModel.viewState.header == "Daily Limit" {
                                 limitViewModel.incrementDailyLimitTapped()
                                 } else {
                                     limitViewModel.incrementWeeklyLimitTapped()
@@ -118,7 +114,7 @@ struct LimitView: View {
     }
     
     var buttonColor: Color {
-        return viewSateIsValid(header: header) ? .mainText : .secondaryText
+        return viewSateIsValid(header: limitViewModel.viewState.header) ? .mainText : .secondaryText
     }
 
     
@@ -165,6 +161,6 @@ struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
         let limitViewModel = LimitViewModel(goalsService: goalsService, limitType: .daily)
-        return LimitView(limitViewModel: limitViewModel, header: "Daily Limit")
+        return LimitView(limitViewModel: limitViewModel)
     }
 }

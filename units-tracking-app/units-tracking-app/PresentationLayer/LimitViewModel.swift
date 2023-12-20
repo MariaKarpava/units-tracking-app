@@ -32,9 +32,14 @@ class LimitViewModel: ObservableObject {
         var header: String = "Daily Limit"
     }
     
+    func updateHeader() -> String {
+        limitType == .daily ? "Daily Limit" : "Weekly Limit"
+    }
+    
     private func updateViewState() {
         viewState.dailyLimit = goalsService.unitsPerDay
         viewState.weeklyLimit = goalsService.unitsPer7Days
+        viewState.header = updateHeader()
     }
     
     func decrementDailyLimitTapped() {

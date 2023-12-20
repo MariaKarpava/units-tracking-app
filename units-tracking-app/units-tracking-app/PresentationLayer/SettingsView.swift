@@ -42,7 +42,7 @@ struct SettingsView: View {
     
     func settingCell(title: String, value: String, limitType: LimitViewModel.LimitType) -> some View {
         let vm = LimitViewModel(goalsService: goalsService, limitType: limitType)
-        return NavigationLink(destination: LimitView(limitViewModel: vm, header: title)) {
+        return NavigationLink(destination: LimitView(limitViewModel: vm)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
