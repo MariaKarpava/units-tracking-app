@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-
-struct LimitView: View {
-    @ObservedObject var limitViewModel: LimitViewModel
+// + TODO: naming: "LimitView" is not very descriptive name. Can you guess screen's responsibility based purely on this name?
+struct LimitSettingView: View {
+    @ObservedObject var limitSettingViewModel: LimitSettingViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
-                    header
                     Spacer()
                         .frame(height: 60)
                     infoText
@@ -26,10 +26,11 @@ struct LimitView: View {
                     buttonsWithUnits
                     Spacer()
                 }
+                .navigationTitle(limitSettingViewModel.viewState.title)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            print("save")
+                            print("save") // TODO: implement save logic
                         } label: {
                             Text("Save")
                                 .underline()
@@ -46,7 +47,7 @@ struct LimitView: View {
 }
 
 
-extension LimitView {
+extension LimitSettingView {
     var customBackButton : some View {
         Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -59,12 +60,14 @@ extension LimitView {
         }
     }
 
-    var header: some View {
-        Text(limitViewModel.viewState.header)
-            .font(.limitScreenHeader)
-            .foregroundColor(.mainText)
-            .padding(20)
-    }
+    // + TODO: Here and in related places: "Title" would be a better name
+    // TODO: was it a plan to use native title instead of custom one and custom back button?
+//    var title: some View {
+//        Text(limitSettingViewModel.viewState.title)
+//            .font(.limitScreenTitle)
+//            .foregroundColor(.mainText)
+//            .padding(20)
+//    }
     
     var infoText: some View {
         Text("""
@@ -80,7 +83,7 @@ extension LimitView {
     
     var unitsIncrementer: some View {
         VStack(alignment: .center) {
-            Text(String(format: "%.1f", limitViewModel.viewState.units))
+            Text(String(format: "%.1f", limitSettingViewModel.viewState.units))
                 .foregroundColor(.mainText)
             Text("unit(s)")
                 .foregroundColor(.secondaryText)
@@ -91,22 +94,23 @@ extension LimitView {
         HStack {
             Spacer()
             Button {
-                limitViewModel.decrementUnits()
+                limitSettingViewModel.decrementUnitsTapped()
             } label: {
-                addCustomStepperButton(sign: "-", color: limitViewModel.viewState.buttonColor)
+                customStepperButton(sign: "-", color: limitSettingViewModel.viewState.buttonColor)
             }
-            .disabled(!limitViewModel.viewState.unitsAreValid)
+            .disabled(!limitSettingViewModel.viewState.areUnitsPositive) // + TODO: unitsAreValid -- what does it mean valid? Rename to smth more descriptive
             unitsIncrementer.frame(width: 100)
             Button {
-                limitViewModel.incrementUnits()
+                limitSettingViewModel.incrementUnitsTapped() // + TODO: here and in similar places: check naming convention. Views should never give orders to VMs.
             } label: {
-                addCustomStepperButton(sign: "+", color: .mainText)
+                customStepperButton(sign: "+", color: .mainText)
             }
             Spacer()
         }
     }
     
-    func addCustomStepperButton(sign: String, color: Color) -> some View {
+    // + TODO: this func doesn't add anything
+    func customStepperButton(sign: String, color: Color) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(color, lineWidth: 2)
             .frame(width: 64, height: 64)
@@ -123,7 +127,7 @@ extension LimitView {
 struct DailyLimit_Previews: PreviewProvider {
     static var previews: some View {
         let goalsService = GoalsService()
-        let limitViewModel = LimitViewModel(goalsService: goalsService, limitType: .daily)
-        return LimitView(limitViewModel: limitViewModel)
+        let limitSettingViewModel = LimitSettingViewModel(goalsService: goalsService, limitType: .daily)
+        return LimitSettingView(limitSettingViewModel: limitSettingViewModel)
     }
 }
