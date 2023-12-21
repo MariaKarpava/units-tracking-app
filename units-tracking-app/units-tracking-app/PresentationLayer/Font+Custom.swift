@@ -49,7 +49,7 @@ extension Font {
     
     
     // Settings Screen
-    static var settingsScreenHeader: Font {
+    static var settingsScreenTitle: Font {
         Font.custom("Inter-SemiBold", size: 32)
     }
     static var settingsScreenMainInfo: Font {
@@ -60,8 +60,8 @@ extension Font {
     }
     
     
-    // LimitView Screen
-    static var limitScreenHeader: Font {
+    // LimitSettingView Screen
+    static var limitScreenTitle: Font {
         Font.custom("Inter-SemiBold", size: 32)
     }
     static var limitScreenSaveButton: Font {

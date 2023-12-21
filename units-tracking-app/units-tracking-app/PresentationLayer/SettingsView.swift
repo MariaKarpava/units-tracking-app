@@ -17,10 +17,10 @@ struct SettingsView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 40)
-                Text("Settings")
-                    .font(.settingsScreenHeader)
-                    .foregroundColor(.mainText)
-                    .padding(.horizontal, 20)
+//                Text("Settings")
+//                    .font(.settingsScreenTitle)
+//                    .foregroundColor(.mainText)
+//                    .padding(.horizontal, 20)
                 Spacer().frame(height: 50)
                 settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)", limitType: .daily)
                 settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)", limitType: .weekly)
@@ -30,19 +30,19 @@ struct SettingsView: View {
                 infoStartOfTheDay
                 Spacer()
             }
-//            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Text("Settings")
-//                        .font(.settingsScreenHeader)
-//                        .foregroundColor(.mainText)
-//                }
-//            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Settings")
+                        .font(.settingsScreenTitle)
+                        .foregroundColor(.mainText)
+                }
+            }
         }
     }
     
-    func settingCell(title: String, value: String, limitType: LimitViewModel.LimitType) -> some View {
-        let vm = LimitViewModel(goalsService: goalsService, limitType: limitType)
-        return NavigationLink(destination: LimitView(limitViewModel: vm)) {
+    func settingCell(title: String, value: String, limitType: LimitSettingViewModel.LimitType) -> some View {
+        let vm = LimitSettingViewModel(goalsService: goalsService, limitType: limitType)
+        return NavigationLink(destination: LimitSettingView(limitSettingViewModel: vm)) {
             HStack {
                 Text("\(title)").foregroundColor(.mainText)
                 Spacer()
