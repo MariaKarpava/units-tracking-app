@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 
+extension Notification.Name {
+    static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
+    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
+}
+
+
 class LimitSettingViewModel: ObservableObject {
     private let goalsService: GoalsService
     @Published var viewState: ViewState
@@ -24,6 +30,17 @@ class LimitSettingViewModel: ObservableObject {
         self.viewState = ViewState()
         self.limitType = limitType
         self.updateViewState()
+        
+        NotificationCenter.default.addObserver(
+            forName: .dailyLimitHasChanged,
+            object: self,
+            queue: .main
+        ) { [ weak self ] notification in
+            // Handle the notification here
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+            print("Received a notification in LimitSettingViewModel!")
+        }
     }
     
     struct ViewState: Equatable {
@@ -43,7 +60,6 @@ class LimitSettingViewModel: ObservableObject {
             return "Weekly Limit"
         }
     }
-    
     
     private func checkIfUnitsArePositive() -> Bool {
         return viewState.units > 0
@@ -81,9 +97,21 @@ class LimitSettingViewModel: ObservableObject {
         updateViewState()
     }
     
+    func saveDailyLimitTapped() {
+        // Encode the daily limit
+        let encoder = JSONEncoder()
+        do {
+            let encodedDailyLimit = try encoder.encode(viewState.units)
+            UserDefaults.standard.set(encodedDailyLimit, forKey: "dailyLimitHasChanged")
+        } catch {
+            print("Error encoding daily limit: \(error)")
+        }
+    }
+    
     private func updateGoalsService() {
         if limitType == .daily {
             goalsService.changeUnitsPerDay(newValue: viewState.units)
+            NotificationCenter.default.post(name: .dailyLimitHasChanged, object: self)
         } else {
             goalsService.changeUnitsPer7Days(newValue: viewState.units)
         }
