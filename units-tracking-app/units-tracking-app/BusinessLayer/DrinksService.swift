@@ -73,7 +73,6 @@ class DrinksService {
         do {
             let loadedDrinks = try decoder.decode([Drink].self, from: savedDrinksData)
             drinks = loadedDrinks
-            print(drinks)
         } catch {
             print("Error decoding array: \(error)")
         }
