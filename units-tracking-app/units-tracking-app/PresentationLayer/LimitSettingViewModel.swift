@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Notification.Name {
     static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
-//    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
+    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
 }
 
 
@@ -33,13 +33,24 @@ class LimitSettingViewModel: ObservableObject {
         
         NotificationCenter.default.addObserver(
             forName: .dailyLimitHasChanged,
-            object: goalsService,
+            object: self,
             queue: .main
         ) { [ weak self ] notification in
             // Handle the notification here
             guard let strongSelf = self else { return }
             strongSelf.updateViewState()
             print("Received a notification in LimitSettingViewModel! DailyLimitHasChanged!")
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: .weeklyLimitHasChanged,
+            object: self,
+            queue: .main
+        ) { [ weak self ] notification in
+            // Handle the notification here
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+            print("Received a notification in LimitSettingViewModel! WeeklyLimitHasChanged!")
         }
     }
     
@@ -104,6 +115,7 @@ class LimitSettingViewModel: ObservableObject {
             NotificationCenter.default.post(name: .dailyLimitHasChanged, object: self)
         } else {
             goalsService.changeUnitsPer7Days(newValue: viewState.units)
+            NotificationCenter.default.post(name: .weeklyLimitHasChanged, object: self)
         }
     }
 }
