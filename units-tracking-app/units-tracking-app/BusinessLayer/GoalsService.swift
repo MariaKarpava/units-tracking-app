@@ -10,24 +10,20 @@ import Foundation
 
 class  GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
-    var unitsPerDay: Double = 5.0
+    var unitsPerDay: Double = 5.0 {
+        didSet {
+            UserDefaults.standard.set(unitsPerDay, forKey: "dailyLimitHasChanged")
+            print("Daily limit saved and = \(unitsPerDay).")
+        }
+    }
     /// Returns the number of units per 7 days which is the max value but still within a limit.
     var unitsPer7Days: Double = 14.0
     
     
     init() {
         // Decode the daily limit
-        guard let savedDailyLimit = UserDefaults.standard.data(forKey: "dailyLimitHasChanged") else {
-            return
-        }
-        let decoder = JSONDecoder()
-        do {
-            let loadedDailyLimit = try decoder.decode(Double.self, from: savedDailyLimit)
-            unitsPerDay = loadedDailyLimit
-            print("loaded!")
-        } catch {
-            print("Error decoding daily limit: \(error)")
-        }
+        let savedDailyLimit = UserDefaults.standard.double(forKey: "dailyLimitHasChanged")
+        unitsPerDay = savedDailyLimit
     }
     
     func changeUnitsPerDay(newValue: Double) {

@@ -30,7 +30,7 @@ struct LimitSettingView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            limitSettingViewModel.saveDailyLimitTapped() // TODO: implement save logic
+                            limitSettingViewModel.saveLimitsTapped() // TODO: implement save logic
                         } label: {
                             Text("Save")
                                 .underline()
