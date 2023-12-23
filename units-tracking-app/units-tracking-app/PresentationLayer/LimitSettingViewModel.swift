@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Notification.Name {
     static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
-    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
+//    static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
 }
 
 
@@ -33,13 +33,13 @@ class LimitSettingViewModel: ObservableObject {
         
         NotificationCenter.default.addObserver(
             forName: .dailyLimitHasChanged,
-            object: self,
+            object: goalsService,
             queue: .main
         ) { [ weak self ] notification in
             // Handle the notification here
             guard let strongSelf = self else { return }
             strongSelf.updateViewState()
-            print("Received a notification in LimitSettingViewModel!")
+            print("Received a notification in LimitSettingViewModel! DailyLimitHasChanged!")
         }
     }
     
@@ -80,32 +80,22 @@ class LimitSettingViewModel: ObservableObject {
             viewState.units = goalsService.unitsPer7Days
         }
         viewState.title = titleForCurrentLimitType()
-        viewState.areUnitsPositive = checkIfUnitsArePositive()
         viewState.buttonColor = updateButtonColor()
     }
     
     func decrementUnitsTapped() {
         guard viewState.units > 0 else { return }
         viewState.units -= 1.0
-        updateGoalsService()
-        updateViewState()
+        viewState.buttonColor = updateButtonColor()
     }
     
     func incrementUnitsTapped() {
         viewState.units += 1.0
-        updateGoalsService()
-        updateViewState()
     }
     
-    func saveDailyLimitTapped() {
-        // Encode the daily limit
-        let encoder = JSONEncoder()
-        do {
-            let encodedDailyLimit = try encoder.encode(viewState.units)
-            UserDefaults.standard.set(encodedDailyLimit, forKey: "dailyLimitHasChanged")
-        } catch {
-            print("Error encoding daily limit: \(error)")
-        }
+    func saveLimitsTapped() {
+        updateGoalsService()
+        updateViewState()
     }
     
     private func updateGoalsService() {
