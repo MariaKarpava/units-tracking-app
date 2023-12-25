@@ -121,14 +121,14 @@ extension RootView {
             VStack(alignment: .center) {
                 Image(systemName: imageName)
                     .font(.system(size: 23))
-                    .foregroundColor(isActive ? .accent : .gray)
+                    .foregroundColor(isActive ? .accentBlue : .gray)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             VStack(alignment: .trailing) {
                 Text(title)
                     .font(.system(size: 10))
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(isActive ? .accent : .gray)
+                    .foregroundColor(isActive ? .accentBlue : .gray)
                 
             }
             .offset(y: -3)

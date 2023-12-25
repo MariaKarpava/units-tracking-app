@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-// + TODO: naming: "LimitView" is not very descriptive name. Can you guess screen's responsibility based purely on this name?
 struct LimitSettingView: View {
     @ObservedObject var limitSettingViewModel: LimitSettingViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
     var body: some View {
@@ -30,40 +28,24 @@ struct LimitSettingView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            limitSettingViewModel.saveLimitsTapped() // TODO: implement save logic
+                            limitSettingViewModel.saveLimitsTapped()
                         } label: {
                             Text("Save")
                                 .underline()
-                                .font(.limitScreenSaveButton)
-                                .foregroundColor(.mainText)
                         }
                     }
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: customBackButton)
     }
 }
 
 
 extension LimitSettingView {
-    var customBackButton : some View {
-        Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.mainText)
-            Text("")
-            }
-        }
-    }
-
-    // + TODO: Here and in related places: "Title" would be a better name
-    // + TODO: was it a plan to use native title instead of custom one and custom back button?
+    // + TODO: was it a plan to use native back button?
 
     var infoText: some View {
+        // TODO: check alignment.
         Text("""
             According to the NHS, males should
             not exceed a daily limit of 8 units,
@@ -78,7 +60,7 @@ extension LimitSettingView {
     var unitsIncrementer: some View {
         VStack(alignment: .center) {
             Text(String(format: "%.1f", limitSettingViewModel.viewState.units))
-                .foregroundColor(.mainText)
+                .foregroundColor(.accentColor)
             Text("unit(s)")
                 .foregroundColor(.secondaryText)
         }.font(.limitScreenUnits)
@@ -92,18 +74,17 @@ extension LimitSettingView {
             } label: {
                 customStepperButton(sign: "-", color: limitSettingViewModel.viewState.buttonColor)
             }
-            .disabled(!limitSettingViewModel.viewState.areUnitsPositive) // + TODO: unitsAreValid -- what does it mean valid? Rename to smth more descriptive
+            .disabled(limitSettingViewModel.viewState.decrementButtonIsNotActive) // TODO: this state never changes, but should!
             unitsIncrementer.frame(width: 100)
             Button {
-                limitSettingViewModel.incrementUnitsTapped() // + TODO: here and in similar places: check naming convention. Views should never give orders to VMs.
+                limitSettingViewModel.incrementUnitsTapped()
             } label: {
-                customStepperButton(sign: "+", color: .mainText)
+                customStepperButton(sign: "+", color: .accentColor)
             }
             Spacer()
         }
     }
     
-    // + TODO: this func doesn't add anything
     func customStepperButton(sign: String, color: Color) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(color, lineWidth: 2)

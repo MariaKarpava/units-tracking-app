@@ -38,7 +38,7 @@ struct HomeView: View {
                 Text("Why?")
                     .frame(height: 96)
                     .underline()
-                    .foregroundColor(.accent)
+                    .foregroundColor(.accentBlue)
                     .font(.homeScreenInfoButton)
             }
             Spacer()
