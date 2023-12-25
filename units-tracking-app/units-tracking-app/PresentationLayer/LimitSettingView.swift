@@ -61,14 +61,8 @@ extension LimitSettingView {
     }
 
     // + TODO: Here and in related places: "Title" would be a better name
-    // TODO: was it a plan to use native title instead of custom one and custom back button?
-//    var title: some View {
-//        Text(limitSettingViewModel.viewState.title)
-//            .font(.limitScreenTitle)
-//            .foregroundColor(.mainText)
-//            .padding(20)
-//    }
-    
+    // + TODO: was it a plan to use native title instead of custom one and custom back button?
+
     var infoText: some View {
         Text("""
             According to the NHS, males should
