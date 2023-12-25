@@ -58,7 +58,7 @@ struct HistoryView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
                         .font(.historyScreenHistoryHeader)
-                        .foregroundColor(.mainText)
+                        .foregroundColor(.accentColor)
                 }
             }
         }
@@ -136,7 +136,7 @@ struct DrinkHistoryRow: View {
                 VStack(alignment: .trailing) {
                     Text(String(format: "%.1f", drink.units))
                         .font(.historyScreenUnits)
-                        .foregroundColor(.mainText)
+                        .foregroundColor(.accentColor)
                     Text("unit(s)")
                         .font(.historyScreenUnitsText)
                         .foregroundColor(.secondaryText)

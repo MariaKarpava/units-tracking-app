@@ -30,7 +30,7 @@ struct SettingsView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Settings")
                         .font(.settingsScreenTitle)
-                        .foregroundColor(.mainText)
+                        .foregroundColor(.accentColor)
                 }
             }
         }
@@ -40,11 +40,11 @@ struct SettingsView: View {
         let vm = LimitSettingViewModel(goalsService: goalsService, limitType: limitType)
         return NavigationLink(destination: LimitSettingView(limitSettingViewModel: vm)) {
             HStack {
-                Text("\(title)").foregroundColor(.mainText)
+                Text("\(title)").foregroundColor(.accentColor)
                 Spacer()
                 Text("\(value)")
                     .foregroundColor(.secondaryText)
-                Image(systemName: "chevron.right").foregroundColor(.mainText)
+                Image(systemName: "chevron.right").foregroundColor(.accentColor)
             }
         }
         .frame(height: 50)
@@ -58,7 +58,7 @@ struct SettingsView: View {
     var infoAboutLimits: some View {
         Text("You will get warnings if you exceed the limits or get close to do so. These limits do not affect how many units you can log.")
             .font(.settingsScreenWarningInfo)
-            .foregroundColor(.mainText)
+            .foregroundColor(.accentColor)
             .frame(height: 50)
             .padding(.horizontal, 20)
     }
@@ -66,7 +66,7 @@ struct SettingsView: View {
     var infoStartOfTheDay: some View {
         Text("Units logged before this time tomorrow will be counted as consumed today. \"Today\" means \"before going to sleep\", not \"before midnight\".")
             .font(.settingsScreenWarningInfo)
-            .foregroundColor(.mainText)
+            .foregroundColor(.accentColor)
             .padding(.horizontal, 20)
     }
 

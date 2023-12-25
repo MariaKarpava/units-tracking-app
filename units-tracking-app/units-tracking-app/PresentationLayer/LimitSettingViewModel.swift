@@ -18,7 +18,7 @@ extension Notification.Name {
 class LimitSettingViewModel: ObservableObject {
     private let goalsService: GoalsService
     @Published var viewState: ViewState
-    private var limitType: LimitType // + TODO: encapsulation: how is supposed to be using it from the outside?
+    private var limitType: LimitType
     
     enum LimitType {
         case daily
@@ -31,6 +31,9 @@ class LimitSettingViewModel: ObservableObject {
         self.limitType = limitType
         self.updateViewState()
         
+        // TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
+        // TODO: Even if we need broadcasting, what is the best place to post these notifications?
+        // TODO: There is a Bug: Home screen doesn't get updated once the limit changes (Note: state of Home depends on limits, not just on drinks history).
         NotificationCenter.default.addObserver(
             forName: .dailyLimitHasChanged,
             object: self,
@@ -56,15 +59,15 @@ class LimitSettingViewModel: ObservableObject {
     
     struct ViewState: Equatable {
         var units: Double = 1.0
-        var areUnitsPositive: Bool = true
-        var limitType: LimitType = .daily
+        var decrementButtonIsNotActive: Bool = false
         var title: String = "Daily Limit"
-        var buttonColor: Color = .mainText
+        var buttonColor: Color = .accentColor
+        
+        // TODO: Save button should not always be enabled. It's enabled only when there are unsaved changes.
     }
     
-    // + TODO: misleading name: this is a "pure" function which doesn't have any side effects (which is good), it does not update anything.
     private func titleForCurrentLimitType() -> String {
-        switch viewState.limitType {
+        switch limitType {
         case .daily:
             return "Daily Limit"
         case .weekly:
@@ -78,9 +81,10 @@ class LimitSettingViewModel: ObservableObject {
         return result
     }
     
+    // TODO: same as with title. Doesn't this name lie about what it's doing?
     private func updateButtonColor() -> Color {
         if checkIfUnitsArePositive() {
-            return Color.mainText
+            return Color.accentColor
         } else {
             return Color.secondaryText
         }

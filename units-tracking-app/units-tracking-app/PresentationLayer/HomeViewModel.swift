@@ -70,7 +70,7 @@ class HomeViewModel: ObservableObject {
     func calculateColorForUnits(currentDrinkState: DrinkState) -> Color {
         switch currentDrinkState {
         case .normal:
-            return .mainText
+            return .accentColor
         case .closeToZero:
             return .customOrange
         case .remainingIsZero:
