@@ -52,6 +52,26 @@ class HomeViewModel: ObservableObject {
             guard let strongSelf = self else { return }
             strongSelf.updateViewState()
         }
+        
+        NotificationCenter.default.addObserver(
+            forName: .dailyLimitHasChanged,
+            object: goalsService,
+            queue: .main
+        ) { [weak self] notification in
+            // Handle the notification here
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: .weeklyLimitHasChanged,
+            object: goalsService,
+            queue: .main
+        ) { [weak self] notification in
+            // Handle the notification here
+            guard let strongSelf = self else { return }
+            strongSelf.updateViewState()
+        }
     }
     
     func updateViewState() {

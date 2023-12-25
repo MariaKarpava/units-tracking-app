@@ -17,6 +17,7 @@ class  GoalsService: ObservableObject {
     var unitsPerDay: Double = 5.0 {
         didSet {
             UserDefaults.standard.set(unitsPerDay, forKey: "dailyLimitHasChanged")
+            NotificationCenter.default.post(name: .dailyLimitHasChanged, object: self)
             print("Daily limit saved and = \(unitsPerDay).")
         }
     }
@@ -24,6 +25,7 @@ class  GoalsService: ObservableObject {
     var unitsPer7Days: Double = 14.0 {
         didSet {
             UserDefaults.standard.set(unitsPer7Days, forKey: "weeklyLimitHasChanged")
+            NotificationCenter.default.post(name: .weeklyLimitHasChanged, object: self)
             print("Weekly limit saved and = \(unitsPer7Days).")
         }
     }
