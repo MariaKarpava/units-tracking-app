@@ -17,10 +17,6 @@ struct SettingsView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 40)
-//                Text("Settings")
-//                    .font(.settingsScreenTitle)
-//                    .foregroundColor(.mainText)
-//                    .padding(.horizontal, 20)
                 Spacer().frame(height: 50)
                 settingCell(title: "Daily Limit", value: "\(settingsViewModel.viewState.dailyLimit) unit(s)", limitType: .daily)
                 settingCell(title: "Weekly Limit", value: "\(settingsViewModel.viewState.weeklyLimit) unit(s)", limitType: .weekly)

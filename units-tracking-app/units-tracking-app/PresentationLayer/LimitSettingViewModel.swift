@@ -73,11 +73,13 @@ class LimitSettingViewModel: ObservableObject {
     }
     
     private func checkIfUnitsArePositive() -> Bool {
-        return viewState.units > 0
+        let result = viewState.units > 0
+        print("Units:\(viewState.units) -- \(result)")
+        return result
     }
     
     private func updateButtonColor() -> Color {
-        if viewState.areUnitsPositive {
+        if checkIfUnitsArePositive() {
             return Color.mainText
         } else {
             return Color.secondaryText
@@ -102,6 +104,7 @@ class LimitSettingViewModel: ObservableObject {
     
     func incrementUnitsTapped() {
         viewState.units += 1.0
+        viewState.buttonColor = updateButtonColor()
     }
     
     func saveLimitsTapped() {
