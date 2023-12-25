@@ -76,16 +76,16 @@ class LimitSettingViewModel: ObservableObject {
     }
     
     private func checkIfUnitsArePositive() -> Bool {
-        let result = viewState.units > 0
-        print("Units:\(viewState.units) -- \(result)")
-        return result
+        return viewState.units > 0
     }
     
     // TODO: same as with title. Doesn't this name lie about what it's doing?
     private func updateButtonColor() -> Color {
         if checkIfUnitsArePositive() {
+            viewState.decrementButtonIsNotActive = false
             return Color.accentColor
         } else {
+            viewState.decrementButtonIsNotActive = true
             return Color.secondaryText
         }
     }
