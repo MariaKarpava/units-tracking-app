@@ -44,7 +44,7 @@ extension LimitSettingView {
     // + TODO: was it a plan to use native back button?
 
     var infoText: some View {
-        // TODO: check alignment.
+        // + TODO: check alignment.
         Text("""
             According to the NHS, males should
             not exceed a daily limit of 8 units,
@@ -75,7 +75,7 @@ extension LimitSettingView {
             } label: {
                 customStepperButton(sign: "-", color: limitSettingViewModel.viewState.buttonColor)
             }
-            .disabled(limitSettingViewModel.viewState.decrementButtonIsNotActive) // TODO: this state never changes, but should!
+            .disabled(limitSettingViewModel.viewState.decrementButtonIsNotActive) // + TODO: this state never changes, but should!
             unitsIncrementer.frame(width: 100)
             Button {
                 limitSettingViewModel.incrementUnitsTapped()
