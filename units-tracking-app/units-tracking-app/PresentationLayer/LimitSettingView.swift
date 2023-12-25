@@ -31,7 +31,7 @@ struct LimitSettingView: View {
                         } label: {
                             Text("Save")
                                 .underline()
-                        }
+                        }.disabled(limitSettingViewModel.viewState.saveButtonIsNotActive)
                     }
                 }
             }

@@ -31,9 +31,9 @@ class LimitSettingViewModel: ObservableObject {
         self.limitType = limitType
         self.updateViewState()
         
-        // TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
-        // TODO: Even if we need broadcasting, what is the best place to post these notifications? -- at updateViewState()?
-        // TODO: There is a Bug: Home screen doesn't get updated once the limit changes (Note: state of Home depends on limits, not just on drinks history).
+        // + TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
+        // + TODO: Even if we need broadcasting, what is the best place to post these notifications? -- at updateViewState()?
+        // + TODO: There is a Bug: Home screen doesn't get updated once the limit changes (Note: state of Home depends on limits, not just on drinks history).
         
         NotificationCenter.default.addObserver(
             forName: .weeklyLimitHasChanged,
@@ -50,10 +50,11 @@ class LimitSettingViewModel: ObservableObject {
     struct ViewState: Equatable {
         var units: Double = 1.0
         var decrementButtonIsNotActive: Bool = false
+        var saveButtonIsNotActive: Bool = true
         var title: String = "Daily Limit"
         var buttonColor: Color = .accentColor
         
-        // TODO: Save button should not always be enabled. It's enabled only when there are unsaved changes.
+        // + TODO: Save button should not always be enabled. It's enabled only when there are unsaved changes.
     }
     
     private func titleForCurrentLimitType() -> String {
@@ -94,16 +95,19 @@ class LimitSettingViewModel: ObservableObject {
         guard viewState.units > 0 else { return }
         viewState.units -= 1.0
         viewState.buttonColor = updateButtonColor()
+        viewState.saveButtonIsNotActive = false
     }
     
     func incrementUnitsTapped() {
         viewState.units += 1.0
         viewState.buttonColor = updateButtonColor()
+        viewState.saveButtonIsNotActive = false
     }
     
     func saveLimitsTapped() {
         updateGoalsService()
         updateViewState()
+        viewState.saveButtonIsNotActive = true
     }
     
     private func updateGoalsService() {
