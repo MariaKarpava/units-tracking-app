@@ -70,8 +70,8 @@ class LimitSettingViewModel: ObservableObject {
         return viewState.units > 0
     }
     
-    // TODO: same as with title. Doesn't this name lie about what it's doing?
-    private func updateButtonColor() -> Color {
+    // + TODO: same as with title. Doesn't this name lie about what it's doing?
+    private func decrementButtonColor() -> Color {
         if checkIfUnitsArePositive() {
             viewState.decrementButtonIsNotActive = false
             return Color.accentColor
@@ -88,19 +88,19 @@ class LimitSettingViewModel: ObservableObject {
             viewState.units = goalsService.unitsPer7Days
         }
         viewState.title = titleForCurrentLimitType()
-        viewState.buttonColor = updateButtonColor()
+        viewState.buttonColor = decrementButtonColor()
     }
     
     func decrementUnitsTapped() {
         guard viewState.units > 0 else { return }
         viewState.units -= 1.0
-        viewState.buttonColor = updateButtonColor()
+        viewState.buttonColor = decrementButtonColor()
         viewState.saveButtonIsNotActive = false
     }
     
     func incrementUnitsTapped() {
         viewState.units += 1.0
-        viewState.buttonColor = updateButtonColor()
+        viewState.buttonColor = decrementButtonColor()
         viewState.saveButtonIsNotActive = false
     }
     
