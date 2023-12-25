@@ -32,18 +32,8 @@ class LimitSettingViewModel: ObservableObject {
         self.updateViewState()
         
         // TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
-        // TODO: Even if we need broadcasting, what is the best place to post these notifications?
+        // TODO: Even if we need broadcasting, what is the best place to post these notifications? -- at updateViewState()?
         // TODO: There is a Bug: Home screen doesn't get updated once the limit changes (Note: state of Home depends on limits, not just on drinks history).
-        NotificationCenter.default.addObserver(
-            forName: .dailyLimitHasChanged,
-            object: self,
-            queue: .main
-        ) { [ weak self ] notification in
-            // Handle the notification here
-            guard let strongSelf = self else { return }
-            strongSelf.updateViewState()
-            print("Received a notification in LimitSettingViewModel! DailyLimitHasChanged!")
-        }
         
         NotificationCenter.default.addObserver(
             forName: .weeklyLimitHasChanged,
@@ -119,10 +109,8 @@ class LimitSettingViewModel: ObservableObject {
     private func updateGoalsService() {
         if limitType == .daily {
             goalsService.changeUnitsPerDay(newValue: viewState.units)
-            NotificationCenter.default.post(name: .dailyLimitHasChanged, object: self)
         } else {
             goalsService.changeUnitsPer7Days(newValue: viewState.units)
-            NotificationCenter.default.post(name: .weeklyLimitHasChanged, object: self)
         }
     }
 }
