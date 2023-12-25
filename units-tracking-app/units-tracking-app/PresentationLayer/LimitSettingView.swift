@@ -14,11 +14,10 @@ struct LimitSettingView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Spacer()
                         .frame(height: 60)
                     infoText
-                    .padding(.horizontal, 55)
                     Spacer()
                         .frame(height: 140)
                     buttonsWithUnits
@@ -55,6 +54,8 @@ extension LimitSettingView {
             alcohol. The more alcohol you
             consume, the higher are the risks.
             """)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal, 55)
     }
     
     var unitsIncrementer: some View {
