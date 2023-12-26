@@ -41,10 +41,7 @@ struct LimitSettingView: View {
 
 
 extension LimitSettingView {
-    // + TODO: was it a plan to use native back button?
-
     var infoText: some View {
-        // + TODO: check alignment.
         Text("""
             According to the NHS, males should
             not exceed a daily limit of 8 units,

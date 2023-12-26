@@ -61,6 +61,7 @@ class HomeViewModel: ObservableObject {
             // Handle the notification here
             guard let strongSelf = self else { return }
             strongSelf.updateViewState()
+            print("Home: view state updated: .dailyLimitHasChanged")
         }
         
         NotificationCenter.default.addObserver(
@@ -71,6 +72,7 @@ class HomeViewModel: ObservableObject {
             // Handle the notification here
             guard let strongSelf = self else { return }
             strongSelf.updateViewState()
+            print("Home: view state updated: .weeklyLimitHasChanged")
         }
     }
     
@@ -102,7 +104,7 @@ class HomeViewModel: ObservableObject {
     func calculateCurrentDrinkState() -> DrinkState {
         let unitsRemainingForToday = drinksService.unitsRemainingForToday
         
-        let unitsAllowedPer7Days = goalsService.unitsPer7Days
+        let unitsAllowedPer7Days = goalsService.getUnitsPer7Days()
         let closeToLimitUnits: Double = unitsAllowedPer7Days * 20 / 100
         
         if unitsRemainingForToday() > closeToLimitUnits {
