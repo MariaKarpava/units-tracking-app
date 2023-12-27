@@ -24,18 +24,7 @@ class LimitSettingViewModel: ObservableObject {
         self.viewState = ViewState()
         self.limitType = limitType
         self.updateViewState()
-        
-        // TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
-        NotificationCenter.default.addObserver(
-            forName: GoalsService.NotificationName.weeklyLimitHasChanged,
-            object: self,
-            queue: .main
-        ) { [ weak self ] notification in
-            // Handle the notification here
-            guard let strongSelf = self else { return }
-            strongSelf.updateViewState()
-            print("Received a notification in LimitSettingViewModel! WeeklyLimitHasChanged!")
-        }
+        // + TODO:  What's the purpose of these notification center usages? Is it possible to achieve the same without broadcasting?
     }
     
     struct ViewState: Equatable {

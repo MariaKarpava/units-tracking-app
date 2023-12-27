@@ -44,7 +44,7 @@ class  GoalsService: ObservableObject {
         NotificationCenter.default.post(name: NotificationName.dailyLimitHasChanged, object: self)
     }
     
-    // TODO: FYI: alternative could be to make the property `private(set) public` -- that way it would have been read-only from outside but read-write from the inside. But current approach is also fine.
+    // + TODO: FYI: alternative could be to make the property `private(set) public` -- that way it would have been read-only from outside but read-write from the inside. But current approach is also fine.
     
     func changeUnitsPer7Days(newValue: Double) {
         unitsPer7Days = newValue
