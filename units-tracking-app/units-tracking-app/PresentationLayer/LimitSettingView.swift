@@ -72,7 +72,7 @@ extension LimitSettingView {
             } label: {
                 customStepperButton(sign: "-", color: limitSettingViewModel.viewState.buttonColor)
             }
-            .disabled(limitSettingViewModel.viewState.decrementButtonIsNotActive) // + TODO: this state never changes, but should!
+            .disabled(limitSettingViewModel.viewState.decrementButtonIsNotActive)
             unitsIncrementer.frame(width: 100)
             Button {
                 limitSettingViewModel.incrementUnitsTapped()

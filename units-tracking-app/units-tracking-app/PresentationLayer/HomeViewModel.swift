@@ -54,7 +54,7 @@ class HomeViewModel: ObservableObject {
         }
         
         NotificationCenter.default.addObserver(
-            forName: .dailyLimitHasChanged,
+            forName: GoalsService.NotificationName.dailyLimitHasChanged,
             object: goalsService,
             queue: .main
         ) { [weak self] notification in
@@ -65,7 +65,7 @@ class HomeViewModel: ObservableObject {
         }
         
         NotificationCenter.default.addObserver(
-            forName: .weeklyLimitHasChanged,
+            forName: GoalsService.NotificationName.weeklyLimitHasChanged,
             object: goalsService,
             queue: .main
         ) { [weak self] notification in
