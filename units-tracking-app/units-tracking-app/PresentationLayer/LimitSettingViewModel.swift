@@ -13,6 +13,7 @@ class LimitSettingViewModel: ObservableObject {
     private let goalsService: GoalsService
     @Published var viewState: ViewState
     private var limitType: LimitType
+
     
     enum LimitType {
         case daily
@@ -29,13 +30,14 @@ class LimitSettingViewModel: ObservableObject {
     
     struct ViewState: Equatable {
         var units: Double = 1.0
+        var oldUnits: Double = 1.0
         var decrementButtonIsNotActive: Bool = false
         var saveButtonIsNotActive: Bool = true
         var title: String = "Daily Limit"
         var buttonColor: Color = .accentColor
         
         // + TODO: Save button should not always be enabled. It's enabled only when there are unsaved changes.
-        // TODO: Save should be enabled when there are unsaved changes. I.e. 8 -> 9 -> 8 = not enabled.
+        // + TODO: Save should be enabled when there are unsaved changes. I.e. 8 -> 9 -> 8 = not enabled.
     }
     
     private func titleForCurrentLimitType() -> String {
@@ -63,11 +65,21 @@ class LimitSettingViewModel: ObservableObject {
         }
     }
     
+    private func updateSaveButtonState(oldUnits: Double) {
+        if viewState.units != oldUnits {
+            viewState.saveButtonIsNotActive = false
+        } else {
+            viewState.saveButtonIsNotActive = true
+        }
+    }
+    
     private func updateViewState() {
         if limitType == .daily {
             viewState.units = goalsService.unitsPerDay
+            viewState.oldUnits = viewState.units
         } else {
             viewState.units = goalsService.unitsPer7Days
+            viewState.oldUnits = viewState.units
         }
         viewState.title = titleForCurrentLimitType()
         viewState.buttonColor = buttonColor()
@@ -77,19 +89,19 @@ class LimitSettingViewModel: ObservableObject {
         guard viewState.units > 0 else { return }
         viewState.units -= 1.0
         viewState.buttonColor = buttonColor()
-        viewState.saveButtonIsNotActive = false
+        updateSaveButtonState(oldUnits: viewState.oldUnits)
     }
     
     func incrementUnitsTapped() {
         viewState.units += 1.0
         viewState.buttonColor = buttonColor()
-        viewState.saveButtonIsNotActive = false
+        updateSaveButtonState(oldUnits: viewState.oldUnits)
     }
     
     func saveLimitsTapped() {
         updateGoalsService()
         updateViewState()
-        viewState.saveButtonIsNotActive = true
+        updateSaveButtonState(oldUnits: viewState.oldUnits)
     }
     
     private func updateGoalsService() {
