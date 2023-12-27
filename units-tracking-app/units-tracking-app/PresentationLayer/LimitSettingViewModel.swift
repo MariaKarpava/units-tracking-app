@@ -76,9 +76,9 @@ class LimitSettingViewModel: ObservableObject {
     
     private func updateViewState() {
         if limitType == .daily {
-            viewState.units = goalsService.getUnitsPerDay()
+            viewState.units = goalsService.unitsPerDay
         } else {
-            viewState.units = goalsService.getUnitsPer7Days()
+            viewState.units = goalsService.unitsPer7Days
         }
         viewState.title = titleForCurrentLimitType()
         viewState.buttonColor = decrementButtonColor()
