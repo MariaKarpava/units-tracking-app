@@ -104,7 +104,7 @@ class HomeViewModel: ObservableObject {
     func calculateCurrentDrinkState() -> DrinkState {
         let unitsRemainingForToday = drinksService.unitsRemainingForToday
         
-        let unitsAllowedPer7Days = goalsService.getUnitsPer7Days()
+        let unitsAllowedPer7Days = goalsService.unitsPer7Days
         let closeToLimitUnits: Double = unitsAllowedPer7Days * 20 / 100
         
         if unitsRemainingForToday() > closeToLimitUnits {

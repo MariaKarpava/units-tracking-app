@@ -7,15 +7,15 @@
 
 import Foundation
 
-// TODO: get rid of magic strings. Add enums `GoalsService.Notification` and `GoalsService.UserDefaultsKey` which would host the constants. Make sure best fitting access modifiers are chosen.
+// + TODO: get rid of magic strings. Add enums `GoalsService.Notification` and `GoalsService.UserDefaultsKey` which would host the constants. Make sure best fitting access modifiers are chosen.
 
 
 class  GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
-    private var unitsPerDay: Double
+    private(set) public var unitsPerDay: Double
     
     /// Returns the number of units per 7 days which is the max value but still within a limit.
-    private var unitsPer7Days: Double
+    private(set) public var unitsPer7Days: Double
     
     enum NotificationName {
         static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
@@ -45,18 +45,11 @@ class  GoalsService: ObservableObject {
     }
     
     // TODO: FYI: alternative could be to make the property `private(set) public` -- that way it would have been read-only from outside but read-write from the inside. But current approach is also fine.
-    func getUnitsPerDay() -> Double {
-        unitsPerDay
-    }
     
     func changeUnitsPer7Days(newValue: Double) {
         unitsPer7Days = newValue
         
         UserDefaults.standard.set(unitsPer7Days, forKey: UserDefaultsKey.weeklyLimitHasChanged)
         NotificationCenter.default.post(name: NotificationName.weeklyLimitHasChanged, object: self)
-    }
-    
-    func getUnitsPer7Days() -> Double {
-        unitsPer7Days
     }
 }

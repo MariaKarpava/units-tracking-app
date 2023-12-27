@@ -25,8 +25,8 @@ class SettingsViewModel: ObservableObject {
     }
     
     func updateViewState() {
-        viewState.dailyLimit = goalsService.getUnitsPerDay()
-        viewState.weeklyLimit = goalsService.getUnitsPer7Days()
+        viewState.dailyLimit = goalsService.unitsPerDay
+        viewState.weeklyLimit = goalsService.unitsPer7Days
     }
 
 }

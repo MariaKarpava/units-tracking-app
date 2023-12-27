@@ -107,8 +107,8 @@ class DrinksService {
     
     func unitsRemainingForToday() -> Double {
         var result = 0.0
-        let allowedUnitsPerDay = goalsService.getUnitsPerDay()
-        let allowedUnitsPer7Days = goalsService.getUnitsPer7Days()
+        let allowedUnitsPerDay = goalsService.unitsPerDay
+        let allowedUnitsPer7Days = goalsService.unitsPer7Days
         
         if unitsConsumedWithinLast7Days() > allowedUnitsPer7Days || unitsConsumedToday() > allowedUnitsPerDay {
             result = 0.0
