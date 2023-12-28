@@ -51,21 +51,13 @@ class LimitSettingViewModel: ObservableObject {
             According to the NHS, males should
             not exceed a daily limit of 8 units,
             while for females the value is 6 units. 
-            
-            Note: there is **no safe** amount of
-            alcohol. The more alcohol you
-            consume, the higher are the risks.
             """
         case .weekly:
             return """
-            According to the NHS, men and women are
-            advised not to drink
+            According to the NHS, men and 
+            women are advised not to drink
             more than 14 units a week on a
             regular basis.
-            
-            Note: there is **no safe** amount of
-            alcohol. The more alcohol you
-            consume, the higher are the risks.
             """
         }
     }

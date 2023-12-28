@@ -42,9 +42,19 @@ struct LimitSettingView: View {
 
 extension LimitSettingView {
     var infoText: some View {
-        Text(limitSettingViewModel.viewState.infoText)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 55)
+        VStack{
+            Text(limitSettingViewModel.viewState.infoText)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 55)
+            Text("""
+            
+            Note: there is **no safe** amount of
+            alcohol. The more alcohol you
+            consume, the higher are the risks.
+            """
+            )
+        }
+        
     }
     
     var unitsIncrementer: some View {
