@@ -8,7 +8,7 @@
 import Foundation
 
 // + TODO: get rid of magic strings. Add enums `GoalsService.Notification` and `GoalsService.UserDefaultsKey` which would host the constants. Make sure best fitting access modifiers are chosen.
-// TODO: So what about access modifiers?
+// + TODO: So what about access modifiers?
 
 class  GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
@@ -22,21 +22,21 @@ class  GoalsService: ObservableObject {
         static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
     }
     
-    // private as: 1.
     private enum UserDefaultsKey {
         static let dailyLimitHasChanged = "dailyLimitHasChanged"
         static let weeklyLimitHasChanged = "weeklyLimitHasChanged"
     }
     
+    private enum DefaultLimit {
+        static let daily = 6.0
+        static let weekly = 14.0
+    }
+    
     init() {
-        // daily and weekly limits when launching the app
-        let launchingDailyLimit = 6.0
-        let launchingWeeklyLimit = 14.0
-        
         // Decode the daily limit
         let savedDailyLimit = UserDefaults.standard.double(forKey: UserDefaultsKey.dailyLimitHasChanged)
         if savedDailyLimit == 0 {
-            unitsPerDay = launchingDailyLimit // TODO: get rid of magic numbers. Also how are the defaults chosen? Does it match NHS recommendation?
+            unitsPerDay = DefaultLimit.daily // + TODO: get rid of magic numbers. Also how are the defaults chosen? Does it match NHS recommendation?
         } else {
             unitsPerDay = savedDailyLimit
         }
@@ -45,7 +45,7 @@ class  GoalsService: ObservableObject {
         // Decode the weekly limit
         let savedWeeklyLimit = UserDefaults.standard.double(forKey: UserDefaultsKey.weeklyLimitHasChanged)
         if savedWeeklyLimit == 0 {
-            unitsPer7Days = launchingWeeklyLimit
+            unitsPer7Days = DefaultLimit.weekly
         } else {
             unitsPer7Days = savedWeeklyLimit
         }
