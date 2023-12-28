@@ -8,7 +8,7 @@
 import Foundation
 
 // + TODO: get rid of magic strings. Add enums `GoalsService.Notification` and `GoalsService.UserDefaultsKey` which would host the constants. Make sure best fitting access modifiers are chosen.
-
+// TODO: So what about access modifiers?
 
 class  GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
@@ -17,24 +17,38 @@ class  GoalsService: ObservableObject {
     /// Returns the number of units per 7 days which is the max value but still within a limit.
     private(set) public var unitsPer7Days: Double
     
-    enum NotificationName {
+    public enum NotificationName {
         static let dailyLimitHasChanged = Notification.Name("dailyLimitHasChanged")
         static let weeklyLimitHasChanged = Notification.Name("weeklyLimitHasChanged")
     }
     
-    enum UserDefaultsKey {
+    // private as: 1.
+    private enum UserDefaultsKey {
         static let dailyLimitHasChanged = "dailyLimitHasChanged"
         static let weeklyLimitHasChanged = "weeklyLimitHasChanged"
     }
     
     init() {
+        // daily and weekly limits when launching the app
+        let launchingDailyLimit = 6.0
+        let launchingWeeklyLimit = 14.0
+        
         // Decode the daily limit
         let savedDailyLimit = UserDefaults.standard.double(forKey: UserDefaultsKey.dailyLimitHasChanged)
-        unitsPerDay = savedDailyLimit
+        if savedDailyLimit == 0 {
+            unitsPerDay = launchingDailyLimit // TODO: get rid of magic numbers. Also how are the defaults chosen? Does it match NHS recommendation?
+        } else {
+            unitsPerDay = savedDailyLimit
+        }
+        
         
         // Decode the weekly limit
         let savedWeeklyLimit = UserDefaults.standard.double(forKey: UserDefaultsKey.weeklyLimitHasChanged)
-        unitsPer7Days = savedWeeklyLimit
+        if savedWeeklyLimit == 0 {
+            unitsPer7Days = launchingWeeklyLimit
+        } else {
+            unitsPer7Days = savedWeeklyLimit
+        }
     }
     
     func changeUnitsPerDay(newValue: Double) {
@@ -43,9 +57,7 @@ class  GoalsService: ObservableObject {
         UserDefaults.standard.set(unitsPerDay, forKey: UserDefaultsKey.dailyLimitHasChanged)
         NotificationCenter.default.post(name: NotificationName.dailyLimitHasChanged, object: self)
     }
-    
-    // + TODO: FYI: alternative could be to make the property `private(set) public` -- that way it would have been read-only from outside but read-write from the inside. But current approach is also fine.
-    
+
     func changeUnitsPer7Days(newValue: Double) {
         unitsPer7Days = newValue
         
