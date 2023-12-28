@@ -42,17 +42,9 @@ struct LimitSettingView: View {
 
 extension LimitSettingView {
     var infoText: some View {
-        Text("""
-            According to the NHS, males should
-            not exceed a daily limit of 8 units,
-            while for females the value is 6 units. 
-            
-            Note: there is **no safe** amount of
-            alcohol. The more alcohol you
-            consume, the higher are the risks.
-            """)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal, 55)
+        Text(limitSettingViewModel.viewState.infoText)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 55)
     }
     
     var unitsIncrementer: some View {
