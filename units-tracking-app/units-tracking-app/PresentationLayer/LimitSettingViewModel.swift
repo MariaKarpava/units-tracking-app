@@ -25,7 +25,6 @@ class LimitSettingViewModel: ObservableObject {
         self.updateViewState()
     }
     
-    // TODO: check the info text -- it should be different based on the `limitType`.
     struct ViewState: Equatable {
         var units: Double = 1.0
         var oldUnits: Double = 1.0
@@ -75,9 +74,6 @@ class LimitSettingViewModel: ObservableObject {
         return viewState.units > 0
     }
     
-    // + TODO: same as with title. Doesn't this name lie about what it's doing?
-    // + TODO: NEW: Doesn't this name lie about what it's doing now? :)
-    // TODO: discuss
     private func updateDecrementButton() {
         if checkIfUnitsArePositive() {
             viewState.buttonColor = .accentColor

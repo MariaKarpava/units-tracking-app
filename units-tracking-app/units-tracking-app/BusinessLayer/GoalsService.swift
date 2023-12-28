@@ -7,10 +7,8 @@
 
 import Foundation
 
-// + TODO: get rid of magic strings. Add enums `GoalsService.Notification` and `GoalsService.UserDefaultsKey` which would host the constants. Make sure best fitting access modifiers are chosen.
-// + TODO: So what about access modifiers?
 
-class  GoalsService: ObservableObject {
+class GoalsService: ObservableObject {
     /// Returns the number of units per day which is the max value but still within a limit.
     private(set) public var unitsPerDay: Double
     
@@ -36,7 +34,7 @@ class  GoalsService: ObservableObject {
         // Decode the daily limit
         let savedDailyLimit = UserDefaults.standard.double(forKey: UserDefaultsKey.dailyLimitHasChanged)
         if savedDailyLimit == 0 {
-            unitsPerDay = DefaultLimit.daily // + TODO: get rid of magic numbers. Also how are the defaults chosen? Does it match NHS recommendation?
+            unitsPerDay = DefaultLimit.daily
         } else {
             unitsPerDay = savedDailyLimit
         }
