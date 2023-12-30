@@ -55,6 +55,9 @@ struct HistoryView: View {
                         }
             }
             .toolbar { // GeometryReader
+                ToolbarItem {
+                    EditButton()
+                }
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
                         .font(.historyScreenHistoryHeader)
