@@ -42,8 +42,6 @@ struct HomeView: View {
                     .font(.homeScreenInfoButton)
             }
             Spacer()
-              //  .frame(height: 290)
-            Text("BOTTOM")
         }
     }
 }

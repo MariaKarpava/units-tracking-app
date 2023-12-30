@@ -65,7 +65,6 @@ struct RootView: View {
     static let addButtonProtrusion: CGFloat = 40
     
     var body: some View {
-        VStack(spacing: 0.0) {
             ZStack(alignment: .bottom) {
                 TabView(selection: $selectedTab) {
                     HomeView(homeViewModel: homeViewModel)
@@ -76,7 +75,6 @@ struct RootView: View {
                         .tag(TabbedItems.history)
                     SettingsView(settingsViewModel: settingsViewModel, goalsService: goalsService)
                         .tag(TabbedItems.settings)
-                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
  
