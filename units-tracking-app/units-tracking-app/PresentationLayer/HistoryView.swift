@@ -20,7 +20,79 @@ struct ResultView: View {
 
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
+    @Environment(\.editMode) private var editMode
 
+    var body: some View {
+        
+        MainContent(historyViewModel: historyViewModel)
+        
+        Form {
+            if editMode?.wrappedValue.isEditing == true {
+                MainContent(historyViewModel: historyViewModel)
+            } else {
+                Text("Hello")
+//                MainContent(historyViewModel: historyViewModel)
+            }
+        }
+        .animation(nil, value: editMode?.wrappedValue)
+        
+        
+        
+//        NavigationStack {
+//            GeometryReader { bodyGeometry in
+//                        switch historyViewModel.viewState.content {
+//                        case .empty:
+//                            EmptyDrinkHistory()
+//                        case .notEmpty(let drinkHistoryRowModels):
+//                            // should use foreach for drinks whenever @Published drinks in VM changes
+//            
+//                             ScrollView(.vertical) {
+//                                 LazyVStack(alignment: .center, spacing: 15) {
+//                                    ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
+//                                        NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+//                                            DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+//                                                .frame(
+//                                                    width: bodyGeometry.size.width - 40,
+//                                                    height: 80
+//                                                )
+//                                                .background(Color.white)
+//                                                .cornerRadius(4)
+//                                                .shadow(
+//                                                    color: Color.gray.opacity(0.2),
+//                                                    radius: 10,
+//                                                    x: 0,
+//                                                    y: 0
+//                                                )
+//                                        }
+//                                    }
+//                                    .onDelete{ indexSet in
+//                                        historyViewModel.deleteHistoryRows(at: indexSet)
+//                                    }
+//                                 }.frame(width: bodyGeometry.size.width)
+//                            }
+//                                .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
+//                                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
+//                                .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
+//                        }
+//            }
+//            .toolbar { // GeometryReader
+//                ToolbarItem {
+//                    EditButton()
+//                }
+//                ToolbarItem(placement: .topBarLeading) {
+//                    Text("History")
+//                        .font(.historyScreenHistoryHeader)
+//                        .foregroundColor(.accentColor)
+//                }
+//            }
+//        }
+    }
+}
+
+
+struct MainContent: View {
+    @ObservedObject var historyViewModel: HistoryViewModel
+    
     var body: some View {
         NavigationStack {
             GeometryReader { bodyGeometry in
@@ -29,8 +101,9 @@ struct HistoryView: View {
                             EmptyDrinkHistory()
                         case .notEmpty(let drinkHistoryRowModels):
                             // should use foreach for drinks whenever @Published drinks in VM changes
-                            ScrollView(.vertical) {
-                                LazyVStack(alignment: .center, spacing: 15) {
+            
+                             ScrollView(.vertical) {
+                                 LazyVStack(alignment: .center, spacing: 15) {
                                     ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
                                         NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                             DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
@@ -48,8 +121,12 @@ struct HistoryView: View {
                                                 )
                                         }
                                     }
-                                }.frame(width: bodyGeometry.size.width)
-                            }.frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
+                                    .onDelete{ indexSet in
+                                        historyViewModel.deleteHistoryRows(at: indexSet)
+                                    }
+                                 }.frame(width: bodyGeometry.size.width)
+                            }
+                                .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
                                 .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                                 .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
                         }
