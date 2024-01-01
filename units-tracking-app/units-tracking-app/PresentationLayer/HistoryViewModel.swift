@@ -59,4 +59,9 @@ class HistoryViewModel: ObservableObject {
             viewState.content = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
         }
     }
+    
+    public func deleteHistoryRows(at offsets: IndexSet) {
+        drinksService.deleteDrinks(at: offsets)
+        updateViewState()
+    }
 }
