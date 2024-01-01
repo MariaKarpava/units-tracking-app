@@ -21,6 +21,8 @@ struct ResultView: View {
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     @Environment(\.editMode) private var editMode
+    
+    @State var mode: EditMode = .inactive //< -- Here
 
     var body: some View {
 //        if editMode?.wrappedValue.isEditing == true {
@@ -43,6 +45,11 @@ struct HistoryView: View {
             
                              ScrollView(.vertical) {
                                  LazyVStack(alignment: .center, spacing: 15) {
+                                     if mode == .active {
+                                         Text("Editing Mode")
+                                     } else {
+                                         Text("No Editing")
+                                     }
                                     ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
                                         NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                             DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
@@ -79,7 +86,8 @@ struct HistoryView: View {
                         .font(.historyScreenHistoryHeader)
                         .foregroundColor(.accentColor)
                 }
-            }
+                
+            }.environment(\.editMode, $mode) //< -- Here
         }
     }
 }
