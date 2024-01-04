@@ -35,9 +35,7 @@ struct HistoryView: View {
                                      ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
                                          HStack {
                                              if historyViewModel.viewState.mode == .edit {
-                                                 Circle()
-                                                     .stroke(.red, lineWidth: 2)
-                                                     .frame(width: 25, height: 25)
+                                                 ChooseButton(isEditing: true)
                                              }
                                              NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
 //                                                 HStack {
@@ -176,24 +174,20 @@ struct DrinkHistoryRow: View {
 
 
 struct ChooseButton: View {
-//    let isEditing: Bool
-//    let number: Int
-//    @State private var didTapOnChooseButton:Bool = false
-//    @Binding var chosenNumbers: [Int]
-    
     let isEditing: Bool
+    @State var tapped: Bool = false
     
     var body: some View {
         VStack {
             if isEditing {
                 Button(action: {
-//                    self.didTapOnChooseButton.toggle()
-//                    chosenNumbers.append(number)
-
+                    tapped.toggle()
                 }) {
                     Circle()
-                        .stroke(.gray, lineWidth: 2)
-//                        .fill(didTapOnChooseButton ? .blue : .white)
+                        .fill(tapped ? Color.orange : Color.green)
+//                        .strokeBorder(.gray, lineWidth: 2)
+//                        .background(tapped ? Color.orange : Color.white)
+                        
                         .frame(width: 25, height: 25)
                 }
             }
