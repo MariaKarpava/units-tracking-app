@@ -35,6 +35,12 @@ class HistoryViewModel: ObservableObject {
             case notEmpty(drinkHistoryRowModels: [DrinkHistoryRowModel])
         }
         var content: Content = .empty
+        
+        enum Mode: Equatable {
+            case edit
+            case noEdit
+        }
+        var mode: Mode = .noEdit
     }
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
@@ -63,5 +69,13 @@ class HistoryViewModel: ObservableObject {
     public func deleteHistoryRows(at offsets: IndexSet) {
         drinksService.deleteDrinks(at: offsets)
         updateViewState()
+    }
+    
+    func editButtonTapped() {
+        if viewState.mode == .edit {
+            viewState.mode = .noEdit
+        } else {
+            viewState.mode = .edit
+        }
     }
 }
