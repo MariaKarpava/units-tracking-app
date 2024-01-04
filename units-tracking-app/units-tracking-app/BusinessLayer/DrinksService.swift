@@ -126,6 +126,7 @@ class DrinksService {
     func deleteDrinks(at offsets: IndexSet) {
         drinks.remove(atOffsets: offsets)
     }
+
 }
 
 
