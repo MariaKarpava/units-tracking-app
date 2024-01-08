@@ -32,52 +32,48 @@ struct HistoryView: View {
                             // should use foreach for drinks whenever @Published drinks in VM changes
                              ScrollView(.vertical) {
                                  LazyVStack(alignment: .center, spacing: 15) {
-                                     ForEach(drinkHistoryRowModels, id: \.self) { drinkHistoryRowModel in
+                                     ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
                                          HStack {
                                              if historyViewModel.viewState.mode == .edit {
-                                                 ChooseButton(isEditing: true)
+                                                 ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                              }
+                                             
                                              NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-//                                                 HStack {
                                                      DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                          .frame(
-    //                                                         width: bodyGeometry.size.width - 40,
                                                             width: historyViewModel.viewState.mode == .edit ? bodyGeometry.size.width - 90 : bodyGeometry.size.width - 40,
                                                              height: 80
                                                          )
-//                                                 }
-                                                 
                                              }
 
                                          }
                                     }
-                                     .onDelete{ indexSet in
-                                         historyViewModel.deleteHistoryRows(at: indexSet)
-                                     }
                                  }.frame(width: bodyGeometry.size.width)
                             }
-                                .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
-                                .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
-                                .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
+                            .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
+                            .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
+                            .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
                         }
             }
             .toolbar { // GeometryReader
-                ToolbarItem {
-                    Button(historyViewModel.viewState.mode == .edit ? "Done" : "Edit") {
-                        historyViewModel.editButtonTapped()
-                    }
-                    .padding()
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton(historyViewModel: historyViewModel)
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
                         .font(.historyScreenHistoryHeader)
                         .foregroundColor(.accentColor)
                 }
-                
+                ToolbarItem(placement: .bottomBar) {
+                    if historyViewModel.viewState.mode == .edit {
+                        DeleteButton(historyViewModel: historyViewModel)
+                    }
+                }
             }.scrollContentBackground(.hidden)
         }
     }
 }
+
 
 
 struct EmptyDrinkHistory: View {
@@ -174,27 +170,56 @@ struct DrinkHistoryRow: View {
 
 
 struct ChooseButton: View {
-    let isEditing: Bool
     @State var tapped: Bool = false
+    @ObservedObject var historyViewModel: HistoryViewModel
+    let selectedDrinksID: UUID
     
     var body: some View {
         VStack {
-            if isEditing {
-                Button(action: {
-                    tapped.toggle()
-                }) {
-                    Circle()
-                        .fill(tapped ? Color.orange : Color.green)
-//                        .strokeBorder(.gray, lineWidth: 2)
-//                        .background(tapped ? Color.orange : Color.white)
-                        
-                        .frame(width: 25, height: 25)
+            Button(action: {
+                tapped.toggle()
+                if tapped {
+                    historyViewModel.viewState.selectedDrinksUUIDs.append(selectedDrinksID)
+                    print("tapped = true")
+                    print("appended drink")
+                } else {
+                    if let index = historyViewModel.viewState.selectedDrinksUUIDs.firstIndex(of: selectedDrinksID) {
+                        historyViewModel.viewState.selectedDrinksUUIDs.remove(at: index)
+                    }
+                    print("deleted drink")
+                    print("tapped = false")
                 }
+                                
+            }) {
+                Circle()
+                    .fill(tapped ? Color.red : Color.green)
+                    .frame(width: 15, height: 15)
             }
         }
     }
 }
 
+struct EditButton: View {
+    @ObservedObject var historyViewModel: HistoryViewModel
+    
+    var body: some View {
+        Button(historyViewModel.viewState.mode == .edit ? "Done" : "Edit") {
+            historyViewModel.editButtonTapped()
+        }
+        .padding()
+    }
+}
+
+struct DeleteButton: View {
+    @ObservedObject var historyViewModel: HistoryViewModel
+    
+    var body: some View {
+        Button("Delete") {
+            historyViewModel.askServiceTODeleteDrinks()
+        }
+        .padding()
+    }
+}
 
 
 

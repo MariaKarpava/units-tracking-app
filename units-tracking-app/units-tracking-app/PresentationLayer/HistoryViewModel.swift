@@ -41,6 +41,8 @@ class HistoryViewModel: ObservableObject {
             case noEdit
         }
         var mode: Mode = .noEdit
+        
+        var selectedDrinksUUIDs: [UUID] = []
     }
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
@@ -66,10 +68,10 @@ class HistoryViewModel: ObservableObject {
         }
     }
     
-    public func deleteHistoryRows(at offsets: IndexSet) {
-        drinksService.deleteDrinks(at: offsets)
-        updateViewState()
-    }
+//    public func deleteHistoryRows(at offsets: IndexSet) {
+//        drinksService.deleteDrinks(at: offsets)
+//        updateViewState()
+//    }
     
     func editButtonTapped() {
         if viewState.mode == .edit {
@@ -77,5 +79,16 @@ class HistoryViewModel: ObservableObject {
         } else {
             viewState.mode = .edit
         }
+        
+        if viewState.mode == .noEdit {
+            viewState.selectedDrinksUUIDs.removeAll()
+            print("Removed all selected drinks")
+            print()
+        }
+    }
+    
+    func askServiceTODeleteDrinks() {
+        drinksService.deleteDrinks(selectedDrinksIDs: viewState.selectedDrinksUUIDs)
+        print("Asked services to delete drinks, hopefully they are deleted!")
     }
 }
