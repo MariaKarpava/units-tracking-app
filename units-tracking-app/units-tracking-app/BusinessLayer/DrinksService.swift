@@ -123,10 +123,6 @@ class DrinksService {
         return result
     }
     
-//    func deleteDrinks(at offsets: IndexSet) {
-//        drinks.remove(atOffsets: offsets)
-//    }
-    
     func deleteDrinks(selectedDrinksIDs: [UUID]) {
         drinks = drinks.filter { drink in
             !selectedDrinksIDs.contains(drink.id)

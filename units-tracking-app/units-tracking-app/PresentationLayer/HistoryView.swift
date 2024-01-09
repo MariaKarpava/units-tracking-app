@@ -181,17 +181,10 @@ struct ChooseButton: View {
             Button(action: {
                 tapped.toggle()
                 if tapped {
-                    historyViewModel.viewState.selectedDrinksUUIDs.append(selectedDrinksID)
-                    print("tapped = true")
-                    print("appended drink")
+                    historyViewModel.drinkSelected(selectedDrinksID: selectedDrinksID)
                 } else {
-                    if let index = historyViewModel.viewState.selectedDrinksUUIDs.firstIndex(of: selectedDrinksID) {
-                        historyViewModel.viewState.selectedDrinksUUIDs.remove(at: index)
-                    }
-                    print("deleted drink")
-                    print("tapped = false")
+                    historyViewModel.drinkDeselected(deselectedDrinksID: selectedDrinksID)
                 }
-                                
             }) {
                 Circle()
                     .fill(tapped ? Color.red : Color.green)
@@ -218,7 +211,7 @@ struct DeleteButton: View {
     var body: some View {
         Button("Delete") {
             withAnimation {
-                historyViewModel.askServiceTODeleteDrinks()
+                historyViewModel.deleteButtonTapped()
             }
         }
         .padding()

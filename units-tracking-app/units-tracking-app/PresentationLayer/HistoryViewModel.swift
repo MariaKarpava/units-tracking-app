@@ -68,11 +68,6 @@ class HistoryViewModel: ObservableObject {
         }
     }
     
-//    public func deleteHistoryRows(at offsets: IndexSet) {
-//        drinksService.deleteDrinks(at: offsets)
-//        updateViewState()
-//    }
-    
     func editButtonTapped() {
         if viewState.mode == .edit {
             viewState.mode = .noEdit
@@ -82,13 +77,20 @@ class HistoryViewModel: ObservableObject {
         
         if viewState.mode == .noEdit {
             viewState.selectedDrinksUUIDs.removeAll()
-            print("Removed all selected drinks")
-            print()
         }
     }
     
-    func askServiceTODeleteDrinks() {
+    func deleteButtonTapped() {
         drinksService.deleteDrinks(selectedDrinksIDs: viewState.selectedDrinksUUIDs)
-        print("Asked services to delete drinks, hopefully they are deleted!")
+    }
+    
+    func drinkSelected(selectedDrinksID: UUID) {
+       viewState.selectedDrinksUUIDs.append(selectedDrinksID)
+    }
+    
+    func drinkDeselected(deselectedDrinksID: UUID) {
+        if let index = viewState.selectedDrinksUUIDs.firstIndex(of: deselectedDrinksID) {
+            viewState.selectedDrinksUUIDs.remove(at: index)
+        }
     }
 }
