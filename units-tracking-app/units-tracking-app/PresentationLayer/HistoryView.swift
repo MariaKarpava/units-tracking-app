@@ -33,20 +33,28 @@ struct HistoryView: View {
                              ScrollView(.vertical) {
                                  LazyVStack(alignment: .center, spacing: 15) {
                                      ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
-                                         HStack {
                                              if historyViewModel.viewState.mode == .edit {
-                                                 ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
+                                                 HStack {
+                                                     ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
+                                                     
+                                                     NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+                                                             DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                                 .frame(
+                                                                    width: bodyGeometry.size.width - 90,
+                                                                     height: 80
+                                                                 )
+                                                 }
+                                                 
+                                                 }
+                                             } else {
+                                                 NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+                                                         DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                             .frame(
+                                                                width: bodyGeometry.size.width - 40,
+                                                                 height: 80
+                                                             )
+                                                 }
                                              }
-                                             
-                                             NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                                     DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                         .frame(
-                                                            width: historyViewModel.viewState.mode == .edit ? bodyGeometry.size.width - 90 : bodyGeometry.size.width - 40,
-                                                             height: 80
-                                                         )
-                                             }
-
-                                         }
                                     }
                                  }.frame(width: bodyGeometry.size.width)
                             }
@@ -154,8 +162,79 @@ struct DrinkHistoryRow: View {
                         .foregroundColor(.secondaryText)
                 }
                 .frame(width: 78)
-                Spacer().frame(width: 10)
-                
+                Spacer()
+                    .frame(width: 10)
+            }
+            .frame(width: geometry.size.width, height: 80)
+        }
+        .background(Color.white)
+            .cornerRadius(4)
+            .shadow(
+                color: Color.gray.opacity(0.2),
+                radius: 10,
+                x: 0,
+                y: 0
+            )
+    }
+}
+
+
+struct DrinkHistoryRowInEditingMode: View {
+    let drink: DrinkWithUnits
+    let showQuantity: Bool
+    private let formatter = DateFormatter()
+    
+    private var dateFormatterForYear: DateFormatter {
+        formatter.dateFormat = "yyyy"
+        return formatter
+    }
+    
+    private var dateFormatterForDayAndMonth: DateFormatter {
+        formatter.dateFormat = "dd MMM"
+        return formatter
+    }
+ 
+    var body: some View {
+        GeometryReader { geometry in
+            HStack(alignment: .center, spacing: 0) {
+                // Drink's date
+                VStack(alignment: .center) {
+                    Text(dateFormatterForDayAndMonth.string(from: drink.date))
+                        .font(.historyScreenMainInfo)
+                        .foregroundColor(.mainColorForTextInHistoryScreenRaw)
+                    Text(dateFormatterForYear.string(from: drink.date))
+                        .font(.historyScreenYear)
+                        .foregroundColor(.secondaryText)
+                }
+                .frame(width: 98)
+                Divider()
+                    .frame(height: 60)
+                Spacer()
+                    .frame(width: 20)
+                // Drink's main info
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(String(format: "%.1f%%", Double(drink.alcoholByVolume) / 10))
+                        Text("•")
+                        Text(drink.drinkType.rawValue.capitalized)
+                    }
+                    .frame(height: 32)
+                    .font(.historyScreenMainInfo)
+                    .foregroundColor(.mainColorForTextInHistoryScreenRaw)
+                       
+                    HStack {
+                        Text(String(drink.ml)+"ml")
+                        if showQuantity {
+                            Text("x")
+                            Text(String(drink.quantity))
+                        }
+                    }
+                    .font(.historyScreenMainInfo)
+                    .foregroundColor(.mainColorForTextInHistoryScreenRaw)
+                    .offset(y: -7)
+                }
+                Spacer()
+                // Drink's units
             }
             .frame(width: geometry.size.width, height: 80)
         }
