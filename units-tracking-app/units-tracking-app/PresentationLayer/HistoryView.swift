@@ -107,6 +107,7 @@ struct DrinkHistoryRow: View {
     var body: some View {
         GeometryReader { geometry in
             HStack(alignment: .center, spacing: 0) {
+                // Drink's date
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
                         .font(.historyScreenMainInfo)
@@ -120,7 +121,7 @@ struct DrinkHistoryRow: View {
                     .frame(height: 60)
                 Spacer()
                     .frame(width: 20)
-
+                // Drink's main info
                 VStack(alignment: .leading) {
                     HStack {
                         Text(String(format: "%.1f%%", Double(drink.alcoholByVolume) / 10))
@@ -143,6 +144,7 @@ struct DrinkHistoryRow: View {
                     .offset(y: -7)
                 }
                 Spacer()
+                // Drink's units
                 VStack(alignment: .trailing) {
                     Text(String(format: "%.1f", drink.units))
                         .font(.historyScreenUnits)
@@ -215,7 +217,9 @@ struct DeleteButton: View {
     
     var body: some View {
         Button("Delete") {
-            historyViewModel.askServiceTODeleteDrinks()
+            withAnimation {
+                historyViewModel.askServiceTODeleteDrinks()
+            }
         }
         .padding()
     }
