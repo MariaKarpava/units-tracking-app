@@ -37,6 +37,8 @@ struct HistoryView: View {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                                      
+                                                     Spacer().frame(width: 15)
+                                                     
                                                      DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                          .frame(
                                                             width: bodyGeometry.size.width - 90,
