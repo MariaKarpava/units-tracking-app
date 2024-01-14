@@ -76,7 +76,10 @@ struct HistoryView: View {
                 }
                 ToolbarItem(placement: .bottomBar) {
                     if historyViewModel.viewState.mode == .edit {
-                        DeleteButton(historyViewModel: historyViewModel)
+                        HStack{
+                            Spacer()
+                            DeleteButton(historyViewModel: historyViewModel)
+                        }
                     }
                 }
             }.scrollContentBackground(.hidden)
@@ -307,12 +310,17 @@ struct DeleteButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     
     var body: some View {
-        Button("Delete") {
+        Button(action: {
             withAnimation {
                 historyViewModel.deleteButtonTapped()
             }
+        }) {
+            Text("Delete")
+                .foregroundColor(historyViewModel.viewState.selectedDrinksUUIDs.count > 0 ? .red : .gray)
         }
+        .disabled(historyViewModel.viewState.selectedDrinksUUIDs.count == 0)
         .padding()
+        
     }
 }
 
