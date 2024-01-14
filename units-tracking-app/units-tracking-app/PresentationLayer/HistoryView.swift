@@ -37,15 +37,16 @@ struct HistoryView: View {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                                      
+                                                     DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                         .frame(
+                                                            width: bodyGeometry.size.width - 90,
+                                                             height: 80
+                                                         )
+                                                         
                                                      NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                                             DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                                 .frame(
-                                                                    width: bodyGeometry.size.width - 90,
-                                                                     height: 80
-                                                                 )
-                                                 }
-                                                 
-                                                 }
+                                                         Image(systemName: "chevron.forward")
+                                                     }
+                                                }
                                              } else {
                                                  NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                                          DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
@@ -207,7 +208,7 @@ struct DrinkHistoryRowInEditingMode: View {
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 98)
+                .frame(width: 80)
                 Divider()
                     .frame(height: 60)
                 Spacer()
@@ -234,8 +235,20 @@ struct DrinkHistoryRowInEditingMode: View {
                     .foregroundColor(.mainColorForTextInHistoryScreenRaw)
                     .offset(y: -7)
                 }
-                Spacer()
                 // Drink's units
+                Spacer()
+                    .frame(width: 10)
+                VStack(alignment: .trailing) {
+                    Text(String(format: "%.1f", drink.units))
+                        .font(.historyScreenUnits)
+                        .foregroundColor(.accentColor)
+                    Text("unit(s)")
+                        .font(.historyScreenUnitsText)
+                        .foregroundColor(.secondaryText)
+                }
+                .frame(width: 78)
+                Spacer()
+                    .frame(width: 10)
             }
             .frame(width: geometry.size.width, height: 80)
         }
