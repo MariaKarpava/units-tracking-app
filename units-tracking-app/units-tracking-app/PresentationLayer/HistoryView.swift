@@ -66,6 +66,7 @@ struct HistoryView: View {
             .toolbar { // GeometryReader
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton(historyViewModel: historyViewModel)
+                       
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Text("History")
@@ -277,10 +278,13 @@ struct EditButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     
     var body: some View {
-        Button(historyViewModel.viewState.mode == .edit ? "Done" : "Edit") {
+        Button {
             historyViewModel.editButtonTapped()
+        } label: {
+            Text(historyViewModel.viewState.mode == .edit ? "Done" : "Edit")
+                .underline()
+                .padding()
         }
-        .padding()
     }
 }
 
