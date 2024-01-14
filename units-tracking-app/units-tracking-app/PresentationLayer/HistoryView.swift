@@ -279,7 +279,9 @@ struct EditButton: View {
     
     var body: some View {
         Button {
-            historyViewModel.editButtonTapped()
+            withAnimation {
+                historyViewModel.editButtonTapped()
+            }
         } label: {
             Text(historyViewModel.viewState.mode == .edit ? "Done" : "Edit")
                 .underline()
