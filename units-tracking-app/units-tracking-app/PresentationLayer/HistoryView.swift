@@ -50,13 +50,11 @@ struct HistoryView: View {
                                                      }
                                                 }
                                              } else {
-                                                 NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                                         DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                             .frame(
-                                                                width: bodyGeometry.size.width - 40,
-                                                                 height: 80
-                                                             )
-                                                 }
+                                             DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                 .frame(
+                                                    width: bodyGeometry.size.width - 40,
+                                                     height: 80
+                                                 )  
                                              }
                                     }
                                  }.frame(width: bodyGeometry.size.width)
