@@ -20,7 +20,7 @@ struct ResultView: View {
 
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
-
+   
     
     var body: some View {
         NavigationStack {
@@ -54,7 +54,7 @@ struct HistoryView: View {
                                                  .frame(
                                                     width: bodyGeometry.size.width - 40,
                                                      height: 80
-                                                 )  
+                                                 )
                                              }
                                     }
                                  }.frame(width: bodyGeometry.size.width)
@@ -308,15 +308,27 @@ struct EditButton: View {
 
 struct DeleteButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
+    @State private var confirmationShown = false
     
     var body: some View {
         Button(action: {
-            withAnimation {
-                historyViewModel.deleteButtonTapped()
-            }
+            confirmationShown.toggle()
         }) {
             Text("Delete")
                 .foregroundColor(historyViewModel.viewState.selectedDrinksUUIDs.count > 0 ? .red : .gray)
+        }
+        .confirmationDialog(
+            "Are you sure?",
+             isPresented: $confirmationShown,
+            titleVisibility: .visible
+        ) {
+            Button("Yes") {
+                withAnimation {
+                    withAnimation {
+                        historyViewModel.deleteButtonTapped()
+                    }
+                }
+            }
         }
         .disabled(historyViewModel.viewState.selectedDrinksUUIDs.count == 0)
         .padding()
