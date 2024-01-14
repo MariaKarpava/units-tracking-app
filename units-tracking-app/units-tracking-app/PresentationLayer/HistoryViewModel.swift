@@ -42,6 +42,7 @@ class HistoryViewModel: ObservableObject {
         }
         var mode: Mode = .noEdit
         
+        var editButtonTitle: String = "Edit"
         var selectedDrinksUUIDs: [UUID] = []
     }
     
@@ -71,8 +72,10 @@ class HistoryViewModel: ObservableObject {
     func editButtonTapped() {
         if viewState.mode == .edit {
             viewState.mode = .noEdit
+            viewState.editButtonTitle = "Edit"
         } else {
             viewState.mode = .edit
+            viewState.editButtonTitle = "Done"
         }
         
         if viewState.mode == .noEdit {

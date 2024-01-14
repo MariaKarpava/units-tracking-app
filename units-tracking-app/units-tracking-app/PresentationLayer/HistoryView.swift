@@ -299,7 +299,7 @@ struct EditButton: View {
                 historyViewModel.editButtonTapped()
             }
         } label: {
-            Text(historyViewModel.viewState.mode == .edit ? "Done" : "Edit")
+            Text(historyViewModel.viewState.editButtonTitle)
                 .underline()
                 .padding()
         }
