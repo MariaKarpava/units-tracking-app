@@ -21,6 +21,9 @@ struct ResultView: View {
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
    
+    func onTap() {
+        historyViewModel.deleteButtonTapped()
+    }
     
     var body: some View {
         NavigationStack {
@@ -78,7 +81,7 @@ struct HistoryView: View {
                     if historyViewModel.viewState.mode == .edit {
                         HStack{
                             Spacer()
-                            DeleteButton(historyViewModel: historyViewModel)
+                            DeleteButton(historyViewModel: historyViewModel, onTap: onTap)
                         }
                     }
                 }
@@ -268,22 +271,24 @@ struct DrinkHistoryRowInEditingMode: View {
 
 
 struct ChooseButton: View {
-    @State var tapped: Bool = false
     @ObservedObject var historyViewModel: HistoryViewModel
     let selectedDrinksID: UUID
+    
+    var isSelected: Bool {
+        historyViewModel.viewState.selectedDrinksUUIDs.contains(selectedDrinksID)
+    }
     
     var body: some View {
         VStack {
             Button(action: {
-                tapped.toggle()
-                if tapped {
-                    historyViewModel.drinkSelected(selectedDrinksID: selectedDrinksID)
-                } else {
+                if isSelected {
                     historyViewModel.drinkDeselected(deselectedDrinksID: selectedDrinksID)
+                } else {
+                    historyViewModel.drinkSelected(selectedDrinksID: selectedDrinksID)
                 }
             }) {
                 Circle()
-                    .fill(tapped ? Color.red : Color.green)
+                    .fill(isSelected ? Color.red : Color.green)
                     .frame(width: 15, height: 15)
             }
         }
@@ -309,13 +314,14 @@ struct EditButton: View {
 struct DeleteButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     @State private var confirmationShown = false
+    let onTap: () -> ()
     
     var body: some View {
         Button(action: {
             confirmationShown.toggle()
         }) {
             Text("Delete")
-                .foregroundColor(historyViewModel.viewState.selectedDrinksUUIDs.count > 0 ? .red : .gray)
+                .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
         }
         .confirmationDialog(
             "Are you sure?",
@@ -324,15 +330,12 @@ struct DeleteButton: View {
         ) {
             Button("Yes") {
                 withAnimation {
-                    withAnimation {
-                        historyViewModel.deleteButtonTapped()
-                    }
+                    onTap()
                 }
             }
         }
-        .disabled(historyViewModel.viewState.selectedDrinksUUIDs.count == 0)
+        .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
         .padding()
-        
     }
 }
 

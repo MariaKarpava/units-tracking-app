@@ -44,6 +44,7 @@ class HistoryViewModel: ObservableObject {
         
         var editButtonTitle: String = "Edit"
         var selectedDrinksUUIDs: [UUID] = []
+        var deleteButtonIsNotActive: Bool = true
     }
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
@@ -66,6 +67,7 @@ class HistoryViewModel: ObservableObject {
             viewState.content = .empty
         } else {
             viewState.content = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
+            viewState.selectedDrinksUUIDs = [] 
         }
     }
     
@@ -80,20 +82,37 @@ class HistoryViewModel: ObservableObject {
         
         if viewState.mode == .noEdit {
             viewState.selectedDrinksUUIDs.removeAll()
+            updateDeleteButtonState()
+//            print("selectedDrinksUUIDs: \(viewState.selectedDrinksUUIDs)")
         }
+    }
+    
+    private func updateDeleteButtonState() {
+        if viewState.selectedDrinksUUIDs.count == 0 {
+            viewState.deleteButtonIsNotActive = true
+            print("delete button is NOT active")
+        } else {
+            viewState.deleteButtonIsNotActive = false
+            print("delete button is active")
+        }
+        print("selectedDrinksUUIDs: \(viewState.selectedDrinksUUIDs)")
     }
     
     func deleteButtonTapped() {
         drinksService.deleteDrinks(selectedDrinksIDs: viewState.selectedDrinksUUIDs)
+        updateViewState() // ?
+        updateDeleteButtonState()
     }
     
     func drinkSelected(selectedDrinksID: UUID) {
        viewState.selectedDrinksUUIDs.append(selectedDrinksID)
+        updateDeleteButtonState()
     }
     
     func drinkDeselected(deselectedDrinksID: UUID) {
         if let index = viewState.selectedDrinksUUIDs.firstIndex(of: deselectedDrinksID) {
             viewState.selectedDrinksUUIDs.remove(at: index)
+            updateDeleteButtonState()
         }
     }
 }
