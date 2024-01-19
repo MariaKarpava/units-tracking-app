@@ -132,7 +132,7 @@ struct DrinkHistoryRow: View {
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 98)
+                .frame(width: 98, alignment: .center)
                 Divider()
                     .frame(height: 60)
                 Spacer()
@@ -159,9 +159,10 @@ struct DrinkHistoryRow: View {
                     .foregroundColor(.mainColorForTextInHistoryScreenRaw)
                     .offset(y: -7)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 // Drink's units
-                VStack(alignment: .trailing) {
+                VStack() {
                     Text(String(format: "%.1f", drink.units))
                         .font(.historyScreenUnits)
                         .foregroundColor(.accentColor)
@@ -169,9 +170,11 @@ struct DrinkHistoryRow: View {
                         .font(.historyScreenUnitsText)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 78)
+                .frame(width: 78, alignment: .trailing)
+                .border(.red)
                 Spacer()
                     .frame(width: 10)
+                
             }
             .frame(width: geometry.size.width, height: 80)
         }
@@ -204,7 +207,7 @@ struct DrinkHistoryRowInEditingMode: View {
  
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment:.center, spacing: 0) {
                 // Drink's date
                 VStack(alignment: .center) {
                     Text(dateFormatterForDayAndMonth.string(from: drink.date))
@@ -214,11 +217,11 @@ struct DrinkHistoryRowInEditingMode: View {
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 80)
+                .frame(width: 70, alignment: .center)
                 Divider()
                     .frame(height: 60)
                 Spacer()
-                    .frame(width: 20)
+                    .frame(width: 10)
                 // Drink's main info
                 VStack(alignment: .leading) {
                     HStack {
@@ -241,10 +244,11 @@ struct DrinkHistoryRowInEditingMode: View {
                     .foregroundColor(.mainColorForTextInHistoryScreenRaw)
                     .offset(y: -7)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 // Drink's units
                 Spacer()
                     .frame(width: 10)
-                VStack(alignment: .trailing) {
+                VStack() {
                     Text(String(format: "%.1f", drink.units))
                         .font(.historyScreenUnits)
                         .foregroundColor(.accentColor)
@@ -252,7 +256,8 @@ struct DrinkHistoryRowInEditingMode: View {
                         .font(.historyScreenUnitsText)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 78)
+                .frame(width: 70, alignment: .trailing)
+                .border(.red)
                 Spacer()
                     .frame(width: 10)
             }
