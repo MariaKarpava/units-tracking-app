@@ -36,7 +36,7 @@ struct HistoryView: View {
                              ScrollView(.vertical) {
                                  LazyVStack(alignment: .center, spacing: 15) {
                                      ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
-                                         if historyViewModel.viewState.mode == .edit {
+                                         if historyViewModel.viewState.isToolbarVisible {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                                      
@@ -75,7 +75,7 @@ struct HistoryView: View {
                                         .foregroundColor(.accentColor)
                                 }
                                 ToolbarItem(placement: .bottomBar) {
-                                    if historyViewModel.viewState.mode == .edit {
+                                    if historyViewModel.viewState.isToolbarVisible {
                                         HStack{
                                             Spacer()
                                             DeleteButton(numberOfDrinksToDelete: historyViewModel.viewState.selectedDrinksUUIDs.count, onDeletionConfirmed: onDeletionConfirmed)

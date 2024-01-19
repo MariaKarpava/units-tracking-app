@@ -41,6 +41,7 @@ class HistoryViewModel: ObservableObject {
             case noEdit
         }
         var mode: Mode = .noEdit
+        var isToolbarVisible: Bool = false
         
         var editButtonTitle: String = "Edit"
         var selectedDrinksUUIDs: [UUID] = []
@@ -73,9 +74,11 @@ class HistoryViewModel: ObservableObject {
     
     func editButtonTapped() {
         if viewState.mode == .edit {
+            viewState.isToolbarVisible = true
             viewState.mode = .noEdit
             viewState.editButtonTitle = "Edit"
         } else {
+            viewState.isToolbarVisible = false
             viewState.mode = .edit
             viewState.editButtonTitle = "Done"
         }
