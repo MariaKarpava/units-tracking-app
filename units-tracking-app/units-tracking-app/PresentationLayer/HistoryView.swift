@@ -41,16 +41,15 @@ struct HistoryView: View {
                                                      ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                                      
                                                      Spacer().frame(width: 15)
-                                                     
-                                                     DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                         .frame(
-                                                            width: bodyGeometry.size.width - 90,
-                                                             height: 80
-                                                         )
-                                                         
                                                      NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
+                                                         DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
+                                                             .frame(
+                                                                width: bodyGeometry.size.width - 90,
+                                                                height: 80
+                                                             )
                                                          Image(systemName: "chevron.forward")
                                                      }
+                                                     
                                                 }
                                              } else {
                                              DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
