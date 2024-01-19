@@ -21,7 +21,7 @@ struct ResultView: View {
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
    
-    func onTap() {
+    func onDeletionConfirmed() {
         historyViewModel.deleteButtonTapped()
     }
     
@@ -78,7 +78,7 @@ struct HistoryView: View {
                                     if historyViewModel.viewState.mode == .edit {
                                         HStack{
                                             Spacer()
-                                            DeleteButton(historyViewModel: historyViewModel, onTap: onTap)
+                                            DeleteButton(historyViewModel: historyViewModel, onTap: onDeletionConfirmed)
                                                 .border(.green)
                                         }
                                     }
