@@ -78,7 +78,9 @@ struct HistoryView: View {
                                     if historyViewModel.viewState.mode == .edit {
                                         HStack{
                                             Spacer()
-                                            DeleteButton(historyViewModel: historyViewModel, onTap: onDeletionConfirmed)
+                                            DeleteButton(numberOfDrinksToDelete: historyViewModel.viewState.selectedDrinksUUIDs.count, onDeletionConfirmed: onDeletionConfirmed)
+                                                .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
+                                                .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
                                                 .border(.green)
                                         }
                                     }
@@ -318,31 +320,28 @@ struct EditButton: View {
 }
 
 struct DeleteButton: View {
-    @ObservedObject var historyViewModel: HistoryViewModel
+    let numberOfDrinksToDelete: Int
     @State private var confirmationShown = false
-    let onTap: () -> ()
-
+    let onDeletionConfirmed: () -> ()
     
     var body: some View {
         Button(action: {
             confirmationShown.toggle()
         }) {
             Text("Delete")
-                .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
         }
         .confirmationDialog(
-            "Would you like to delete \(historyViewModel.viewState.selectedDrinksUUIDs.count) item(s)?",
+            "Would you like to delete \(numberOfDrinksToDelete) item(s)?",
             isPresented: $confirmationShown,
             titleVisibility: .visible
         ) {
             Button("Yes", role: .destructive) {
                 withAnimation {
-                    onTap()
+                    onDeletionConfirmed()
                 }
             }
             .foregroundColor(.red)
         }
-        .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
 //        .padding()
     }
 }
