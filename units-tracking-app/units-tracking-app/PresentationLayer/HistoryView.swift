@@ -80,6 +80,7 @@ struct HistoryView: View {
                                         HStack{
                                             Spacer()
                                             DeleteButton(historyViewModel: historyViewModel, onTap: onTap)
+                                                .border(.green)
                                         }
                                     }
                                 }
@@ -321,6 +322,7 @@ struct DeleteButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     @State private var confirmationShown = false
     let onTap: () -> ()
+
     
     var body: some View {
         Button(action: {
@@ -330,18 +332,19 @@ struct DeleteButton: View {
                 .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
         }
         .confirmationDialog(
-            "Are you sure?",
-             isPresented: $confirmationShown,
+            "Would you like to delete \(historyViewModel.viewState.selectedDrinksUUIDs.count) item(s)?",
+            isPresented: $confirmationShown,
             titleVisibility: .visible
         ) {
-            Button("Yes") {
+            Button("Yes", role: .destructive) {
                 withAnimation {
                     onTap()
                 }
             }
+            .foregroundColor(.red)
         }
         .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
-        .padding()
+//        .padding()
     }
 }
 
