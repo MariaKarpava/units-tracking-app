@@ -36,7 +36,7 @@ struct HistoryView: View {
                              ScrollView(.vertical) {
                                  LazyVStack(alignment: .center, spacing: 15) {
                                      ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
-                                             if historyViewModel.viewState.mode == .edit {
+                                         if historyViewModel.viewState.mode == .edit {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
                                                      
@@ -65,26 +65,27 @@ struct HistoryView: View {
                             .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
                             .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
                             .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
-                        }
-            }
-            .toolbar { // GeometryReader
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton(historyViewModel: historyViewModel)
-                       
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("History")
-                        .font(.historyScreenHistoryHeader)
-                        .foregroundColor(.accentColor)
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    if historyViewModel.viewState.mode == .edit {
-                        HStack{
-                            Spacer()
-                            DeleteButton(historyViewModel: historyViewModel, onTap: onTap)
+                            .toolbar { // GeometryReader
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    EditButton(historyViewModel: historyViewModel)
+                                       
+                                }
+                                ToolbarItem(placement: .topBarLeading) {
+                                    Text("History")
+                                        .font(.historyScreenHistoryHeader)
+                                        .foregroundColor(.accentColor)
+                                }
+                                ToolbarItem(placement: .bottomBar) {
+                                    if historyViewModel.viewState.mode == .edit {
+                                        HStack{
+                                            Spacer()
+                                            DeleteButton(historyViewModel: historyViewModel, onTap: onTap)
+                                        }
+                                    }
+                                }
+                            
                         }
                     }
-                }
             }.scrollContentBackground(.hidden)
         }
     }
