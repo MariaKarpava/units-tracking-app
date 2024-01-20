@@ -40,7 +40,7 @@ struct HistoryView: View {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, iDToDelete: drinkHistoryRowModel.drinkWithUnits.id, isSelected: drinkHistoryRowModel.isSelected)
                                                      
-                                                     Spacer().frame(width: 15)
+                                                     Spacer().frame(width: 20)
                                                      NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                                          DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                              .frame(
@@ -48,6 +48,8 @@ struct HistoryView: View {
                                                                 height: 80
                                                              )
                                                          Image(systemName: "chevron.forward")
+                                                             .foregroundColor(.mainColorForTextInHistoryScreenRaw)
+                                                             
                                                      }
                                                 }
                                              } else {
@@ -282,10 +284,6 @@ struct ChooseButton: View {
     let iDToDelete: UUID
     var isSelected: Bool
     
-//    var isSelected: Bool {
-//        historyViewModel.viewState.selectedDrinksUUIDs.contains(iDToDelete)
-//    }
-    
     var body: some View {
         VStack {
             Button(action: {
@@ -296,8 +294,12 @@ struct ChooseButton: View {
                 }
             }) {
                 Circle()
-                    .fill(isSelected ? Color.red : Color.green)
-                    .frame(width: 15, height: 15)
+                    .fill(isSelected ? Color.chooseButtonSelected : Color.white)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.black, lineWidth: isSelected ? 0 : 2)
+                                    )
+                                    .frame(width: 20, height: 20)
             }
         }
     }
