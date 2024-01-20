@@ -53,14 +53,15 @@ class HistoryViewModel: ObservableObject {
         var shouldDisplayQuantity: Bool {
             drinkWithUnits.quantity > 1
         }
-    }
-
-    private func getDrinksWithUnits() -> [DrinkWithUnits] {
-        drinksService.drinksWithUnits.sorted(by: { $0.date > $1.date })
+        var isSelected: Bool
     }
     
     private func rowModels(from drinksWithUnits: [DrinkWithUnits]) -> [DrinkHistoryRowModel] {
-        drinksWithUnits.map { DrinkHistoryRowModel(drinkWithUnits: $0) }
+        drinksWithUnits.map { DrinkHistoryRowModel(drinkWithUnits: $0, isSelected: viewState.selectedDrinksUUIDs.contains($0.id)) }
+    }
+    
+    private func getDrinksWithUnits() -> [DrinkWithUnits] {
+        return drinksService.drinksWithUnits.sorted(by: { $0.date > $1.date })
     }
     
     private func updateViewState() {
@@ -68,17 +69,17 @@ class HistoryViewModel: ObservableObject {
             viewState.content = .empty
         } else {
             viewState.content = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
-            viewState.selectedDrinksUUIDs = [] 
         }
     }
     
     func editButtonTapped() {
         if viewState.mode == .edit {
-            viewState.isToolbarVisible = true
+            viewState.isToolbarVisible = false
             viewState.mode = .noEdit
             viewState.editButtonTitle = "Edit"
+            viewState.selectedDrinksUUIDs = []
         } else {
-            viewState.isToolbarVisible = false
+            viewState.isToolbarVisible = true
             viewState.mode = .edit
             viewState.editButtonTitle = "Done"
         }
@@ -86,36 +87,36 @@ class HistoryViewModel: ObservableObject {
         if viewState.mode == .noEdit {
             viewState.selectedDrinksUUIDs.removeAll()
             updateDeleteButtonState()
-//            print("selectedDrinksUUIDs: \(viewState.selectedDrinksUUIDs)")
+            updateViewState()
         }
     }
     
     private func updateDeleteButtonState() {
         if viewState.selectedDrinksUUIDs.count == 0 {
             viewState.deleteButtonIsNotActive = true
-            print("delete button is NOT active")
         } else {
             viewState.deleteButtonIsNotActive = false
-            print("delete button is active")
         }
-        print("selectedDrinksUUIDs: \(viewState.selectedDrinksUUIDs)")
     }
     
     func deleteButtonTapped() {
         drinksService.deleteDrinks(selectedDrinksIDs: viewState.selectedDrinksUUIDs)
-        updateViewState() // ?
+        viewState.selectedDrinksUUIDs = []
+        updateViewState()
         updateDeleteButtonState()
     }
     
     func drinkSelected(selectedDrinksID: UUID) {
        viewState.selectedDrinksUUIDs.append(selectedDrinksID)
         updateDeleteButtonState()
+        updateViewState()
     }
     
     func drinkDeselected(deselectedDrinksID: UUID) {
         if let index = viewState.selectedDrinksUUIDs.firstIndex(of: deselectedDrinksID) {
             viewState.selectedDrinksUUIDs.remove(at: index)
             updateDeleteButtonState()
+            updateViewState()
         }
     }
 }
