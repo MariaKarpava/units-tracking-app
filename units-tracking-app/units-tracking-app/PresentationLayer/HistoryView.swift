@@ -38,7 +38,7 @@ struct HistoryView: View {
                                      ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
                                          if historyViewModel.viewState.isToolbarVisible {
                                                  HStack {
-                                                     ChooseButton(historyViewModel: historyViewModel, selectedDrinksID: drinkHistoryRowModel.drinkWithUnits.id)
+                                                     ChooseButton(historyViewModel: historyViewModel, iDToDelete: drinkHistoryRowModel.drinkWithUnits.id, isSelected: drinkHistoryRowModel.isSelected)
                                                      
                                                      Spacer().frame(width: 15)
                                                      NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
@@ -49,7 +49,6 @@ struct HistoryView: View {
                                                              )
                                                          Image(systemName: "chevron.forward")
                                                      }
-                                                     
                                                 }
                                              } else {
                                              DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
@@ -280,19 +279,20 @@ struct DrinkHistoryRowInEditingMode: View {
 
 struct ChooseButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
-    let selectedDrinksID: UUID
+    let iDToDelete: UUID
+    var isSelected: Bool
     
-    var isSelected: Bool {
-        historyViewModel.viewState.selectedDrinksUUIDs.contains(selectedDrinksID)
-    }
+//    var isSelected: Bool {
+//        historyViewModel.viewState.selectedDrinksUUIDs.contains(iDToDelete)
+//    }
     
     var body: some View {
         VStack {
             Button(action: {
                 if isSelected {
-                    historyViewModel.drinkDeselected(deselectedDrinksID: selectedDrinksID)
+                    historyViewModel.drinkDeselected(deselectedDrinksID: iDToDelete)
                 } else {
-                    historyViewModel.drinkSelected(selectedDrinksID: selectedDrinksID)
+                    historyViewModel.drinkSelected(selectedDrinksID: iDToDelete)
                 }
             }) {
                 Circle()
