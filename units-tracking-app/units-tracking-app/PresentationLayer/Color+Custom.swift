@@ -37,5 +37,9 @@ extension Color {
     static var mainColorForTextInHistoryScreenRaw: Color {
         Color("MainColorForTextInHistoryScreenRaw")
     }
+    
+    static var chooseButtonSelected: Color {
+        Color("ChooseButtonSelected")
+    }
 }
 
