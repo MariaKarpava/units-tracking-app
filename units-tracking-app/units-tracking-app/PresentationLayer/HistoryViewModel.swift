@@ -44,9 +44,13 @@ class HistoryViewModel: ObservableObject {
         var isToolbarVisible: Bool = false
         
         var editButtonTitle: String = "Edit"
-        var selectedDrinksUUIDs: [UUID] = []
+        fileprivate var selectedDrinksUUIDs: [UUID] = []
+        var countOfItemsMarkedToDelete: Int {
+            selectedDrinksUUIDs.count
+        }
         var deleteButtonIsNotActive: Bool = true
     }
+    
     
     struct DrinkHistoryRowModel: Equatable, Hashable {
         var drinkWithUnits: DrinkWithUnits
@@ -78,16 +82,12 @@ class HistoryViewModel: ObservableObject {
             viewState.mode = .noEdit
             viewState.editButtonTitle = "Edit"
             viewState.selectedDrinksUUIDs = []
+            updateDeleteButtonState()
+            updateViewState()
         } else {
             viewState.isToolbarVisible = true
             viewState.mode = .edit
             viewState.editButtonTitle = "Done"
-        }
-        
-        if viewState.mode == .noEdit {
-            viewState.selectedDrinksUUIDs.removeAll()
-            updateDeleteButtonState()
-            updateViewState()
         }
     }
     

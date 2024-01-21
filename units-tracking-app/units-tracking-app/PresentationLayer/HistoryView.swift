@@ -20,73 +20,63 @@ struct ResultView: View {
 
 struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
-   
-    func onDeletionConfirmed() {
-        historyViewModel.deleteButtonTapped()
-    }
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { bodyGeometry in
-                        switch historyViewModel.viewState.content {
-                        case .empty:
-                            EmptyDrinkHistory()
-                        case .notEmpty(let drinkHistoryRowModels):
-                            // should use foreach for drinks whenever @Published drinks in VM changes
-                             ScrollView(.vertical) {
-                                 LazyVStack(alignment: .center, spacing: 15) {
-                                     ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
-                                         if historyViewModel.viewState.isToolbarVisible {
-                                                 HStack {
-                                                     ChooseButton(historyViewModel: historyViewModel, iDToDelete: drinkHistoryRowModel.drinkWithUnits.id, isSelected: drinkHistoryRowModel.isSelected)
-                                                     
-                                                     Spacer().frame(width: 17)
-                                                     NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
-                                                         DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                             .frame(
-                                                                width: bodyGeometry.size.width - 90,
-                                                                height: 80
-                                                             )
-                                                         Image(systemName: "chevron.forward")
-                                                             .foregroundColor(.secondaryText)
-                                                             
-                                                     }
-                                                }
-                                             } else {
-                                             DrinkHistoryRow(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
-                                                 .frame(
-                                                    width: bodyGeometry.size.width - 40,
-                                                     height: 80
-                                                 )
-                                             }
-                                    }
-                                 }.frame(width: bodyGeometry.size.width)
+                switch historyViewModel.viewState.content {
+                case .empty:
+                    EmptyDrinkHistory()
+                case .notEmpty(let drinkHistoryRowModels):
+                    ScrollView(.vertical) {
+                        LazyVStack(alignment: .center, spacing: 15) {
+                            ForEach(drinkHistoryRowModels, id: \.drinkWithUnits.id) { drinkHistoryRowModel in
+                                if historyViewModel.viewState.isToolbarVisible {
+                                    ChooseButtonAndDrinkHistoryRowInEditMode(
+                                        historyViewModel: historyViewModel,
+                                        iDToDelete: drinkHistoryRowModel.drinkWithUnits.id,
+                                        isSelected: drinkHistoryRowModel.isSelected,
+                                        drink: drinkHistoryRowModel.drinkWithUnits,
+                                        showQuantity: drinkHistoryRowModel.shouldDisplayQuantity,
+                                        bodyGeometryWidth: bodyGeometry.size.width
+                                    )
+                                } else {
+                                    DrinkHistoryRow(
+                                        drink: drinkHistoryRowModel.drinkWithUnits,
+                                        showQuantity: drinkHistoryRowModel.shouldDisplayQuantity
+                                    )
+                                    .frame(width: bodyGeometry.size.width - 40, height: 80)
+                                }
                             }
-                            .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
-                            .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
-                            .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
-                            .toolbar { // GeometryReader
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    if historyViewModel.viewState.isToolbarVisible {
-                                        HStack{
-                                            Spacer()
-                                            DeleteButton(numberOfDrinksToDelete: historyViewModel.viewState.selectedDrinksUUIDs.count, onDeletionConfirmed: onDeletionConfirmed)
-                                                .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
-                                                .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
-                                        }
+                         }.frame(width: bodyGeometry.size.width)
+                    }
+                    .frame(width: historyViewModel.viewState.content == .notEmpty(drinkHistoryRowModels: drinkHistoryRowModels) ? bodyGeometry.size.width : nil) // Scroll View
+                    .safeAreaInset(edge: .top, content: { Spacer().frame(height: 20) })
+                    .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
+                    .toolbar { // GeometryReader
+                        ToolbarItem(placement: .topBarTrailing) {
+                            if historyViewModel.viewState.isToolbarVisible {
+                                HStack{
+                                    Spacer()
+                                    DeleteButton(numberOfDrinksToDelete: historyViewModel.viewState.countOfItemsMarkedToDelete) {
+                                        historyViewModel.deleteButtonTapped()
                                     }
+                                    .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
+                                    .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
                                 }
-                            
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    EditButton(historyViewModel: historyViewModel)
-                                }
-                                ToolbarItem(placement: .topBarLeading) {
-                                    Text("History")
-                                        .font(.historyScreenHistoryHeader)
-                                        .foregroundColor(.accentColor)
-                                }
+                            }
+                        }
+                    
+                        ToolbarItem(placement: .topBarTrailing) {
+                            EditButton(historyViewModel: historyViewModel)
+                        }
+                        ToolbarItem(placement: .topBarLeading) {
+                            Text("History")
+                                .font(.historyScreenHistoryHeader)
+                                .foregroundColor(.accentColor)
                         }
                     }
+                }
             }.scrollContentBackground(.hidden)
         }
     }
@@ -274,6 +264,36 @@ struct DrinkHistoryRowInEditingMode: View {
     }
 }
 
+struct ChooseButtonAndDrinkHistoryRowInEditMode: View {
+    @ObservedObject var historyViewModel: HistoryViewModel
+    let iDToDelete: UUID
+    var isSelected: Bool
+    let drink: DrinkWithUnits
+    let showQuantity: Bool
+    let bodyGeometryWidth: CGFloat
+    
+    
+    var body: some View {
+        HStack {
+            ChooseButton(
+                historyViewModel: historyViewModel,
+                iDToDelete: iDToDelete,
+                isSelected: isSelected
+            )
+            Spacer().frame(width: 17)
+            NavigationLink(destination: ResultView(drink: drink)) {
+                DrinkHistoryRowInEditingMode(
+                    drink: drink,
+                    showQuantity: showQuantity
+                )
+                .frame(width: bodyGeometryWidth - 90, height: 80)
+
+                Image(systemName: "chevron.forward")
+                    .foregroundColor(.secondaryText)
+            }
+        }
+    }
+}
 
 struct ChooseButton: View {
     @ObservedObject var historyViewModel: HistoryViewModel
