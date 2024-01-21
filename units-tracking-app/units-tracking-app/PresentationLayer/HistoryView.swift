@@ -48,7 +48,7 @@ struct HistoryView: View {
                                                                 height: 80
                                                              )
                                                          Image(systemName: "chevron.forward")
-                                                             .foregroundColor(.mainColorForTextInHistoryScreenRaw)
+                                                             .foregroundColor(.secondaryText)
                                                              
                                                      }
                                                 }
