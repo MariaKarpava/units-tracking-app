@@ -40,7 +40,7 @@ struct HistoryView: View {
                                                  HStack {
                                                      ChooseButton(historyViewModel: historyViewModel, iDToDelete: drinkHistoryRowModel.drinkWithUnits.id, isSelected: drinkHistoryRowModel.isSelected)
                                                      
-                                                     Spacer().frame(width: 20)
+                                                     Spacer().frame(width: 17)
                                                      NavigationLink(destination: ResultView(drink: drinkHistoryRowModel.drinkWithUnits)) {
                                                          DrinkHistoryRowInEditingMode(drink: drinkHistoryRowModel.drinkWithUnits, showQuantity: drinkHistoryRowModel.shouldDisplayQuantity)
                                                              .frame(
@@ -67,15 +67,6 @@ struct HistoryView: View {
                             .safeAreaInset(edge: .bottom, content: { Spacer().frame(height: RootView.addButtonProtrusion) })
                             .toolbar { // GeometryReader
                                 ToolbarItem(placement: .topBarTrailing) {
-                                    EditButton(historyViewModel: historyViewModel)
-                                       
-                                }
-                                ToolbarItem(placement: .topBarLeading) {
-                                    Text("History")
-                                        .font(.historyScreenHistoryHeader)
-                                        .foregroundColor(.accentColor)
-                                }
-                                ToolbarItem(placement: .bottomBar) {
                                     if historyViewModel.viewState.isToolbarVisible {
                                         HStack{
                                             Spacer()
@@ -87,6 +78,14 @@ struct HistoryView: View {
                                     }
                                 }
                             
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    EditButton(historyViewModel: historyViewModel)
+                                }
+                                ToolbarItem(placement: .topBarLeading) {
+                                    Text("History")
+                                        .font(.historyScreenHistoryHeader)
+                                        .foregroundColor(.accentColor)
+                                }
                         }
                     }
             }.scrollContentBackground(.hidden)
@@ -297,9 +296,9 @@ struct ChooseButton: View {
                     .fill(isSelected ? Color.chooseButtonSelected : Color.white)
                                     .overlay(
                                         Circle()
-                                            .stroke(Color.black, lineWidth: isSelected ? 0 : 2)
+                                            .stroke(isSelected ? Color.chooseButtonSelected: Color.accentColor, lineWidth: 2)
                                     )
-                                    .frame(width: 20, height: 20)
+                                    .frame(width: 18, height: 18)
             }
         }
     }
