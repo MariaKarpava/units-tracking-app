@@ -93,6 +93,13 @@ struct EmptyDrinkHistory: View {
                 .padding(.leading, 20)
                 .padding(.top, 30)
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("History")
+                    .font(.historyScreenHistoryHeader)
+                    .foregroundColor(.accentColor)
+            }
+        }
     }
 }
 
