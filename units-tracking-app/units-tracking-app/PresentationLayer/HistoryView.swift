@@ -73,7 +73,6 @@ struct HistoryView: View {
                                             DeleteButton(numberOfDrinksToDelete: historyViewModel.viewState.selectedDrinksUUIDs.count, onDeletionConfirmed: onDeletionConfirmed)
                                                 .disabled(historyViewModel.viewState.deleteButtonIsNotActive)
                                                 .foregroundColor(historyViewModel.viewState.deleteButtonIsNotActive ? .gray : .red)
-                                                .border(.green)
                                         }
                                     }
                                 }
@@ -174,7 +173,6 @@ struct DrinkHistoryRow: View {
                         .foregroundColor(.secondaryText)
                 }
                 .frame(width: 78, alignment: .trailing)
-                .border(.red)
                 Spacer()
                     .frame(width: 10)
                 
@@ -260,7 +258,6 @@ struct DrinkHistoryRowInEditingMode: View {
                         .foregroundColor(.secondaryText)
                 }
                 .frame(width: 70, alignment: .trailing)
-                .border(.red)
                 Spacer()
                     .frame(width: 10)
             }
@@ -330,6 +327,7 @@ struct DeleteButton: View {
             confirmationShown.toggle()
         }) {
             Text("Delete")
+                .underline()
         }
         .confirmationDialog(
             "Would you like to delete \(numberOfDrinksToDelete) item(s)?",
@@ -343,7 +341,6 @@ struct DeleteButton: View {
             }
             .foregroundColor(.red)
         }
-//        .padding()
     }
 }
 
