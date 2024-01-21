@@ -134,11 +134,11 @@ struct DrinkHistoryRow: View {
                         .font(.historyScreenYear)
                         .foregroundColor(.secondaryText)
                 }
-                .frame(width: 98, alignment: .center)
+                .frame(width: 86, alignment: .center)
                 Divider()
                     .frame(height: 60)
                 Spacer()
-                    .frame(width: 20)
+                    .frame(width: 15)
                 // Drink's main info
                 VStack(alignment: .leading) {
                     HStack {
