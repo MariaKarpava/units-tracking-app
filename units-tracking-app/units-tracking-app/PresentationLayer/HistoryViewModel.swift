@@ -71,6 +71,9 @@ class HistoryViewModel: ObservableObject {
     private func updateViewState() {
         if getDrinksWithUnits().isEmpty {
             viewState.content = .empty
+            viewState.mode = .noEdit
+            viewState.isToolbarVisible = false
+            viewState.editButtonTitle = "Edit"
         } else {
             viewState.content = .notEmpty(drinkHistoryRowModels: rowModels(from: getDrinksWithUnits()))
         }
@@ -104,6 +107,14 @@ class HistoryViewModel: ObservableObject {
         viewState.selectedDrinksUUIDs = []
         updateViewState()
         updateDeleteButtonState()
+        
+        if drinksService.drinks.isEmpty {
+            viewState.content = .empty
+            viewState.isToolbarVisible = false
+//            print("Mode:")
+//            print(viewState)
+//            print("****")
+        }
     }
     
     func drinkSelected(selectedDrinksID: UUID) {
