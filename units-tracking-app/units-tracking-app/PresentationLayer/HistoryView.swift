@@ -66,10 +66,10 @@ struct HistoryView: View {
                                 }
                             }
                         }
-                    
                         ToolbarItem(placement: .topBarTrailing) {
-                            EditButton(historyViewModel: historyViewModel)
+                            EditButton(historyViewModel: historyViewModel)  
                         }
+                        
                         ToolbarItem(placement: .topBarLeading) {
                             Text("History")
                                 .font(.historyScreenHistoryHeader)
