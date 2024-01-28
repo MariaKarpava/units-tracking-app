@@ -111,9 +111,6 @@ class HistoryViewModel: ObservableObject {
         if drinksService.drinks.isEmpty {
             viewState.content = .empty
             viewState.isToolbarVisible = false
-//            print("Mode:")
-//            print(viewState)
-//            print("****")
         }
     }
     
