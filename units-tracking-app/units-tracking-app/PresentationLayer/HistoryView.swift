@@ -333,9 +333,7 @@ struct EditButton: View {
     
     var body: some View {
         Button {
-            withAnimation {
-                historyViewModel.editButtonTapped()
-            }
+            historyViewModel.editButtonTapped()
         } label: {
             Text(historyViewModel.viewState.editButtonTitle)
                 .underline()
