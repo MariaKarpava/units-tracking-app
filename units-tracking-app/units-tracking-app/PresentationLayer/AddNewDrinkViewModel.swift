@@ -33,8 +33,5 @@ class AddNewDrinkViewModel: ObservableObject {
         let enteredQuantity = quantityInPicker
         let newDrink = Drink(drinkType: selectedDrinkType, ml: enteredVolume, alcoholByVolume: enteredAlcoholByVolume, date: Date(), quantity: enteredQuantity)
         drinksService.drinks.append(newDrink)
-        
-//        print(newDrink.id)
-//        print()
     }
 }
